@@ -2,5 +2,7 @@
 // For more info, visit https://on.cypress.io/plugins-api
 
 module.exports = (on, config) => {
+  config.baseUrl = config.env.baseUrl;
+
   return config;
 }

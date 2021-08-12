@@ -8,6 +8,7 @@
 /bazel-out
 
 # dependencies
+/node
 /node_modules
 
 # profiling files
@@ -46,3 +47,4 @@ Thumbs.db
 
 /cypress/screenshots/
 /cypress/videos/
+/cypress.env.json
