@@ -43,6 +43,16 @@
                         </configuration>
                     </execution>
 
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
                      <execution>
                         <id>cypress-tests</id>
                         <goals>
