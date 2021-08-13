@@ -27,7 +27,7 @@
 import 'cypress-file-upload';
 
 Cypress.Commands.add('login', () => {
-  cy.visit('ibpworkbench/main/');
+  cy.visit('ibpworkbench/controller/auth/login');
 
   cy.intercept('POST', '/ibpworkbench/controller/auth/validateLogin').as('doLogin');
 
