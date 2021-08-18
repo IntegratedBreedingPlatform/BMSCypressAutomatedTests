@@ -286,6 +286,8 @@ const specifyLocationNameForEnvironment = (environmentNumber:string, value:strin
     getIframeBody().xpath(`//tr/td[2][text()='${environmentNumber}']/parent::tr/td[4]`).should('be.visible').click();
     getIframeBody().xpath(`//tr/td[2][text()='${environmentNumber}']/parent::tr/td[4]//div[contains(@class,'ui-select-container')]`).should('be.visible').click();
     getIframeBody().xpath(`//div[contains(@class,'select2-container-active select2-dropdown-open open')]//input[@type='search']`).should('be.visible').type(value, {delay: 0});
+    // Wait for search result to load. TODO: Find a way to detect if the search result is finished without using cy,wait();
+    cy.wait(1500);
     getIframeBody().xpath(`//div[contains(@title,'${value}')]`).should('be.visible').click();
 }
 
