@@ -61,7 +61,7 @@ describe('Manage Studies', () => {
                 manageSettingsModal('Add Study-Level Settings', 'Crop_season_Code');
                 //Open Add Environmental Conditions Modal
                 openEnvironmentConditionsModal();
-                manageSettingsModalWithoutSearch('Add Environmental Conditions', 'SITE_SOIL_PH');
+                manageSettingsModal('Add Environmental Conditions', 'SITE_SOIL_PH');
 
                 // Reload the Environments tab to make sure the Environments table are loaded properly, so that editing the variable
                 // values will not fail.
@@ -103,7 +103,7 @@ describe('Manage Studies', () => {
 
                 // Open Add Selections Modal
                 openSelectionsModal();
-                manageSettingsModalWithoutSearch('Add Selections', 'NPSEL');
+                manageSettingsModal('Add Selections', 'NPSEL');
 
                 specifyObservationTableCellNumericValue('1', '11', '101');
                 specifyObservationTableCellNumericValue('1', '12', '102');
