@@ -56,4 +56,12 @@ Cypress.Commands.add('getProgram', () => {
     Cypress.env('program', { uuid: program.programDbId, name: program.name });
   })
 
-})
+});
+
+Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => {
+    return new Cypress.Promise(resolve => {
+        $iframe.on('load', () => {
+            resolve($iframe.contents().find('body'));
+        });
+    });
+});

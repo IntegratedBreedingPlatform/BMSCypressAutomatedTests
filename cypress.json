@@ -4,5 +4,7 @@
   "videosFolder": "cypress/videos",
   "screenshotsFolder": "cypress/screenshots",
   "pluginsFile": "cypress/plugins/index.ts",
-  "fixturesFolder": "cypress/fixtures"
+  "fixturesFolder": "cypress/fixtures",
+  "viewportHeight": 800,
+  "viewportWidth": 1280
 }
