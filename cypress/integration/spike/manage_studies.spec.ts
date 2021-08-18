@@ -32,7 +32,8 @@ describe('Manage Studies', () => {
                 // Select Variable In Manage Settings Modal
                 manageSettingsModal('Add Study-Level Settings', 'PI_NAME');
                 // Select Admin user from PI_NAME dropdown
-                specifyStudyLevelSettingDropdown('PI_NAME', 'Admin Admin');
+                // TODO: Find a reliable way to select drop down.
+                //specifyStudyLevelSettingDropdown('PI_NAME', 'Admin Admin');
                 // Save the study
                 saveStudy();
             });
@@ -230,7 +231,7 @@ const specifyTreatmentValue = (treatmentLabelNo:string, value:string) => {
 
 const specifyStudyLevelSettingDropdown = (variableName:string, value:string) => {
     getIframeBody().xpath(`//span[text()='${variableName}']/parent::a/parent::div/parent::div//show-setting-form-element`).should('be.visible').click();
-    getIframeBody().xpath(`//div[contains(@class, 'select2-result-label')]//div[text()='${value}'][1]`).click({multiple: true});
+    getIframeBody().xpath(`//div[contains(@class, 'select2-result-label')]//div[text()='${value}']`).click();
 }
 
 const saveStudy = () => {
