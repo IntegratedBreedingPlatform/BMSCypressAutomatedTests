@@ -152,12 +152,12 @@ const openCreateStudyPage = () => {
 }
 
 const enterBasicDetails = (studyName: string, studyDescription: string, studyType: string, objective: string, startDate: string, endDate: string) => {
-    getIframeBody().xpath('//input[@ng-model="data.studyName"]').type(studyName);
-    getIframeBody().xpath('//input[@ng-model="data.description"]').type(studyDescription);
+    getIframeBody().xpath('//input[@ng-model="data.studyName"]').type(studyName, {delay: 0});
+    getIframeBody().xpath('//input[@ng-model="data.description"]').type(studyDescription, {delay: 0});
     getIframeBody().xpath('//select[@id="studyTypeId"]').select(studyType, { force : true });
-    getIframeBody().xpath('//textarea[@ng-model="data.objective"]').type(objective);
-    getIframeBody().xpath('//input[@ng-model="data.startDate"]').clear({ force : true }).type(startDate, { force : true });
-    getIframeBody().xpath('//input[@ng-model="data.endDate"]').clear({ force : true }).type(endDate, { force : true });
+    getIframeBody().xpath('//textarea[@ng-model="data.objective"]').type(objective, {delay: 0});
+    getIframeBody().xpath('//input[@ng-model="data.startDate"]').clear({ force : true }).type(startDate, { force : true, delay: 0 });
+    getIframeBody().xpath('//input[@ng-model="data.endDate"]').clear({ force : true }).type(endDate, { force : true, delay: 0 });
 }
 
 const openChangeFolderModal = (folderName:string) => {
@@ -197,7 +197,7 @@ const manageSettingsModal = (headerName:string, variableName:string) => {
     // Trigger variable search dropdown
     getIframeBody().xpath(`//body/div[3]/div/div/div[7]/div/div/div/div/div/div[2]/div[1]/div/a`).should('be.visible').click();
     // Search variable name
-    getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName);
+    getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, {delay: 0});
     // Select the first result
     getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').click();
     // Add the item from result
@@ -222,11 +222,11 @@ const specifyTreatmentLabelAndSize = (treatmentFactor:string, treatmentLabel:str
     getIframeBody().xpath(`//a[text()='${treatmentFactor}']//parent::td//parent::tr//div[contains(@class, 'select2-container')]`).should('be.visible').click();
     // Select the first result
     getIframeBody().xpath(`//div[contains(@class,'select2-result-label') and text()='${treatmentLabel}']`).click();
-    getIframeBody().xpath(`//a[text()='${treatmentFactor}']//parent::td//parent::tr//td[4]/input`).clear().type(treatmentSize);
+    getIframeBody().xpath(`//a[text()='${treatmentFactor}']//parent::td//parent::tr//td[4]/input`).clear().type(treatmentSize, {delay: 0});
 }
 
 const specifyTreatmentValue = (treatmentLabelNo:string, value:string) => {
-    getIframeBody().xpath(`//a[normalize-space(text())='${treatmentLabelNo}']//parent::td/parent::tr//input[@type='text']`).should('be.visible').type(value);
+    getIframeBody().xpath(`//a[normalize-space(text())='${treatmentLabelNo}']//parent::td/parent::tr//input[@type='text']`).should('be.visible').type(value, {delay: 0});
 }
 
 const specifyStudyLevelSettingDropdown = (variableName:string, value:string) => {
@@ -242,7 +242,7 @@ const showTabByName = (tabName:string) => {
     getIframeBody().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='${tabName}']`).should('be.visible').click();
 }
 
-const browseAndSelectGermplasmList = (listName:string) => {
+const browseAndSelectGermplasmList = () => {
     getIframeBody().xpath(`//div[@id='chooseGermplasmAndChecks']//a[text()='Browse']`).should('be.visible').click();
     getIframeBody().xpath(`//div[@id='listTreeModal']//label[text()='Browse For Lists']`).should('be.visible');
     // Wait for the list table to load
@@ -258,7 +258,7 @@ const specifyTheNumberOfEnvironments = (numberOfEnvironments:string) => {
 
 const specifyEnvironmentTableCellNumeric = (row:string, column:string, value:string) => {
     getIframeBody().xpath(`//div[@class='dataTables_scrollBody']//table[@id='environment-table']//tr[${row}]/td[${column}]`).should('be.visible').click();
-    getIframeBody().xpath(`//div[@class='dataTables_scrollBody']//table[@id='environment-table']//tr[${row}]/td[${column}]//input`).should('be.visible').type(value);
+    getIframeBody().xpath(`//div[@class='dataTables_scrollBody']//table[@id='environment-table']//tr[${row}]/td[${column}]//input`).should('be.visible').type(value, {delay: 0});
     // Click the body to remove focus on the textbox control
     getIframeBody().xpath(`//body`).click();
 }
@@ -271,8 +271,8 @@ const specifyEnvironmentTableCellDropdown = (row:string, column:string, value:st
 const generateRCBDesign = (startingPlotNumber:string, numberOfReplicates:string) => {
      getIframeBody().xpath(`//section-container[contains(@heading,'CHOOSE A DESIGN TYPE')]//div[contains(@class,'select2-container')]`).should('be.visible').click();
      getIframeBody().xpath(`//div[contains(@class,'select2-result-label') and contains(text(),'Randomized Complete Block Design')]`).should('be.visible').click();
-     getIframeBody().xpath(`//input[@id='txtStartingPlotNo']`).should('be.visible').clear().type(startingPlotNumber);
-     getIframeBody().xpath(`//input[@name='replicationsCount']`).should('be.visible').clear().type(numberOfReplicates);
+     getIframeBody().xpath(`//input[@id='txtStartingPlotNo']`).should('be.visible').clear().type(startingPlotNumber, {delay: 0});
+     getIframeBody().xpath(`//input[@name='replicationsCount']`).should('be.visible').clear().type(numberOfReplicates, {delay: 0});
      getIframeBody().xpath(`//input[@type='submit' and @value='Generate Design']`).should('be.visible').click();
 
      // Wait for modal to load and click the Generate button
@@ -285,7 +285,7 @@ const specifyLocationNameForEnvironment = (environmentNumber:string, value:strin
     getIframeBody().xpath(`//tr/td[2][text()='${environmentNumber}']`).should('be.visible');
     getIframeBody().xpath(`//tr/td[2][text()='${environmentNumber}']/parent::tr/td[4]`).should('be.visible').click();
     getIframeBody().xpath(`//tr/td[2][text()='${environmentNumber}']/parent::tr/td[4]//div[contains(@class,'ui-select-container')]`).should('be.visible').click();
-    getIframeBody().xpath(`//div[contains(@class,'select2-container-active select2-dropdown-open open')]//input[@type='search']`).should('be.visible').type(value);
+    getIframeBody().xpath(`//div[contains(@class,'select2-container-active select2-dropdown-open open')]//input[@type='search']`).should('be.visible').type(value, {delay: 0});
     getIframeBody().xpath(`//div[contains(@title,'${value}')]`).should('be.visible').click();
 }
 
