@@ -6,5 +6,6 @@
   "pluginsFile": "cypress/plugins/index.ts",
   "fixturesFolder": "cypress/fixtures",
   "viewportHeight": 800,
-  "viewportWidth": 1280
+  "viewportWidth": 1280,
+  "testFiles": "**/*.{feature,features}"
 }
