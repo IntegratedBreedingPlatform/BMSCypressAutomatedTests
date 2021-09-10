@@ -6,7 +6,7 @@ const dir = 'cypress/cucumber_report/';
 
 fs.emptyDir('cypress/cucumber_report/', err => {
   if (err) return console.error(err)
-  console.log('success!')
+  console.log('cypress/cucumber_report folder created')
 })
 
 // Report configuration
