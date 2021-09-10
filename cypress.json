@@ -7,5 +7,7 @@
   "fixturesFolder": "cypress/fixtures",
   "viewportHeight": 800,
   "viewportWidth": 1280,
-  "testFiles": "**/*.{feature,features}"
+  "testFiles": "**/*.{feature,features}",
+  "video": false,
+  "screenshotOnRunFailure": true
 }
