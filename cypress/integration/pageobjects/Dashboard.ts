@@ -9,7 +9,7 @@ class Dashboard{
     }
 
     clickAddProgram(){
-        return cy.get('.mat-button ng-star-inserted').should('exist').click();
+        return cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
     }
 
     getProgramsIframeBody = () => {
@@ -18,17 +18,18 @@ class Dashboard{
     
     selectCrop(){
         
-		this.getProgramsIframeBody().find('#cropDropdown select').should('exist').select(this.cropName, { force : true });
-		this.getProgramsIframeBody().find('#cropDropdown select').should('have.value', this.cropName);
+		return this.getProgramsIframeBody().find('#cropDropdown select')
+        .should('exist').select(this.cropName, { force : true })
+        .should('have.value', this.cropName);
 
     }
     clickLaunchProgram(){
-        this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
+       return this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
 
     }
 
     checkBMSVersion(){
-        cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
+        return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
     
     }
