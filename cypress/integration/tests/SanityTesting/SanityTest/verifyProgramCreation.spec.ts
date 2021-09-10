@@ -28,7 +28,7 @@ When('I select a {string} name', (cropName) => {
   addProgramPage.enterCropName(cropName)
 });
 
-When('I enter a program name', (programName) => {
+When('I enter a {string} name', (programName) => {
   addProgramPage.enterProgramName(programName)       
 });
 
