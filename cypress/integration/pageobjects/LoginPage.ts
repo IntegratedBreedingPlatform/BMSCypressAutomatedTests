@@ -32,7 +32,7 @@ class Login{
         }
 
         checkLoginTagVersion(){
-            cy.xpath(`//span[contains(text(), "19.0")]`).should('exist');
+            cy.xpath('//span[contains(text(), "19.0")]').should('exist');
         }
     }
 
