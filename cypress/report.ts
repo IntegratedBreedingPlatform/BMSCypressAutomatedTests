@@ -1,8 +1,20 @@
-var reporter = require('cucumber-html-reporter');
+// Prepare folder structure
 
-var options = {
+const fs = require('fs-extra');
+
+const dir = 'cypress/cucumber_report/';
+
+fs.emptyDir('cypress/cucumber_report/', err => {
+  if (err) return console.error(err)
+  console.log('success!')
+})
+
+// Report configuration
+const reporter = require('cucumber-html-reporter');
+
+const options = {
         theme: 'bootstrap',
-        jsonFile: 'cypress/cucumber_report',
+        jsonFile: 'cypress/cucumber_json',
         output: 'cypress/cucumber_report/cucumber_report.html',
         reportSuiteAsScenarios: true,
         scenarioTimestamp: true,
