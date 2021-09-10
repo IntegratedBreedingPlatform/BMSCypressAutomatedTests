@@ -30,7 +30,13 @@ class Login{
             expect(cookie?.sameSite).to.equal("strict");
         })
         }
+
+        checkLoginTagVersion(){
+            cy.xpath(`//span[contains(text(), "19.0")]`).should('exist');
+        }
     }
+
+    
 
     
 }
