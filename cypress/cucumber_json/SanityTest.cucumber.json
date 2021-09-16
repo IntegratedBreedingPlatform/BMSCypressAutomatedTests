@@ -1,0 +1,199 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "SanityTest",
+    "line": 1,
+    "id": "sanitytest",
+    "tags": [],
+    "uri": "SanityTest.feature",
+    "elements": [
+      {
+        "id": "sanitytest;verify-bms-tag-version-on-login-page",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Verify BMS tag version on login page",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "I navigate to BMS login screen",
+            "result": {
+              "status": "passed",
+              "duration": 11311000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 5,
+            "name": "The BMS login should have the correct tag version",
+            "result": {
+              "status": "passed",
+              "duration": 38000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "sanitytest;verify-bms-tag-version-on-sidebar",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Verify BMS tag version on sidebar",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "I navigate to BMS login screen",
+            "result": {
+              "status": "passed",
+              "duration": 411000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I login as an admin",
+            "result": {
+              "status": "passed",
+              "duration": 19785000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I launch a program",
+            "result": {
+              "status": "passed",
+              "duration": 1315000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "The BMS sidebar should have the correct tag version",
+            "result": {
+              "status": "passed",
+              "duration": 1110000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "sanitytest;verify-creation-of-a-program",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Verify creation of a program",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "I navigate to BMS login screen",
+            "result": {
+              "status": "passed",
+              "duration": 1174000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "I login as an admin",
+            "result": {
+              "status": "passed",
+              "duration": 3773000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I navigate to Add a Program page",
+            "result": {
+              "status": "passed",
+              "duration": 283000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "crop"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "maize"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I select a \"crop\" name",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#vaadin_croptype_combo`, but never found it. Queried from element: <body>\n    at AddProgram.enterCropName (https://bms-centos-2.leafnode.io/__cypress/tests?p=cypress\\integration\\tests\\SanityTesting\\SanityTest.feature:15:76)\n    at Context.eval (https://bms-centos-2.leafnode.io/__cypress/tests?p=cypress\\integration\\tests\\SanityTesting\\SanityTest.feature:158:20)\n    at Context.resolveAndRunStepDefinition (https://bms-centos-2.leafnode.io/__cypress/tests?p=cypress\\integration\\tests\\SanityTesting\\SanityTest.feature:11156:29)\n    at Context.eval (https://bms-centos-2.leafnode.io/__cypress/tests?p=cypress\\integration\\tests\\SanityTesting\\SanityTest.feature:10477:35)"
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "program"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "MyProgram2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I enter a \"program\" name",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "I clicked Save",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "A success message saying the program has been sucessfully created displays",
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
