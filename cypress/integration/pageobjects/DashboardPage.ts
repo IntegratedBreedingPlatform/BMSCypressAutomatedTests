@@ -1,8 +1,8 @@
 
-class Dashboard{
+class DashboardPage{
 
-    const cropName = Cypress.env('cropName');
-    const program = Cypress.env('program');
+    protected cropName = Cypress.env('cropName');
+    protected program = Cypress.env('program');
  
     getProgramsIframeDocument = () => {
             return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
@@ -15,6 +15,11 @@ class Dashboard{
     getProgramsIframeBody = () => {
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
+
+	launchProgram() {
+        this.selectCrop()
+        this.clickLaunchProgram();
+    }
     
     selectCrop(){
         
@@ -31,9 +36,7 @@ class Dashboard{
     checkBMSVersion(){
         return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
-    
-    }
 
 }
-export default Dashboard
+export default DashboardPage
 

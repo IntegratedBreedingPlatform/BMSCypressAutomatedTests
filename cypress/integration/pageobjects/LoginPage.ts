@@ -1,14 +1,25 @@
-class Login{
+class LoginPage{
+
+    performLogin() {
+        this.launchLogin();
+        this.enterValidCredentials()
+        this.clickLogin()
+    }
 
     launchLogin(){
         cy.visit('ibpworkbench/controller/auth/login');
     }
 
-    enterUsername(){
-        cy.get('.js-login-username').type(Cypress.env('username'));
+    enterValidCredentials() {
+        this.enterUsername(Cypress.env('username'));
+        this.enterPassword(Cypress.env('password'));
     }
-    enterPassword(){
-        cy.get('.js-login-password').type(Cypress.env('password'));
+
+    enterUsername(username:string){
+        cy.get('.js-login-username').type(username);
+    }
+    enterPassword(password:string){
+        cy.get('.js-login-password').type(password);
     }
 
     clickLogin(){
@@ -17,7 +28,7 @@ class Login{
 
     checkURLandToken(){
         cy.url({ log: true }).should('include', '/app', () => {
-            expect(localStorage.getItem('bms.xAuthToken')).to.exist()
+            expect(localStorage.getItem('bms.xAuthToken')).to.exist
         })
     }
 
@@ -31,13 +42,12 @@ class Login{
         })
         }
 
-        checkLoginTagVersion(){
-            cy.xpath('//span[contains(text(), "19.0")]').should('exist');
-        }
+    checkLoginTagVersion(){
+        cy.xpath('//span[contains(text(), "19.0")]').should('exist');
     }
 
     
 
     
 }
-export default Login
+export default LoginPage
