@@ -11,5 +11,5 @@ Feature: BMSAPI
 @update-install
     Scenario: Launch BMSAPI page
         Given I am already logged in to BMS
-        When I navigate to BMSAPI page
-        Then API Swagger page will display
+        When I navigate to the BMSAPI page
+        Then The API Swagger page will display
