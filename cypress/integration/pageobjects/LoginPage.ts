@@ -26,6 +26,11 @@ class LoginPage{
         cy.get('.js-login-form').submit();
     }
 
+    verifyPageLoaded() {
+        cy.get('.js-login-username').should('exist')
+        cy.get('.js-login-password').should('exist')
+    }
+
     checkURLandToken(){
         cy.url({ log: true }).should('include', '/app', () => {
             expect(localStorage.getItem('bms.xAuthToken')).to.exist
@@ -42,8 +47,9 @@ class LoginPage{
         })
         }
 
-    checkLoginTagVersion(){
-        cy.xpath('//span[contains(text(), "19.0")]').should('exist');
+    checkBMSVersion(){
+        let bmsVersion = Cypress.env('bmsVersion');
+        cy.xpath(`//span[contains(text(), '${bmsVersion}')]`).should('exist');
     }
 
     

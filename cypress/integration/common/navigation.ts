@@ -27,7 +27,13 @@ When('I navigate to {} in the sidebar', (sidebarLink) => {
 // ==================================
 // THENS
 Then('The {} page should display', (page) => {
-    if (page === 'Dashboard') {
+    if (page === 'BMS login') {
+        loginPage.verifyPageLoaded();
+
+    } else if (page === 'Dashboard') {
+        loginPage.checkURLandToken()
+        loginPage.checkIfCookieExist('BMS_TOK')
+        dashboardPage.verifyPageLoaded();
 
     } else if (page === 'Add Program') {
 

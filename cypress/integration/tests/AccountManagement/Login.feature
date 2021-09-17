@@ -12,8 +12,8 @@ Feature: Login
 @clean-install
 @update-install
     Scenario: Launch BMS      
-        Given I navigate to BMS login page
-        Then BMS login screen will display
+        Given I navigate to the BMS login page
+        Then The BMS login page should display
 
 @TestCaseKey=IBP-T3155
 @sanity-test
@@ -21,17 +21,17 @@ Feature: Login
 @clean-install
 @update-install
     Scenario: Login as an admin
-        Given I navigate to BMS login page
+        Given I navigate to the BMS login page
         When I enter valid user credentials
         And I click login
-        Then Dashboard page will display
+        Then The Dashboard page should display
 
 @TestCaseKey=IBP-T3154
 @sanity-test  
 @clean-install
 @update-install   
     Scenario: Check BMS version on login page
-        Given I navigate to BMS login page
+        Given I navigate to the BMS login page
         Then The BMS login should have the correct version
 
 

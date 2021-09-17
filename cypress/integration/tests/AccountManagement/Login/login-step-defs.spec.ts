@@ -4,20 +4,17 @@ import LoginPage from '../../../pageobjects/LoginPage'
 
 const loginPage = new LoginPage()
 
-Given('I go to BMS login page',()=>{
+Given('I navigate to the BMS login page',()=>{
     loginPage.launchLogin()
 })
+
 When('I enter valid user credentials',()=>{
-    loginPage.enterUsername()
-    loginPage.enterPassword()
+   loginPage.enterValidCredentials();
 })
 And('I click login',()=>{
     loginPage.clickLogin()
 })
-Then('Dashboard page will display',()=>{
-
-    loginPage.checkURLandToken()
-    loginPage.checkIfCookieExist('BMS_TOK')
-   
-    
+Then('The BMS login should have the correct version',()=>{
+    loginPage.checkBMSVersion()
 })
+

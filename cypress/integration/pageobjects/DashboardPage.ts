@@ -37,6 +37,18 @@ class DashboardPage{
         return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
 
+    verifyPageLoaded() {
+        // Verify Crop dropdown, Program dropdown and Launch buttons
+        this.getProgramsIframeBody().find('#cropDropdown select').should('exist')
+        this.getProgramsIframeBody().find('#programDropdown select').should('exist')
+        this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist')
+        this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(1) > a > span`)
+            .should('exist').should(($sp) => {expect($sp).to.have.text('My Studies')});
+        this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
+            .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
+        // this.getProgramsIframeBody().find(`//span[contains(text(),'My Lists')]`).should('exist');
+    }
+
 }
 export default DashboardPage
 
