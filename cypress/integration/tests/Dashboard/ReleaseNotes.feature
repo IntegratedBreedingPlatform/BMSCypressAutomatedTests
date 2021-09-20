@@ -6,8 +6,6 @@ Feature: Release Notes
   I should be able to see the release notes pop-up
 
 @TestCaseKey=IBP-T3185
-@sanity-test
-@smoke-test
 @clean-install
       Scenario: Check display of release notes  
         Given I am already logged in to BMS

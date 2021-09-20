@@ -7,7 +7,6 @@ Feature: Add Program
 	I should be able to add a new program
     
 @TestCaseKey=IBP-T3156    
-@sanity-test
 @smoke-test
 @clean-install
 @update-install
