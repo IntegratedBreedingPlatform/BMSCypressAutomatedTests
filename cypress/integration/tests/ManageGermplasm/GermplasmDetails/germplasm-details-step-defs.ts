@@ -1,4 +1,3 @@
-  
 import { When,And,Then } from "cypress-cucumber-preprocessor/steps";
 import ManageGermplasmPage from '../../../pageobjects/ManageGermplasmPage'
 import GermplasmDetailsPage from '../../../pageobjects/GermplasmDetailsPage'

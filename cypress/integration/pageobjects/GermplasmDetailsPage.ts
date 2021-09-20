@@ -31,15 +31,15 @@ class GermplasmDetailsPage{
 }
 
 const getMainIframeDocument = () => {
-    return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
+    return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
 }
 
 const getGermplasmIframeBodyWaitLoad = () => {
-    return getMainIframeDocument().its('body').should('not.be.undefined').then(cy.wrap).find('iframe').waitIframeToLoad().then(cy.wrap);
+    return getMainIframeDocument().find('iframe').waitIframeToLoad().then(cy.wrap);
 }
 
 const getGermplasmIframeBody = () => {
-    return getMainIframeDocument().its('body').should('not.be.undefined').then(cy.wrap).find('iframe').its('0.contentDocument').should('exist')
+    return getMainIframeDocument().find('iframe').its('0.contentDocument').should('exist')
         .its('body').should('not.be.undefined').then(cy.wrap);
 }
 export default GermplasmDetailsPage
