@@ -1,6 +1,10 @@
 class SidebarSection {
     navigateTo(link:string){
         let sidebarTool = SidebarTool.getFromLinkName(link);
+        this.navigate(sidebarTool);
+    }
+
+    navigate(sidebarTool:SidebarTool){
         // Germplasm category is expanded by default, otherwise expand sidebar category
         if (sidebarTool.category !== 'Germplasm') {
             cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.category} ')]`).should('exist').click();
@@ -75,6 +79,14 @@ export class SidebarTool {
            return sidebarTools[0];
        }
        throw new Error('Could not find tool ' + link)
+    }
+
+    public static getFromToolName(link:string): SidebarTool {
+        let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
+        if (sidebarTools.length > 0) {
+            return sidebarTools[0];
+        }
+        throw new Error('Could not find tool ' + link)
     }
 }
 

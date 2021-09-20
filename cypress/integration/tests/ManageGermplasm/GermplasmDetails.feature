@@ -10,18 +10,18 @@ Feature: Germplasm Details
 @clean-install
 @update-install
     Scenario: Check pedigree tree
-        Given I am on Manage Germplasm screen
-        And I click on the GID of a germplasm
-        And I navigate to the pedigree tab of germplasm details
+        Given I am on the Germplasm Manager page
+        When I click on the GID of a germplasm
+        And I navigate to the Pedigree tab of germplasm details
         Then I should be able to see the pedigree tree
 
 @TestCaseKey=IBP-T3180
 @sanity-test
 @clean-install
 @update-install
-    Scenario: Check pedigree graph   
-        Given I am on Manage Germplasm screen
-        And I click on the GID of a germplasm
-        And I navigate to the pedigree tab of germplasm details
-        And I click view pedigree graph button
+    Scenario: Check pedigree graph
+        Given I am on the Germplasm Manager page
+        When I click on the GID of a germplasm
+        And I navigate to the Pedigree tab of germplasm details
+        And I click View Pedigree Graph button
         Then I should be able to see the pedigree graph

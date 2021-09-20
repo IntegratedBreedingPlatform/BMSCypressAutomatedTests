@@ -1,7 +1,7 @@
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../pageobjects/LoginPage'
 import DashboardPage from '../pageobjects/DashboardPage'
-import SidebarSection from '../pageobjects/SidebarSection'
+import SidebarSection, { SidebarTool } from '../pageobjects/SidebarSection'
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
@@ -11,6 +11,13 @@ const sidebarSection = new SidebarSection()
 // GIVENS
 Given('I am already logged in to BMS', () => {
     loginPage.performLogin();
+});
+
+Given('I am on the {} page', (page) => {
+    loginPage.performLogin();
+    dashboardPage.launchProgram();
+    let tool = SidebarTool.getFromToolName(page);
+    sidebarSection.navigate(tool);
 });
 
 // ==================================

@@ -46,7 +46,6 @@ class DashboardPage{
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Studies')});
         this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
-        // this.getProgramsIframeBody().find(`//span[contains(text(),'My Lists')]`).should('exist');
     }
 
 }
