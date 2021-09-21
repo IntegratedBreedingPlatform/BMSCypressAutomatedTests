@@ -1,6 +1,13 @@
+@create-study
+@manage-studies
 Feature: Create Study
+    In order to perform breeding activities
+    As a breeder
+    I should be able to create a study
 
 @TestCaseKey=IBP-T511
+@sanity-test
+@clean-install
 Scenario: Create trial using randomized complete block design with treatment factor
     Given I am on the Manage Studies page
     When I click on Start a New study button
