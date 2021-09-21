@@ -1,6 +1,6 @@
   
 import { Given,When,And,Then } from "cypress-cucumber-preprocessor/steps";
-import BmsApiPage from '../../../pageobjects/BmsApiPage'
+import BmsApiPage from '../../../pageobjects/bmsapi-page'
 
 const apiPage = new BmsApiPage()
 

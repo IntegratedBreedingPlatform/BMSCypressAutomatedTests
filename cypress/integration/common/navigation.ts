@@ -1,7 +1,7 @@
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
-import LoginPage from '../pageobjects/LoginPage'
-import DashboardPage from '../pageobjects/DashboardPage'
-import SidebarSection, { SidebarTool } from '../pageobjects/SidebarSection'
+import LoginPage from '../pageobjects/login-page'
+import DashboardPage from '../pageobjects/dashboard-page'
+import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
