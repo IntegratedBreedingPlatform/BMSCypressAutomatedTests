@@ -1,6 +1,6 @@
 import { When,And,Then } from "cypress-cucumber-preprocessor/steps";
-import ManageGermplasmPage from '../../../pageobjects/ManageGermplasmPage'
-import GermplasmDetailsPage from '../../../pageobjects/GermplasmDetailsPage'
+import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page'
+import GermplasmDetailsPage from '../../../pageobjects/germplasm/germplasm-details-page'
 
 const manageGermplasmPage = new ManageGermplasmPage()
 const germplasmDetailsPage = new GermplasmDetailsPage()

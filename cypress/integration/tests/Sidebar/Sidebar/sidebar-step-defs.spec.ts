@@ -1,6 +1,6 @@
 
 import { Then } from "cypress-cucumber-preprocessor/steps";
-import SidebarSection from '../../../pageobjects/SidebarSection'
+import SidebarSection from '../../../pageobjects/sidebar-section'
 
 const sidebar = new SidebarSection()
 
