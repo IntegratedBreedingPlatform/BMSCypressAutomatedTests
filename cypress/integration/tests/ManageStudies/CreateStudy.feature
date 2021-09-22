@@ -40,7 +40,6 @@ Scenario Outline: Browse germplasm list for a study
     And I browse a germplasm list for the study
     Then The germplasm list should be succesfully loaded on the Study
     #Check display of germplasm records table
-
 @sanity-test
 @focus @clean-install
 Scenario Outline: Add environment variables to a study    
@@ -61,7 +60,7 @@ Examples:
 @clean-install    
  Scenario Outline: Add treatment factors to a study and generate RCBD design
     Given I am on the Manage Studies page
-    When I open a study I created with basic details
+    When I open a study I created with basic details and germplasm list
     And I navigate to Treatment Factors tab
     And I add the treatment factor variable <treatment_factor_variable> 
 
@@ -79,3 +78,12 @@ Examples:
 Examples:
     |treatment_factor_variable|treatment_label|
     |NFert_kg_ha|NFERT_NO|
+
+Scenario: Check if design generation fails on BMS with no BV license
+    Given I am on the Manage Studies page
+    When I open a study I created with basic details and germplasm list
+    And I select Randomized Complete Block Design
+    And I specify starting plot number
+    And I specify no. of replications
+    And I generate design
+    Then Design generation should not be successful 
