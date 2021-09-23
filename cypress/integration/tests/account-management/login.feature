@@ -18,7 +18,7 @@ Feature: Login
 @TestCaseKey=IBP-T3155
 @sanity-test
 @smoke-test
-@clean-install
+@clean-install  
 @update-install
     Scenario: Login as an admin
         Given I navigate to the BMS login page
