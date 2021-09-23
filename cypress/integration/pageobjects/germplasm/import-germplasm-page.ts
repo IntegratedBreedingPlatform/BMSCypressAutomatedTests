@@ -1,4 +1,4 @@
-class ImportGermplasmPage{
+export default class ImportGermplasmPage{
 
     uploadFile() {
         const fileName = 'GermplasmImport.xls';
@@ -65,4 +65,3 @@ class ImportGermplasmPage{
 const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
 }
-export default ImportGermplasmPage

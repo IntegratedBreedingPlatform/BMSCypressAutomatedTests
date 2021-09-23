@@ -1,6 +1,4 @@
 import { When,And,Then } from "cypress-cucumber-preprocessor/steps";
-import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page'
-import GermplasmDetailsPage from '../../../pageobjects/germplasm/germplasm-details-page'
 
 const manageGermplasmPage = new ManageGermplasmPage()
 const germplasmDetailsPage = new GermplasmDetailsPage()
@@ -14,7 +12,7 @@ And('I navigate to the {} tab of germplasm details',(tab)=>{
     germplasmDetailsPage.clickTab(tab)
 })
 
-And('I click View Pedigree Graph button',(tab)=>{
+And('I click View Pedigree Graph button',()=>{
     germplasmDetailsPage.viewPedigreeGraph()
 })
 

@@ -1,4 +1,4 @@
-class GermplasmDetailsPage{
+export default class GermplasmDetailsPage{
 
    clickTab(tab:string) {
        switch (tab) {
@@ -42,4 +42,3 @@ const getGermplasmIframeBody = () => {
     return getMainIframeDocument().find('iframe').its('0.contentDocument').should('exist')
         .its('body').should('not.be.undefined').then(cy.wrap);
 }
-export default GermplasmDetailsPage
