@@ -17,16 +17,13 @@ export default class GermplasmDetailsPage{
 
 
    viewPedigreeGraph() {
-       cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/*/tree*`).as('viewPedigreeGraph');
        getGermplasmIframeBody().find(`[jhitranslate="pedigree.tree.view-pedigree-graph"]`).should('exist').click();
+       cy.wait(50);
    }
 
    verifyPedigreeGraph() {
-       cy.wait('@viewPedigreeGraph').then((interception) => {
-           expect(interception.response.statusCode).to.equal(200);
-           getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-header > div > h4 > span').should('exist').contains('Pedigree Graph');
-           getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-body > jhi-pedigree-graph > div:nth-child(2) > div > div.pedigree-graph > svg').should('exist');
-       });
+       getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-header > div > h4 > span').should('exist').contains('Pedigree Graph');
+       getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-body > jhi-pedigree-graph > div:nth-child(2) > div > div.pedigree-graph > svg').should('exist');
    }
 
 
