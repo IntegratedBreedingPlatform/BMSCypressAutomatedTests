@@ -3,7 +3,7 @@
 Feature: Add Program
 
     In order to carry out various breeding activities
-	As a breeder
+	As a user
 	I should be able to add a new program
     
 @TestCaseKey=IBP-T3156    

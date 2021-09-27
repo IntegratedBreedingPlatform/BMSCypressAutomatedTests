@@ -2,7 +2,7 @@
 @manage-studies
 Feature: Create Study
     In order to perform breeding activities
-    As a breeder
+    As a user
     I should be able to create a study
 
 @TestCaseKey=IBP-T511  

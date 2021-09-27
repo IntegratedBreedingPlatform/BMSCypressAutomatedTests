@@ -1,7 +1,7 @@
 @BMSAPI
 Feature: BMSAPI
     In order to access various BMSAPI calls
-    As a breeder
+    As a user
     I should be able to see BMSAPI page
 
 @TestCaseKey=IBP-T3184

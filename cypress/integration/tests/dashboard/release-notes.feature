@@ -2,7 +2,7 @@
 @dashboard
 Feature: Release Notes
   In order to see the latest changes on BMS
-  As a breeder
+  As a user
   I should be able to see the release notes pop-up
 
 @TestCaseKey=IBP-T3185
