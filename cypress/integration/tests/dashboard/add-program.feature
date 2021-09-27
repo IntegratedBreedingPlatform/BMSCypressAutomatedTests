@@ -15,5 +15,5 @@ Feature: Add Program
         When I navigate to Add Program page
         And I select a crop name
         And I enter a program name
-        And I click Save
-        Then A success message saying the program has been sucessfully created displays
+        And I save program details
+        Then A success message should display
