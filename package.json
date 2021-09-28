@@ -23,7 +23,6 @@
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
-    "cucumber-html-reporter": "^5.5.0",
     "cypress": "^8.2.0",
     "cypress-cucumber-preprocessor": "^4.2.0",
     "cypress-file-upload": "^5.0.8",
