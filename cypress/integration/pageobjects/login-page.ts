@@ -1,4 +1,4 @@
-class LoginPage{
+export default class LoginPage{
 
     performLogin() {
         this.launchLogin();
@@ -57,4 +57,3 @@ class LoginPage{
 
     
 }
-export default LoginPage

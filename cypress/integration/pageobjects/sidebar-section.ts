@@ -1,4 +1,4 @@
-class SidebarSection {
+export default class SidebarSection {
     navigateTo(link:string){
         let sidebarTool = SidebarTool.getFromLinkName(link);
         this.navigate(sidebarTool);
@@ -89,6 +89,3 @@ export class SidebarTool {
         throw new Error('Could not find tool ' + link)
     }
 }
-
-
-export default SidebarSection

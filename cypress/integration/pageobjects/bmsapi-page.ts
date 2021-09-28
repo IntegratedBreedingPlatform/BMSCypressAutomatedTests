@@ -1,4 +1,4 @@
-class BmsApiPage{
+export default class BmsApiPage{
 
     launchBMSAPI(){
         cy.visit('bmsapi');
@@ -12,4 +12,3 @@ class BmsApiPage{
     }
 
 }
-export default BmsApiPage
