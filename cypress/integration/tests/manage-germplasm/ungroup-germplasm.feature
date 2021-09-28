@@ -1,7 +1,9 @@
 @ungroup-germplasm
 @manage-germplasm
 Feature: Ungroup Germplasm
-
+    In order to remove germplasm from an existing group
+    As a user 
+    I should be ungroup germplasm entries
 @TestCaseKey=IBP-T2963
 @smoke-test
 Scenario: Check if user can ungroup germplasm entries
