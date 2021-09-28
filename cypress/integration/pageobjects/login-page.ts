@@ -4,6 +4,7 @@ class LoginPage{
         this.launchLogin();
         this.enterValidCredentials()
         this.clickLogin()
+        this.checkURLandToken();
     }
 
     launchLogin(){
