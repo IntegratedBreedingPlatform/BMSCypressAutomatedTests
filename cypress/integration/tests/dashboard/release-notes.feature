@@ -5,7 +5,7 @@ Feature: Release Notes
   As a user
   I should be able to see the release notes pop-up
 
-@TestCaseKey=IBP-T2620
+@TestCaseKey=IBP-T3185
 @clean-install
 @update-install
       Scenario: Check display of release notes  
@@ -14,7 +14,7 @@ Feature: Release Notes
         # And the user haven't logged in yet in the new version
         Given I am already logged in to BMS
         Then Release Notes pop-up displays
-@TestCaseKey=IBP-T2620
+@TestCaseKey=IBP-T3185
 @clean-install
 @update-install        
       Scenario: Check if release notes displays when unchecked Don't show again
@@ -24,7 +24,7 @@ Feature: Release Notes
         And I click OK
         And I re-logs in the system
         Then I should see the release notes pop-up again
-@TestCaseKey=IBP-T2620
+@TestCaseKey=IBP-T3185
 @clean-install
 @update-install
       Scenario: Check if release notes no longer shows when checked Don't show again
