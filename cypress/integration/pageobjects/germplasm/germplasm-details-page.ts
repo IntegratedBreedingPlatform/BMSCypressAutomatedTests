@@ -18,11 +18,10 @@ export default class GermplasmDetailsPage{
 
    viewPedigreeGraph() {
        getGermplasmIframeBody().find(`[jhitranslate="pedigree.tree.view-pedigree-graph"]`).should('exist').click();
-       cy.wait(50);
    }
 
    verifyPedigreeGraph() {
-       getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-header > div > h4 > span').should('exist').contains('Pedigree Graph');
+       getGermplasmIframeBody().xpath(`//h4//span[contains(text(), 'Pedigree Graph')]`, {timeout: 15000}).should('be.visible');
        getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-body > jhi-pedigree-graph > div:nth-child(2) > div > div.pedigree-graph > svg').should('exist');
    }
 
