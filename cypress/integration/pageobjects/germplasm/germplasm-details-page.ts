@@ -17,7 +17,7 @@ export default class GermplasmDetailsPage{
 
 
    viewPedigreeGraph() {
-       getGermplasmIframeBody().find(`[jhitranslate="pedigree.tree.view-pedigree-graph"]`).should('exist').click();
+       getGermplasmIframeBody().xpath(`//span[contains(text(), 'View Pedigree Graph')]`, {timeout: 15000}).should('be.visible').click();
    }
 
    verifyPedigreeGraph() {
