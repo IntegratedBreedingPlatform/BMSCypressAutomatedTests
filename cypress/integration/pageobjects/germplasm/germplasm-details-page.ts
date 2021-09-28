@@ -17,7 +17,7 @@ export default class GermplasmDetailsPage{
 
 
    viewPedigreeGraph() {
-       getGermplasmIframeBody().xpath(`//span[contains(text(), 'View Pedigree Graph')]`, {timeout: 15000}).should('be.visible').click();
+       getGermplasmIframeBody().xpath(`//span[contains(text(), 'View Pedigree Graph')]`, {timeout: 15000}).should('not.be.disabled').click();
    }
 
    verifyPedigreeGraph() {
