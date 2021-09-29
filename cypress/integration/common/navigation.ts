@@ -11,6 +11,7 @@ const sidebarSection = new SidebarSection()
 // GIVENS
 Given('I am already logged in to BMS', () => {
     loginPage.performLogin();
+    dashboardPage.verifyPageLoaded();
 });
 
 Given('I am on the {} page', (page) => {
