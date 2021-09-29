@@ -4,7 +4,7 @@ Feature: Create Role
 
 @TestCaseKey=IBP-T76
 @smoke-test
-Scenario: Check if user can create new role in Site Admin
+Scenario: Check if user can create new program role in Site Admin
     Given I am already logged in to BMS
     And I navigate to Site Admin page
     When I create a new program role with valid details
