@@ -17,16 +17,12 @@ export default class GermplasmDetailsPage{
 
 
    viewPedigreeGraph() {
-       cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/*/tree*`).as('viewPedigreeGraph');
-       getGermplasmIframeBody().find(`[jhitranslate="pedigree.tree.view-pedigree-graph"]`).should('exist').click();
+       getGermplasmIframeBody().xpath(`//*[@id="PEDIGREE TREE"]/div/jhi-pedigree-tree/div/div/div[1]/div/div/button`, {timeout: 15000}).should('not.be.disabled').click();
    }
 
    verifyPedigreeGraph() {
-       cy.wait('@viewPedigreeGraph').then((interception) => {
-           expect(interception.response.statusCode).to.equal(200);
-           getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-header > div > h4 > span').should('exist').contains('Pedigree Graph');
-           getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-body > jhi-pedigree-graph > div:nth-child(2) > div > div.pedigree-graph > svg').should('exist');
-       });
+       getGermplasmIframeBody().xpath(`//h4//span[contains(text(), 'Pedigree Graph')]`, {timeout: 15000}).should('be.visible');
+       getGermplasmIframeBody().find('jhi-germplasm-details-graphviz-modal > div > div.modal-body > jhi-pedigree-graph > div:nth-child(2) > div > div.pedigree-graph > svg').should('exist');
    }
 
 

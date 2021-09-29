@@ -49,5 +49,4 @@ Thumbs.db
 /cypress/screenshots/
 /cypress/videos/
 /cypress.env.json
-/cypress/cucumber_report
 *.cucumber.json

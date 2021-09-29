@@ -1,4 +1,4 @@
-class AddProgram{
+export default class AddProgram{
 
     enterCropName(cropName:string){
         return cy.get('.v-filterselect-input').type(cropName)
@@ -16,5 +16,3 @@ class AddProgram{
         return cy.get('.popupContent').should('have.value','Success');
     }
 }
-
-export default AddProgram

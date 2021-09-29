@@ -1,9 +1,10 @@
-class LoginPage{
+export default class LoginPage{
 
     performLogin() {
         this.launchLogin();
         this.enterValidCredentials()
         this.clickLogin()
+        this.checkURLandToken();
     }
 
     launchLogin(){
@@ -56,4 +57,3 @@ class LoginPage{
 
     
 }
-export default LoginPage

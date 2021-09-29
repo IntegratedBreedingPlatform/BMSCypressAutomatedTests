@@ -1,5 +1,5 @@
 
-class DashboardPage{
+export default class DashboardPage{
 
     protected cropName = Cypress.env('cropName');
     protected program = Cypress.env('program');
@@ -49,5 +49,4 @@ class DashboardPage{
     }
 
 }
-export default DashboardPage
 
