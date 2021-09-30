@@ -14,7 +14,7 @@ Scenario: Check if user can download import lists template
 Given I am on the Manage Lists page
 And I click Import List in the Actions menu
 When I download the import list template
-tapos Then An import list template should be downloaded
+Then An import list template should be downloaded
 
 Scenario: Check if user cancels import lists
 Given I am on the Manage Lists page
