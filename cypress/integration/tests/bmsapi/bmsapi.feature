@@ -12,4 +12,4 @@ Feature: BMSAPI
     Scenario: Launch BMSAPI page
         Given I am already logged in to BMS
         When I navigate to the BMSAPI page
-        Then The API Swagger page should display
+        Then The API Swagger page displays
