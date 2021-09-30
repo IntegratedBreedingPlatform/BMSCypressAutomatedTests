@@ -1,3 +1,5 @@
+@manage-lists
+@import-lists
 Feature: Import Lists
     In order to find germplasm using different criteria and enable the user to resolve conflicts
     As a user
@@ -71,6 +73,8 @@ Then I should be able to save the germplasm list with omitted entries
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
 # Add assertion to check that the omitted entries are not in the saved list
 
+@TestCaseKey=IBP-T3214
+@smoke-test
 Scenario: Check if user can review list and manually match selected entries
 Given I imported a valid file with multiple matches
 # Note: File has entries with multiple existing entries included. Add values to check GUID, GID, DESIGNATION search prioritization
