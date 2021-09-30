@@ -63,7 +63,7 @@ Then I should be able to save the germplasm list
 # Add assertion to check that the entries with without matches are not included in the saved list
 
 Scenario: Check if user can review list and omit selected entries
-Given I imported a valid file with without matches
+Given I imported a valid file with missing matches
 # Note: File has non-existing entries included
 And I am presented with the Review Import List screen
 When I navigate to Select match screen
@@ -80,7 +80,7 @@ Given I imported a valid file with multiple matches
 # Note: File has entries with multiple existing entries included. Add values to check GUID, GID, DESIGNATION search prioritization
 And I am presented with the Review Import List screen
 When I navigate to Select match screen
-And I select match entries
+And I manually map a germplasm for the selected record
 Then I should be able to save the germplasm list with the matched entries
 # Note: Add assertion to check the status of the matched entries
 # Add asserting to check the valid list metadata (name, description, etc) and folder. 
@@ -97,3 +97,12 @@ Then I should be able to save the germplasm list without the entries with missin
 # Note: Add asserting to check the valid list metadata (name, description, etc) and folder. 
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
 # Add assertion to check that the entries with missing entries are not in the saved list
+
+Scenario: Check if user can review list and proceed with single matches entries
+Given I imported a valid file with single matches
+# Note: File has entries with single matches
+And I am presented with the Review Import List screen
+When I navigate to the next page
+Then I should be able to save the germplasm list without the entries with missing matches
+# Note: Add asserting to check the valid list metadata (name, description, etc) and folder. 
+# And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
