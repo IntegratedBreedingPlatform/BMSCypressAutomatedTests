@@ -9,6 +9,7 @@ export default class DashboardPage{
     }
 
     clickAddProgram(){
+        // TODO add checking if release notes popup is shown, if so - close it
         return cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
     }
 
@@ -17,12 +18,12 @@ export default class DashboardPage{
 	}
 
 	launchProgram() {
+        // TODO add checking if release notes popup is shown, if so - close it
         this.selectCrop()
         this.clickLaunchProgram();
     }
     
     selectCrop(){
-        
 		return this.getProgramsIframeBody().find('#cropDropdown select')
         .should('exist').select(this.cropName, { force : true })
         .should('have.value', this.cropName);
@@ -47,6 +48,18 @@ export default class DashboardPage{
         this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
+
+    clickSiteAdmin() {
+        // TODO add checking first if release notes popup is shown, if so - close it
+    }
+
+   signOut() {
+       // TODO add checking first if release notes popup is shown, if so - close it
+   }
+
+   updateUserProfile() {
+       // TODO add checking first if release notes popup is shown, if so - close it
+   }
 
 }
 
