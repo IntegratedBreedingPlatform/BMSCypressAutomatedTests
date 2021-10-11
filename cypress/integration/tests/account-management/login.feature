@@ -3,7 +3,7 @@
 Feature: Login
 
     In order to carry out various breeding activities
-	As a breeder
+	As a user
 	I want to login to the BMS to access the breeding programs I am involved with
 
 @TestCaseKey=IBP-T3153
@@ -34,6 +34,10 @@ Feature: Login
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version
 
-
-
+@TestCaseKey=IBP-T78
+@smoke-test
+    Scenario: Check if user can sign out in BMS
+        Given I am already logged in to BMS
+        When I sign out
+		Then I should be redirected to the login page
         

@@ -1,7 +1,7 @@
 @sidebar
 Feature: Check BMS sidebar links
     In order to carry out various breeding activities
-    As a breeder
+    As a user
     I should be able to see each sidebar pages
 
 @TestCaseKey=IBP-T3157
