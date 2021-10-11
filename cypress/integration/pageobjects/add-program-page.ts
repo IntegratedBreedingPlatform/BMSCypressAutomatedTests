@@ -1,4 +1,4 @@
-export default class AddProgram{
+export default class AddProgramPage{
 
     openCropNameOptions(){
         return getMainIframeDocumentWaitToLoad().find('.v-filterselect-button').should('exist')
