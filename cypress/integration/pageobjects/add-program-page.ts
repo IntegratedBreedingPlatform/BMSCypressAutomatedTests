@@ -6,7 +6,7 @@ export default class AddProgramPage{
     }
 
     selectCropName(cropName:string){
-        return getMainIframeDocument().find('span').contains(cropName).should('exist')
+        return getMainIframeDocument().find('.gwt-MenuItem > span').contains(cropName).should('exist')
             .click();
     }
 
