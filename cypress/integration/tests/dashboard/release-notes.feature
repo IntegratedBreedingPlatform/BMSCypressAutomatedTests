@@ -22,7 +22,7 @@ Feature: Release Notes
         And I am presented with the release notes pop-up
         When I uncheck the Don't show again checkbox
         And I click OK
-        And I re-logs in the system
+        And I re-log in the system
         Then I should see the release notes pop-up again
 @TestCaseKey=IBP-T3185
 @clean-install
@@ -32,5 +32,5 @@ Feature: Release Notes
         And I am presented with the release notes pop-up
         When I check the Don't show again checkbox
         And I click OK
-        And I re-logs in the system
+        And I re-log in the system
         Then I should no longer see the release notes pop-up
