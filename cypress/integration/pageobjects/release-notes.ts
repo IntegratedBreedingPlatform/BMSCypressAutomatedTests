@@ -29,9 +29,13 @@ export default class ReleaseNotes{
 
     setDontShowAgainValue(checked: boolean) {
         if(checked) {
-            this.getReleaseNotesBody().find('#dontShowAgain').should('exist').check();
+            this.getDontShowAgainCheckBox().check();
         } else {
-            this.getReleaseNotesBody().find('#dontShowAgain').should('exist').uncheck();
+            this.getDontShowAgainCheckBox().uncheck();
         }
+    }
+
+    getDontShowAgainCheckBox() {
+        return this.getReleaseNotesBody().find('#dontShowAgain', {timeout:50000}).should('exist');
     }
 }
