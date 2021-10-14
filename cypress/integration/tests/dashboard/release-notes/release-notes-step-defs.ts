@@ -1,32 +1,28 @@
 import { Given,When,And,Then } from "cypress-cucumber-preprocessor/steps";
-import ReleaseNotes from '../../../pageobjects/release-notes'
+import ReleaseNotesPage from '../../../pageobjects/release-notes-page'
 import LoginPage from '../../../pageobjects/login-page'
 
 const loginPage = new LoginPage()
-const releaseNotes = new ReleaseNotes();
-
-Given('I am already logged in to BMS', ()=> {
-    loginPage.performLogin();
-})
+const releaseNotesPage = new ReleaseNotesPage();
 
 Then('Release Notes pop-up displays', ()=> {
-    releaseNotes.verifyReleaseNotesDisplayed();
+    releaseNotesPage.verifyReleaseNotesDisplayed();
 })
 
 And('I am presented with the release notes pop-up', ()=> {
-    releaseNotes.verifyReleaseNotesDisplayed();
+    releaseNotesPage.verifyReleaseNotesDisplayed();
 })
 
 When('I uncheck the Don\'t show again checkbox', ()=> {
-    releaseNotes.setDontShowAgainValue(false);
+    releaseNotesPage.setDontShowAgainValue(false);
 })
 
 When('I check the Don\'t show again checkbox', ()=> {
-    releaseNotes.setDontShowAgainValue(true);
+    releaseNotesPage.setDontShowAgainValue(true);
 })
 
 And('I click OK', ()=> {
-    releaseNotes.clickOk();
+    releaseNotesPage.clickOk();
 })
 
 And('I re-log in the system', ()=> {
@@ -34,9 +30,9 @@ And('I re-log in the system', ()=> {
 })
 
 Then('I should see the release notes pop-up again', ()=> {
-    releaseNotes.verifyReleaseNotesDisplayed();
+    releaseNotesPage.verifyReleaseNotesDisplayed();
 })
 
 Then('I should no longer see the release notes pop-up', ()=> {
-    releaseNotes.verifyReleaseNotesNotDisplayed();
+    releaseNotesPage.verifyReleaseNotesNotDisplayed();
 })

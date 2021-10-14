@@ -1,4 +1,4 @@
-export default class ReleaseNotes{
+export default class ReleaseNotesPage {
     verifyReleaseNotesDisplayed() {
         this.getReleaseNotesIframe();
         this.verifyReleaseNotesHeaderDisplayed();
