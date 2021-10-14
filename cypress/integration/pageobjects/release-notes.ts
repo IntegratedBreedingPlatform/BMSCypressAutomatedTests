@@ -1,15 +1,15 @@
 export default class ReleaseNotes{
     verifyReleaseNotesDisplayed() {
         this.getReleaseNotesIframe();
-        this.getReleaseNotesBody();
+        this.verifyReleaseNotesHeaderDisplayed();
     }
 
     verifyReleaseNotesNotDisplayed() {
         cy.xpath('//jhi-release-notes-wrapper/iframe').should('not.exist');
     }
 
-    getReleaseNotesBody() {
-        return this.getReleaseNotesBody()
+    verifyReleaseNotesHeaderDisplayed() {
+        this.getReleaseNotesBody()
             .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-header > h4 > span > span')
             .should('exist');
     }
