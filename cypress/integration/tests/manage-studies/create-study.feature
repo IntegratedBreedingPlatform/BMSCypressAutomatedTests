@@ -10,7 +10,7 @@ Feature: Create Study
 @update-install    
  Scenario: Check creation of trial using randomized complete block design with treatment factors
     Given I am on the Manage Studies page
-    And I created a new study with basic details
+    And I opened an existing study with no existing design yet
     When I added study settings
     And I browsed germplasm list 
     And I added treatment factors
@@ -18,6 +18,7 @@ Feature: Create Study
     And I generated experimental design using Randomized Complete Block design
     Then Design generation should be successful 
     #Check success message of design generation
+    #Add deletion of design step on Then step definition
 
 @TestCaseKey=IBP-T2352
 @sanity-test
