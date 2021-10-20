@@ -8,7 +8,7 @@ Given('I navigate to the BMSAPI page',()=>{
     apiPage.launchBMSAPI()
 })
 
-Then('The API Swagger page will display',()=>{
+Then('The API Swagger page displays',()=>{
     apiPage.verifyPageLoaded()
 })
 

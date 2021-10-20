@@ -2,7 +2,7 @@
 @manage-germplasm
 Feature: Import Germplasm
     In order to create germplasm records in BMS
-	As a breeder
+	As a user
 	I want to import a germplasm records using a template file
 
 @TestCaseKey=IBP-T3177    

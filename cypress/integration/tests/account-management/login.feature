@@ -3,7 +3,7 @@
 Feature: Login
 
     In order to carry out various breeding activities
-	As a breeder
+	As a user
 	I want to login to the BMS to access the breeding programs I am involved with
 
 @TestCaseKey=IBP-T3153
@@ -33,7 +33,4 @@ Feature: Login
     Scenario: Check BMS version on login page
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version
-
-
-
         
