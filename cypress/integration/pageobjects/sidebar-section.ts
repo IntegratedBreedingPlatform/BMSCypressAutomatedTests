@@ -15,22 +15,28 @@ export default class SidebarSection {
 
     verifyPageIsShown(page:string) {
         let sidebarTool = SidebarTool.getFromLinkName(page);
-        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-            if (sidebarTool.toolName === 'GDMS') {
-                cy.wrap($iframeBody).xpath(`//img[@src="/GDMS/VAADIN/themes/gdmstheme/images/GDMS.gif"]`).should('exist')
 
-            } else if (sidebarTool.linkName == 'High Density') {
-                cy.wrap($iframeBody).xpath(`//p[contains(text(),'${sidebarTool.toolName}')]`).should('exist')
+        if(sidebarTool.isVaadin) {
+            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
+                if (sidebarTool.toolName === 'GDMS') {
+                    cy.wrap($iframeBody).xpath(`//img[@src="/GDMS/VAADIN/themes/gdmstheme/images/GDMS.gif"]`).should('exist')
 
-            } else if (!sidebarTool.isVaadin) {
+                } else if (sidebarTool.linkName == 'High Density') {
+                    cy.wrap($iframeBody).xpath(`//p[contains(text(),'${sidebarTool.toolName}')]`).should('exist')
+
+                } else {
+                    cy.wrap($iframeBody).xpath(`//div[@id="toolTitle"]`).should('exist').should('have.text', sidebarTool.toolName);
+                }
+            });
+        } else {
+            cy.get('mat-sidenav-content > iframe').its('0.contentDocument.body').should('not.be.empty').then(($iframeBody) => {
                 cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')] | 
                     //h2[contains(text(),'${sidebarTool.toolName}')] | 
-                    //h1/span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
+                    //h1>span[contains(text(),'${sidebarTool.toolName}')]| 
+                    //h1>span>span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
+            });
+        }
 
-            } else {
-                cy.wrap($iframeBody).xpath(`//div[@id="toolTitle"]`).should('exist').should('have.text', sidebarTool.toolName);
-            }
-        });
     }
 
     verifyBMSVersion() {
@@ -55,8 +61,8 @@ export class SidebarTool {
     public static readonly GRAPHICAL_QUERIES = new SidebarTool('Graphical Queries', 'Queries', 'BrAPI Graphical Queries');
     public static readonly HEAD_TO_HEAD_QUERY = new SidebarTool('Head to Head Query', 'Queries', 'Main Head to Head Query', true);
     public static readonly MULTI_TRAIT_QUERY = new SidebarTool('Multi-trait Query', 'Queries', 'Multi-trait Query', true);
-    public static readonly GDMS = new SidebarTool('Low Density', 'Genotyping', 'GDMS');
-    public static readonly HIGH_DENSITY = new SidebarTool('High Density', 'Genotyping', 'Module is not defined yet');
+    public static readonly GDMS = new SidebarTool('Low Density', 'Genotyping', 'GDMS', true);
+    public static readonly HIGH_DENSITY = new SidebarTool('High Density', 'Genotyping', 'Module is not defined yet', true);
     public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Ontology Browser');
     public static readonly MANAGE_METADATA = new SidebarTool('Manage Metadata', 'Crop Administration', 'Manage Metadata');
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
