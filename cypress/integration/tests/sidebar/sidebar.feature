@@ -20,6 +20,7 @@ Feature: Check BMS sidebar links
         |Manage Germplasm|  
         |Germplasm Lists|
         |Samples Lists|
+        |Germplasm Lists Beta|
         |Manage Studies|
         |Browse Studies|
         |Import Datasets|
