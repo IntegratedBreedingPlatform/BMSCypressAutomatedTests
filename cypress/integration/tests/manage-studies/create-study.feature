@@ -24,6 +24,7 @@ Scenario: Check creation of trial using randomized complete block design with tr
 Scenario: Check BV Design License is not included
     Given I am on the Manage Studies page
     And I created a new study with basic details
+    And I browsed germplasm list
     When I generated experimental design using Randomized Complete Block design
     Then Design generation should not be successful     
 
