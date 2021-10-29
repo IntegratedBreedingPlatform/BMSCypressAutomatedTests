@@ -1,11 +1,11 @@
-export default class ManageStudiesPage{
+export default class ManageStudiesPage {
 
-    browseExistingStudies(){
+    browseExistingStudies() {
         getMainIframeDocumentWaitToLoad().find('.control-label > a').contains('Browse').click();
     }
 
-    selectExistingStudy(studyName:string){
-        getMainIframeDocument().xpath("//div[@id='studyTreeModal']//label[text()='Browse Studies']").should('be.visible');
+    selectExistingStudy(studyName: string) {
+        getMainIframeDocument().xpath('//div[@id=\'studyTreeModal\']//label[text()=\'Browse Studies\']').should('be.visible');
         getMainIframeDocument().xpath(`//a[@class='dynatree-title' and text()='${studyName}']`).scrollIntoView().should('be.visible').click().then(() => {
             getMainIframeDocument().xpath(`//div[@id='studyTreeModal']//button[text()='Open']`).click();
         });
