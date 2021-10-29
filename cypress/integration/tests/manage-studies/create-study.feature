@@ -25,8 +25,8 @@ Scenario: Check BV Design License is not included
     Given I am on the Manage Studies page
     And I created a new study with basic details
     And I browsed germplasm list
-    When I generated experimental design using Randomized Complete Block design
-    Then Design generation should not be successful     
+    When I try to generate experimental design using Randomized Complete Block design
+    Then Design generation should not be successful
 
 @TestCaseKey=IBP-T2359  
 @sanity-test
@@ -34,8 +34,10 @@ Scenario: Check BV Design License is not included
  Scenario: Check BV Design License is included
     Given I am on the Manage Studies page
     And I opened an existing study with germplasm list but with no existing design yet
-    And I generated experimental design using Randomized Complete Block design
-    Then Design generation should be successful 
+    When I go to experimental design and generated using Randomized Complete Block design
+    Then Design generation should be successful
+    And Delete the generated design
     #Check success message of design generation
     #Add deletion of design step on Then step definition
+
 
