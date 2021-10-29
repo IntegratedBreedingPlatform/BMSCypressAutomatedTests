@@ -32,7 +32,7 @@ Scenario: Check BV Design License is not included
 @sanity-test
 @update-install    
  Scenario: Check BV Design License is included
-    Given I am on the Manage Studies page
+    Given I am on the Manage Studies page of specified program
     And I opened an existing study with germplasm list but with no existing design yet
     When I go to experimental design and generated using Randomized Complete Block design
     Then Design generation should be successful

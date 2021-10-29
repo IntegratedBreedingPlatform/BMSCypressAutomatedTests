@@ -2,7 +2,7 @@
 export default class DashboardPage{
 
     protected cropName = Cypress.env('cropName');
-    protected program = Cypress.env('program');
+    protected programName = Cypress.env('existingProgramName');
  
     getProgramsIframeDocument = () => {
             return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
@@ -17,12 +17,22 @@ export default class DashboardPage{
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
 
-	launchProgram() {
+	launchProgram(openSpecifiedProgram?:boolean) {
         // TODO add checking if release notes popup is shown, if so - close it
-        this.selectCrop()
+        this.selectCrop();
+        if (openSpecifiedProgram){
+            this.selectProgram();
+        }
         this.clickLaunchProgram();
     }
-    
+
+    selectProgram(){
+        this.getProgramsIframeBody().find('#programDropdown').should('exist').click();
+        this.getProgramsIframeBody().find('input[role="searchbox"]').should('be.visible')
+            .type(this.programName, { force: true, delay: 0 });
+        return this.getProgramsIframeBody().find('span.select2-results').should('be.visible').contains('ul', this.programName).click();
+    }
+
     selectCrop(){
 		return this.getProgramsIframeBody().find('#cropDropdown select')
         .should('exist').select(this.cropName, { force : true })

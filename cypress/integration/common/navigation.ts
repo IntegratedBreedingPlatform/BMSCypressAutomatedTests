@@ -20,6 +20,13 @@ Given('I am on the {} page', (page) => {
     sidebarSection.navigate(tool);
 });
 
+Given('I am on the {} page of specified program', (page) => {
+    loginPage.performLogin();
+    dashboardPage.launchProgram(true);
+    let tool = SidebarTool.getFromToolName(page);
+    sidebarSection.navigate(tool);
+});
+
 // ==================================
 // WHENS
 When('I launch a program', () => {
