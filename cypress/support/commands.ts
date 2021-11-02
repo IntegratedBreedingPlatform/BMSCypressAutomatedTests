@@ -63,6 +63,7 @@ Cypress.Commands.add('getProgram', () => {
 
 });
 
+// TODO refactor, use getIframeBody? that uses only cypress retry-ability (Cypress "manages a Promise chain on your behalf")
 Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => {
     return new Cypress.Promise(resolve => {
         $iframe.on('load', () => {
@@ -70,3 +71,21 @@ Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => 
         });
     });
 });
+
+/**
+ * Usage:
+ *      cy.getIframeBody().then(($iframe) => {
+ *        cy.wrap($iframe)
+ *      })
+ * or
+ *      cy.getIframeBody().find()
+ */
+Cypress.Commands.add('getIframeBody', ($iframe) => {
+    // get the main iframe
+    // and retry until the body element is not empty
+    return cy.get('mat-sidenav-content > iframe', {timeout: Cypress.config('pageLoadTimeout')})
+        .its('0.contentDocument.body')
+        .should('not.be.empty')
+        .then(cy.wrap)
+});
+
