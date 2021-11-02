@@ -51,7 +51,7 @@ export class SidebarTool {
     public static readonly MANAGE_GERMPLASM = new SidebarTool('Manage Germplasm', 'Germplasm', 'Germplasm Manager');
     public static readonly GERMPLASM_LISTS = new SidebarTool('Germplasm Lists', 'Lists', 'Germplasm Lists', true);
     public static readonly SAMPLE_LISTS = new SidebarTool('Samples Lists', 'Lists', 'Manage Samples');
-    public static readonly GERMPLASM_LISTS_BETA = new SidebarTool('Germplasm Lists Beta', 'Lists', 'Germplasm Lists');
+    public static readonly GERMPLASM_LISTS_BETA = new SidebarTool('Germplasm Lists Beta', 'Lists', 'Germplasm Lists Beta');
     public static readonly MANAGE_STUDIES = new SidebarTool('Manage Studies', 'Studies', 'Manage Studies');
     public static readonly BROWSE_STUDIES = new SidebarTool('Browse Studies', 'Studies', 'Browse Studies', true);
     public static readonly DATASET_IMPORT = new SidebarTool('Import Datasets', 'Studies', 'Dataset Importer');
