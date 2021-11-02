@@ -2,7 +2,7 @@
 @manage-germplasm
 Feature: Germplasm Details
     In order to know the details of a germplasm
-    As a breeder
+    As a user
     I should be able to view details of a germplasm
 
 @TestCaseKey=IBP-T3178

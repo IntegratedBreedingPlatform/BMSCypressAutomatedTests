@@ -4,7 +4,7 @@ export default class LoginPage{
         this.launchLogin();
         this.enterValidCredentials()
         this.clickLogin()
-        this.checkURLandToken();
+        this.checkURLandToken(); 
     }
 
     launchLogin(){
