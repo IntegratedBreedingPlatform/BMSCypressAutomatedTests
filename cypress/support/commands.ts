@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
+import { timeout } from 'rxjs/operators';
 
 Cypress.Commands.add('login', () => {
   cy.visit('ibpworkbench/controller/auth/login');
@@ -41,6 +42,10 @@ Cypress.Commands.add('login', () => {
 function getAccessToken() {
   const token = localStorage.getItem('bms.xAuthToken');
   return JSON.parse(token).token;
+}
+
+export function randomString(length = 11) {
+    return Math.random().toString(36).substr(2, length);
 }
 
 Cypress.Commands.add('getProgram', () => {
