@@ -43,9 +43,18 @@ that this values will overwrite the ones defined in cypress.env.json.
 node_modules/.bin/cypress open --config baseUrl=SERVE_URL --env username=USERNAME,password=PASSWORD,cropName=CROP
 ~~~ 
 
+Running specific tags
+----------
+
+~~~
+node_modules/.bin/cypress-tags run -e TAGS="(@sanity-test and @sidebar) and not @ignore" --spec 'cypress/integration/**/*.feature'
+~~~ 
+See also: https://github.com/TheBrainFamily/cypress-cucumber-preprocessor#running-tagged-tests
+
 Running Cypress using docker
 ----------
 
 ~~~
 docker run -it -v $PWD:/e2e -w /e2e cypress/included:8.2.0 run
 ~~~ 
+
