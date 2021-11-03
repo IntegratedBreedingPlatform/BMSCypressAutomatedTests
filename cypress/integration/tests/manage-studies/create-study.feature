@@ -15,8 +15,7 @@ Scenario: Check creation of trial using randomized complete block design with tr
     And I added treatment factors
     And I added environment variables
     And I generated experimental design using Randomized Complete Block design
-    Then Design generation should be successful 
-    #Check success message of design generation 
+    Then Design generation should be successful
     
 @TestCaseKey=IBP-T2352
 @sanity-test
@@ -37,7 +36,5 @@ Scenario: Check BV Design License is not included
     When I go to experimental design and generated using Randomized Complete Block design
     Then Design generation should be successful
     And Delete the generated design
-    #Check success message of design generation
-    #Add deletion of design step on Then step definition
 
 
