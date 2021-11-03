@@ -21,9 +21,8 @@ import './commands'
 require('cypress-xpath');
 
 beforeEach(() => {
-
+  cy.restoreLocalStorage();
   Cypress.env('program', {});
-
 });
 afterEach(() => {
   const screenshotsFolder = Cypress.config("screenshotsFolder");
@@ -47,4 +46,6 @@ afterEach(() => {
 
       }
   }
+
+  cy.saveLocalStorage();
 });

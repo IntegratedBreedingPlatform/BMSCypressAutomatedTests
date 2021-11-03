@@ -25,7 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
-import { timeout } from 'rxjs/operators';
 
 Cypress.Commands.add('login', () => {
   cy.visit('ibpworkbench/controller/auth/login');
@@ -69,6 +68,29 @@ Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => 
         $iframe.on('load', () => {
             resolve($iframe.contents().find('body'));
         });
+    });
+});
+
+/**
+ * Ideally test should be isolated according to cypress best practices
+ * but being able to keep localstorage between test allows to stay on the page
+ * and run more than than one cucumber scenario without doing the full login loop.
+ *
+ * See also:
+ * https://github.com/cypress-io/cypress/issues/461#issuecomment-392070888
+ */
+//
+const LOCAL_STORAGE_MEMORY: any = {};
+
+Cypress.Commands.add("saveLocalStorage", () => {
+    Object.keys(localStorage).forEach(key => {
+        LOCAL_STORAGE_MEMORY[key] = localStorage[key];
+    });
+});
+
+Cypress.Commands.add("restoreLocalStorage", () => {
+    Object.keys(LOCAL_STORAGE_MEMORY).forEach(key => {
+        localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
     });
 });
 
