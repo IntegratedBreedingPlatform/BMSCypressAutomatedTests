@@ -10,9 +10,8 @@ export default class CreateStudyPage {
 
     goToExperimentalDesign(waitForIframe: boolean) {
         if (waitForIframe) {
-            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-                this.clickTab('Experimental Design');
-            });
+            getMainIframeDocumentWaitLoad();
+            this.clickTab('Experimental Design');
         } else {
             this.clickTab('Experimental Design');
         }
@@ -45,23 +44,19 @@ export default class CreateStudyPage {
     }
 
     deleteGeneratedDesign() {
-        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(() => {
-            getMainIframeDocument().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='Experimental Design']`).should('be.visible').click().then(() => {
-                getMainIframeDocument().xpath(`//input[@type='button' and @value='Delete Design']`).should('be.visible').first().click({ force: true });
-                getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//div[contains(@class,'modal-footer')]//button[text()='Yes']`).should('be.visible').first().click();
-            });
+        getMainIframeDocumentWaitLoad().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='Experimental Design']`).should('be.visible').click().then(() => {
+            getMainIframeDocument().xpath(`//input[@type='button' and @value='Delete Design']`).should('be.visible').first().click({ force: true });
+            getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//div[contains(@class,'modal-footer')]//button[text()='Yes']`).should('be.visible').first().click();
         });
     }
 
     saveStudyWithBasicDetails(studyName: string, studyDesc: string, studyType: string, objective: string) {
-        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-            getMainIframeDocument().xpath('//input[@ng-model="data.studyName"]').type(studyName, { delay: 0 });
-            getMainIframeDocument().xpath('//input[@ng-model="data.description"]').type(studyDesc, { delay: 0 });
-            getMainIframeDocument().xpath('//select[@id="studyTypeId"]').select(studyType, { force: true });
-            getMainIframeDocument().xpath('//textarea[@ng-model="data.objective"]').type(objective, { delay: 0 });
-            this.openChangeFolderModal();
-            getMainIframeDocument().xpath(`//input[@value='Save']`).click();
-        }
+        getMainIframeDocumentWaitLoad().xpath('//input[@ng-model="data.studyName"]').type(studyName, { delay: 0 });
+        getMainIframeDocument().xpath('//input[@ng-model="data.description"]').type(studyDesc, { delay: 0 });
+        getMainIframeDocument().xpath('//select[@id="studyTypeId"]').select(studyType, { force: true });
+        getMainIframeDocument().xpath('//textarea[@ng-model="data.objective"]').type(objective, { delay: 0 });
+        this.openChangeFolderModal();
+        getMainIframeDocument().xpath(`//input[@value='Save']`).click();
     }
 
     openChangeFolderModal() {
@@ -72,17 +67,14 @@ export default class CreateStudyPage {
     }
 
     addStudySettings() {
-        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-            cy.wrap($iframeBody).xpath(`//div[@id='manage-study-tabs']//span[text()='Add']`).should('be.visible').click();
-        });
+        getMainIframeDocumentWaitLoad().xpath(`//div[@id='manage-study-tabs']//span[text()='Add']`).should('be.visible').click();
         this.manageSettingsModal('Add Study-Level Settings', 'PI_NAME');
         getMainIframeDocument().xpath(`//input[@value='Save']`).should('be.visible').click();
     }
 
     addGermplasms() {
-        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-            this.clickTab('Germplasm & Checks');
-        });
+        getMainIframeDocumentWaitLoad();
+        this.clickTab('Germplasm & Checks');
         getMainIframeDocument().xpath(`//div[@id='chooseGermplasmAndChecks']//a[text()='Browse']`).should('be.visible').click();
         getMainIframeDocument().xpath(`//div[@id='listTreeModal']//label[text()='Browse For Lists']`).should('be.visible');
         // Wait for the list table to load
@@ -138,3 +130,6 @@ const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
 }
 
+const getMainIframeDocumentWaitLoad = () => {
+    return cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(cy.wrap);
+}
