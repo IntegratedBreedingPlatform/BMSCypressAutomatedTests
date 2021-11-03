@@ -74,18 +74,18 @@ Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => 
 
 /**
  * Usage:
- *      cy.getIframeBody().then(($iframe) => {
+ *      getIframeBody().then(($iframe) => {
  *        cy.wrap($iframe)
  *      })
  * or
- *      cy.getIframeBody().find()
+ *      getIframeBody().find()
  */
-Cypress.Commands.add('getIframeBody', ($iframe) => {
+export function getIframeBody() {
     // get the main iframe
     // and retry until the body element is not empty
     return cy.get('mat-sidenav-content > iframe', {timeout: Cypress.config('pageLoadTimeout')})
         .its('0.contentDocument.body')
         .should('not.be.empty')
         .then(cy.wrap)
-});
+}
 
