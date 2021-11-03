@@ -11,9 +11,9 @@ export default class CreateStudyPage {
     goToExperimentalDesign(waitForIframe: boolean) {
         if (waitForIframe) {
             getMainIframeDocumentWaitLoad();
-            this.clickTab('Experimental Design');
+            this.clickTab(experimentalDesignLabel);
         } else {
-            this.clickTab('Experimental Design');
+            this.clickTab(experimentalDesignLabel);
         }
     }
 
@@ -22,13 +22,13 @@ export default class CreateStudyPage {
         getMainIframeDocument().xpath(`//div[contains(@class,'select2-result-label') and contains(text(),'Randomized Complete Block Design')]`).should('be.visible').click();
         getMainIframeDocument().xpath(`//input[@id='txtStartingPlotNo']`).should('be.visible').clear().type('1', { delay: 0 });
         getMainIframeDocument().xpath(`//input[@name='replicationsCount']`).should('be.visible').clear().type('2', { delay: 0 });
-        getMainIframeDocument().xpath(`//input[@type='submit' and @value='Generate Design']`).should('be.visible').click();
+        getMainIframeDocument().xpath(`//input[@type='submit' and @value='${generateDesignLabel}']`).should('be.visible').click();
     }
 
     confirmGenerateModal() {
         // Wait for modal to load and click the Generate button
         cy.intercept('POST', `**/generation`).as('generate');
-        getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//label[text()='Generate Design']`, { timeout: 15000 }).should('be.visible');
+        getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//label[text()='${generateDesignLabel}']`, { timeout: 15000 }).should('be.visible');
         getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//button[text()='Generate']`).should('be.visible').click();
     }
 
@@ -44,7 +44,7 @@ export default class CreateStudyPage {
     }
 
     deleteGeneratedDesign() {
-        getMainIframeDocumentWaitLoad().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='Experimental Design']`).should('be.visible').click().then(() => {
+        getMainIframeDocumentWaitLoad().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='${experimentalDesignLabel}']`).should('be.visible').click().then(() => {
             getMainIframeDocument().xpath(`//input[@type='button' and @value='Delete Design']`).should('be.visible').first().click({ force: true });
             getMainIframeDocument().xpath(`//div[contains(@class,'modal-dialog')]//div[contains(@class,'modal-footer')]//button[text()='Yes']`).should('be.visible').first().click();
         });
@@ -125,6 +125,10 @@ export default class CreateStudyPage {
         getMainIframeDocument().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
     }
 }
+
+const generateDesignLabel = 'Generate Design';
+
+const experimentalDesignLabel = 'Experimental Design';
 
 const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
