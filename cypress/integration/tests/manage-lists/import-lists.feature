@@ -16,17 +16,10 @@ Feature: Import Lists
     And I click Confirm on Save Germplasm List screen
     Then the created list is available and filtered
 
-  @ignore
-  Scenario: Check if Import Lists is available in Manage Lists module
-    Given I am on the Manage Lists page
-    When I click the Actions menu
-    Then I should see Import List from Actions
-
-  @ignore
+  @smoke-test
   Scenario: Check if user can download import lists template
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I download the import list template
+    When I select Import germplasm list from Actions
+    And I click the link to dowload the import list template
     Then An import list template should be downloaded
 
   @ignore

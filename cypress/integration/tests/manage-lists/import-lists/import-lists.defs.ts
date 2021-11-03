@@ -1,5 +1,5 @@
 import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germplasm-lists-beta-page';
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { randomString } from '../../../../support/commands';
 import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
 
@@ -7,24 +7,36 @@ const searchPage = new GermplasmListsBetaPage();
 let importModal = new GermplasmListImportPage();
 const listName = 'list name ' + randomString();
 
+// Import list
 When('I select Import germplasm list from Actions', () => {
     searchPage.openImportGermplasmListModal();
 });
-When('I select a file to upload', () => {
+And('I select a file to upload', () => {
     importModal.selectFile(listName);
 });
-When('I click Next on Import Germplasm list screen', () => {
+And('I click Next on Import Germplasm list screen', () => {
     importModal.clickImportNext();
 });
-When('I click Next on Review Import List screen', () => {
+And('I click Next on Review Import List screen', () => {
     importModal.clickImportSubmit();
 });
-When('I click Confirm on Import List Summary screen', () => {
+And('I click Confirm on Import List Summary screen', () => {
     importModal.clickImportConfirm();
 });
-When('I click Confirm on Save Germplasm List screen', () => {
+And('I click Confirm on Save Germplasm List screen', () => {
     importModal.clickSaveList(listName);
 });
-Then('the created list is available and filtered',()=>{
+Then('the created list is available and filtered', () => {
     importModal.verifyListCreated(listName);
 })
+
+// Download template
+When('I select Import germplasm list from Actions', () => {
+    searchPage.openImportGermplasmListModal();
+});
+And('I click the link to dowload the import list template', () => {
+    importModal.openImportListClickTemplate();
+});
+Then('An import list template should be downloaded', () => {
+    searchPage.verifyImportTemplateDowload();
+});

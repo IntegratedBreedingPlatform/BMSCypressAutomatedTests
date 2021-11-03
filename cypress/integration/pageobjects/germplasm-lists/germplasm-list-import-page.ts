@@ -53,4 +53,10 @@ export default class GermplasmListImportPage {
             cy.wrap($iframe).find('jhi-germplasm-list-search').contains(listName);
         });
     }
+
+    openImportListClickTemplate() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="downloadImportTemplate"]').click();
+        });
+    }
 }

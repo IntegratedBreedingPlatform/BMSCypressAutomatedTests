@@ -9,4 +9,7 @@ export default class GermplasmListsBetaPage {
         })
     }
 
+    verifyImportTemplateDowload() {
+        // TODO
+    }
 }
