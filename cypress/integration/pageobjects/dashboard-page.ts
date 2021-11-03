@@ -27,7 +27,7 @@ export default class DashboardPage{
     }
 
     selectProgram(){
-        this.getProgramsIframeBody().find('#programDropdown .select2-selection__rendered').invoke('text').then((text) => {
+        this.getProgramsIframeBody().find('#programDropdown .select2-selection__rendered').should('be.visible').invoke('text').then((text) => {
             // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
             // workaround: only perform selection when selected text is not yet the specified programName
             if (text != this.programName) {
