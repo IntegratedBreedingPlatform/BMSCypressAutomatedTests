@@ -2,6 +2,7 @@
 @account-management
 Feature: Create User
 
+@ignore
 @TestCaseKey=IBP-T76
 @smoke-test
 Scenario: Check if user can create new user and assigned the created role in Site Admin

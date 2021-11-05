@@ -5,6 +5,7 @@ Feature: Reset Password
     As a user
     I need to reset my password
 
+@ignore
 @TestCaseKey=IBP-T77
 @smoke-test
   Scenario: Check if user can reset password
