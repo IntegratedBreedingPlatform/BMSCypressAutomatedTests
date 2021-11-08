@@ -9,5 +9,6 @@
   "viewportWidth": 1280,
   "testFiles": "**/*.feature",
   "video": false,
-  "screenshotOnRunFailure": true
+  "screenshotOnRunFailure": true,
+  "defaultCommandTimeout": 10000
 }

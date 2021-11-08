@@ -33,4 +33,11 @@ Feature: Login
     Scenario: Check BMS version on login page
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version
+@ignore
+@TestCaseKey=IBP-T78
+@smoke-test
+    Scenario: Check if user can sign out in BMS
+        Given I am already logged in to BMS
+        When I sign out
+		Then I should be redirected to the login page
         

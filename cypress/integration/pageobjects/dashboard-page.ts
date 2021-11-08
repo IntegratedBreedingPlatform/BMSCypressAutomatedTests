@@ -2,7 +2,7 @@
 export default class DashboardPage{
 
     protected cropName = Cypress.env('cropName');
-    protected program = Cypress.env('program');
+    protected programName = Cypress.env('existingProgramName');
  
     getProgramsIframeDocument = () => {
             return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
@@ -17,12 +17,28 @@ export default class DashboardPage{
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
 
-	launchProgram() {
+	launchProgram(openSpecifiedProgram?:boolean) {
         // TODO add checking if release notes popup is shown, if so - close it
-        this.selectCrop()
+        this.selectCrop();
+        if (openSpecifiedProgram){
+            this.selectProgram();
+        }
         this.clickLaunchProgram();
     }
-    
+
+    selectProgram(){
+        this.getProgramsIframeBody().find('#programDropdown .select2-selection__rendered').should('be.visible').invoke('text').then((text) => {
+            // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
+            // workaround: only perform selection when selected text is not yet the specified programName
+            if (text != this.programName) {
+                this.getProgramsIframeBody().find('#programDropdown').should('exist').click();
+                this.getProgramsIframeBody().find('input[role="searchbox"]').should('be.visible')
+                    .type(this.programName);
+                this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
+            }
+        });
+    }
+
     selectCrop(){
 		return this.getProgramsIframeBody().find('#cropDropdown select')
         .should('exist').select(this.cropName, { force : true })
