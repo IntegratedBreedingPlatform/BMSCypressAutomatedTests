@@ -5,7 +5,7 @@ export default class DashboardPage{
     protected programName = Cypress.env('existingProgramName');
  
     getProgramsIframeDocument = () => {
-            return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
+        return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
 
     clickAddProgram(){
@@ -71,6 +71,8 @@ export default class DashboardPage{
 
    signOut() {
        // TODO add checking first if release notes popup is shown, if so - close it
+       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[5]/span').should('exist').click();
+       cy.xpath('//body/div[2]/div[2]/div/div/div/button').should('exist').should(($sp) => {expect($sp).to.have.text('Sign out')}).click();
    }
 
    updateUserProfile() {
