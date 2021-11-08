@@ -10,7 +10,7 @@ export default class DashboardPage{
 
     clickAddProgram(){
         // TODO add checking if release notes popup is shown, if so - close it
-        return cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
+       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
     }
 
     getProgramsIframeBody = () => {
@@ -46,12 +46,12 @@ export default class DashboardPage{
 
     }
     clickLaunchProgram(){
-       return this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
+       this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
 
     }
 
     checkBMSVersion(){
-        return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
+        cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
 
     verifyPageLoaded() {
