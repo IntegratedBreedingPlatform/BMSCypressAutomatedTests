@@ -5,12 +5,12 @@ export default class DashboardPage{
     protected programName = Cypress.env('existingProgramName');
  
     getProgramsIframeDocument = () => {
-            return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
+        return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
 
     clickAddProgram(){
         // TODO add checking if release notes popup is shown, if so - close it
-        return cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
+       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
     }
 
     getProgramsIframeBody = () => {
@@ -46,12 +46,12 @@ export default class DashboardPage{
 
     }
     clickLaunchProgram(){
-       return this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
+       this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
 
     }
 
     checkBMSVersion(){
-        return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
+        cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
 
     verifyPageLoaded() {
@@ -71,6 +71,8 @@ export default class DashboardPage{
 
    signOut() {
        // TODO add checking first if release notes popup is shown, if so - close it
+       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[5]/span').should('exist').click();
+       cy.xpath('//body/div[2]/div[2]/div/div/div/button').should('exist').should(($sp) => {expect($sp).to.have.text('Sign out')}).click();
    }
 
    updateUserProfile() {
