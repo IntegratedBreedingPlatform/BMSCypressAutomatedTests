@@ -38,5 +38,13 @@ And('I click the link to dowload the import list template', () => {
     importModal.openImportListClickTemplate();
 });
 Then('An import list template should be downloaded', () => {
-    searchPage.verifyImportTemplateDowload();
+    searchPage.verifyImportTemplateDownload();
+});
+
+// Cancel import
+And('I click the Cancel button', () => {
+    importModal.cancelImport();
+});
+Then('the system closes the Import List screen', () => {
+    searchPage.verifyImportCancelled();
 });

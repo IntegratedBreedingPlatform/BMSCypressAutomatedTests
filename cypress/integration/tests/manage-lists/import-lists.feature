@@ -22,12 +22,12 @@ Feature: Import Lists
     And I click the link to dowload the import list template
     Then An import list template should be downloaded
 
-  @ignore
+  @smoke-test
   Scenario: Check if user cancels import lists
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I upload a valid file
-    And click the Cancel button
+    Given I reload the Germplasm Lists Beta page
+    When I select Import germplasm list from Actions
+    And I select a file to upload
+    And I click the Cancel button
     Then the system closes the Import List screen
 
   @ignore

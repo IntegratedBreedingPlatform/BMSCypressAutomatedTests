@@ -59,4 +59,10 @@ export default class GermplasmListImportPage {
             cy.wrap($iframe).find('[data-test="downloadImportTemplate"]').click();
         });
     }
+
+    cancelImport() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="cancelImport"]').click();
+        });
+    }
 }
