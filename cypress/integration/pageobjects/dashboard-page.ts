@@ -8,11 +8,6 @@ export default class DashboardPage{
         return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
 
-    clickAddProgram(){
-        // TODO add checking if release notes popup is shown, if so - close it
-       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
-    }
-
     getProgramsIframeBody = () => {
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
@@ -50,10 +45,6 @@ export default class DashboardPage{
 
     }
 
-    checkBMSVersion(){
-        cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
-    }
-
     verifyPageLoaded() {
         // Verify Crop dropdown, Program dropdown and Launch buttons
         this.getProgramsIframeBody().find('#cropDropdown select').should('exist')
@@ -65,19 +56,6 @@ export default class DashboardPage{
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
-    clickSiteAdmin() {
-        // TODO add checking first if release notes popup is shown, if so - close it
-    }
-
-   signOut() {
-       // TODO add checking first if release notes popup is shown, if so - close it
-       cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[5]/span').should('exist').click();
-       cy.xpath('//body/div[2]/div[2]/div/div/div/button').should('exist').should(($sp) => {expect($sp).to.have.text('Sign out')}).click();
-   }
-
-   updateUserProfile() {
-       // TODO add checking first if release notes popup is shown, if so - close it
-   }
 
 }
 
