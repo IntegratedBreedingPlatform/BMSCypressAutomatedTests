@@ -1,9 +1,9 @@
-import { When,And,Then } from "cypress-cucumber-preprocessor/steps";
-import DashboardPage from '../../../pageobjects/dashboard-page';
+import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import AddProgramPage from '../../../pageobjects/add-program-page';
 import { randomString } from '../../../../support/commands';
+import NavbarSection from '../../../pageobjects/navbar-section';
 
-const dashboardPage = new DashboardPage();
+const navBar = new NavbarSection();
 const addProgramPage = new AddProgramPage();
 
 const cropName = Cypress.env('cropName');
@@ -12,7 +12,7 @@ const id = randomString(5);
 const programName = `PROG${id}`;
 
 When('I navigate to Add Program page',()=>{
-    dashboardPage.clickAddProgram();
+    navBar.clickAddProgram();
 })
 
 And('I select a crop name',()=>{

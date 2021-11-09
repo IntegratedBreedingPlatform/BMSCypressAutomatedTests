@@ -40,7 +40,7 @@ export default class SidebarSection {
     }
 
     verifyBMSVersion() {
-        let bmsVersion = Cypress.env('bmsVersion').replace('.0','');
+        let bmsVersion = Cypress.env('bmsVersion');
         cy.xpath(`//mat-sidenav/div[contains(text(), 'BMS ${bmsVersion}')]`).should('exist');
     }
 }
