@@ -5,10 +5,10 @@ Feature: Reset Password
     As a user
     I need to reset my password
 
-@ignore
 @TestCaseKey=IBP-T77
 @smoke-test
   Scenario: Check if user can reset password
   	Given I navigate to the Reset Password page
-    When I enter my account credentials
+    When I enter my email addresss and username
+    And I click Continue
     Then A message saying that a link was sent to my email should display

@@ -53,6 +53,10 @@ export default class LoginPage{
         cy.xpath(`//span[contains(text(), '${bmsVersion}')]`).should('exist');
     }
 
+    goToResetPasswordPage() {
+        cy.get('.ac-login-forgot-password').should('exist').click();
+    }
+
     
 
     
