@@ -1,10 +1,9 @@
-  
-import { Given,When,And,Then } from "cypress-cucumber-preprocessor/steps";
+import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../../../pageobjects/account-management/login-page'
-import DashboardPage from '../../../pageobjects/dashboard-page';
+import NavbarSection from '../../../pageobjects/navbar-section';
 
 const loginPage = new LoginPage()
-const dashboardPage = new DashboardPage();
+const navBar = new NavbarSection();
 
 Given('I navigate to the BMS login page',()=>{
     loginPage.launchLogin();
@@ -19,7 +18,7 @@ And('I click login',()=>{
 })
 
 When('I sign out',()=>{
-    dashboardPage.signOut();
+    navBar.signOut();
 })
 
 Then('The BMS login should have the correct version',()=>{
