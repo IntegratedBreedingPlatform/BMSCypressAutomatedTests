@@ -47,6 +47,11 @@ Running specific tags
 ----------
 
 ~~~
+node_modules/.bin/cypress run -e TAGS="(@sanity-test and @sidebar) and not @ignore" --spec 'cypress/integration/**/*.feature'
+~~~ 
+
+or using cucumber preprocessor script: (this one skips the tags that don't match, instead of labelling them as pending)
+~~~
 node_modules/.bin/cypress-tags run -e TAGS="(@sanity-test and @sidebar) and not @ignore" --spec 'cypress/integration/**/*.feature'
 ~~~ 
 See also: https://github.com/TheBrainFamily/cypress-cucumber-preprocessor#running-tagged-tests
