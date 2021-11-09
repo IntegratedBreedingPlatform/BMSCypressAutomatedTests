@@ -27,7 +27,6 @@ export default class ResetPasswordPage{
             // Verify UI shows login page
             cy.get('.js-login-forgot-password-input').should('not.be.visible');
             cy.get('.js-login-password').should('be.visible');
-            cy.xpath(`//div/span[@class='login-submit-label' and text()='Sign In']`).should('be.visible');
         });
     }
 
