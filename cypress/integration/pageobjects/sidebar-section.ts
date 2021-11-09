@@ -13,6 +13,13 @@ export default class SidebarSection {
         cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
     }
 
+    /**
+     * Assumes sidebar section is already expanded
+     */
+    reload(sidebarTool:SidebarTool){
+        cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+    }
+
     verifyPageIsShown(page:string) {
         let sidebarTool = SidebarTool.getFromLinkName(page);
 
