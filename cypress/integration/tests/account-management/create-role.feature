@@ -2,6 +2,7 @@
 @account-management
 Feature: Create Role
 
+@ignore
 @TestCaseKey=IBP-T76
 @smoke-test
 Scenario: Check if user can create new program role in Site Admin

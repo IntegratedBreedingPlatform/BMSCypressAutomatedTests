@@ -6,24 +6,35 @@ Feature: Create Study
     I should be able to create a study
 
 @TestCaseKey=IBP-T511  
-@sanity-test
-@update-install    
- Scenario: Check creation of trial using randomized complete block design with treatment factors
-    Given I am on the Manage Studies page
-    And I created a new study with basic details
-    When I added study settings
+@smoke-test
+Scenario: Check creation of trial using randomized complete block design with treatment factors
+    Given I am on the Manage Studies page of specified program
+    When I created a new study with basic details
+    And I added study settings
     And I browsed germplasm list 
     And I added treatment factors
     And I added environment variables
     And I generated experimental design using Randomized Complete Block design
-    Then Design generation should be successful 
-    #Check success message of design generation
-
+    Then Design generation should be successful
+    
 @TestCaseKey=IBP-T2352
 @sanity-test
 @clean-install 
-Scenario: Check if design generation fails on BMS with no BV license
-    Given I am on the Manage Studies page
+Scenario: Check BV Design License is not included
+    Given I am on the Manage Studies page of specified program
     And I created a new study with basic details
-    When I generated experimental design using Randomized Complete Block design
-    Then Design generation should not be successful 
+    And I browsed germplasm list
+    When I try to generate experimental design using Randomized Complete Block design
+    Then Design generation should not be successful
+
+@TestCaseKey=IBP-T2359  
+@sanity-test
+@update-install    
+ Scenario: Check BV Design License is included
+    Given I am on the Manage Studies page of specified program
+    And I opened an existing study with germplasm list but with no existing design yet
+    When I go to experimental design and generated using Randomized Complete Block design
+    Then Design generation should be successful
+    And Delete the generated design
+
+

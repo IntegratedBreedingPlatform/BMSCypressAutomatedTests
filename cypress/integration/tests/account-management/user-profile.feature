@@ -2,6 +2,7 @@
 @account-management
 Feature: User Profile
 
+@ignore
 @TestCaseKey=IBP-T2819
 @smoke-test
 Scenario: Check if user can update user profile
