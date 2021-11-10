@@ -8,7 +8,7 @@ Feature: Import Lists
   @smoke-test
   @setup
   Scenario: Import new germplasm list
-    Given I am on the Germplasm Lists Beta page
+    Given I am on the Germplasm Lists Beta page of specified program
 
   @smoke-test
   Scenario: Import new germplasm list
