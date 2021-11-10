@@ -111,3 +111,15 @@ export function getIframeBody() {
         .then(cy.wrap)
 }
 
+export function closeReleaseNotePopupIfShown() {
+    cy.window().then((window: any) => {
+        if (window.showReleaseNotes) {
+            cy.get('jhi-release-notes-wrapper > iframe').its('0.contentDocument.body').should('not.be.empty')
+                .then(($iframe) => {
+                    cy.wrap($iframe).find('jhi-release-notes-dialog > div.modal-footer > button.btn-primary', {
+                        timeout: Cypress.config('pageLoadTimeout')
+                    }).click();
+                });
+        }
+    });
+}
