@@ -1,6 +1,9 @@
 export default class ReleaseNotesPage {
     resetReleaseNoteUserShowAgainValueTo1() {
-        cy.task('queryDB', "UPDATE release_note_user SET show_again = 1 WHERE user_id = 1");
+        var query = "UPDATE release_note_user rnu "
+            + "INNER JOIN users u ON u.userid = rnu.user_id "
+            + "SET rnu.show_again = 1 WHERE u.uname=\"" + Cypress.env('username') + "\"";
+        cy.task('queryWorkbenchDB', query);
     }
 
     verifyReleaseNotesDisplayed() {

@@ -9,7 +9,6 @@ const mysql = require('mysql')
 //const webpack = require("@cypress/webpack-preprocessor");
 
 function queryDB(query, config) {
-
   // creates a new mysql connection using credentials from cypress.json env's
   const connection = mysql.createConnection(config.env.db)
 
@@ -43,8 +42,13 @@ module.exports = (on, config) => {
   // on("file:preprocessor", webpack(options));
 
   on('task', {
-    queryDB: query => {
-      return queryDB(query, config)
+    queryWorkbenchDB: query => {
+      config.env.db.database = "workbench";
+      return queryDB(query, config);
+    },
+    queryCropDB: query => {
+      config.env.db.database = "ibdbv2_" + config.env.cropName + "_merged";
+      return queryDB(query, config);
     }
   })
 
