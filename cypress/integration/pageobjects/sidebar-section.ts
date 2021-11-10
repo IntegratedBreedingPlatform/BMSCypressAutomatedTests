@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../support/commands';
+
 export default class SidebarSection {
     navigateTo(link:string){
         let sidebarTool = SidebarTool.getFromLinkName(link);
@@ -17,7 +19,9 @@ export default class SidebarSection {
      * Assumes sidebar section is already expanded
      */
     reload(sidebarTool:SidebarTool){
-        cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        getIframeBody().then(($iframe) => {
+            cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        });
     }
 
     verifyPageIsShown(page:string) {
