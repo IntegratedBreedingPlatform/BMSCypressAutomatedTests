@@ -20,6 +20,9 @@ And('I click Next on Import Germplasm list screen', () => {
 And('I click Next on Review Import List screen', () => {
     importModal.clickImportSubmit();
 });
+And('I select the first match on Select Match screen', () => {
+    importModal.selectFirstMatch();
+});
 And('I click Confirm on Import List Summary screen', () => {
     importModal.clickImportConfirm();
 });

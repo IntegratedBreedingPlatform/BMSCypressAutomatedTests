@@ -33,6 +33,13 @@ export default class GermplasmListImportPage {
         });
     }
 
+    selectFirstMatch() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('jhi-germplasm-list-import-multi-matches table tr:nth-child(1)').should('exist').click();
+            cy.wrap($iframe).xpath('//jhi-germplasm-list-import-multi-matches//button/span/span[contains(text(), "Next")]').should('exist').click();
+        });
+    }
+
     clickImportConfirm() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="modalConfirmButton"]').should('exist').click();
