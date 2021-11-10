@@ -5,7 +5,6 @@ Feature: Release Notes
   As a user
   I should be able to see the release notes pop-up
 
-@ignore
 @TestCaseKey=IBP-T3185
 @clean-install
 @update-install
@@ -17,7 +16,6 @@ Feature: Release Notes
         And I am already logged in to BMS
         Then Release Notes pop-up displays
 
-@ignore        
 @TestCaseKey=IBP-T3185
 @clean-install
 @update-install        
@@ -29,7 +27,6 @@ Feature: Release Notes
         And I re-log in the system
         Then I should see the release notes pop-up again
 
-@ignore        
 @TestCaseKey=IBP-T3185
 @clean-install
 @update-install
