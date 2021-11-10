@@ -13,7 +13,8 @@ Feature: Release Notes
         # Pre-condition
         # The BMS has been upgraded
         # And the user haven't logged in yet in the new version
-        Given I am already logged in to BMS
+        Given I reset release_note_user show_again value to 1
+        And I am already logged in to BMS
         Then Release Notes pop-up displays
 
 @ignore        

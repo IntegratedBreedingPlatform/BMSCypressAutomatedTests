@@ -1,4 +1,4 @@
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../pageobjects/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
@@ -25,6 +25,12 @@ Given('I am on the {} page of specified program', (page) => {
     dashboardPage.launchProgram(true);
     let tool = SidebarTool.getFromToolName(page);
     sidebarSection.navigate(tool);
+});
+
+// ==================================
+// ANDS
+And('I am already logged in to BMS', () => {
+    loginPage.performLogin();
 });
 
 // ==================================

@@ -5,6 +5,10 @@ import LoginPage from '../../../pageobjects/login-page'
 const loginPage = new LoginPage()
 const releaseNotesPage = new ReleaseNotesPage();
 
+Given('I reset release_note_user show_again value to 1', ()=> {
+    releaseNotesPage.resetReleaseNoteUserShowAgainValueTo1();
+})
+
 Then('Release Notes pop-up displays', ()=> {
     releaseNotesPage.verifyReleaseNotesDisplayed();
 })

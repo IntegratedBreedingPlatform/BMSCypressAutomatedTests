@@ -1,4 +1,8 @@
 export default class ReleaseNotesPage {
+    resetReleaseNoteUserShowAgainValueTo1() {
+        cy.task('queryDB', "UPDATE release_note_user SET show_again = 1 WHERE user_id = 1");
+    }
+
     verifyReleaseNotesDisplayed() {
         this.getReleaseNotesIframe();
         this.verifyReleaseNotesHeaderDisplayed();
