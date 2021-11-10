@@ -13,7 +13,8 @@ Feature: Release Notes
         # Pre-condition
         # The BMS has been upgraded
         # And the user haven't logged in yet in the new version
-        Given I am already logged in to BMS
+        Given I reset release_note_user show_again value to 1
+        And I am already logged in to BMS
         Then Release Notes pop-up displays
 
 @ignore        
@@ -25,7 +26,7 @@ Feature: Release Notes
         And I am presented with the release notes pop-up
         When I uncheck the Don't show again checkbox
         And I click OK
-        And I re-logs in the system
+        And I re-log in the system
         Then I should see the release notes pop-up again
 
 @ignore        
@@ -37,5 +38,5 @@ Feature: Release Notes
         And I am presented with the release notes pop-up
         When I check the Don't show again checkbox
         And I click OK
-        And I re-logs in the system
+        And I re-log in the system
         Then I should no longer see the release notes pop-up
