@@ -6,8 +6,12 @@ Feature: Import Lists
   I should be able to import germplasm lists
 
   @smoke-test
+  @setup
   Scenario: Import new germplasm list
     Given I am on the Germplasm Lists Beta page
+
+  @smoke-test
+  Scenario: Import new germplasm list
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click Next on Import Germplasm list screen
