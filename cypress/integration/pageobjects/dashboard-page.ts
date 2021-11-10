@@ -5,12 +5,7 @@ export default class DashboardPage{
     protected programName = Cypress.env('existingProgramName');
  
     getProgramsIframeDocument = () => {
-            return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
-    }
-
-    clickAddProgram(){
-        // TODO add checking if release notes popup is shown, if so - close it
-        return cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
+        return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
 
     getProgramsIframeBody = () => {
@@ -46,12 +41,8 @@ export default class DashboardPage{
 
     }
     clickLaunchProgram(){
-       return this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
+       this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
 
-    }
-
-    checkBMSVersion(){
-        return cy.xpath(`//div[contains(text(), "BMS 19")]`).should('exist');
     }
 
     verifyPageLoaded() {
@@ -65,17 +56,6 @@ export default class DashboardPage{
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
-    clickSiteAdmin() {
-        // TODO add checking first if release notes popup is shown, if so - close it
-    }
-
-   signOut() {
-       // TODO add checking first if release notes popup is shown, if so - close it
-   }
-
-   updateUserProfile() {
-       // TODO add checking first if release notes popup is shown, if so - close it
-   }
 
 }
 

@@ -33,7 +33,7 @@ Feature: Login
     Scenario: Check BMS version on login page
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version
-@ignore
+
 @TestCaseKey=IBP-T78
 @smoke-test
     Scenario: Check if user can sign out in BMS

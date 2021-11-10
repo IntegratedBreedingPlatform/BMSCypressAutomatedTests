@@ -1,5 +1,5 @@
 import { Given, And, Then, When } from 'cypress-cucumber-preprocessor/steps';
-import LoginPage from '../pageobjects/login-page'
+import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 
