@@ -4,6 +4,14 @@ export default class CreateStudyPage {
         getMainIframeDocument().xpath(`//ul[@id='manage-trial-tab-headers']//li/a[text()='${tab}']`).should('be.visible').click();
     }
 
+    clickStudyAction(actionName: string, actionOptionsName?: string) {
+        getMainIframeDocument().xpath(`//span[@name='action-buttons']`).should('be.visible').click();
+        if (actionOptionsName) {
+            getMainIframeDocument().xpath(`//li/a[text()='${actionOptionsName}']`).should('be.visible').realHover();
+        }
+        getMainIframeDocument().xpath(`//li/a[text()='${actionName}']`).should('be.visible').click();
+    }
+
     enterStudyName(studyName: string) {
         return getMainIframeDocument().get('input[ng-model="data.studyName"]').should('exist').type(studyName)
     }
@@ -123,6 +131,15 @@ export default class CreateStudyPage {
         getMainIframeDocument().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
         // Close the modal
         getMainIframeDocument().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
+    }
+
+    waitForStudyToLoad() {
+        getMainIframeDocumentWaitLoad().xpath(`//span[@class='fbk-study-heading']`).should('be.visible');
+    }
+
+    selectFielmapLocations() {
+        getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']`).should('be.visible');
+        getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']//button[text()='OK']`).should('be.visible').click();
     }
 }
 

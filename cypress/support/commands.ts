@@ -43,6 +43,10 @@ function getAccessToken() {
   return JSON.parse(token).token;
 }
 
+export function randomString(length = 11) {
+  return Math.random().toString(36).substr(2, length);
+}
+
 Cypress.Commands.add('getProgram', () => {
 
   cy.request({
