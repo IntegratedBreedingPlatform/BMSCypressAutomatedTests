@@ -6,6 +6,7 @@ Feature: Release Notes
   I should be able to see the release notes pop-up
 
 @TestCaseKey=IBP-T3185
+@sanity-test
 @clean-install
 @update-install
       Scenario: Check display of release notes  
@@ -17,6 +18,7 @@ Feature: Release Notes
         Then Release Notes pop-up displays
 
 @TestCaseKey=IBP-T3185
+@sanity-test
 @clean-install
 @update-install        
       Scenario: Check if release notes displays when unchecked Don't show again
@@ -28,6 +30,7 @@ Feature: Release Notes
         Then I should see the release notes pop-up again
 
 @TestCaseKey=IBP-T3185
+@sanity-test
 @clean-install
 @update-install
       Scenario: Check if release notes no longer shows when checked Don't show again
