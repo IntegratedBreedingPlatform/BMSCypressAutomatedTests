@@ -1,3 +1,4 @@
+import { closeReleaseNotePopupIfShown } from '../../support/commands';
 
 export default class DashboardPage{
 
@@ -12,8 +13,8 @@ export default class DashboardPage{
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
 
-	launchProgram(openSpecifiedProgram?:boolean) {
-        // TODO add checking if release notes popup is shown, if so - close it
+    launchProgram(openSpecifiedProgram?:boolean) {
+        closeReleaseNotePopupIfShown();
         this.selectCrop();
         if (openSpecifiedProgram){
             this.selectProgram();

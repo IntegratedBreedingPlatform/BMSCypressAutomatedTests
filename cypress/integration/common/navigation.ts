@@ -27,6 +27,11 @@ Given('I am on the {} page of specified program', (page) => {
     sidebarSection.navigate(tool);
 });
 
+Given('I reload the {} page', (page) => {
+    let tool = SidebarTool.getFromToolName(page);
+    sidebarSection.reload(tool);
+});
+
 // ==================================
 // WHENS
 When('I launch a program', () => {
