@@ -1,16 +1,20 @@
 export default class CreateFieldmapPage {
 
     addFieldName(fieldName: string) {
+        // This is to wait for location dropdown to initialize.
         getMainIframeDocument().xpath(`//a[text()='Add Fields']`).should('be.visible').click();
         getMainIframeDocument().xpath(`//div[@id='addFieldsModal']`).should('be.visible');
+        getMainIframeDocument().xpath(`//div[@id='s2id_parentLocationId']`).should('be.visible');
         getMainIframeDocument().xpath(`//input[@id='newFieldName']`).should('be.visible').clear().type(fieldName, { delay: 0 });
         getMainIframeDocument().xpath(`//div[@id='addFieldsModal']//button[@id='addFields']`).should('be.visible').click();
 
     }
 
     addBlockName(blockName: string) {
+        // This is to wait for location dropdown to initialize.
         getMainIframeDocument().xpath(`//a[text()='Add Blocks']`).should('be.visible').click();
         getMainIframeDocument().xpath(`//div[@id='addBlocksModal']`).should('be.visible');
+        getMainIframeDocument().xpath(`//div[@id='s2id_parentFieldId']`).should('be.visible');
         getMainIframeDocument().xpath(`//input[@id='newBlockName']`).should('be.visible').clear().type(blockName, { delay: 0 });
         getMainIframeDocument().xpath(`//div[@id='addBlocksModal']//button[@id='addFields']`).should('be.visible').click();
     }

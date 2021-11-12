@@ -138,7 +138,7 @@ export default class CreateStudyPage {
     }
 
     selectFielmapLocations() {
-        getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']`).should('be.visible');
+        getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']`, { timeout: 15000 }).should('be.visible');
         getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']//button[text()='OK']`).should('be.visible').click();
     }
 
