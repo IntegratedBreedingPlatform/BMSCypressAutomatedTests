@@ -21,9 +21,9 @@ import './commands'
 require('cypress-xpath');
 
 beforeEach(() => {
-
+  Cypress.Cookies.preserveOnce('JSESSIONID', 'BMS_TOK')
+  cy.restoreLocalStorage();
   Cypress.env('program', {});
-
 });
 afterEach(() => {
   const screenshotsFolder = Cypress.config("screenshotsFolder");
@@ -47,4 +47,6 @@ afterEach(() => {
 
       }
   }
+
+  cy.saveLocalStorage();
 });

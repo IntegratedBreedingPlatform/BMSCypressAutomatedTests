@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../support/commands';
+
 export default class SidebarSection {
     navigateTo(link:string){
         let sidebarTool = SidebarTool.getFromLinkName(link);
@@ -7,10 +9,19 @@ export default class SidebarSection {
     navigate(sidebarTool:SidebarTool){
         // Germplasm category is expanded by default, otherwise expand sidebar category
         if (sidebarTool.category !== 'Germplasm') {
-            cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.category} ')]`).should('exist').click();
+            cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).should('exist').click();
         }
         // Then click the sidebar category child
-        cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+    }
+
+    /**
+     * Assumes sidebar section is already expanded
+     */
+    reload(sidebarTool:SidebarTool){
+        getIframeBody().then(($iframe) => {
+            cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        });
     }
 
     verifyPageIsShown(page:string) {
@@ -51,7 +62,7 @@ export class SidebarTool {
     public static readonly MANAGE_GERMPLASM = new SidebarTool('Manage Germplasm', 'Germplasm', 'Germplasm Manager');
     public static readonly GERMPLASM_LISTS = new SidebarTool('Germplasm Lists', 'Lists', 'Germplasm Lists', true);
     public static readonly SAMPLE_LISTS = new SidebarTool('Samples Lists', 'Lists', 'Manage Samples');
-    public static readonly GERMPLASM_LISTS_BETA = new SidebarTool('Germplasm Lists Beta', 'Lists', 'Germplasm Lists');
+    public static readonly GERMPLASM_LISTS_BETA = new SidebarTool('Germplasm Lists Beta', 'Lists', 'Germplasm Lists Beta');
     public static readonly MANAGE_STUDIES = new SidebarTool('Manage Studies', 'Studies', 'Manage Studies');
     public static readonly BROWSE_STUDIES = new SidebarTool('Browse Studies', 'Studies', 'Browse Studies', true);
     public static readonly DATASET_IMPORT = new SidebarTool('Import Datasets', 'Studies', 'Dataset Importer');

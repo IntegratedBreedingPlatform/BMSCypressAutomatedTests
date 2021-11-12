@@ -50,3 +50,4 @@ Thumbs.db
 /cypress/videos/
 /cypress.env.json
 *.cucumber.json
+/cypress/downloads
