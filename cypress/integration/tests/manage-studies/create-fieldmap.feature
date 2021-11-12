@@ -25,4 +25,5 @@ Scenario: Check creation of fieldmap on an existing study in row col order
     And I navigate to generate fieldmap page
     And I click Finish
     Then I should be directed back to the study
+    And Fieldmap range and fieldmap column are added in observation table
     

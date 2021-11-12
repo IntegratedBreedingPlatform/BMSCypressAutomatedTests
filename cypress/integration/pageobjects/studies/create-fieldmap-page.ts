@@ -34,10 +34,14 @@ export default class CreateFieldmapPage {
     }
 
     moveToPlantingDetailsPage() {
+        // Check if the current active page is '1. ENTER FIELD DETAILS'.
+        getMainIframeDocument().xpath(`//h2[text()='1. ENTER FIELD DETAILS' and not(contains(@class, 'light'))]`).should('exist');
         getMainIframeDocument().xpath(`//input[@value='Next']`).should('be.visible').click();
     }
 
     moveToGenerateFieldmapPage() {
+         // Check if the current active page is '2. ENTER PLANTING DETAILS'.
+        getMainIframeDocument().xpath(`//h2[text()='2. ENTER PLANTING DETAILS' and not(contains(@class, 'light'))]`).should('exist');
         getMainIframeDocument().xpath(`//input[@value='Next']`).should('be.visible').click();
     }
 

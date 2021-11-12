@@ -141,6 +141,13 @@ export default class CreateStudyPage {
         getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']`).should('be.visible');
         getMainIframeDocument().xpath(`//div[@id='selectTrialInstanceModal']//button[text()='OK']`).should('be.visible').click();
     }
+
+    verifyColumnsInObservationTable(columnNames: string[] = []) {
+        this.clickTab('Observations');
+        for (let columnName of columnNames) {
+            getMainIframeDocument().xpath(`//th[text()='${columnName}']`).should('be.visible');
+        }
+    }
 }
 
 const generateDesignLabel = 'Generate Design';

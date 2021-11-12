@@ -71,6 +71,10 @@ And('I click Finish', () => {
     createFieldmapPage.clickFinish();
 });
 
+And('Fieldmap range and fieldmap column are added in observation table', () => {
+    createStudyPage.verifyColumnsInObservationTable(['FIELDMAP RANGE','FIELDMAP COLUMN']);
+}); 
+
 
 
 
