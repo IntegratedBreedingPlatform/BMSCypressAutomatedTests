@@ -1,11 +1,13 @@
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
+import NavbarSection from '../pageobjects/navbar-section';
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const sidebarSection = new SidebarSection()
+const navBar = new NavbarSection()
 
 // ==================================
 // GIVENS
@@ -30,6 +32,10 @@ Given('I am on the {} page of specified program', (page) => {
 Given('I reload the {} page', (page) => {
     let tool = SidebarTool.getFromToolName(page);
     sidebarSection.reload(tool);
+});
+
+And('I navigate to Site Admin page',()=>{
+    navBar.clickSiteAdmin();
 });
 
 // ==================================
