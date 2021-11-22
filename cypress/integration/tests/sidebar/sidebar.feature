@@ -39,7 +39,5 @@ Background:
 @TestCaseKey=IBP-T3176
 @sanity-test
 @update-install
-    Scenario: Check BMS version on sidebar     
-        Given I am already logged in to BMS
-        When I launch a program
+    Scenario: Check BMS version on sidebar
         Then The BMS sidebar should have the correct version

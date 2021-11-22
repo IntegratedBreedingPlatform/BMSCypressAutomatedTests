@@ -9,8 +9,14 @@ export default class SidebarSection {
     navigate(sidebarTool:SidebarTool){
         // Germplasm category is expanded by default, otherwise expand sidebar category
         if (sidebarTool.category !== 'Germplasm') {
-            cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).should('exist').click();
+            cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).should('exist').invoke('attr', 'aria-expanded').then((isExpanded) => {
+                if (isExpanded !== 'true') {
+                    cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).click();
+                    cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).invoke('attr', 'aria-expanded').should('eq', 'true');
+                }
+            });
         }
+
         // Then click the sidebar category child
         cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
     }
