@@ -1,10 +1,12 @@
-import { closeReleaseNotePopupIfShown } from '../../support/commands';
 
+import { closeReleaseNotePopupIfShown } from '../../support/commands';
+import LoginPage from './account-management/login-page';
 export default class DashboardPage{
 
     protected cropName = Cypress.env('cropName');
     protected programName = Cypress.env('existingProgramName');
- 
+    login:LoginPage = new LoginPage()
+
     getProgramsIframeDocument = () => {
         return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
@@ -57,6 +59,15 @@ export default class DashboardPage{
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
+    loginAndLaunchProgram(){
 
+        if(this.login.getLocalStorage('bms.xAuthToken')==null){
+            this.login.performLogin();    
+            this.launchProgram(true);    
+        }else{
+          cy.log("do nothing");
+          return;
+        }
+    }
 }
 

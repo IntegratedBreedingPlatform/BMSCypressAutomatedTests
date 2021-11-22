@@ -4,20 +4,20 @@ Feature: Check BMS sidebar links
     As a user
     I should be able to see each sidebar pages
 
+Background: 
+    Given I am already in my program
 @TestCaseKey=IBP-T3157
 @sanity-test
 @clean-install
 @update-install
     Scenario Outline: Check BMS sidebar links
-        Given I am already logged in to BMS
-        When I launch a program
         When I navigate to <sidebarlink> in the sidebar
         Then The <sidebarlink> page should display
         
         Examples:
         
         |sidebarlink|
-        |Manage Germplasm|  
+        |Manage Germplasm|
         |Germplasm Lists|
         |Samples Lists|
         |Germplasm Lists Beta|

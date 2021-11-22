@@ -24,7 +24,7 @@ import "cypress-real-events/support";
 require('cypress-xpath');
 
 beforeEach(() => {
-  Cypress.Cookies.preserveOnce('JSESSIONID', 'BMS_TOK')
+//Cypress.Cookies.preserveOnce('bms.xAuthToken')
   cy.restoreLocalStorage();
   Cypress.env('program', {});
 });
