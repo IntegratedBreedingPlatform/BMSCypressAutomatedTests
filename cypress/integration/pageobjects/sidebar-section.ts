@@ -46,11 +46,11 @@ export default class SidebarSection {
                 }
             });
         } else {
-            cy.get('mat-sidenav-content > iframe').its('0.contentDocument.body').should('not.be.empty').then(($iframeBody) => {
-                cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')] | 
+            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
+                cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')]| 
                     //h2[contains(text(),'${sidebarTool.toolName}')] | 
-                    //h1>span[contains(text(),'${sidebarTool.toolName}')]| 
-                    //h1>span>span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
+                    //h1/span[contains(text(),'${sidebarTool.toolName}')]| 
+                    //h1/span/span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
             });
         }
 
