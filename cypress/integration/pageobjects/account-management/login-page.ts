@@ -17,10 +17,7 @@ export default class LoginPage{
     useLocalStorage(){
         if(this.getLocalStorage('bms.xAuthToken')==null){
             this.performLogin();        
-        }else{
-          cy.log("do nothing");
         }
-
     }
 
     
