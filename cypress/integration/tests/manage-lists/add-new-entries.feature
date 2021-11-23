@@ -9,8 +9,16 @@ I should be able to add new entries to a germplasm list
 Background: 
     Given I am on the Germplasm Lists Beta page of specified program
     And I open an existing list
-
+@TestCaseKey=IBP-T3366
 @smoke-test
+@ignore    
+Scenario: Add entries in all page to a list
+    When I navigate to add new entries screen
+    And I select all entries and add to the list
+    Then I should see a message that entries are added successfully 
+    And I should be see that the list entries are updated
+    #Assert total count if updated 
+
 @TestCaseKey=IBP-T3366
 @ignore    
 Scenario: Add random entries to a list
