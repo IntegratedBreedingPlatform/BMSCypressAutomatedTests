@@ -7,16 +7,13 @@ export default class SidebarSection {
     }
 
     navigate(sidebarTool:SidebarTool){
-        // Germplasm category is expanded by default, otherwise expand sidebar category
-        if (sidebarTool.category !== 'Germplasm') {
+        // Expand sidebar category if collapsed
             cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).should('exist').invoke('attr', 'aria-expanded').then((isExpanded) => {
                 if (isExpanded !== 'true') {
                     cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).click();
                     cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).invoke('attr', 'aria-expanded').should('eq', 'true');
-                }
+                } 
             });
-        }
-
         // Then click the sidebar category child
         cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
     }
@@ -46,7 +43,7 @@ export default class SidebarSection {
                 }
             });
         } else {
-            cy.get('mat-sidenav-content > iframe').its('0.contentDocument.body').should('not.be.empty').then(($iframeBody) => {
+            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
                 cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')]| 
                     //h2[contains(text(),'${sidebarTool.toolName}')] | 
                     //h1/span[contains(text(),'${sidebarTool.toolName}')]| 
