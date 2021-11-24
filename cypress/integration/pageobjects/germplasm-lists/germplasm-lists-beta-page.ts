@@ -10,6 +10,21 @@ export default class GermplasmListsBetaPage {
         });
     }
 
+    openGermplasmList(){
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="germplasmListSearchTable"] > tbody > tr:nth-child(1) > td:nth-child(1) > a')
+                .should('exist')
+                .click()
+                .then(($a) => {
+                    const listName = $a.text();
+
+                    cy.wrap($iframe).find('jhi-germplasm-list > section > div > section > nav > ul > li:nth-child(2) > a')
+                        .should('exist')
+                        .contains(listName);
+                });
+        });
+    }
+
     verifyImportTemplateDownload() {
         const downloadsFolder = Cypress.config("downloadsFolder");
         // TODO clear downloads https://github.com/cypress-io/cypress/issues/14886
