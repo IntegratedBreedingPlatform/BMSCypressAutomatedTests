@@ -6,8 +6,8 @@ export default class GermplasmListAddEntryDetailsPage {
 
     selectVariable() {
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('#dropdownvariable')
-                .should('exist')
+            cy.wrap($iframe).find('#dropdownvariable .select2-selection__rendered')
+                .should('be.visible')
                 .click();
 
             cy.wrap($iframe).find('span.select2-results > ul > li:first-of-type')

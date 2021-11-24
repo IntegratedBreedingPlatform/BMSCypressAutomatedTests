@@ -12,7 +12,7 @@ export default class GermplasmListPage {
 
     checkEntryDetailWasAdded(variableName: string) {
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2)')
+            cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
                 .should('exist')
                 .contains(variableName);
         });
