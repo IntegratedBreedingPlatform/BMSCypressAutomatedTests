@@ -34,7 +34,7 @@ Scenario: Add random entries to another list
 @ignore
 @TestCaseKey=IBP-T3371
 Scenario: Filter entries and add to another list
-    When I filter by germplasm list and select the entries
+    When I filter an entry by GID and select the entries
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully 
 
