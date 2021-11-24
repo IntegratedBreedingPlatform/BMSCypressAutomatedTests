@@ -25,3 +25,9 @@ Scenario: Cancel deletion of an existing list
     And I click Cancel in the delete germplasm list screen
     Then the delete germplasm list screen closes
     And the list is not deleted
+
+@TestCaseKey=IBP-T3368
+@ignore    
+Scenario: Check if delete list option is available if list is locked
+    When I lock the list
+    Then the Delete list is not available
