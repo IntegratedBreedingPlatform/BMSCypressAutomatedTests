@@ -65,7 +65,6 @@ export default class DashboardPage{
             this.login.performLogin();    
             this.launchProgram(true);    
         }else{
-          cy.log("do nothing");
           return;
         }
     }
