@@ -1,8 +1,10 @@
 import { getIframeBody } from '../../../support/commands';
+import AddEntryDetailsContext from '../../tests/manage-lists/add-entry-details/add-entry-details.context';
 
 export default class GermplasmListAddEntryDetailsPage {
 
-    private _variableName: string | undefined;
+    constructor(private addEntryDetailsContext: AddEntryDetailsContext) {
+    }
 
     selectVariable() {
         getIframeBody().then(($iframe) => {
@@ -17,17 +19,13 @@ export default class GermplasmListAddEntryDetailsPage {
                     const variableName = $li.find('div:nth-child(2)').text().trim();
                     assert.isNotNull(variableName);
 
-                    this._variableName = variableName;
+                    this.addEntryDetailsContext.variableName = variableName;
                 });
 
             cy.wrap($iframe).find('[data-test="addEntryDetailSubmit"]')
                 .should('exist')
                 .click();
         });
-    }
-
-    get variableName(): string {
-        return <string>this._variableName;
     }
 
 }

@@ -5,18 +5,25 @@ Feature: Add entry details to an existing list
   As a user
   I should be able to add entry details to an existing germplasm list
 
-  @smoke-test
-  @setup
-  Scenario: I am on the Germplasm Lists Beta
-    Given I am on the Germplasm Lists Beta page of specified program
+Background:
+  # TODO: use the entry detail variable created previosly in Manage Ontologies
+  # Given I added entry detail to Ontology Manager
+  Given I am on the Germplasm Lists Beta page of specified program
+  And I open an existing list
 
-  @smoke-test
-  Scenario: Add entry details and value to an existing germplasm list
-    When I click on a Germplasm List name
-    And I click Add on Entry Details section
-    And I select a Variable
-    And Check that Entry Details section has the recently added Variable
-    And Germplasm List table has the recently added Variable
-    And I enter a value to the entry detail
+@TestCaseKey=IBP-T3398
+@smoke-test
+# TODO: implement an outline scenario in order to parameterize the test using the values defined in 'Examples' section
+# Scenario Outline: Add entry details and value to an existing germplasm list
+Scenario: Add entry details and value to an existing germplasm list
+  When I navigate to add entry details screen
+  And I add entry details variable to the list
+  And I add value to the entry detail
+  Then I should be able to see that the variable is added to the germplasm list
 
-
+#Examples:
+#  |scaleType|value|
+#  |numeric|100|
+#  |categorica|CategoryA|
+#  |date|20210101|
+#  |text|Text1|
