@@ -11,6 +11,16 @@ export default class LoginPage{
         cy.visit('ibpworkbench/controller/auth/login');
     }
 
+    getToken(item:string){
+       return localStorage.getItem(item)
+    }
+    useToken(){
+        if(this.getToken('bms.xAuthToken')==null){
+            this.performLogin();        
+        }
+    }
+
+    
     enterValidCredentials() {
         this.enterUsername(Cypress.env('username'));
         this.enterPassword(Cypress.env('password'));
