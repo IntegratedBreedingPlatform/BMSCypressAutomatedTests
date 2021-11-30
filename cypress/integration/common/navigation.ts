@@ -2,7 +2,6 @@ import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
-
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const sidebarSection = new SidebarSection()
@@ -10,7 +9,7 @@ const sidebarSection = new SidebarSection()
 // ==================================
 // GIVENS
 Given('I am already logged in to BMS', () => {
-    loginPage.performLogin();
+    loginPage.useToken();
 });
 
 Given('I am on the {} page', (page) => {
@@ -21,9 +20,8 @@ Given('I am on the {} page', (page) => {
 });
 
 Given('I am on the {} page of specified program', (page) => {
-    loginPage.performLogin();
-    dashboardPage.launchProgram(true);
-    let tool = SidebarTool.getFromToolName(page);
+    dashboardPage.loginAndLaunchProgram();
+    let tool = SidebarTool.getFromLinkName(page);
     sidebarSection.navigate(tool);
 });
 
@@ -31,12 +29,13 @@ Given('I reload the {} page', (page) => {
     let tool = SidebarTool.getFromToolName(page);
     sidebarSection.reload(tool);
 });
+Given('I am already in my program', () => {
+    dashboardPage.loginAndLaunchProgram();
+});
 
 // ==================================
 // WHENS
-When('I launch a program', () => {
-    dashboardPage.launchProgram();
-});
+
 
 When('I navigate to {} in the sidebar', (sidebarLink) => {
     sidebarSection.navigateTo(sidebarLink);

@@ -5,9 +5,7 @@ Feature: Import Lists
   As a user
   I should be able to import germplasm lists
 
-  @smoke-test
-  @setup
-  Scenario: I am on the Germplasm Lists Beta
+ Background: 
     Given I am on the Germplasm Lists Beta page of specified program
 
   @smoke-test
