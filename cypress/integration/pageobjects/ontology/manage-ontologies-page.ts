@@ -1,4 +1,4 @@
-import { getIframeBody } from '../../../support/commands';
+import { getIframeBody, randomString } from '../../../support/commands';
 
 export default class ManageOntologiesPage {
 
@@ -121,7 +121,7 @@ export default class ManageOntologiesPage {
                     });
 
                 if (scaleType === 'categorical') {
-                    const categoryName = `categoricalName${this.getIntRandom}`;
+                    const categoryName = `categoricalName${randomString()}`;
 
                     // cy.wrap($iframe).find('om-categories > ng-form > ol > li > div:nth-child(1) > input')
                     cy.wrap($iframe).find('input[name="omCategoryName1"]')
@@ -206,18 +206,13 @@ export default class ManageOntologiesPage {
     }
 
     private addTermName(term: OntologyTerm) {
-        const termName = `${term.name}Name${this.getIntRandom()}`;
+        const termName = `${term.name}Name${randomString()}`;
         this.getOntologyBrowserIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('input[name=omName]')
                 .should('exist')
                 .type(termName);
         });
         return termName;
-    }
-
-    // TODO: generate an UUID instead of using Math.random in order to avoid a possible collision of duplicated names
-    private getIntRandom() {
-        return Math.floor(Math.random() * 1000000000);
     }
 
     private assertAddNewTermTitle(term: OntologyTerm) {
