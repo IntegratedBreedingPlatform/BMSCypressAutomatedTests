@@ -173,10 +173,10 @@ export default class ManageOntologiesPage {
                 .should('exist')
                 .should('have.length', 1)
                 .then(($tr) => {
-                    cy.wrap($tr).find('td:nth-child(1) > span').should('exist').contains(<string>this.variableName);
-                    cy.wrap($tr).find('td:nth-child(3) > span').should('exist').contains(<string>this.propertyName);
-                    cy.wrap($tr).find('td:nth-child(4) > span').should('exist').contains(<string>this.methodName);
-                    cy.wrap($tr).find('td:nth-child(5) > span').should('exist').contains(<string>this.scaleName);
+                    cy.wrap($tr).find('td:nth-child(1) > span').should('exist').should('contain', <string>this.variableName);
+                    cy.wrap($tr).find('td:nth-child(2) > span').should('exist').should('contain', <string>this.propertyName);
+                    cy.wrap($tr).find('td:nth-child(3) > span').should('exist').should('contain', <string>this.methodName);
+                    cy.wrap($tr).find('td:nth-child(4) > span').should('exist').should('contain', <string>this.scaleName);
                 });
         });
     }
@@ -196,14 +196,14 @@ export default class ManageOntologiesPage {
         // is not the one that should be in ontology.html. I guess this is due that angularJS replace the body when is it's fully rendered but Cypress doesn't
         // detect that change in the iframe and it sticks with the content of the body when the iframe is loading
         if (!this.iframeLoaded) {
-            cy.wait(1000);
+            cy.wait(2500);
             this.iframeLoaded = true;
         }
         return getIframeBody();
     }
 
     private addTermName(term: OntologyTerm) {
-        const termName = `${term.name}Name${randomString()}`;
+        const termName = `${term.name}Name_${randomString()}`;
         this.getOntologyBrowserIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('input[name=omName]')
                 .should('exist')
@@ -216,7 +216,7 @@ export default class ManageOntologiesPage {
         this.getOntologyBrowserIframeBody().then(($iframe) => {
           cy.wrap($iframe).find('h2.om-title')
               .should('exist')
-              .contains(`Add New ${term.name}`);
+              .should('contain', `Add New ${term.name}`);
         })
     }
 
