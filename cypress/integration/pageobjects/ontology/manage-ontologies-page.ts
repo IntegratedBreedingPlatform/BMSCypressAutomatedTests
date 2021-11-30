@@ -122,13 +122,10 @@ export default class ManageOntologiesPage {
 
                 if (scaleType === 'categorical') {
                     const categoryName = `categoricalName${randomString()}`;
-
-                    // cy.wrap($iframe).find('om-categories > ng-form > ol > li > div:nth-child(1) > input')
                     cy.wrap($iframe).find('input[name="omCategoryName1"]')
                         .should('exist')
                         .type(categoryName);
 
-                    // om-categories > ng-form > ol > li > div.col-sm-6 > input
                     cy.wrap($iframe).find('input[name="omCategoryDescription1"]')
                         .should('exist')
                         .type('This is a description');
