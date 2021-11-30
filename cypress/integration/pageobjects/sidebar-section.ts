@@ -74,7 +74,7 @@ export class SidebarTool {
     public static readonly MULTI_TRAIT_QUERY = new SidebarTool('Multi-trait Query', 'Queries', 'Multi-trait Query', true);
     public static readonly GDMS = new SidebarTool('Low Density', 'Genotyping', 'GDMS', true);
     public static readonly HIGH_DENSITY = new SidebarTool('High Density', 'Genotyping', 'Module is not defined yet', true);
-    public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Ontology Browser');
+    public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Manage Ontologies');
     public static readonly MANAGE_METADATA = new SidebarTool('Manage Metadata', 'Crop Administration', 'Manage Metadata');
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
         'Manage Program Settings', true);
@@ -92,18 +92,18 @@ export class SidebarTool {
     }
 
     public static getFromLinkName(link:string): SidebarTool {
-       let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
+       const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
        if (sidebarTools.length > 0) {
            return sidebarTools[0];
        }
-       throw new Error('Could not find tool ' + link)
+       throw new Error('Could not find tool ' + link);
     }
 
     public static getFromToolName(link:string): SidebarTool {
-        let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
+        const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
         if (sidebarTools.length > 0) {
             return sidebarTools[0];
         }
-        throw new Error('Could not find tool ' + link)
+        throw new Error('Could not find tool ' + link);
     }
 }
