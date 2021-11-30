@@ -10,8 +10,7 @@ Background:
     Given I am on the Manage Ontologies page of specified program
 
 Scenario Outline: Create a variable with entry detail type
-    When I click on add new ontology term button
-    And I select Variable type
+    When I navigate to create Variable page
     And I specified the Variable name and description
     And I added a new property
     And I added a new method

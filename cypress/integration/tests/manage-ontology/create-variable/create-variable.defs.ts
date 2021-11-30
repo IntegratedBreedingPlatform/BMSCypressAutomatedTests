@@ -3,10 +3,9 @@ import ManageOntologiesPage, { OntologyTerm } from '../../../pageobjects/ontolog
 
 const manageOntologiesPage = new ManageOntologiesPage();
 
-When('I click on add new ontology term button', () => {
+When('I navigate to create {} page', (termName: string) => {
     manageOntologiesPage.openAddNewOntologyTermPanel();
-});
-And('I select {} type', (termName: string) => {
+
     const term: OntologyTerm = OntologyTerm.getTermByName(termName);
     manageOntologiesPage.selectTerm(term);
 });
