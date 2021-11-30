@@ -22,13 +22,13 @@ import "cypress-real-events/support";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require('cypress-xpath');
-Cypress.Cookies.defaults({
-    preserve: ['JSESSIONID', 'BMS_TOK'],
-  })
-beforeEach(() => {
 
-  cy.restoreLocalStorage();
-  Cypress.env('program', {});
+beforeEach(() => {
+    Cypress.Cookies.defaults({
+        preserve: ['JSESSIONID', 'BMS_TOK'],
+      })
+    cy.restoreLocalStorage();
+    Cypress.env('program', {});
 });
 afterEach(() => {
   const screenshotsFolder = Cypress.config("screenshotsFolder");
