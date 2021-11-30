@@ -11,11 +11,11 @@ export default class LoginPage{
         cy.visit('ibpworkbench/controller/auth/login');
     }
 
-    getLocalStorage(item:string){
+    getToken(item:string){
        return localStorage.getItem(item)
     }
-    useLocalStorage(){
-        if(this.getLocalStorage('bms.xAuthToken')==null){
+    useToken(){
+        if(this.getToken('bms.xAuthToken')==null){
             this.performLogin();        
         }
     }

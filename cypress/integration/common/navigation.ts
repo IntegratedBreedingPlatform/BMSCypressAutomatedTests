@@ -9,7 +9,7 @@ const sidebarSection = new SidebarSection()
 // ==================================
 // GIVENS
 Given('I am already logged in to BMS', () => {
-    loginPage.useLocalStorage();
+    loginPage.useToken();
 });
 
 Given('I am on the {} page', (page) => {

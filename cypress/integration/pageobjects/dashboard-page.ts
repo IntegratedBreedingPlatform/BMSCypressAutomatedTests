@@ -61,7 +61,7 @@ export default class DashboardPage{
 
     loginAndLaunchProgram(){
 
-        if(this.login.getLocalStorage('bms.xAuthToken')==null){
+        if(this.login.getToken('bms.xAuthToken')==null){
             this.login.performLogin();    
             this.launchProgram(true);    
         }else{
