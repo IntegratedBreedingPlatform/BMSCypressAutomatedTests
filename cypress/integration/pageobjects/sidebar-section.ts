@@ -77,7 +77,7 @@ export class SidebarTool {
     public static readonly MULTI_TRAIT_QUERY = new SidebarTool('Multi-trait Query', 'Queries', 'Multi-trait Query', true);
     public static readonly GDMS = new SidebarTool('Low Density', 'Genotyping', 'GDMS', true);
     public static readonly HIGH_DENSITY = new SidebarTool('High Density', 'Genotyping', 'Module is not defined yet', true);
-    public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Manage Ontologies');
+    public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Ontology Browser');
     public static readonly MANAGE_METADATA = new SidebarTool('Manage Metadata', 'Crop Administration', 'Manage Metadata');
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
         'Manage Program Settings', true);
