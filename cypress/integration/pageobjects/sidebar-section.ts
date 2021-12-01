@@ -95,18 +95,18 @@ export class SidebarTool {
     }
 
     public static getFromLinkName(link:string): SidebarTool {
-       let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
+       const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
        if (sidebarTools.length > 0) {
            return sidebarTools[0];
        }
-       throw new Error('Could not find tool ' + link)
+       throw new Error('Could not find tool ' + link);
     }
 
     public static getFromToolName(link:string): SidebarTool {
-        let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
+        const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
         if (sidebarTools.length > 0) {
             return sidebarTools[0];
         }
-        throw new Error('Could not find tool ' + link)
+        throw new Error('Could not find tool ' + link);
     }
 }
