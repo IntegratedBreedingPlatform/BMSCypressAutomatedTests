@@ -1,6 +1,6 @@
 @manage-lists
 @add-entry-details
-Feature: Add entry details to an existing list
+Feature: Add entry details
   In order to add entry details to an existing germplasm list
   As a user
   I should be able to add entry details to an existing germplasm list
