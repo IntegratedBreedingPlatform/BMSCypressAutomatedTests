@@ -24,9 +24,11 @@ import "cypress-real-events/support";
 require('cypress-xpath');
 
 beforeEach(() => {
-  Cypress.Cookies.preserveOnce('JSESSIONID', 'BMS_TOK')
-  cy.restoreLocalStorage();
-  Cypress.env('program', {});
+    Cypress.Cookies.defaults({
+        preserve: ['JSESSIONID', 'BMS_TOK'],
+      })
+    cy.restoreLocalStorage();
+    Cypress.env('program', {});
 });
 afterEach(() => {
   const screenshotsFolder = Cypress.config("screenshotsFolder");
