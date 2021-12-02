@@ -27,10 +27,8 @@ Feature: Import Lists
 
   # FIXME jenkings: cy.click()` failed because this element is detached from the DOM
   # See https://github.com/cypress-io/cypress/issues/7306 for possible solutions
-  @ignore
   @smoke-test
   Scenario: Check if user cancels import lists
-    Given I reload the Germplasm Lists Beta page
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click the Cancel button
