@@ -2,7 +2,7 @@ import { randomString } from '../../../support/commands';
 
 export default class RolesPage{
     selectRolesTab() {
-        getMainIframeDocumentWaitToLoad().find('ol.nav-tabs  > li > a').contains('Roles').should('exist').click();
+        getMainIframeDocumentWaitToLoad().find('ol.nav-tabs  > li > a', {timeout: 30000}).contains('Roles').should('exist').click();
     }
 
     openCreateRoleModal() {
