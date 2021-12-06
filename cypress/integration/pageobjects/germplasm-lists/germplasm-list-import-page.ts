@@ -2,10 +2,9 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListImportPage {
 
-    selectFile(listName: string) {
+    selectFile(listName: string, fileName: string) {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="importFileInput"]').should('exist').then((input) => {
-                const fileName = 'GermplasmListImport.xls';
                 cy.fixture(fileName, 'binary')
                     .then(Cypress.Blob.binaryStringToBlob)
                     .then((fileContent) => {

@@ -12,7 +12,8 @@ When('I select Import germplasm list from Actions', () => {
     searchPage.openImportGermplasmListModal();
 });
 And('I select a file to upload', () => {
-    importModal.selectFile(listName);
+    const fileName = 'GermplasmListImport.xls';
+    importModal.selectFile(listName, fileName);
 });
 And('I click Next on Import Germplasm list screen', () => {
     importModal.clickImportNext();
@@ -41,7 +42,8 @@ And('I click the link to dowload the import list template', () => {
     importModal.openImportListClickTemplate();
 });
 Then('An import list template should be downloaded', () => {
-    searchPage.verifyImportTemplateDownload();
+    const fileName = 'GermplasmListImportTemplate.xls';
+    searchPage.verifyImportTemplateDownload(fileName);
 });
 
 // Cancel import
