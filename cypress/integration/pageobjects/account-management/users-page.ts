@@ -7,8 +7,7 @@ export default class UsersPage{
 
     openAddUserModal() {
         getMainIframeDocumentWaitToLoad().find('table').should('be.visible');
-        getMainIframeDocument().find('div.om-panel-content button').should('exist').contains('Add user')
-            .click({ force: true });
+        getMainIframeDocument().find('div.om-panel-content button').should('exist').contains('Add user').click();
     }
 
     createUser() {
