@@ -53,3 +53,33 @@ And('I click the Cancel button', () => {
 Then('the system closes the Import List screen', () => {
     searchPage.verifyImportCancelled();
 });
+
+// Validate required columns
+When('I click Import List in the Actions menu', () => {
+    searchPage.openImportGermplasmListModal();
+});
+And('I import a valid file with no required columns', () => {
+    const fileName = 'GermplasmListImportBadHeader.xls';
+    importModal.selectFile(listName, fileName);
+});
+And('I click Next on Import Germplasm list screen', () => {
+    importModal.clickImportNext();
+});
+Then('I should be able to see error message that the file has no required columns', () => {
+    searchPage.verifyErrorMessage('At least GID, GUID or DESIGNATION column is required');
+});
+
+// Checks value is present
+When('I click Import List in the Actions menu', () => {
+    searchPage.openImportGermplasmListModal();
+});
+And('I select a file to upload without data', () => {
+    const fileName = 'GermplasmListImportEmpty.xls';
+    importModal.selectFile(listName, fileName);
+});
+And('I click Next on Import Germplasm list screen', () => {
+    importModal.clickImportNext();
+});
+Then('I should be able to see error message that there are no data to import', () => {
+    searchPage.verifyErrorMessage('Wrong name for Observation sheet or the file has no data. Please verify and try again');
+});

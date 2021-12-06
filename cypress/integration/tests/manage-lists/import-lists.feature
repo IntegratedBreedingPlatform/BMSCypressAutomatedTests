@@ -34,21 +34,19 @@ Feature: Import Lists
     And I click the Cancel button
     Then the system closes the Import List screen
 
-  @ignore
+  @smoke-test
   Scenario: Check if List File Importer validates required columns
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I import a valid file with no required columns
+    When I click Import List in the Actions menu
+    And I import a valid file with no required columns
+    And I click Next on Import Germplasm list screen
     Then I should be able to see error message that the file has no required columns
-# NOTE: Add assertion to check error message
 
-  @ignore
+  @smoke-test
   Scenario: Check if List File Importer checks value is present in the required columns
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I import a valid file with no required columns
-    Then I should be able to see error message that there is no value in one of the required columns
-# NOTE: Add assertion to check error message
+    When I click Import List in the Actions menu
+    And I select a file to upload without data
+    And I click Next on Import Germplasm list screen
+    Then I should be able to see error message that there are no data to import
 
   @ignore
   Scenario: Check if user can review list and proceed with single matches entries
@@ -57,7 +55,7 @@ Feature: Import Lists
     And I am presented with the Review Import List screen
     When I navigate to the next page
     Then I should be able to save the germplasm list without the entries with missing matches
-# Note: Add asserting to check the valid list metadata (name, description, etc) and folder. 
+# Note: Add asserting to check the valid list metadata (name, description, etc) and folder.
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
 
 # Add before-hook: @import-germplasm.feature
@@ -68,7 +66,7 @@ Feature: Import Lists
     And I am presented with the Review Import List screen
     When I skip data with multiple matches
     Then I should be able to save the germplasm list without the entries with multiple matches
-# Add assertion to check the valid list metadata (name, description, etc) and folder. 
+# Add assertion to check the valid list metadata (name, description, etc) and folder.
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file
 # Add assertion to check that the entries with multiple matches are not included in the saved list
 

@@ -10,7 +10,7 @@ export default class GermplasmListsBetaPage {
         });
     }
 
-    openGermplasmList(){
+    openGermplasmList() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListSearchTable"] > tbody > tr:nth-child(1) > td:nth-child(1) > a')
                 .should('exist')
@@ -34,6 +34,12 @@ export default class GermplasmListsBetaPage {
     verifyImportCancelled() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('.modal').should('not.exist');
+        });
+    }
+
+    verifyErrorMessage(message: string) {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('ngb-alert > span').contains(message);
         });
     }
 }
