@@ -6,7 +6,7 @@ export default class UsersPage{
     protected programName = Cypress.env('existingProgramName');
 
     openAddUserModal() {
-        getIframeBody().find('table').should('be.visible');
+        getIframeBody().find('table', {timeout: 30000}).should('be.visible');
         getIframeBody().find('div.om-panel-content button').should('exist').contains('Add user').click();
     }
 
