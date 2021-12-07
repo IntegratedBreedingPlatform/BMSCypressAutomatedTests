@@ -1,10 +1,13 @@
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
+import NavbarSection from '../pageobjects/navbar-section';
+
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const sidebarSection = new SidebarSection()
+const navBar = new NavbarSection()
 
 // ==================================
 // GIVENS
@@ -31,6 +34,10 @@ Given('I reload the {} page', (page) => {
 });
 Given('I am already in my program', () => {
     dashboardPage.loginAndLaunchProgram();
+});
+
+And('I navigate to Site Admin page',()=>{
+    navBar.clickSiteAdmin();
 });
 
 // ==================================
