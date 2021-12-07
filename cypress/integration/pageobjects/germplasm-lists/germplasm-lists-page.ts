@@ -57,6 +57,28 @@ export default class GermplasmListPage {
         });
     }
 
+    openAddNewEntries() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="germplasmListActionButton"]')
+                .should('exist')
+                .click();
+            cy.wrap($iframe).find('[data-test="addEntriesButton"]').should('be.visible').click();
+        });
+    }
+
+    getTotalCount() {
+        getIframeBody().xpath(`//div[contains(@class,'active' ) and @aria-labelledby='germplasm-list-data-tab']//div[@class='info jhi-item-count']/span[1]`).invoke('text').as('totalCount');
+    }
+
+    verifyTotalCountChanged() {
+        getIframeBody().xpath(`//div[contains(@class,'active' ) and @aria-labelledby='germplasm-list-data-tab']//div[@class='info jhi-item-count']/span[1]`).invoke('text').as('newTotalCount');
+        expect(cy.get('@totalCount')).not.eq(cy.get('@newTotalCount'));
+    }
+
+    verifySuccessMessage() {
+        getIframeBody().find('ngb-alert > span').contains('Germplasm entries added to list successfully!');
+    }
+
     /*
         Returns a radom value in range from 1 to 10
      */
