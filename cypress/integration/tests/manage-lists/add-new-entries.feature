@@ -31,20 +31,18 @@ Scenario: Add random entries to a list
     Then I should see a message that entries are added successfully 
     And I should be see that the list entries are updated
 
-# @ignore
-# @TestCaseKey=IBP-T3366
-# Scenario: Filter entries and add to a list
-#     When I navigate to add new entries screen
-#     And I filter an entry by GID and add to the list
-#     Then I should see a message that entries are added successfully 
-#     And I should be see that the list entries are updated
-#     #Assert total count if updated
+@TestCaseKey=IBP-T3366
+Scenario: Filter entries and add to a list
+    When I navigate to add new entries screen
+    And I filter an entry by GID and add to the list
+    Then I should see a message that entries are added successfully 
+    And I should be see that the list entries are updated
+    #Assert total count if updated
 
-# @ignore
-# @TestCaseKey=IBP-T3366
-# Scenario: Add the same entries to a list
-#     When I navigate to add new entries screen
-#     And I filter for an entry that exists in the list and add again to the list
-#     Then I should see a message that entries are added successfully 
-#     And I should be see that the list entries are updated
-#     #Assert total count if updated
+@TestCaseKey=IBP-T3366
+Scenario: Add the same entries to a list
+    When I navigate to add new entries screen
+    And I filter for an entry that exists in the list and add again to the list
+    Then I should see a message that entries are added successfully 
+    And I should be see that the list entries are updated
+    #Assert total count if updated

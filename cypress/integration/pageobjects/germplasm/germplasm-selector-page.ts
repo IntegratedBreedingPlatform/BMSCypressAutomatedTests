@@ -3,7 +3,12 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmSelectorPage {
 
-    
+    filterByGIDs(gids: number[]) {
+        getModalContent().xpath(`//button[contains(@title, 'GID ::')]`).should('be.visible').click();
+        getModalContent().find('[data-test="columnFilterListInput"]').should('be.visible').type(gids.join(','));
+        getModalContent().find('[data-test="columnFilterListApplyButton"]').should('be.visible').click();
+    }
+
     clickSelectButton() {
         getModalContent().find('[data-test="selectButton"]').should('be.visible').click();
     }

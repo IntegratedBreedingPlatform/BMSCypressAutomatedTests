@@ -42,6 +42,24 @@ And('I select all entries on the current page and add to the list', () => {
     germplasmSelectorPage.clickSelectButton();
 });
 
+And('I filter an entry by GID and add to the list', () => {
+    // Get the old total count first so we can compare the new total count after the entries
+    // are added.
+    germplasmListPage.getTotalCount();
+    germplasmSelectorPage.filterByGIDs([1, 2, 3]);
+    germplasmSelectorPage.selectAllEntriesCurrentPage();
+    germplasmSelectorPage.clickSelectButton();
+});
+
+And('I filter for an entry that exists in the list and add again to the list', () => {
+    // Get the old total count first so we can compare the new total count after the entries
+    // are added.
+    germplasmListPage.getTotalCount();
+    germplasmSelectorPage.filterByGIDs([1, 2, 3]);
+    germplasmSelectorPage.selectAllEntriesCurrentPage();
+    germplasmSelectorPage.clickSelectButton();
+});
+
 Then('I should see a message that entries are added successfully', () => {
     germplasmListPage.verifySuccessMessage();
 });
