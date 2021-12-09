@@ -7,7 +7,7 @@ As a user
 I should be able to add selected entries to another germplasm list
 
 Background: 
-    Given I am on the Germplasm Lists Beta page of specified program
+    Given I am on the Germplasm Lists page of specified program
     And I open an existing list
 @TestCaseKey=IBP-T3371
 @smoke-test

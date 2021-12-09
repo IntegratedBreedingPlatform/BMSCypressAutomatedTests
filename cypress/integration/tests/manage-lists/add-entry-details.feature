@@ -8,7 +8,7 @@ Feature: Add entry details
 Background:
   # TODO: use the entry detail variable created previosly in Manage Ontologies
   # Given I added entry detail to Ontology Manager
-  Given I am on the Germplasm Lists Beta page of specified program
+  Given I am on the Germplasm Lists page of specified program
   And I open an existing list
 
 @TestCaseKey=IBP-T3398

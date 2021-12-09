@@ -6,7 +6,7 @@ Feature: Import Lists
   I should be able to import germplasm lists
 
  Background: 
-    Given I am on the Germplasm Lists Beta page of specified program
+    Given I am on the Germplasm Lists page of specified program
 
   @smoke-test
   Scenario: Import new germplasm list
@@ -30,7 +30,7 @@ Feature: Import Lists
   @ignore
   @smoke-test
   Scenario: Check if user cancels import lists
-    Given I reload the Germplasm Lists Beta page
+    Given I reload the Germplasm Lists page
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click the Cancel button
