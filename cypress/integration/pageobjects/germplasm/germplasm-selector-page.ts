@@ -22,10 +22,10 @@ export default class GermplasmSelectorPage {
     }
 
     selectRandomEntries() {
-        // Select 3 entries randomly
-        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10)}]`).check();
-        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10)}]`).check();
-        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10)}]`).check();
+        // Select 3 entries randomly (1-10)
+        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10) + 1}]`).check();
+        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10) + 1}]`).check();
+        getModalContent().xpath(`(//table[@data-test="germplasmSelectorTable"]//input)[${Math.floor(Math.random() * 10) + 1}]`).check();
     }
 
     verifyGermplasmSelectorModalIsShown() {
