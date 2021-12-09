@@ -81,7 +81,7 @@ export class SidebarTool {
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
         'Manage Program Settings', true);
 
-    private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.GERMPLASM_LISTS, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS_BETA, SidebarTool.MANAGE_STUDIES,
+    private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS, SidebarTool.MANAGE_STUDIES,
         SidebarTool.BROWSE_STUDIES, SidebarTool.DATASET_IMPORT, SidebarTool.SINGLE_SITE_ANALYSIS, SidebarTool.MULTI_SITE_ANALYSIS, SidebarTool.MANAGE_INVENTORY, SidebarTool.GRAPHICAL_QUERIES,
         SidebarTool.HEAD_TO_HEAD_QUERY, SidebarTool.MULTI_TRAIT_QUERY, SidebarTool.GDMS, SidebarTool.HIGH_DENSITY, SidebarTool.MANAGE_ONTOLOGIES, SidebarTool.MANAGE_METADATA,
         SidebarTool.MANAGE_PROGRAM_SETTINGS]
