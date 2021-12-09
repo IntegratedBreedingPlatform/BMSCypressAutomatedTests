@@ -30,7 +30,7 @@ Feature: Import Lists
   @ignore
   @smoke-test
   Scenario: Check if user cancels import lists
-    Given I reload the Germplasm Lists Beta page
+    Given I reload the Germplasm Lists page
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click the Cancel button
