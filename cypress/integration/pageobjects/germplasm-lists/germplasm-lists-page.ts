@@ -59,7 +59,7 @@ export default class GermplasmListPage {
 
     openAddNewEntries() {
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="germplasmListActionButton"]')
+            cy.wrap($iframe).find('[data-test="germplasmListActionButton"]',{ timeout: Cypress.config('pageLoadTimeout') })
                 .should('exist')
                 .click();
             cy.wrap($iframe).find('[data-test="addEntriesButton"]').should('be.visible').click();
@@ -76,7 +76,7 @@ export default class GermplasmListPage {
     }
 
     verifySuccessMessage() {
-        getIframeBody().find('ngb-alert > span').contains('Germplasm entries added to list successfully!');
+        getIframeBody().find('ngb-alert > span',{ timeout: 50000}).contains('Germplasm entries added to list successfully!');
     }
 
     /*
