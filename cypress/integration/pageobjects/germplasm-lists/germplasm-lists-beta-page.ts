@@ -11,7 +11,7 @@ export default class GermplasmListsBetaPage {
     }
 
     openGermplasmList(){
-        getIframeBody().then(($iframe) => {
+        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListSearchTable"] > tbody > tr:nth-child(1) > td:nth-child(1) > a')
                 .should('exist')
                 .click()
