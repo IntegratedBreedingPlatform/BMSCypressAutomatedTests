@@ -2,6 +2,16 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListImportPage {
 
+    importNewList(listName: string) {
+        this.selectFile(listName);
+        this.clickImportNext();
+        this.clickImportSubmit();
+        this.selectFirstMatch();
+        this.clickImportConfirm();
+        this.clickSaveList(listName);
+        this.verifyListCreated(listName);
+    }
+
     selectFile(listName: string) {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="importFileInput"]').should('exist').then((input) => {
