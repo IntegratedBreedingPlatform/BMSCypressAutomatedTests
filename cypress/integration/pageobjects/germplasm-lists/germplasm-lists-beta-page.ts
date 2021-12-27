@@ -43,13 +43,27 @@ export default class GermplasmListsBetaPage {
     }
 
     selectListFilteredByListName(listName:string) {
+        this.filterByListName(listName);
+        this.filterAndSelectFirstResult();
+    }
+
+    filterByListName(listName:string) {
         getIframeBody().find('jhi-column-filter > div > div > div > div > a').contains("reset all filters")
             .should("exist")
             .click();
         getIframeBody().find('button.btn-info[title="List Name :: All"]').should('be.visible').click();
         getIframeBody().xpath('//input[@placeholder="Search Text"]').should('be.visible').type(listName);
+    }
 
-        this.filterAndSelectFirstResult();
+    filterAndVerifyResult(listName:string, condition:string) {
+        this.filterByListName(listName);
+        cy.intercept('POST', `**/germplasm-lists/search?*`).as('filterList');
+        getIframeBody().find('button.btn-primary').contains("Apply").click();
+        cy.wait('@filterList').then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
+                .should(condition);
+        });
     }
 
     filterAndSelectFirstResult() {
