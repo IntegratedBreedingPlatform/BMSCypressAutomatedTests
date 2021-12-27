@@ -1,5 +1,4 @@
 import { getIframeBody } from '../../../support/commands';
-import AddEntryDetailsContext from '../../tests/manage-lists/add-entry-details/add-entry-details.context';
 
 export default class GermplasmListDeleteListPage {
     clickDeleteListConfirm() {
