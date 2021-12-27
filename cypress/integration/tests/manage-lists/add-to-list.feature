@@ -11,14 +11,12 @@ Background:
     And I import a list to add entries to
 
 @TestCaseKey=IBP-T3371
-@ignore
 Scenario: Add random entries to another list
     Given I open an existing list
     When I select some entries in the current page
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully
 
-@ignore
 @TestCaseKey=IBP-T3371
  Scenario: Add all entries in the current page to another list
     Given I open an existing list
@@ -26,7 +24,6 @@ Scenario: Add random entries to another list
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully
 
-@ignore
 @TestCaseKey=IBP-T3371
 Scenario: Filter entries and add to another list
   Given I open an existing list
@@ -34,7 +31,6 @@ Scenario: Filter entries and add to another list
   And I select germplasm list in the add entries to list screen
   Then I should see a message that entries are added successfully
 
-@ignore
 @TestCaseKey=IBP-T3371
 Scenario: Add the same entry to another list
     Given I open an existing list
@@ -42,7 +38,6 @@ Scenario: Add the same entry to another list
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully
 
-@ignore
 @TestCaseKey=IBP-T3371
 Scenario: Add entries to another list that is locked
     Given I lock the imported list
