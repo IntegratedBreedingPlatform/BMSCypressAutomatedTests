@@ -1,5 +1,4 @@
 import { Given, And, Then, When } from 'cypress-cucumber-preprocessor/steps';
-import GermplasmSelectorPage from '../../../pageobjects/germplasm/germplasm-selector-page';
 import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germplasm-lists-beta-page';
 import GermplasmListPage from "../../../pageobjects/germplasm-lists/germplasm-lists-page";
 import AddEntryDetailsContext from "../add-entry-details/add-entry-details.context";
