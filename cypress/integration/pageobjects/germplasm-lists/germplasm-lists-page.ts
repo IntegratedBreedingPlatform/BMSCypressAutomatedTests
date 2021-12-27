@@ -85,7 +85,13 @@ export default class GermplasmListPage {
         getIframeBody().find('[data-test="germplasmListTable"] > tbody > tr:first-of-type > td:nth-of-type(3) > jhi-list-data-row > div > span > a').should('exist').invoke("text").then((gid: string) => {
             getIframeBody().find('[data-test="germplasmListTable"] > thead > tr:first-of-type > th:nth-of-type(3) > jhi-column-filter-inline > i').click();
             getIframeBody().find('input[data-test="columnFilterListInput"]').should('exist').type(gid);
+            
+            cy.intercept('GET', `**/search?*`).as('filterList');
             getIframeBody().find('button[data-test="columnFilterListApplyButton"]').contains("Apply").click();
+
+            cy.wait('@filterList').then((interception) => {
+                expect(interception.response.statusCode).to.be.equal(200);
+            });
         });
     }
 
