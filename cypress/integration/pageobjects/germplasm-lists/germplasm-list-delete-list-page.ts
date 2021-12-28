@@ -34,10 +34,3 @@ export default class GermplasmListDeleteListPage {
         });
     }
 }
-
-const getModalContent = () => {
-    return getIframeBody().find('jhi-germplasm-list-add > div > iframe', {timeout: Cypress.config('pageLoadTimeout')})
-        .its('0.contentDocument.body')
-        .should('not.be.empty')
-        .then(cy.wrap);
-};
