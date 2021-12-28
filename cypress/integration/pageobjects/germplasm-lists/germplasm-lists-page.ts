@@ -90,7 +90,7 @@ export default class GermplasmListPage {
     }
 
     selectAllEntriesCurrentPage() {
-        getIframeBody().find('[title="select current page"]').should('be.visible').check();
+        getIframeBody().find('[data-test="selectCurrentPageCheckbox"]').should('be.visible').check();
     }
 
     openAddToList() {
@@ -107,8 +107,9 @@ export default class GermplasmListPage {
     }
 
     lockList() {
-        getIframeBody().find("i.fa-unlock").parent().click();
-        getIframeBody().find("i.fa-lock").should('exist');
+        getIframeBody().find('[data-test="lockListButton"]').click();
+        getIframeBody().find('[data-test="lockListIcon"]')
+            .should('have.class', 'fa-lock');
     }
 
     /*
