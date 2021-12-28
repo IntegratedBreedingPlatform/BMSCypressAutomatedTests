@@ -2,12 +2,12 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListAddToListPage {
     selectExistingList(listName: string) {
-        getIframeBody().find('jhi-germplasm-list-add').should('be.visible');
-        getIframeBody().find('div.ui-treetable-wrapper > table > tbody > tr > td:nth-child(1)')
+        getIframeBody().find('[data-test="addToListTable"]').should('be.visible');
+        getIframeBody().find('[data-test="addToListTable"] > div > div > table > tbody > tr > td:nth-child(1)')
             .contains(listName)
             .should('exist')
             .click();
-        getIframeBody().find('span[jhitranslate="germplasm-list-add.add-action"]')
+        getIframeBody().find('[data-test="addToListModalButton"]')
             .should('exist')
             .click();
     }
@@ -34,9 +34,3 @@ export default class GermplasmListAddToListPage {
     }
 }
 
-const getModalContent = () => {
-    return getIframeBody().find('jhi-germplasm-list-add > div > iframe', {timeout: Cypress.config('pageLoadTimeout')})
-        .its('0.contentDocument.body')
-        .should('not.be.empty')
-        .then(cy.wrap);
-};
