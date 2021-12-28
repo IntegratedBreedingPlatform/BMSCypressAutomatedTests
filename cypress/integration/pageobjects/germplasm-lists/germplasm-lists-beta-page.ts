@@ -31,11 +31,11 @@ export default class GermplasmListsBetaPage {
     }
 
     selectListFilteredByNumberOfEntries() {
-        getIframeBody().find('jhi-column-filter > div > div > div > div > a').contains("reset all filters")
+        getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
             .should("exist")
             .click();
         getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
-        getIframeBody().find('button.fa-plus').click();
+        getIframeBody().find('[data-test="addFilterButton"]').click();
         getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
         getIframeBody().xpath('//input[@id="from"]').should('exist').type("20");
 
@@ -48,7 +48,7 @@ export default class GermplasmListsBetaPage {
     }
 
     filterByListName(listName:string) {
-        getIframeBody().find('jhi-column-filter > div > div > div > div > a').contains("reset all filters")
+        getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
             .should("exist")
             .click();
         getIframeBody().find('button.btn-info[title="List Name :: All"]').should('be.visible').click();
