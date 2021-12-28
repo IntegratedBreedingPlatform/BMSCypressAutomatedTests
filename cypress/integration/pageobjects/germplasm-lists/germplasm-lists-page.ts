@@ -122,6 +122,13 @@ export default class GermplasmListPage {
             .should('have.class', 'fa-lock');
     }
 
+    openEditListMetadata() {
+        getIframeBody().find('[data-test="editListMetadataButton"]').click();
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('.modal').should('exist');
+        });
+    }
+
     /*
         Returns a radom value in range from 1 to 10
      */
