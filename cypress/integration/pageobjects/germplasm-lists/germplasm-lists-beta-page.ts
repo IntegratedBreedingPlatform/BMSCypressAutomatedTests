@@ -37,7 +37,7 @@ export default class GermplasmListsBetaPage {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
                 .should("exist")
-                .click();
+                .click({force:true});
         });
     }
 
