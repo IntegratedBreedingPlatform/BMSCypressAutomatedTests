@@ -4,11 +4,12 @@ import * as path from 'path';
 export default class GermplasmListsBetaPage {
 
     openImportGermplasmListModal() {
-        getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="actionMenu"]', { timeout: Cypress.config('pageLoadTimeout') })
+        cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
+        cy.wait('@loadLists').then((interception) => {
+            getIframeBody().find('[data-test="actionMenu"]', { timeout: Cypress.config('pageLoadTimeout') })
                 .should('exist')
                 .click();
-            cy.wrap($iframe).find('[data-test="importListButton"]').should('exist').click();
+            getIframeBody().find('[data-test="importListButton"]').should('exist').click();
         });
     }
 
@@ -30,10 +31,18 @@ export default class GermplasmListsBetaPage {
         });
     }
 
+    resetAllFilters() {
+        cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
+        cy.wait('@loadLists').then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
+                .should("exist")
+                .click();
+        });
+    }
+
     selectListFilteredByNumberOfEntries() {
-        getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
-            .should("exist")
-            .click();
+        this.resetAllFilters();
         getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
         getIframeBody().find('[data-test="addFilterButton"]').click();
         getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
@@ -48,9 +57,7 @@ export default class GermplasmListsBetaPage {
     }
 
     filterByListName(listName:string) {
-        getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
-            .should("exist")
-            .click();
+        this.resetAllFilters();
         getIframeBody().find('button.btn-info[title="List Name :: All"]').should('be.visible').click();
         getIframeBody().xpath('//input[@placeholder="Search Text"]').should('be.visible').type(listName);
     }
