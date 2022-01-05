@@ -58,12 +58,7 @@ export default class GermplasmListPage {
     }
 
     openAddNewEntries() {
-        getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="germplasmListActionButton"]',{ timeout: Cypress.config('pageLoadTimeout') })
-                .should('exist')
-                .click();
-            cy.wrap($iframe).find('[data-test="addEntriesButton"]').should('be.visible').click();
-        });
+        this.openGermplasmListAction("addEntriesButton");
     }
 
     getTotalCount() {
@@ -76,7 +71,49 @@ export default class GermplasmListPage {
     }
 
     verifySuccessMessage() {
-        getIframeBody().find('ngb-alert > span',{ timeout: 50000}).contains('Germplasm entries added to list successfully!');
+        getIframeBody().find('ngb-alert > span',{ timeout: 60000}).contains('Germplasm entries added to list successfully!');
+    }
+
+    selectRandomEntries() {
+        // select 3 random entries in the first page
+        getIframeBody().xpath(`(//table[@data-test="germplasmListTable"]//tbody//input)[${Math.floor(Math.random() * 20) + 1}]`).check();
+        getIframeBody().xpath(`(//table[@data-test="germplasmListTable"]//tbody//input)[${Math.floor(Math.random() * 20) + 1}]`).check();
+        getIframeBody().xpath(`(//table[@data-test="germplasmListTable"]//tbody//input)[${Math.floor(Math.random() * 20) + 1}]`).check();
+    }
+
+    filterByGid() {
+        getIframeBody().find('[data-test="germplasmListTable"] > tbody > tr:first-of-type > td:nth-of-type(3) > jhi-list-data-row > div > span > a').should('exist').invoke("text").then((gid: string) => {
+            getIframeBody().find('[data-test="germplasmListTable"] > thead > tr:first-of-type > th:nth-of-type(3) > jhi-column-filter-inline > i').click();
+            getIframeBody().find('input[data-test="columnFilterListInput"]').should('exist').type(gid);
+            getIframeBody().find('button[data-test="columnFilterListApplyButton"]').contains("Apply").click();
+        });
+    }
+
+    selectAllEntriesCurrentPage() {
+        getIframeBody().find('[data-test="selectCurrentPageCheckbox"]').should('be.visible').check();
+    }
+
+    openAddToList() {
+        this.openGermplasmListAction("addToListButton");
+    }
+
+    deleteList() {
+        this.openGermplasmListAction("deleteListButton");
+    }
+
+    openGermplasmListAction(actionButtonName: string) {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="germplasmListActionButton"]',{ timeout: Cypress.config('pageLoadTimeout') })
+                .should('exist')
+                .click();
+            cy.wrap($iframe).find(`[data-test="${actionButtonName}"]`).should('be.visible').click();
+        });
+    }
+
+    lockList() {
+        getIframeBody().find('[data-test="lockListButton"]').click();
+        getIframeBody().find('[data-test="lockListIcon"]')
+            .should('have.class', 'fa-lock');
     }
 
     /*
