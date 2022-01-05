@@ -5,7 +5,7 @@ export default class GermplasmListsBetaPage {
 
     openImportGermplasmListModal() {
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
-        cy.wait('@loadLists').then((interception) => {
+        cy.wait('@loadLists',{timeout:30000}).then((interception) => {
             getIframeBody().find('[data-test="actionMenu"]', { timeout: Cypress.config('pageLoadTimeout') })
                 .should('exist')
                 .click();
