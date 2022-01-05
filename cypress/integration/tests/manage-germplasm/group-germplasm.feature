@@ -4,7 +4,6 @@ Feature: Group Germplasm
     In order to group germplasm based on the origin
     As a user 
     I should be able to add germplasm to a management group and mark as fixed
-@ignore
 @TestCaseKey=IBP-T2960
 @smoke-test
 Scenario: Check if user can add germplasms to a group and mark them as fixed
