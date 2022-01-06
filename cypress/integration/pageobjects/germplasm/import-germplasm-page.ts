@@ -62,7 +62,10 @@ export default class ImportGermplasmPage{
     }
 
     skipSavingList() {
-        getIframeBody().find('[data-test="cancelSaveList"]').click();
+        cy.wait('@importGermplasm').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().find('[data-test="cancelSaveList"]').click();
+        }
     }
 }
 const getMainIframeDocument = () => {
