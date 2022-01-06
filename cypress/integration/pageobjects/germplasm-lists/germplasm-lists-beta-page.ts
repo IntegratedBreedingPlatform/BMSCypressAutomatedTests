@@ -5,7 +5,7 @@ export default class GermplasmListsBetaPage {
 
     openImportGermplasmListModal() {
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
-        cy.wait('@loadLists').then((interception) => {
+        cy.wait('@loadLists',{timeout:30000}).then((interception) => {
             getIframeBody().find('[data-test="actionMenu"]', { timeout: Cypress.config('pageLoadTimeout') })
                 .should('exist')
                 .click();
@@ -37,7 +37,7 @@ export default class GermplasmListsBetaPage {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
                 .should("exist")
-                .click();
+                .click({force:true});
         });
     }
 

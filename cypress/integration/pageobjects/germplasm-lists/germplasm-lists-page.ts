@@ -71,7 +71,7 @@ export default class GermplasmListPage {
     }
 
     verifySuccessMessage() {
-        getIframeBody().find('ngb-alert > span',{ timeout: 50000}).contains('Germplasm entries added to list successfully!');
+        getIframeBody().find('ngb-alert > span',{ timeout: 60000}).contains('Germplasm entries added to list successfully!');
     }
 
     selectRandomEntries() {
