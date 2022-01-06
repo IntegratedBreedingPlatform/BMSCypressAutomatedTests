@@ -64,6 +64,7 @@ export default class ImportGermplasmPage{
     skipSavingList() {
         cy.wait('@importGermplasm').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
+            cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('loadGermplasms');
             getIframeBody().find('[data-test="cancelSaveList"]').click();
         }
     }

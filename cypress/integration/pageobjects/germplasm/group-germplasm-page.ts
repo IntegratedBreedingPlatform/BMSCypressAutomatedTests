@@ -2,7 +2,10 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GroupGermplasmPage{
     selectAllImportedEntries() {
-        getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
+        cy.wait('@loadGermplasms').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
+        }
     }
 
     confirmGermplasmGrouping() {
