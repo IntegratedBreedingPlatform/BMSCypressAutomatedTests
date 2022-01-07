@@ -1,6 +1,5 @@
-import { getIframeBody } from '../../../support/commands';
-
 export default class ManageGermplasmPage{
+
     openGermplasm(){
         cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
             cy.wrap($iframeBody).find('table > tbody > tr:nth-child(1) > td:nth-child(2) > a').should('exist').click().then(($a) => {
@@ -21,12 +20,5 @@ export default class ManageGermplasmPage{
         });
     }
 
-    openGroupGermplasmModal(){
-        getIframeBody().find('#actionMenu').click();
-        getIframeBody().find('[jhitranslate="search-germplasm.actions.group"]').click().then(() => {
-            getIframeBody().find('.modal-dialog').should('exist');
-            getIframeBody().find('[jhitranslate="germplasm-grouping.grouping-results"] > span').contains('Grouping Results');
-        });
-    }
 
 }

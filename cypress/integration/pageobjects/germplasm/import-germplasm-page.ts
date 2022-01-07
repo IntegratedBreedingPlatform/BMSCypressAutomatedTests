@@ -1,8 +1,7 @@
-import { getIframeBody } from '../../../support/commands';
-
 export default class ImportGermplasmPage{
 
-    uploadFile(fileName: string) {
+    uploadFile() {
+        const fileName = 'GermplasmImport.xls';
         cy.fixture(fileName, 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
             .then((fileContent) => {
@@ -61,13 +60,7 @@ export default class ImportGermplasmPage{
         });
     }
 
-    skipSavingList() {
-        cy.wait('@importGermplasm').then((interception) => {
-            expect(interception.response.statusCode).to.equal(200);
-            cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('loadGermplasms');
-            getIframeBody().find('[data-test="cancelSaveList"]').click();
-        }
-    }
+
 }
 const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
