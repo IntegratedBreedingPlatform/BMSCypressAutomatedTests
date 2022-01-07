@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../support/commands';
+
 export default class SidebarSection {
     navigateTo(link:string){
         let sidebarTool = SidebarTool.getFromLinkName(link);
@@ -5,12 +7,24 @@ export default class SidebarSection {
     }
 
     navigate(sidebarTool:SidebarTool){
-        // Germplasm category is expanded by default, otherwise expand sidebar category
-        if (sidebarTool.category !== 'Germplasm') {
-            cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.category} ')]`).should('exist').click();
-        }
+        // Expand sidebar category if collapsed
+            cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).should('exist').invoke('attr', 'aria-expanded').then((isExpanded) => {
+                if (isExpanded !== 'true') {
+                    cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).click();
+                    cy.xpath(`//mat-tree-node[not(contains(@class, 'leaf')) and contains(text(), ' ${sidebarTool.category} ')]`).invoke('attr', 'aria-expanded').should('eq', 'true');
+                } 
+            });
         // Then click the sidebar category child
-        cy.xpath(`//mat-tree-node[contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+    }
+
+    /**
+     * Assumes sidebar section is already expanded
+     */
+    reload(sidebarTool:SidebarTool){
+        getIframeBody().then(($iframe) => {
+            cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
+        });
     }
 
     verifyPageIsShown(page:string) {
@@ -29,11 +43,11 @@ export default class SidebarSection {
                 }
             });
         } else {
-            cy.get('mat-sidenav-content > iframe').its('0.contentDocument.body').should('not.be.empty').then(($iframeBody) => {
-                cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')] | 
+            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
+                cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')]| 
                     //h2[contains(text(),'${sidebarTool.toolName}')] | 
-                    //h1>span[contains(text(),'${sidebarTool.toolName}')]| 
-                    //h1>span>span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
+                    //h1/span[contains(text(),'${sidebarTool.toolName}')]| 
+                    //h1/span/span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
             });
         }
 
@@ -49,9 +63,8 @@ export default class SidebarSection {
 export class SidebarTool {
 
     public static readonly MANAGE_GERMPLASM = new SidebarTool('Manage Germplasm', 'Germplasm', 'Germplasm Manager');
-    public static readonly GERMPLASM_LISTS = new SidebarTool('Germplasm Lists', 'Lists', 'Germplasm Lists', true);
     public static readonly SAMPLE_LISTS = new SidebarTool('Samples Lists', 'Lists', 'Manage Samples');
-    public static readonly GERMPLASM_LISTS_BETA = new SidebarTool('Germplasm Lists Beta', 'Lists', 'Germplasm Lists');
+    public static readonly GERMPLASM_LISTS = new SidebarTool('Germplasm Lists', 'Lists', 'Germplasm Lists');
     public static readonly MANAGE_STUDIES = new SidebarTool('Manage Studies', 'Studies', 'Manage Studies');
     public static readonly BROWSE_STUDIES = new SidebarTool('Browse Studies', 'Studies', 'Browse Studies', true);
     public static readonly DATASET_IMPORT = new SidebarTool('Import Datasets', 'Studies', 'Dataset Importer');
@@ -68,7 +81,7 @@ export class SidebarTool {
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
         'Manage Program Settings', true);
 
-    private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.GERMPLASM_LISTS, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS_BETA, SidebarTool.MANAGE_STUDIES,
+    private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS, SidebarTool.MANAGE_STUDIES,
         SidebarTool.BROWSE_STUDIES, SidebarTool.DATASET_IMPORT, SidebarTool.SINGLE_SITE_ANALYSIS, SidebarTool.MULTI_SITE_ANALYSIS, SidebarTool.MANAGE_INVENTORY, SidebarTool.GRAPHICAL_QUERIES,
         SidebarTool.HEAD_TO_HEAD_QUERY, SidebarTool.MULTI_TRAIT_QUERY, SidebarTool.GDMS, SidebarTool.HIGH_DENSITY, SidebarTool.MANAGE_ONTOLOGIES, SidebarTool.MANAGE_METADATA,
         SidebarTool.MANAGE_PROGRAM_SETTINGS]
@@ -81,18 +94,18 @@ export class SidebarTool {
     }
 
     public static getFromLinkName(link:string): SidebarTool {
-       let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
+       const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.linkName === link);
        if (sidebarTools.length > 0) {
            return sidebarTools[0];
        }
-       throw new Error('Could not find tool ' + link)
+       throw new Error('Could not find tool ' + link);
     }
 
     public static getFromToolName(link:string): SidebarTool {
-        let sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
+        const sidebarTools = SidebarTool.TOOLS.filter((tool) => tool.toolName === link);
         if (sidebarTools.length > 0) {
             return sidebarTools[0];
         }
-        throw new Error('Could not find tool ' + link)
+        throw new Error('Could not find tool ' + link);
     }
 }

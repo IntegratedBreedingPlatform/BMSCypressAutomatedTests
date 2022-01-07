@@ -43,6 +43,10 @@ function getAccessToken() {
   return JSON.parse(token).token;
 }
 
+export function randomString(length = 11) {
+    return Math.random().toString(36).substr(2, length);
+}
+
 Cypress.Commands.add('getProgram', () => {
 
   cy.request({
@@ -58,6 +62,7 @@ Cypress.Commands.add('getProgram', () => {
 
 });
 
+// TODO refactor, use getIframeBody? that uses only cypress retry-ability (Cypress "manages a Promise chain on your behalf")
 Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => {
     return new Cypress.Promise(resolve => {
         $iframe.on('load', () => {
@@ -65,3 +70,56 @@ Cypress.Commands.add('waitIframeToLoad', { prevSubject: 'element' }, $iframe => 
         });
     });
 });
+
+/**
+ * Ideally test should be isolated according to cypress best practices
+ * but being able to keep localstorage between test allows to stay on the page
+ * and run more than than one cucumber scenario without doing the full login loop.
+ *
+ * See also:
+ * https://github.com/cypress-io/cypress/issues/461#issuecomment-392070888
+ */
+//
+const LOCAL_STORAGE_MEMORY: any = {};
+
+Cypress.Commands.add("saveLocalStorage", () => {
+    Object.keys(localStorage).forEach(key => {
+        LOCAL_STORAGE_MEMORY[key] = localStorage[key];
+    });
+});
+
+Cypress.Commands.add("restoreLocalStorage", () => {
+    Object.keys(LOCAL_STORAGE_MEMORY).forEach(key => {
+        localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
+    });
+});
+
+/**
+ * Usage:
+ *      getIframeBody().then(($iframe) => {
+ *        cy.wrap($iframe)
+ *      })
+ * or
+ *      getIframeBody().find()
+ */
+export function getIframeBody() {
+    // get the main iframe
+    // and retry until the body element is not empty
+    return cy.get('mat-sidenav-content > iframe', {timeout: Cypress.config('pageLoadTimeout')})
+        .its('0.contentDocument.body')
+        .should('not.be.empty')
+        .then(cy.wrap)
+}
+
+export function closeReleaseNotePopupIfShown() {
+    cy.window().then((window: any) => {
+        if (window.showReleaseNotes) {
+            cy.get('jhi-release-notes-wrapper > iframe').its('0.contentDocument.body').should('not.be.empty')
+                .then(($iframe) => {
+                    cy.wrap($iframe).find('jhi-release-notes-dialog > div.modal-footer > button.btn-primary', {
+                        timeout: Cypress.config('pageLoadTimeout')
+                    }).click();
+                });
+        }
+    });
+}

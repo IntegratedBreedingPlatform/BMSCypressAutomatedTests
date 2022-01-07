@@ -1,11 +1,16 @@
+import { closeReleaseNotePopupIfShown } from '../../support/commands';
+
 export default class NavbarSection {
 
     clickAddProgram(){
+        closeReleaseNotePopupIfShown();
         cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[3]/span').should('exist').click();
     }
 
 
     clickSiteAdmin() {
+        closeReleaseNotePopupIfShown();
+        cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[2]/span').should('exist').click();
     }
 
     signOut() {

@@ -14,16 +14,21 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
+
+// To support firing of native system events from Cypress
+import "cypress-real-events/support";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require('cypress-xpath');
 
 beforeEach(() => {
-
-  Cypress.env('program', {});
-
+    Cypress.Cookies.defaults({
+        preserve: ['JSESSIONID', 'BMS_TOK'],
+      })
+    cy.restoreLocalStorage();
+    Cypress.env('program', {});
 });
 afterEach(() => {
   const screenshotsFolder = Cypress.config("screenshotsFolder");
@@ -47,4 +52,6 @@ afterEach(() => {
 
       }
   }
+
+  cy.saveLocalStorage();
 });
