@@ -8,7 +8,7 @@ I should be able to add new entries to a germplasm list
 
 Background: 
     Given I am on the Germplasm Lists page of specified program
-    And I open an existing list
+    And I import a list to add entries to
 
 @smoke-test  
 @TestCaseKey=IBP-T3366   

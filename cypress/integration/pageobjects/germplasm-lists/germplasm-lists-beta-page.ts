@@ -64,9 +64,9 @@ export default class GermplasmListsBetaPage {
 
     filterAndVerifyResult(listName:string, condition:string) {
         this.filterByListName(listName);
-        cy.intercept('POST', `**/germplasm-lists/search?*`).as('filterList');
+        cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
         getIframeBody().find('button.btn-primary').contains("Apply").click();
-        cy.wait('@filterList').then((interception) => {
+        cy.wait('@loadLists').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
                 .should(condition);
@@ -75,7 +75,7 @@ export default class GermplasmListsBetaPage {
 
     filterAndSelectFirstResult() {
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('filterList');
-        getIframeBody().find('button.btn-primary').contains("Apply").click();
+        getIframeBody().find('button.btn-primary').contains("Apply").click({force:true});
         cy.wait('@filterList').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             this.selectFirstList();
