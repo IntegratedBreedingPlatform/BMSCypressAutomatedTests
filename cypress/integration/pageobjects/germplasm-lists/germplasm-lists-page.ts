@@ -74,7 +74,7 @@ export default class GermplasmListPage {
     verifySuccessMessage() {
         cy.wait('@loadList',{ timeout: 60000}).then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
-            getIframeBody().find('ngb-alert > span',{ timeout: 60000}).contains('Germplasm entries added to list successfully!');
+            getIframeBody().find('ngb-alert > span',{ timeout: 120000}).contains('Germplasm entries added to list successfully!',{ timeout: 120000});
         });
     }
 
