@@ -17,7 +17,7 @@ export default class GermplasmDetailsPage{
 
 
    viewPedigreeGraph() {
-       getGermplasmIframeBody().xpath(`//*[@id="PEDIGREE TREE"]/div/jhi-pedigree-tree/div/div/div[1]/div/div/button`, {timeout: 15000}).should('not.be.disabled').click();
+       getGermplasmIframeBody().xpath(`//*[@id="PEDIGREE TREE"]/div/jhi-pedigree-tree/div/div/div[1]/div/div/button`, {timeout: 15000}).should('not.be.disabled').first().click();
    }
 
    verifyPedigreeGraph() {
