@@ -1,9 +1,12 @@
 
+import { closeReleaseNotePopupIfShown } from '../../support/commands';
+import LoginPage from './account-management/login-page';
 export default class DashboardPage{
 
     protected cropName = Cypress.env('cropName');
     protected programName = Cypress.env('existingProgramName');
- 
+    login:LoginPage = new LoginPage()
+
     getProgramsIframeDocument = () => {
         return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
     }
@@ -12,8 +15,8 @@ export default class DashboardPage{
 		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
 	}
 
-	launchProgram(openSpecifiedProgram?:boolean) {
-        // TODO add checking if release notes popup is shown, if so - close it
+    launchProgram(openSpecifiedProgram?:boolean) {
+        closeReleaseNotePopupIfShown();
         this.selectCrop();
         if (openSpecifiedProgram){
             this.selectProgram();
@@ -56,6 +59,14 @@ export default class DashboardPage{
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
+    loginAndLaunchProgram(){
 
+        if(this.login.getToken('bms.xAuthToken')==null){
+            this.login.performLogin();    
+            this.launchProgram(true);    
+        }else{
+          return;
+        }
+    }
 }
 

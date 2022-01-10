@@ -1,5 +1,6 @@
 import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import AddProgramPage from '../../../pageobjects/add-program-page';
+import { randomString } from '../../../../support/commands';
 import NavbarSection from '../../../pageobjects/navbar-section';
 
 const navBar = new NavbarSection();
@@ -7,8 +8,7 @@ const addProgramPage = new AddProgramPage();
 
 const cropName = Cypress.env('cropName');
 
-const randomizeId = () => Math.random().toString(36).substring(2, 7);
-const id = randomizeId();
+const id = randomString(5);
 const programName = `PROG${id}`;
 
 When('I navigate to Add Program page',()=>{

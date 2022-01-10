@@ -15,6 +15,7 @@
 chrome-profiler-events*.json
 
 # IDEs and editors
+*.iml
 /.idea
 .project
 .classpath
@@ -50,3 +51,4 @@ Thumbs.db
 /cypress/videos/
 /cypress.env.json
 *.cucumber.json
+/cypress/downloads
