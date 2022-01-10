@@ -58,20 +58,24 @@ export default class GermplasmListPage {
     }
 
     openAddNewEntries() {
+        cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('loadEntriesModal');
         this.openGermplasmListAction("addEntriesButton");
     }
 
     getTotalCount() {
-        getIframeBody().xpath(`//div[contains(@class,'active' ) and @aria-labelledby='germplasm-list-data-tab']//div[@class='info jhi-item-count']/span[1]`).invoke('text').as('totalCount');
+        getIframeBody().xpath(`(//span[@data-test="totalCount"])[1]`).invoke('text').as('totalCount');
     }
 
     verifyTotalCountChanged() {
-        getIframeBody().xpath(`//div[contains(@class,'active' ) and @aria-labelledby='germplasm-list-data-tab']//div[@class='info jhi-item-count']/span[1]`).invoke('text').as('newTotalCount');
+        getIframeBody().xpath(`(//span[@data-test="totalCount"])[1]`).invoke('text').as('newTotalCount');
         expect(cy.get('@totalCount')).not.eq(cy.get('@newTotalCount'));
     }
 
     verifySuccessMessage() {
-        getIframeBody().find('ngb-alert > span',{ timeout: 60000}).contains('Germplasm entries added to list successfully!');
+        cy.wait('@loadList',{ timeout: 60000}).then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().find('ngb-alert > span',{ timeout: 120000}).contains('Germplasm entries added to list successfully!',{ timeout: 120000});
+        });
     }
 
     selectRandomEntries() {

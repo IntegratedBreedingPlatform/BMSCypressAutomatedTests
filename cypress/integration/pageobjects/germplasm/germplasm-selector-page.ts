@@ -10,6 +10,7 @@ export default class GermplasmSelectorPage {
     }
 
     clickSelectButton() {
+        cy.intercept('GET', `**/search?*`).as('loadList');
         getModalContent().find('[data-test="selectButton"]').should('be.visible').click();
     }
 
