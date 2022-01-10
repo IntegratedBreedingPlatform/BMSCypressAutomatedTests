@@ -31,6 +31,7 @@ When('I navigate to add new entries screen', () => {
 });
 
 And('I select all entries and add to the list', () => {
+    germplasmSelectorPage.filterByGIDs([1, 2, 3]);
     germplasmSelectorPage.selectAllPages();
     germplasmSelectorPage.clickSelectButton();
 });
