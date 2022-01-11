@@ -2,7 +2,7 @@ export default class ReleaseNotesPage {
     resetReleaseNoteUserShowAgainValueTo1() {
         cy.request({
             method: 'PUT',
-            url: `/bmsapi/release-notes/show-again/${true}`,
+            url: '/bmsapi/release-notes/toggle?showAgain=' + true,
             headers: {
                 'X-Auth-Token': JSON.parse(localStorage.getItem('bms.xAuthToken')).token
             }
