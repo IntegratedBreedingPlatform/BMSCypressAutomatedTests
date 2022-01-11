@@ -29,4 +29,29 @@ export default class ManageGermplasmPage{
         });
     }
 
+    clickUngroupActionAndConfirm() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.ungroup"]').click();
+        cy.intercept('POST', `**/germplasm/ungrouping?*`).as('ungroup');
+        getIframeBody().find('[data-test="modalConfirmButton"]').should('exist').click();
+    }
+
+    verifySuccessUngroupAction() {
+        cy.wait('@ungroup').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().find('ngb-alert > span').contains('All selected germplasm were successfully unfixed.');
+
+            // Verify the groupId column is empty (-)
+            getIframeBody().find(`tbody[id="cdk-drop-list-1"] > tr`).each(($el) => {
+                cy.wrap($el).xpath('td[position()=3]/span[text()="-"]').should('exist');
+            });
+              
+        });
+    }
+
+    selectAllCurrentPage() {
+        getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
+    }
+
+
 }
