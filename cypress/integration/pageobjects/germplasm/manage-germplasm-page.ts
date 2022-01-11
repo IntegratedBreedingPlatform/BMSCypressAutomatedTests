@@ -40,6 +40,12 @@ export default class ManageGermplasmPage{
         cy.wait('@ungroup').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
             getIframeBody().find('ngb-alert > span').contains('All selected germplasm were successfully unfixed.');
+
+            // Verify the groupId column is empty (-)
+            getIframeBody().find(`tbody[id="cdk-drop-list-1"] > tr`).each(($el) => {
+                cy.wrap($el).xpath('td[position()=3]/span[text()="-"]').should('exist');
+            });
+              
         });
     }
 
