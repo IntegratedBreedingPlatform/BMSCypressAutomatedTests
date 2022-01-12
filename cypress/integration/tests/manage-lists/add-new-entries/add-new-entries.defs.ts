@@ -5,6 +5,7 @@ import GermplasmListPage from "../../../pageobjects/germplasm-lists/germplasm-li
 import AddEntryDetailsContext from "../add-entry-details/add-entry-details.context";
 import { randomString } from '../../../../support/commands';
 import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
+import ImportFileNames from '../../../constants/import-filenames';
 
 const addEntryDetailsContext = new AddEntryDetailsContext();
 const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
@@ -18,7 +19,7 @@ And('I import a list to add entries to', () => {
     listName = 'list name ' + randomString();
 
     searchPage.openImportGermplasmListModal();
-    importModal.importNewList(listName);
+    importModal.importNewList(listName, ImportFileNames.LIST_IMPORT_VALID);
     searchPage.selectListFilteredByListName(listName);
 });
 

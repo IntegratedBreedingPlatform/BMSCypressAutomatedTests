@@ -2,6 +2,7 @@ import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germpla
 import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { randomString } from '../../../../support/commands';
 import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
+import ImportFileNames from '../../../constants/import-filenames';
 
 const searchPage = new GermplasmListsBetaPage();
 let importModal = new GermplasmListImportPage();
@@ -12,7 +13,7 @@ When('I select Import germplasm list from Actions', () => {
     searchPage.openImportGermplasmListModal();
 });
 And('I select a file to upload', () => {
-    importModal.selectFile(listName);
+    importModal.selectFile(ImportFileNames.LIST_IMPORT_VALID);
 });
 And('I click Next on Import Germplasm list screen', () => {
     importModal.clickImportNext();

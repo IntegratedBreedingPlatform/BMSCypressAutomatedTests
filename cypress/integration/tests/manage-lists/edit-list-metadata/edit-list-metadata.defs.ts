@@ -5,6 +5,7 @@ import AddEntryDetailsContext from "../add-entry-details/add-entry-details.conte
 import { randomString } from '../../../../support/commands';
 import GermplasmListEditListMetadataPage from '../../../pageobjects/germplasm-lists/germplasm-list-edit-list-metadata-page';
 import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
+import ImportFileNames from '../../../constants/import-filenames';
 
 const addEntryDetailsContext = new AddEntryDetailsContext();
 const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
@@ -18,7 +19,7 @@ Given('I import a new list', () => {
     listName = 'list name ' + randomString();
 
     searchPage.openImportGermplasmListModal();
-    importModal.importNewList(listName);
+    importModal.importNewList(listName,ImportFileNames.LIST_IMPORT_VALID);
 });
 
 And('I open the imported list', () => {
