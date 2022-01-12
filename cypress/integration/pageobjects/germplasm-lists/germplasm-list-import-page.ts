@@ -2,8 +2,8 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListImportPage {
 
-    importNewList(listName: string) {
-        this.selectFile(listName);
+    importNewList(listName: string, fileName:string) {
+        this.selectFile(fileName);
         this.clickImportNext();
         this.clickImportSubmit();
         this.selectFirstMatch();
@@ -12,10 +12,9 @@ export default class GermplasmListImportPage {
         this.verifyListCreated(listName);
     }
 
-    selectFile(listName: string) {
+    selectFile(fileName: string) {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="importFileInput"]').should('exist').then((input) => {
-                const fileName = 'GermplasmListImport.xls';
                 cy.fixture(fileName, 'binary')
                     .then(Cypress.Blob.binaryStringToBlob)
                     .then((fileContent) => {
@@ -27,6 +26,7 @@ export default class GermplasmListImportPage {
                             lastModified: new Date().getTime()
                         });
                     });
+                    cy.wait(50);
             });
         });
     }
