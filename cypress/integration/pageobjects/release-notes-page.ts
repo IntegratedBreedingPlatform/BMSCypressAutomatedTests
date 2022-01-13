@@ -19,9 +19,7 @@ export default class ReleaseNotesPage {
     }
 
     verifyReleaseNotesHeaderDisplayed() {
-        this.getReleaseNotesBody()
-            .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-header > h4 > span > span', {timeout:100000})
-            .should('exist');
+        this.getReleaseNotesBody().find('jhi-release-notes-dialog > div.modal-header > h4 > span > span').should('exist');
     }
     getReleaseNotesBody() {
         return this.getReleaseNotesIframe().its('0.contentDocument').should('exist').its('body').then(cy.wrap);
