@@ -10,19 +10,13 @@ export default class ReleaseNotesPage {
     }
 
     verifyReleaseNotesDisplayed() {
-        this.getReleaseNotesIframe();
-        this.verifyReleaseNotesHeaderDisplayed();
+        this.getReleaseNotesBody();
     }
 
     verifyReleaseNotesNotDisplayed() {
         cy.xpath('//jhi-release-notes-wrapper/iframe').should('not.exist');
     }
 
-    verifyReleaseNotesHeaderDisplayed() {
-        this.getReleaseNotesBody()
-            .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-header > h4 > span > span', {timeout:100000})
-            .should('exist');
-    }
     getReleaseNotesBody() {
         return this.getReleaseNotesIframe().its('0.contentDocument').should('exist').its('body').then(cy.wrap);
     }
