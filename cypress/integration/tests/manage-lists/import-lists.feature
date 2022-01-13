@@ -10,7 +10,7 @@ Feature: Import Lists
 
   @smoke-test
   Scenario: Import new germplasm list
-    When I select Import germplasm list from Actions
+    When I navigate to import list screen
     And I select a file to upload
     And I click Next on Import Germplasm list screen
     And I click Next on Review Import List screen
@@ -21,35 +21,30 @@ Feature: Import Lists
 
   @smoke-test
   Scenario: Check if user can download import lists template
-    When I select Import germplasm list from Actions
+    When I navigate to import list screen
     And I click the link to dowload the import list template
     Then An import list template should be downloaded
 
-  # FIXME jenkings: cy.click()` failed because this element is detached from the DOM
-  # See https://github.com/cypress-io/cypress/issues/7306 for possible solutions
-  @ignore
   @smoke-test
   Scenario: Check if user cancels import lists
     Given I reload the Germplasm Lists page
-    When I select Import germplasm list from Actions
+    When I navigate to import list screen
     And I select a file to upload
-    And I click the Cancel button
+    And I cancel the import of list
     Then the system closes the Import List screen
-
-  @ignore
-  Scenario: Check if List File Importer validates required columns
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I import a valid file with no required columns
-    Then I should be able to see error message that the file has no required columns
-# NOTE: Add assertion to check error message
-
-  @ignore
-  Scenario: Check if List File Importer checks value is present in the required columns
-    Given I am on the Manage Lists page
-    And I click Import List in the Actions menu
-    When I import a valid file with no required columns
-    Then I should be able to see error message that there is no value in one of the required columns
+  Scenario: Check validation when user imported list with no required columns
+    Given I reload the Germplasm Lists page
+    And I navigate to import list screen
+    When I select a file with no required columns
+    And I click Next on Import Germplasm list screen
+    Then I should see the error message that the file has no required columns
+@focus 
+  Scenario: Check validation when user imported list with no values
+    Given I reload the Germplasm Lists page
+    And I navigate to import list screen
+    When I select a file with no values
+    And I click Next on Import Germplasm list screen
+    Then I should see the error message that the file has data
 # NOTE: Add assertion to check error message
 
   @ignore
