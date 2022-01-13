@@ -166,12 +166,17 @@ export default class CreateStudyPage {
         getMainIframeDocumentWaitLoad();
         this.clickTab('Observations');
         getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
         this.manageSettingsModal('Add Traits', 'AleuCol_E_1to5');
 
-        getIframeBody().xpath(`//th[text()='AleuCol_E_1to5']`).should('be.visible');
-        getIframeBody().find('td.variates').first().click().then(() => {
-            getIframeBody().find('li.ui-select-choices-row > div > div').contains('1').click();
+        cy.wait('@addTraits').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().xpath(`//th[text()='AleuCol_E_1to5']`).should('be.visible');
+            getIframeBody().find('td.variates').first().click().then(() => {
+                getIframeBody().find('li.ui-select-choices-row > div > div').contains('1').click();
+            });
         });
+
     }
 }
 
