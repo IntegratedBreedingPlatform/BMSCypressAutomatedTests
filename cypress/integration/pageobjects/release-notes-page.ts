@@ -10,7 +10,6 @@ export default class ReleaseNotesPage {
     }
 
     verifyReleaseNotesDisplayed() {
-        this.getReleaseNotesIframe();
         this.getReleaseNotesBody();
     }
 
