@@ -71,6 +71,10 @@ export default class GermplasmListImportPage {
         });
     }
 
+    verifyError (errorMessage: string) {
+        getIframeBody().find('ngb-alert > span').contains(errorMessage);
+    }
+
     openImportListClickTemplate() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="downloadImportTemplate"]').click();
