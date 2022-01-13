@@ -19,28 +19,27 @@ export default class ReleaseNotesPage {
     }
 
     getReleaseNotesBody() {
-        return this.getReleaseNotesIframe().its('0.contentDocument').should('exist').its('body').then(cy.wrap);
-    }
-
-    getReleaseNotesIframe() {
-        return cy.xpath('//jhi-release-notes-wrapper/iframe').should('exist');
+        return cy.xpath('//jhi-release-notes-wrapper/iframe').its('0.contentDocument.body')
+            .should('not.be.empty')
+            .then(cy.wrap);
     }
 
     clickOk() {
-        this.getReleaseNotesBody()
-            .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-footer > button')
-            .should('exist').click();
+        this.getReleaseNotesBody().then(($iframe) => {
+            cy.wrap($iframe).find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-footer > button')
+                .should('exist').click();
+        });
     }
 
     setDontShowAgainValue(checked: boolean) {
-        if(checked) {
-            this.getDontShowAgainCheckBox().check();
-        } else {
-            this.getDontShowAgainCheckBox().uncheck();
-        }
-    }
+        this.getReleaseNotesBody().then(($iframe) => {
+            if(checked) {
+                cy.wrap($iframe).find('#dontShowAgain').should('exist').check();
+            } else {
+                cy.wrap($iframe).find('#dontShowAgain').should('exist').uncheck();
+            }
 
-    getDontShowAgainCheckBox() {
-        return this.getReleaseNotesBody().find('#dontShowAgain', {timeout:50000}).should('exist');
+        });
+
     }
 }
