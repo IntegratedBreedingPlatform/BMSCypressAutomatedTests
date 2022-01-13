@@ -20,7 +20,7 @@ export default class ReleaseNotesPage {
 
     verifyReleaseNotesHeaderDisplayed() {
         this.getReleaseNotesBody()
-            .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-header > h4 > span > span', {timeout:50000})
+            .find('jhi-main > div > section > jhi-release-notes-dialog > div.modal-header > h4 > span > span', {timeout:100000})
             .should('exist');
     }
     getReleaseNotesBody() {
