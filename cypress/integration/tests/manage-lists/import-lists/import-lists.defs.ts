@@ -9,7 +9,7 @@ let importModal = new GermplasmListImportPage();
 const listName = 'list name ' + randomString();
 
 // Import list
-When('I select Import germplasm list from Actions', () => {
+When('I navigate to import list screen', () => {
     searchPage.openImportGermplasmListModal();
 });
 And('I select a file to upload', () => {
@@ -32,8 +32,19 @@ And('I click Confirm on Save Germplasm List screen', () => {
 });
 Then('the created list is available and filtered', () => {
     importModal.verifyListCreated(listName);
-})
-
+});
+When('I select a file with no required columns', () => {
+    importModal.selectFile(ImportFileNames.LIST_IMPORT_NO_REQUIRED_COLS);
+});
+When('I select a file with no values', () => {
+    importModal.selectFile(ImportFileNames.LIST_IMPORT_NO_VALUES);
+});
+Then('I should see the error message that the file has no required columns', () => {
+    importModal.verifyError("At least GID, GUID or DESIGNATION column is required");
+});
+Then('I should see the error message that the file has data', () => {
+    importModal.verifyError("Wrong name for Observation sheet or the file has no data. Please verify and try again");
+});
 // Download template
 When('I select Import germplasm list from Actions', () => {
     searchPage.openImportGermplasmListModal();
@@ -46,7 +57,7 @@ Then('An import list template should be downloaded', () => {
 });
 
 // Cancel import
-And('I click the Cancel button', () => {
+And('I cancel the import of list', () => {
     importModal.cancelImport();
 });
 Then('the system closes the Import List screen', () => {
