@@ -143,16 +143,25 @@ export default class CreateStudyPage {
     }
 
     verifyColumnsInObservationTable(columnNames: string[] = []) {
-        this.clickTab('Observations');
+        this.clickTab(observationsTab);
         for (let columnName of columnNames) {
             getMainIframeDocument().xpath(`//th[text()='${columnName}']`).should('be.visible');
         }
     }
+
+    addTrait(variable: string) {
+        this.clickStudyAction(observationsTab);
+        getMainIframeDocument().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        this.manageSettingsModal('Add Traits', variable);
+    }
+    
 }
 
 const generateDesignLabel = 'Generate Design';
 
 const experimentalDesignLabel = 'Experimental Design';
+
+const observationsTab = 'Observations';
 
 const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
