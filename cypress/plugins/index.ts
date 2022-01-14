@@ -1,9 +1,13 @@
 // Plugins enable you to tap into, modify, or extend the internal behavior of Cypress
 // For more info, visit https://on.cypress.io/plugins-api
 
+import { generateImportCrossesTestData } from "./tasks/excel-data-generator";
+
 const browserify = require('@cypress/browserify-preprocessor');
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const resolve = require('resolve');
+const { isFileExist } = require('cy-verify-downloads');
+
 //const webpack = require("@cypress/webpack-preprocessor");
 
 module.exports = (on, config) => {
@@ -13,6 +17,7 @@ module.exports = (on, config) => {
     typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),
   };
   on('file:preprocessor', cucumber(options));
+  on('task', {isFileExist, generateImportCrossesTestData});
   
   // const options = {
   //   webpackOptions: require("../webpack.config.js")
@@ -26,6 +31,6 @@ module.exports = (on, config) => {
 
   return config;
   
-
-
 }
+
+
