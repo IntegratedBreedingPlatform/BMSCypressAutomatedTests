@@ -27,7 +27,7 @@ export default class ManageObservationsPage {
             getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
         } else if (dataType === 'categorical') {
             getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-                .type(value, { force: true, delay: 10 });
+                .type(value, { force: true, delay: 100, timeout:50000});
         } else {
             getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value);
         }
