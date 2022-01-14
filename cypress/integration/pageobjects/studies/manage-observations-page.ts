@@ -30,7 +30,12 @@ export default class ManageObservationsPage {
                 getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
 
             } else if (dataType === 'categorical') {
-                getIframeBody().find('li.ui-select-choices-row > div > div').contains(value).click();
+                if (!useValidValue) {
+                    getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
+                        .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
+                } else {
+                    getIframeBody().find('li.ui-select-choices-row > div > div').contains(value).click();
+                }
 
             } else {
                 getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
