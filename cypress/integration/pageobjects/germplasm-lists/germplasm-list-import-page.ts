@@ -37,6 +37,11 @@ export default class GermplasmListImportPage {
         });
     }
 
+    skipMultimatch() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[id="skipMultiMatchesCheckbox"]').check();
+        });
+    }
     clickImportSubmit() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="importSubmit"]').should('exist').click();
