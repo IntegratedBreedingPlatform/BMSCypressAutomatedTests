@@ -15,6 +15,6 @@ Scenario: Filter studies using graphical filtering tool and export transformed d
     When I selected a study name with existing observation
     And I selected PLOT as observation level
     And I loaded the query by graphical filtering
-    And I selected a range of values for trait in the Where section
+    # And I selected a range of values for trait in the Where section
     And I exported the data by overall average
     Then The export file should be downloaded
