@@ -34,7 +34,7 @@ export default class ManageObservationsPage {
                     getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
                         .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
                 } else {
-                    getIframeBody().find('li.ui-select-choices-row > div > div').contains(value).click();
+                    getIframeBody().find('li.ui-select-choices-row > div > div', {timeout:50000}).contains(value).click();
                 }
 
             } else {
