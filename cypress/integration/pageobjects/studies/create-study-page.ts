@@ -167,16 +167,25 @@ export default class CreateStudyPage {
         this.clickTab('Observations');
         getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        this.manageSettingsModal('Add Traits', 'AleuCol_E_1to5');
+        this.manageSettingsModal('Add Traits', 'Aflatox_M_ppb');
 
         cy.wait('@addTraits').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
-            getIframeBody().xpath(`//th[text()='AleuCol_E_1to5']`).should('be.visible');
-            getIframeBody().find('td.variates').first().click().then(() => {
-                getIframeBody().find('li.ui-select-choices-row > div > div').contains('1').click();
-            });
+            getIframeBody().xpath(`//th[text()='Aflatox_M_ppb']`).should('be.visible');
+            this.setVariableValues();
         });
 
+    }
+
+    setVariableValues() {
+        getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
+        getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
+        getIframeBody().find('[title="Aflatox_M_ppb"]').should('be.visible').click();
+        getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
+        getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
+        getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
+        getIframeBody().find('[data-test="applyBatchActionButton"]').should('be.visible').click();
+        getIframeBody().find('button[ng-bind="confirmButtonLabel"]').should('be.visible').click();
     }
 }
 

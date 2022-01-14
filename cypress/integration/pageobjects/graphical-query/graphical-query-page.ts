@@ -18,7 +18,7 @@ export default class GraphicalQueryPage {
     addRangeOfValues () {
         getIframeBody().find('button[data-test="addFilterButton"]').should('exist').click();
         getIframeBody().find('a[data-test="newRangeOption"]').should('exist').click();
-        getIframeBody().find('select[data-test="selectTrait"]').should('exist').select('AleuCol_E_1to5');
+        getIframeBody().find('select[data-test="selectTrait"]').should('exist').select('Aflatox_M_ppb');
     }
 
     exportByOverallAverage () {
