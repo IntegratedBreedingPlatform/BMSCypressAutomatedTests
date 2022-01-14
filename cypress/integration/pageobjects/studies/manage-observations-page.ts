@@ -45,11 +45,11 @@ export default class ManageObservationsPage {
     }
 
     keepOutOfBoundData() {
-        getMainIframeDocument().xpath(`//button[text()='Keep']`).should('be.visible').click();
+        getMainIframeDocument().xpath(`//button[text()='Keep']`, {timeout:50000}).should('be.visible').click();
     }
 
     discardOutOfBoundData() {
-        getMainIframeDocument().xpath(`//button[text()='Discard']`).should('be.visible').click();
+        getMainIframeDocument().xpath(`//button[text()='Discard']`, {timeout:50000}).should('be.visible').click();
     }
 
     verifyOutOfBoundDataSaved(traitId:number) {
