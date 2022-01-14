@@ -40,7 +40,7 @@ export default class ManageObservationsPage {
             getMainIframeDocument().xpath(cellXpath).should('have.text', value);
         } else {
             var xpath = cellXpath + `/span[@class='fbk-measurement-categorical-name']`;
-            getMainIframeDocument().xpath(xpath).should('have.text', value);
+            getMainIframeDocument().xpath(xpath, {timeout:50000}).should('have.text', value);
         }
     }
 
