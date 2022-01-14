@@ -39,10 +39,19 @@ When('I select a file with no required columns', () => {
 When('I select a file with no values', () => {
     importModal.selectFile(ImportFileNames.LIST_IMPORT_NO_VALUES);
 });
+When('I selected a file with single match', () => {
+    importModal.selectFile(ImportFileNames.LIST_IMPORT_SINGLE_MATCH);
+});
+When('I selected a file with multiple matches', () => {
+    importModal.selectFile(ImportFileNames.LIST_IMPORT_MULTIPLE_MATCHES);
+});
+When('I skip data with multiple matches', () => {
+    importModal.skipMultimatch();
+});
 Then('I should see the error message that the file has no required columns', () => {
     importModal.verifyError("At least GID, GUID or DESIGNATION column is required");
 });
-Then('I should see the error message that the file has data', () => {
+Then('I should see the error message that the file has no data', () => {
     importModal.verifyError("Wrong name for Observation sheet or the file has no data. Please verify and try again");
 });
 // Download template
