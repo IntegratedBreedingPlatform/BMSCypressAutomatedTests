@@ -10,6 +10,7 @@ Background:
     And I opened a study with RCBD design
 
 @TestCaseKey=IBP-T3495
+@smoke-test
 Scenario Outline: Check inline edit of an observation for trait
     And I add <traitName> trait to the study
     When I inline edit an observation for the <dataType> trait <traitName> with id <traitId>
