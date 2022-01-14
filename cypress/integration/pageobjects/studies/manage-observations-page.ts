@@ -23,12 +23,13 @@ export default class ManageObservationsPage {
         getMainIframeDocument().xpath(cellXpath).click();
         var value = this.getObservationValueByDatatype(dataType, useValidValue) + '{enter}';
         if (dataType === 'date') {
-            getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`).should('be.visible').click();
-            getMainIframeDocument().xpath(`//th[text()='${traitName}']`).should('be.visible').click();
+            getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`).click();
+            getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
         } else if (dataType === 'categorical') {
-            getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`).should('be.visible').type(value, { force: true, delay: 0 });
+            getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
+                .type(value, { force: true, delay: 0 });
         } else {
-            getMainIframeDocument().xpath(`//observation-inline-editor/input`).should('be.visible').type(value);
+            getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value);
         }
     }
 

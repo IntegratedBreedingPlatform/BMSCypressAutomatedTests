@@ -1,19 +1,13 @@
 import { When, And, Then, After} from 'cypress-cucumber-preprocessor/steps';
 import ManageObservationsPage from '../../../pageobjects/studies/manage-observations-page'
-import SidebarSection from '../../../pageobjects/sidebar-section'
 
 const manageObservationsPage = new ManageObservationsPage();
-const sidebar = new SidebarSection();
-
 
 When('I inline edit an observation for the {} trait {} with id {}', (dataType, traitName, traitId) => {
-    // Hide the sidebar to minimize horizontal scrolling in observations table
-    sidebar.toggleVisibility();
     manageObservationsPage.performInlineEdit(traitName, dataType, traitId, true);
 })
 
 When('I inline edit an observation for trait {} with id {} using an out-of-bound value', (traitName, traitId) => {
-    sidebar.toggleVisibility();
     manageObservationsPage.performInlineEdit(traitName, 'categorical', traitId, false);
 })
 
@@ -36,9 +30,3 @@ Then('out-of-bound value for trait {} with id {} should not be saved', (traitNam
 Then('out-of-bound value for trait {} with id {} should be saved', (traitName, traitId) => {
     manageObservationsPage.verifyOutOfBoundDataSaved(traitId);
 })
-
-// Show the sidebar again after each scenario
-After(() => {
-    sidebar.toggleVisibility();
-})
-
