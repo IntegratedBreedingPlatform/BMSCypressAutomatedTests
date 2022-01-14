@@ -18,8 +18,8 @@ Scenario Outline: Check inline edit of an observation for trait
 
 Examples:
     |traitName|dataType|traitId|
-    |Aflatox_M_ppb|numeric|20369|
     |AleuCol_E_1to5|categorical|51547|
+    |Aflatox_M_ppb|numeric|20369|
     |GermiTest_date|date|8630|
     |NOTES|character|8390|
 

@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../../support/commands';
+
 export default class ManageObservationsPage {
 
     getObservationValueByDatatype(dataType:string, useValidValue:boolean) {
@@ -20,17 +22,20 @@ export default class ManageObservationsPage {
         var row = useValidValue? 1 : 2;
         var cellXpath = this.getCellClassName(traitId, row)
         // Click on trait cell to activate inline edition
-        getMainIframeDocument().xpath(cellXpath).click();
-        var value = this.getObservationValueByDatatype(dataType, useValidValue) + '{enter}';
-        if (dataType === 'date') {
-            getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
-            getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
-        } else if (dataType === 'categorical') {
-            getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-                .type(value, { force: true, delay: 100, timeout:50000});
-        } else {
-            getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value);
-        }
+        getMainIframeDocument().xpath(cellXpath).click().then(() => {
+            var value = this.getObservationValueByDatatype(dataType, useValidValue);
+
+            if (dataType === 'date') {
+                getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
+                getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
+
+            } else if (dataType === 'categorical') {
+                getIframeBody().find('li.ui-select-choices-row > div > div').contains(value).click();
+
+            } else {
+                getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
+            }
+        });
     }
 
     verifyInlineEditSuccessful(dataType:string, traitId:number, row:number) {
