@@ -19,28 +19,34 @@ export default class ManageObservationsPage {
     }
 
     performInlineEdit(traitName:string, dataType:string, traitId:number, useValidValue:boolean) {
-        var row = useValidValue? 1 : 2;
-        var cellXpath = this.getCellClassName(traitId, row)
-        // Click on trait cell to activate inline edition
-        getMainIframeDocument().xpath(cellXpath).click().then(() => {
-            var value = this.getObservationValueByDatatype(dataType, useValidValue);
+        cy.wait('@addTraits').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().xpath(`//th[text()='AleuCol_E_1to5']`).should('be.visible');
 
-            if (dataType === 'date') {
-                getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
-                getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
+            var row = useValidValue? 1 : 2;
+            var cellXpath = this.getCellClassName(traitId, row)
+            // Click on trait cell to activate inline edition
+            getMainIframeDocument().xpath(cellXpath).click().then(() => {
+                var value = this.getObservationValueByDatatype(dataType, useValidValue);
 
-            } else if (dataType === 'categorical') {
-                if (!useValidValue) {
-                    getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-                        .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
+                if (dataType === 'date') {
+                    getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
+                    getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
+
+                } else if (dataType === 'categorical') {
+                    if (!useValidValue) {
+                        getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
+                            .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
+                    } else {
+                        getIframeBody().find('li.ui-select-choices-row > div > div', {timeout:50000}).contains(value).click();
+                    }
+
                 } else {
-                    getIframeBody().find('li.ui-select-choices-row > div > div', {timeout:50000}).contains(value).click();
+                    getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
                 }
-
-            } else {
-                getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
-            }
+            });
         });
+       
     }
 
     verifyInlineEditSuccessful(dataType:string, traitId:number, row:number) {

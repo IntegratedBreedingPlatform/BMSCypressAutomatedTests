@@ -151,6 +151,7 @@ export default class CreateStudyPage {
 
     addTrait(variable: string) {
         this.clickStudyAction(observationsTab);
+        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
         getMainIframeDocument().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
         this.manageSettingsModal('Add Traits', variable);
     }
