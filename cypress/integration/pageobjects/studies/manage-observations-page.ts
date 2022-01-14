@@ -21,15 +21,17 @@ export default class ManageObservationsPage {
         var cellXpath = this.getCellClassName(traitId, row)
         // Click on trait cell to activate inline edition
         getMainIframeDocument().xpath(cellXpath).click();
-        var value = this.getObservationValueByDatatype(dataType, useValidValue) + '{enter}';
+        var value = this.getObservationValueByDatatype(dataType, useValidValue);
         if (dataType === 'date') {
             getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`).click();
             getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
         } else if (dataType === 'categorical') {
             getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
                 .type(value, { force: true, delay: 0 });
+            // Select the first result
+            getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//ul[contains(@class,'ui-select-choices')]`).click();
         } else {
-            getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value);
+            getMainIframeDocument().xpath(`//observation-inline-editor/input`).type(value + '{enter}');
         }
     }
 
