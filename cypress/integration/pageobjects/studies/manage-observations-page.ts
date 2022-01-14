@@ -23,7 +23,7 @@ export default class ManageObservationsPage {
         getMainIframeDocument().xpath(cellXpath).click();
         var value = this.getObservationValueByDatatype(dataType, useValidValue) + '{enter}';
         if (dataType === 'date') {
-            getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`).click();
+            getMainIframeDocument().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
             getMainIframeDocument().xpath(`//th[text()='${traitName}']`).click();
         } else if (dataType === 'categorical') {
             getMainIframeDocument().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
