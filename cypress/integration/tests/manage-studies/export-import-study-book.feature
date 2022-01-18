@@ -9,6 +9,8 @@ Background:
     Given I am on the Manage Studies page of specified program
     And I created a new study with RCBD design with traits
 
+@ignore
+@smoke-test
 @TestCaseKey=IBP-T5384
 Scenario: Check if user can export and import study books for trial (excel) and review out of bound values
     When I export study book for an instance in excel format
