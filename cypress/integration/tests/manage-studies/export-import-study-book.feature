@@ -12,11 +12,29 @@ Background:
 @ignore
 @smoke-test
 @TestCaseKey=IBP-T5384
-Scenario: Check if user can export and import study books for trial (excel) and review out of bound values
+Scenario: Check if user can export and import study book in excel format and accept out of bound values as is
     When I export study book for an instance in excel format
     And I import the study book with out of bound values for a categorical trait
     And I accept all out of bound values as is
-    Then observation all imported values will be accepted including the out of bound values
+    Then I should be on the accepted view of the observations
+    And all imported values will be accepted including the out of bound values
     #Assert if all expected values are correctly display
     #If possible, assert the color of the cells with out of bound values
+    
+Scenario: Check if user can export and import study book in excel format and set out of bound values as missing
+    When I export study book for an instance in excel format
+    And I import the study book with out of bound values for a categorical trait
+    And I accept pending valid values while set all out of bound values as missing
+    Then I should be on the accepted view of the observations
+    And all imported valid values will be accepted while the out of bound values are set as missing
+    #Assert if all expected values are correctly display
+    
+
+Scenario: Check if user can export and import study book in excel format and discard all pending values
+    When I export study book for an instance in excel format
+    And I import the study book with out of bound values for a categorical trait
+    And I discard all pending values
+    Then I should be on the accepted view of the observations
+    And all imported valid values are discarded
+    #Assert if trait columns are blank
     
