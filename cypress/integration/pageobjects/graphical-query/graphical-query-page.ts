@@ -15,10 +15,10 @@ export default class GraphicalQueryPage {
         getIframeBody().find('#load-brapi').should('exist').click();
     }
 
-    addRangeOfValues () {
+    addRangeOfValues (traitName: string) {
         getIframeBody().find('button[data-test="addFilterButton"]').should('exist').click();
         getIframeBody().find('a[data-test="newRangeOption"]').should('exist').click();
-        getIframeBody().find('select[data-test="selectTrait"]').should('exist').select('Aflatox_M_ppb');
+        getIframeBody().find('select[data-test="selectTrait"]').should('exist').select(traitName);
     }
 
     exportByOverallAverage () {

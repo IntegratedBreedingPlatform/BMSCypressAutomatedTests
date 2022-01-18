@@ -151,7 +151,7 @@ export default class CreateStudyPage {
         }
     }
 
-    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string) {
+    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string, observationName: string) {
         this.saveStudyWithBasicDetails(studyName, studyDesc, studyType, objective);
         this.addStudySettings();
         this.addGermplasms();
@@ -159,10 +159,10 @@ export default class CreateStudyPage {
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
-        this.addObservations();
+        this.addObservations(observationName);
     }
 
-    addObservations() {
+    addObservations(observationName: string) {
         getMainIframeDocumentWaitLoad();
         this.clickTab('Observations');
         getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
@@ -171,7 +171,7 @@ export default class CreateStudyPage {
 
         cy.wait('@addTraits').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
-            getIframeBody().xpath(`//th[text()='Aflatox_M_ppb']`).should('be.visible');
+            getIframeBody().xpath(`//th[text()='${observationName}']`).should('be.visible');
             this.setVariableValues();
         });
 
