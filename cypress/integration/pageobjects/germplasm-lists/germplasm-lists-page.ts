@@ -19,14 +19,16 @@ export default class GermplasmListPage {
     checkEntryDetailWasAdded() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
-                .contains(<string>this.addEntryDetailsContext.variableName).should('exist');
+                .should('exist')
+                .contains('CB_ENTRY_DETAIL');
         });
     }
 
     checkGermplasmListTableHasColumn() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListTable"] > thead > tr > th:last-child > span > span:nth-child(1)')
-                .contains(<string>this.addEntryDetailsContext.variableName).should('exist');
+                .should('exist')
+                .contains('CB_ENTRY_DETAIL');
         });
     }
 
