@@ -7,7 +7,8 @@ As a user
 I should be able to clone germplasm list
 
 Background: 
-    Given I import a new list
+    Given I am on the Germplasm Lists page of specified program
+    And I import a list to clone
     And I open the imported list
     And I add entry details variable to the list
     And I add value to the entry detail
@@ -23,10 +24,11 @@ Scenario: Check if user can clone a list using a new list name
     And the entry detail values are available in the list
 
 @TestCaseKey=IBP-T3493
-Scenario: Check if user can clone the list using an existing list
+Scenario: Check if user can clone the list using an existing list name
     When I clone the list
     And I save the list with an existing name
     Then a message saying that there is an existing item with the same name displays
+
 @TestCaseKey=IBP-T3492
 Scenario: Check if user can clone a locked list
     When I lock the imported list

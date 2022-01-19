@@ -111,6 +111,10 @@ export default class GermplasmListPage {
         this.openGermplasmListAction("deleteListButton");
     }
 
+    cloneList() {
+        this.openGermplasmListAction("cloneListButton");
+    }
+
     openGermplasmListAction(actionButtonName: string) {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListActionButton"]',{ timeout: Cypress.config('pageLoadTimeout') })
