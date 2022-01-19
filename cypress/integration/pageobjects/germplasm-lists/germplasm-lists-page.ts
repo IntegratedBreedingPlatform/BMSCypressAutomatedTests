@@ -26,7 +26,7 @@ export default class GermplasmListPage {
 
     checkGermplasmListTableHasColumn() {
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="germplasmListTable"] > thead > tr > th:last-child > span > span:nth-child(0)')
+            cy.wrap($iframe).find('[data-test="germplasmListTable"] > thead > tr > th:last-child > span > span[1]')
                 .should('exist')
                 .contains(<string>this.addEntryDetailsContext.variableName);
         });
