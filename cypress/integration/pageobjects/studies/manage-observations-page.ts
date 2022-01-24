@@ -29,7 +29,7 @@ export default class ManageObservationsPage {
                 var value = this.getObservationValueByDatatype(dataType, useValidValue);
 
                 if (dataType === 'date') {
-                    getIframeBody().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout:50000}).click();
+                    getIframeBody().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout: 150000}).click();
                     getIframeBody().xpath(`//th[text()='${traitName}']`).click();
 
                 } else if (dataType === 'categorical') {
@@ -37,7 +37,7 @@ export default class ManageObservationsPage {
                         getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
                             .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
                     } else {
-                        getIframeBody().find('li.ui-select-choices-row > div > div', {timeout:50000}).contains(value).click();
+                        getIframeBody().find('li.ui-select-choices-row > div > div', {timeout: 150000}).contains(value).click();
                     }
 
                 } else {
