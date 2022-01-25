@@ -21,6 +21,7 @@ export default class ManageObservationsPage {
     performInlineEdit(traitName:string, dataType:string, traitId:number, useValidValue:boolean) {
         cy.wait('@addTraits').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().xpath(`//th[text()='${traitName}']`).should('exist');
 
             var row = useValidValue? 1 : 2;
             var cellXpath = this.getCellClassName(traitId, row)
