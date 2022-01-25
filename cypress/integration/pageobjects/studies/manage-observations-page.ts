@@ -30,9 +30,10 @@ export default class ManageObservationsPage {
                 var value = this.getObservationValueByDatatype(dataType, useValidValue);
 
                 if (dataType === 'date') {
-                    getIframeBody().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout: 150000}).click();
-                    getIframeBody().xpath(`//th[text()='${traitName}']`).click();
-
+                    getIframeBody().xpath(`//observation-inline-editor/input`, {timeout: 150000}).should('exist').then(() => {
+                        getIframeBody().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout: 150000}).click();
+                        getIframeBody().xpath(`//th[text()='${traitName}']`).click();
+                    });
                 } else if (dataType === 'categorical') {
                     if (!useValidValue) {
                         getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
