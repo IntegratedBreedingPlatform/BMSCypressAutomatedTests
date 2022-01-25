@@ -15,7 +15,6 @@ const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
 const germplasmListImportPage = new GermplasmListImportPage();
 const germplasmListCloneListPage = new GermplasmListCloneListPage();
 const searchPage = new GermplasmListsBetaPage();
-let importModal = new GermplasmListImportPage();
 const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(addEntryDetailsContext);
 
 
