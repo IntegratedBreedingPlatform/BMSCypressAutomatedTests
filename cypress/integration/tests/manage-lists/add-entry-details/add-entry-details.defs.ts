@@ -19,7 +19,6 @@ When('I navigate to add entry details screen', () => {
 And('I add entry details variable to the list', () => {
     germplasmListAddEntryDetailsPage.selectVariable();
     germplasmListPage.checkEntryDetailWasAdded();
-    germplasmListPage.checkGermplasmListTableHasColumn();
 });
 And('I add value to the entry detail', () => {
     germplasmListPage.enterEntryDetailValue();
