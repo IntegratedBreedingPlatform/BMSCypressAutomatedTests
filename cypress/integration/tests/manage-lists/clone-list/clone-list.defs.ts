@@ -59,6 +59,7 @@ And('the entry detail values are available in the list', () => {
 });
 
 And('I save the list with an existing name', () => {
+    cy.intercept('POST', `**/clone?*`).as('cloneList');
     germplasmListImportPage.clickSaveList(listCloneName);
 });
 

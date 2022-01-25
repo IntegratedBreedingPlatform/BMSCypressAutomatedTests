@@ -14,7 +14,6 @@ export default class GermplasmListCloneListPage {
     }
 
     verifyDuplicateNameErrorMessage() {
-        cy.intercept('POST', `**/clone?*`).as('cloneList');
         cy.wait('@cloneList',{ timeout: 60000}).then((interception) => {
             expect(interception.response.statusCode).to.be.equal(400);
             getIframeBody().find('ngb-alert > span',{ timeout: 120000})
