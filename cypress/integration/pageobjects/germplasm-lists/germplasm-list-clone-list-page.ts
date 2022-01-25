@@ -12,4 +12,12 @@ export default class GermplasmListCloneListPage {
     verifyClonedListIsOpened(clonedListName: string) {
         getIframeBody().xpath('//nav/ul/li[3]/a').should('exist').contains(clonedListName);
     }
+
+    verifyDuplicateNameErrorMessage() {
+        cy.wait('@loadLists',{ timeout: 60000}).then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().find('ngb-alert > span',{ timeout: 120000})
+                .contains('There is an existing item with the same name you have entered. Please enter a different name.',{ timeout: 120000});
+        });
+    }
 }

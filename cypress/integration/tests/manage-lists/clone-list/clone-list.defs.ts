@@ -8,7 +8,6 @@ import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germpla
 import GermplasmListAddEntryDetailsPage from '../../../pageobjects/germplasm-lists/germplasm-list-add-entry-details-page';
 
 var listCloneName: string;
-var listName: string;
 
 const addEntryDetailsContext = new AddEntryDetailsContext();
 const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
@@ -22,11 +21,6 @@ const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(ad
 And('I open an existing list', () => {
     searchPage.openGermplasmList();
 });
-
-And('I open the imported list', () => {
-    searchPage.selectListFilteredByListName(listName);
-});
-
 And('I add entry details variable to the list', () => {
     germplasmListPage.openAddEntryDetailsModal();
     germplasmListAddEntryDetailsPage.selectVariable();
@@ -62,5 +56,13 @@ And('the entry detail variables are available in the list', () => {
 
 And('the entry detail values are available in the list', () => {
     germplasmListPage.checkEntryDetailValue();
+});
+
+And('I save the list with an existing name', () => {
+    germplasmListImportPage.clickSaveList(listCloneName);
+});
+
+Then('a message saying that there is an existing item with the same name displays', () => {
+    germplasmListCloneListPage.verifyDuplicateNameErrorMessage();
 });
 
