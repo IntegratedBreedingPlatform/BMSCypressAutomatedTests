@@ -49,6 +49,19 @@ And('I add value to the entry detail', () => {
 });
 
 Then('a message saying that germplasm list is cloned successfully should display', () => {
-    germplasmListCloneListPage.verifyListIsSuccessfullyCloned();
+    germplasmListCloneListPage.verifySuccessMessage();
+});
+
+And('the cloned list is opened in another tab', () => {
+    germplasmListCloneListPage.verifyClonedListIsOpened();
+});
+
+And('the entry detail variables are available in the list', () => {
+    germplasmListPage.checkEntryDetailWasAdded();
+    germplasmListPage.checkGermplasmListTableHasColumn();
+});
+
+And('the entry detail values are available in the list', () => {
+    germplasmListPage.checkEntryDetailValue();
 });
 
