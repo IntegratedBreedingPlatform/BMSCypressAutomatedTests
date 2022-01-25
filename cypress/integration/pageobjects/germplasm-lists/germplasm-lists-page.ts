@@ -20,7 +20,7 @@ export default class GermplasmListPage {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
                 .should('exist')
-                .contains('CB_ENTRY_DETAIL');
+                .contains(<string>this.addEntryDetailsContext.variableName);
         });
     }
 
@@ -28,7 +28,7 @@ export default class GermplasmListPage {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListTable"] > thead > tr > th:last-child > span > span:nth-child(1)')
                 .should('exist')
-                .contains('CB_ENTRY_DETAIL');
+                .contains(<string>this.addEntryDetailsContext.variableName);
         });
     }
 
