@@ -35,7 +35,6 @@ And('I add entry details variable to the list', () => {
     germplasmListPage.openAddEntryDetailsModal();
     germplasmListAddEntryDetailsPage.selectVariable();
     germplasmListPage.checkEntryDetailWasAdded();
-    germplasmListPage.checkGermplasmListTableHasColumn();
 });
 
 When('I clone the list', () => {
