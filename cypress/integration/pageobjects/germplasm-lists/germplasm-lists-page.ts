@@ -28,7 +28,7 @@ export default class GermplasmListPage {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="germplasmListTable"] > thead > tr > th:last-child > span > span:nth-child(1)')
                 .should('exist')
-                .contains(<string>this.addEntryDetailsContext.variableName);
+                .contains("ENTRY_CODE");
         });
     }
 
