@@ -9,10 +9,12 @@ const createStudyPage = new CreateStudyPage();
 const importCrossesPage = new ImportCrossesPage();
 const saveListTreeModalPage = new SaveListTreeModalPage();
 
-const studyName = 'Study-' + Math.random().toString(20).replace(/[^a-z]+/g, '');
-const listName = 'Cross-' + Date.now();
+let studyName = '';
+let listName = '';
 
 When('I created a new study with basic details',  () => {
+    studyName = 'Study-' + Math.random().toString(20).replace(/[^a-z]+/g, '');
+    listName = 'Cross-' + Date.now();
     manageStudiesPage.startNewStudy();
     createStudyPage.saveStudyWithBasicDetails(studyName,
         'Study with Randomized Complete Block Design',
@@ -53,7 +55,14 @@ And('I import a crossing template with details', () => {
 });
 
 And('I select automatic naming generation', () => {
-    importCrossesPage.specifyNaming();
+    importCrossesPage.specifyAutomaticNaming();
+    importCrossesPage.specifyHarvestDetails();
+    importCrossesPage.goToPreviewCrosses();
+    importCrossesPage.goToSaveList();
+});
+
+And('I specified naming format', () => {
+    importCrossesPage.specifyManualNamingDetails();
     importCrossesPage.specifyHarvestDetails();
     importCrossesPage.goToPreviewCrosses();
     importCrossesPage.goToSaveList();

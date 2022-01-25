@@ -38,8 +38,13 @@ export default class ImportCrossesPage {
         getIframeBody().find('#selectMethodInImportFile').should('be.visible').click();
     }
 
-    specifyNaming() {
+    specifyAutomaticNaming() {
         getIframeBody().find('[data-test="automaticNameGenerationOption"]').should('be.visible').click();
+    }
+
+    specifyManualNamingDetails() {
+        getIframeBody().find('[data-test="manualNamingSettingsOption"]').should('be.visible').click();
+        getIframeBody().find('#crossPrefix').type('AAA');
     }
 
     specifyHarvestDetails() {
