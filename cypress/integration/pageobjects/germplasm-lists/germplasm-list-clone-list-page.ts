@@ -10,7 +10,6 @@ export default class GermplasmListCloneListPage {
     }
 
     verifyClonedListIsOpened(clonedListName: string) {
-        cy.xpath("//body/jhi-main/div/section/jhi-germplasm-list/section/div/section/nav/ul/li[3]/a", { timeout: Cypress.config('pageLoadTimeout') })
-            .should('exist').contains(clonedListName);
+        getIframeBody().xpath('//nav/ul/li[3]/a').should('exist').contains(clonedListName);
     }
 }
