@@ -14,6 +14,7 @@ export default class GermplasmListCloneListPage {
     }
 
     verifyDuplicateNameErrorMessage() {
+        cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
         cy.wait('@loadLists',{ timeout: 60000}).then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('ngb-alert > span',{ timeout: 120000})
