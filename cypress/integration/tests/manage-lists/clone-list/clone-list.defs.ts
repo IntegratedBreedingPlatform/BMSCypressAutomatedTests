@@ -52,7 +52,7 @@ Then('a message saying that germplasm list is cloned successfully should display
 });
 
 And('the cloned list is opened in another tab', () => {
-    germplasmListCloneListPage.verifyClonedListIsOpened();
+    germplasmListCloneListPage.verifyClonedListIsOpened(listCloneName);
 });
 
 And('the entry detail variables are available in the list', () => {
