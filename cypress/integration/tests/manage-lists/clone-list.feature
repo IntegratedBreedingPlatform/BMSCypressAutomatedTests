@@ -1,5 +1,5 @@
-@clone-list
 @manage-lists
+@clone-list
 
 Feature: Clone List
 In order create another list with the same entries and details
@@ -8,8 +8,7 @@ I should be able to clone germplasm list
 
 Background: 
     Given I am on the Germplasm Lists page of specified program
-    And I import a list to clone
-    And I open the imported list
+    And I open an existing list
     And I add entry details variable to the list
     And I add value to the entry detail
 

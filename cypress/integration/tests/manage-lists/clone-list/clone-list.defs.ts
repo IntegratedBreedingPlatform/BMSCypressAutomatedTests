@@ -20,11 +20,8 @@ const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(ad
 
 
 
-And('I import a list to clone', () => {
-    listName = 'list name ' + randomString();
-
-    searchPage.openImportGermplasmListModal();
-    importModal.importNewList(listName);
+And('I open an existing list', () => {
+    searchPage.openGermplasmList();
 });
 
 And('I open the imported list', () => {
