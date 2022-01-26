@@ -151,7 +151,7 @@ export default class CreateStudyPage {
         }
     }
 
-    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string, observationName: string) {
+    createStudy (studyName: string, studyDesc: string, studyType: string, objective: string) {
         this.saveStudyWithBasicDetails(studyName, studyDesc, studyType, objective);
         this.addStudySettings();
         this.addGermplasms();
@@ -159,6 +159,10 @@ export default class CreateStudyPage {
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
+    }
+
+    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string, observationName: string) {
+        this.createStudy(studyName, studyDesc, studyType, objective);
         this.addObservations(observationName);
     }
 

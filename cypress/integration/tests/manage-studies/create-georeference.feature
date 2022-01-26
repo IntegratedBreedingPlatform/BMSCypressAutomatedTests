@@ -9,7 +9,7 @@ Feature: Create Georeference
 @smoke-test
 Scenario: Check creation georeference for an existing study with fieldmap
     Given I am on the Manage Studies page of specified program
-    When I opened an existing study with fieldmap
+    When I make a study with fieldmap
     And I navigate to create reference screen
     And I select an environment
     And I draw a rectangle

@@ -1,3 +1,5 @@
+import { randomString } from '../../../support/commands';
+
 export default class CreateFieldmapPage {
 
     addFieldName(fieldName: string) {
@@ -53,6 +55,18 @@ export default class CreateFieldmapPage {
         getMainIframeDocument().xpath(`//input[@value='Finish']`).should('be.visible').click();
     }
 
+    createFieldmap() {
+        this.waitForFieldmapPageToLoad();
+        this.addFieldName(`Field-${randomString()}`);
+        this.addBlockName(`Block-${randomString()}`);
+        this.specifyNumberOfRowsAndRanges();
+        this.moveToPlantingDetailsPage();
+        this.waitForFieldmapPageToLoad();
+        this.specifyPlotLayoutOrder('1');
+        this.moveToGenerateFieldmapPage();
+        this.waitForFieldmapPageToLoad();
+        this.clickFinish();
+    }
 }
 
 const getMainIframeDocument = () => {
