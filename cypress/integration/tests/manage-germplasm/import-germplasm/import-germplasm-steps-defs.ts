@@ -10,7 +10,7 @@ When('I select Import germplasm from Actions',()=>{
 })
 
 And('I select a file to upload',()=>{
-    importGermplasmPage.uploadFile()
+    importGermplasmPage.uploadFile('GermplasmImport.xls');
 })
 
 And('I click Next on Import Germplasm screen',()=>{

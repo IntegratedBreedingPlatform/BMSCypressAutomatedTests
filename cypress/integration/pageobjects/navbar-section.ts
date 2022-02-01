@@ -9,6 +9,8 @@ export default class NavbarSection {
 
 
     clickSiteAdmin() {
+        closeReleaseNotePopupIfShown();
+        cy.xpath('//body/jhi-main/div/section/jhi-navbar/div/mat-toolbar/button[2]/span').should('exist').click();
     }
 
     signOut() {
@@ -17,5 +19,7 @@ export default class NavbarSection {
     }
 
     openUserProfilePopup() {
+        cy.get('[data-test="userProfileMenu"]', {timeout: 5000}).should('exist').click();
+        cy.get('[data-test="openUserProfileButton"]').should('exist').click();
     }
 }

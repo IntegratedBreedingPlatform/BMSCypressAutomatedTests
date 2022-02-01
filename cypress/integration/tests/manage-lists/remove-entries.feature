@@ -7,39 +7,28 @@ As a user
 I should be able to remove entries to a germplasm list
 
 Background: 
-    Given I am on the Germplasm Lists Beta page of specified program
+    Given I am on the Germplasm Lists page of specified program
     And I open an existing list
 @TestCaseKey=IBP-T3390
 @smoke-test
-@ignore    
 Scenario: Remove random entries to the list
     When I select random entries in the list 
     And I click Remove entries
     Then I should see a message that entries are removed successfully 
 
 @TestCaseKey=IBP-T3390
-@ignore    
 Scenario: Remove all entries in the current page
     When I select all entries in the current page
     And I click Remove entries
     Then I should see a message that entries are removed successfully 
 
 @TestCaseKey=IBP-T3390
-@ignore    
-Scenario: Remove all entries from all pages
-    When I select all entries in all pages
-    And I click Remove entries
-    Then I should see a message that entries are removed successfully 
-
-@TestCaseKey=IBP-T3390
-@ignore    
-Scenario: Remove all entries from all pages
+Scenario: Remove all filtered entries from the list
     When I filter the records by GID and select the entries
     And I click Remove entries
-    Then I should see a message that entries are removed successfully 
+    Then I should see a message that entries are removed successfully
 
 @TestCaseKey=IBP-T3390
-@ignore    
 Scenario: Cancel removal of entries in the page
     When I filter the records by GID and select the entries
     And I click Remove entries

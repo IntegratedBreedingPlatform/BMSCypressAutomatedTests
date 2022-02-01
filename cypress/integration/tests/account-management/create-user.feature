@@ -2,7 +2,6 @@
 @account-management
 Feature: Create User
 
-@ignore
 @TestCaseKey=IBP-T76
 @smoke-test
 Scenario: Check if user can create new user and assigned the created role in Site Admin
@@ -12,4 +11,3 @@ Scenario: Check if user can create new user and assigned the created role in Sit
     And I assign an the created program role to the user
     And I add the new user
     Then I should see that the created user in the list
-    # NOTE: Assert success message and if user is present in the list

@@ -18,9 +18,8 @@ Background:
         
         |sidebarlink|
         |Manage Germplasm|
-        |Germplasm Lists|
         |Samples Lists|
-        |Germplasm Lists Beta|
+        |Germplasm Lists|
         |Manage Studies|
         |Browse Studies|
         |Import Datasets|
