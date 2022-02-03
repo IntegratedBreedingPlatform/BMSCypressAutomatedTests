@@ -9,7 +9,7 @@ Background:
 @ignore
 @TestCaseKey=IBP-T2178
 @smoke-test
-    Scenario: Add selected germplasm entry to an existing list 
+    Scenario: Add selected germplasm entries to an existing list 
         When I select some germplasm entries
         And I add select germplasm entries to an existing list
         And I confirm to add selected germplasm to the list
@@ -52,7 +52,7 @@ Background:
 
 @ignore
 @TestCaseKey=IBP-T1721
-    Scenario: Add the same entries  to an existing list
+    Scenario: Add the same entries to an existing list
         When I filtered germplasm entries by the existing germplasm list
         And I select all entries from the list
         And I add selected germplasm entries to an existing list
