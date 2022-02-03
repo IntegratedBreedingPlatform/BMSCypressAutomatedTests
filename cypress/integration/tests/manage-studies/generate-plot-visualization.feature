@@ -7,9 +7,7 @@ Feature: Generate Plot Visualization
 
 Background: 
     Given I am on the Manage Studies page of specified program
-    And I created a new study with RCBD design
-    And I added numeric traits to the study 
-    And I added observations to all traits via inline edit
+    And I create a trial using randomized complete block design with treatment factors
 
 @TestCaseKey=IBP-T621
 @smoke-test

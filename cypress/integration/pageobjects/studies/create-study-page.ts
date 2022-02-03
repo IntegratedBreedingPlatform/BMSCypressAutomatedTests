@@ -159,28 +159,31 @@ export default class CreateStudyPage {
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
+        this.goToObservations();
         this.addObservations(observationName);
     }
 
-    addObservations(observationName: string) {
+    goToObservations() {
         getMainIframeDocumentWaitLoad();
         this.clickTab('Observations');
+    }
+
+    addObservations(observationName: string) {
         getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        this.manageSettingsModal('Add Traits', 'Aflatox_M_ppb');
+        this.manageSettingsModal('Add Traits', observationName);
 
         cy.wait('@addTraits').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
             getIframeBody().xpath(`//th[text()='${observationName}']`).should('be.visible');
-            this.setVariableValues();
+            this.setVariableValues(observationName);
         });
-
     }
 
-    setVariableValues() {
+    setVariableValues(observationName: string) {
         getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
         getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
-        getIframeBody().find('[title="Aflatox_M_ppb"]').should('be.visible').click();
+        getIframeBody().find(`[title='${observationName}']`).should('be.visible').click();
         getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
         getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
         getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
