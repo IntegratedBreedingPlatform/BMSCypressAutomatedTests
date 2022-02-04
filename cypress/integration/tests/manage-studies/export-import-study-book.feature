@@ -7,7 +7,7 @@ Feature: Export and Import Study Book
 
 Background: 
     Given I am on the Manage Studies page of specified program
-    And I created a new study with RCBD design with traits
+    And I created a new study in RCBD design with traits
 
 @ignore
 @smoke-test
