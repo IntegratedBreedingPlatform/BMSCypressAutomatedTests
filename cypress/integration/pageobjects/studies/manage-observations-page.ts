@@ -37,13 +37,8 @@ export default class ManageObservationsPage {
                         getIframeBody().xpath(`//th[text()='${traitName}']`).click();
                     });
                 } else if (dataType === 'categorical') {
-                    if (!useValidValue) {
-                        getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-                            .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
-                    } else {
-                        getIframeBody().find('li.ui-select-choices-row > div > div', {timeout: 150000}).contains(value).click();
-                    }
-
+                    getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
+                        .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
                 } else {
                     getIframeBody().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
                 }
