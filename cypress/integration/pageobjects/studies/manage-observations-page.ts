@@ -33,7 +33,7 @@ export default class ManageObservationsPage {
 
                 if (dataType === 'date') {
                     getIframeBody().xpath(`//observation-inline-editor/input`, {timeout: 150000}).should('exist').then(() => {
-                        getIframeBody().xpath(`//div[@class="datepicker-days"]/table/tbody/tr/td[contains(@class,'today')]`, {timeout: 150000}).click();
+                        getIframeBody().xpath(`//observation-inline-editor/input`).clear().type(value  + '{enter}');
                         getIframeBody().xpath(`//th[text()='${traitName}']`).click();
                     });
                 } else if (dataType === 'categorical') {
