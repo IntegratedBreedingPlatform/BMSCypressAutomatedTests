@@ -128,7 +128,7 @@ export default class CreateStudyPage {
         // Search variable name
         getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
         // Select the first result
-        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').click();
+        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').first().click();
         // Add the item from result
         getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
         // Close the modal

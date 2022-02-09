@@ -13,7 +13,9 @@ export default class ManageObservationsPage {
             const d = new Date();
             const month = (d.getMonth() + 1);
             const monthText = month < 10? '0' + month : month;
-            value = d.getFullYear().toString() + monthText + d.getDate().toString();
+            const day = d.getDate();
+            const dayText = day < 10? '0' + day : day;
+            value = d.getFullYear().toString() + monthText + dayText;
         }
         return value;
     }
