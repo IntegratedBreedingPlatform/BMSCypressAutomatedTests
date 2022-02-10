@@ -39,6 +39,8 @@ export default class ManageObservationsPage {
                 } else if (dataType === 'categorical') {
                     getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
                         .type(value + '{enter}', { force: true, delay: 100, timeout:50000});
+                    getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
+                        .type('{enter}', { force: true, delay: 100, timeout:50000});
                 } else {
                     getIframeBody().xpath(`//observation-inline-editor/input`).type(value  + '{enter}');
                 }
@@ -59,14 +61,10 @@ export default class ManageObservationsPage {
     }
 
     keepOutOfBoundData() {
-        getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-            .type('{enter}', { force: true, delay: 100, timeout:50000});
         getIframeBody().xpath(`//button[text()='Keep']`, {timeout:150000}).should('be.visible').click();
     }
 
     discardOutOfBoundData() {
-        getIframeBody().xpath(`//div[@ng-model="observation.value"]//div[contains(@class,'select2-drop-active')]//div[contains(@class,'select2-search')]//input[@type='search']`, {timeout:50000})
-            .type('{enter}', { force: true, delay: 100, timeout:50000});
         getIframeBody().xpath(`//button[text()='Discard']`, {timeout:150000}).should('be.visible').click();
     }
 
