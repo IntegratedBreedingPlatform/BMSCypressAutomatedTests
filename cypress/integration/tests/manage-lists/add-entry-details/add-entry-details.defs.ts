@@ -4,14 +4,21 @@ import GermplasmListPage from '../../../pageobjects/germplasm-lists/germplasm-li
 import GermplasmListAddEntryDetailsPage
     from '../../../pageobjects/germplasm-lists/germplasm-list-add-entry-details-page';
 import AddEntryDetailsContext from './add-entry-details.context';
+import { randomString } from '../../../../support/commands';
+import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
 
 const addEntryDetailsContext = new AddEntryDetailsContext();
 const searchPage = new GermplasmListsBetaPage();
 const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
 const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(addEntryDetailsContext);
+const importModal = new GermplasmListImportPage();
 
-And('I open an existing list', () => {
-    searchPage.openGermplasmList();
+And('I import a list to add entry details to', () => {
+    const listName = 'list name ' + randomString();
+
+    searchPage.openImportGermplasmListModal();
+    importModal.importNewList(listName);
+    searchPage.selectListFilteredByListName(listName);
 });
 When('I navigate to add entry details screen', () => {
     germplasmListPage.openAddEntryDetailsModal();

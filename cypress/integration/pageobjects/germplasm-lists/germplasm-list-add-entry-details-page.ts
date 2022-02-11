@@ -22,6 +22,7 @@ export default class GermplasmListAddEntryDetailsPage {
                     this.addEntryDetailsContext.variableName = variableName;
                 });
 
+            cy.intercept('GET', `**/search?*`).as('loadList');
             cy.wrap($iframe).find('[data-test="addEntryDetailSubmit"]')
                 .should('exist')
                 .click();
