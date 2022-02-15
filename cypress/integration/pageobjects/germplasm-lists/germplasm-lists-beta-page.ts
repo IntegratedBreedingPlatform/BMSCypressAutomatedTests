@@ -55,6 +55,12 @@ export default class GermplasmListsBetaPage {
             getIframeBody().xpath('//button[@class="btn btn-primary btn-sm"]').should('exist').click();
     }
 
+    selectListFilteredByLockedStatus(){
+        this.resetAllFilters();
+        this.filterListByLockedStatus(false);
+        this.selectFirstList();
+    }
+
     selectListFilteredByNumberOfEntries() {
         this.resetAllFilters();
 
