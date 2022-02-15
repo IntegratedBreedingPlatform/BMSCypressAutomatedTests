@@ -42,7 +42,7 @@ Scenario: Add the same entry to another list
 Scenario: Add entries to another list that is locked
     Given I lock the imported list
     And  I am on the Germplasm Lists page of specified program
-    When I open an existing list
+    When I open the locked list
     And I select some entries in the current page
     And I select germplasm list in the add entries to list screen
     Then I should see a message that the germplasm list is locked
