@@ -122,7 +122,7 @@ export default class CreateStudyPage {
     }
 
     manageSettingsModal(headerName: string, variableName: string) {
-        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 15000 }).should('be.visible');
+        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 120000 }).should('be.visible');
         // Trigger variable search dropdown
         getIframeBody().xpath(`//body/div[3]/div/div/div[7]/div/div/div/div/div/div[2]/div[1]/div/a`).should('be.visible').click();
         // Search variable name
@@ -165,11 +165,16 @@ export default class CreateStudyPage {
 
     goToObservations() {
         getMainIframeDocumentWaitLoad();
+
+        cy.intercept('POST', `**/observationUnits/table?*`).as('loadObservations');
         this.clickTab('Observations');
     }
 
     addObservations(observationName: string) {
-        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        cy.wait('@loadObservations').then((interception) => {
+            getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        }
+
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
         this.manageSettingsModal('Add Traits', observationName);
 
