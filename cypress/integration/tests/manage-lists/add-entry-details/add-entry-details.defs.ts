@@ -12,7 +12,7 @@ const searchPage = new GermplasmListsBetaPage();
 const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
 const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(addEntryDetailsContext);
 let importModal = new GermplasmListImportPage();
-var listName;
+var listName: string;
 
 And('I import a list', () => {
     listName = 'list name ' + randomString();
