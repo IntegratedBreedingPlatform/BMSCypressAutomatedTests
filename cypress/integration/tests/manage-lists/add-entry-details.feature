@@ -9,7 +9,7 @@ Background:
   # TODO: use the entry detail variable created previosly in Manage Ontologies
   # Given I added entry detail to Ontology Manager
   Given I am on the Germplasm Lists page of specified program
-  And I open an existing list
+  And I import a list
 
 @TestCaseKey=IBP-T3398
 @smoke-test
