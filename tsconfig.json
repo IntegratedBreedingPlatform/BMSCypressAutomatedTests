@@ -20,7 +20,7 @@
       "es2018",
       "dom"
     ],
-    "types": ["cypress", "cypress-xpath", "cypress-real-events"]
+    "types": ["cypress", "cypress-xpath", "cypress-real-events", "cy-verify-downloads"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
