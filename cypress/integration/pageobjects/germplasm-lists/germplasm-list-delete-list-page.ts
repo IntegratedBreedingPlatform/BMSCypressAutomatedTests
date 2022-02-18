@@ -30,7 +30,7 @@ export default class GermplasmListDeleteListPage {
             cy.wrap($iframe).find('[data-test="germplasmListActionButton"]',{ timeout: Cypress.config('pageLoadTimeout') })
                 .should('exist')
                 .click();
-            cy.wrap($iframe).find(`[data-test="deleteListButton"]`).should('not.be.visible');
+            cy.wrap($iframe).find(`[data-test="deleteListButton"]`).should('not.exist');
         });
     }
 }

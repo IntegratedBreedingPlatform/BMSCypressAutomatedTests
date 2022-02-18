@@ -89,7 +89,7 @@ export default class CreateStudyPage {
         getIframeBody().xpath(`//div[@id='listTreeModal']//label[text()='Browse For Lists']`).should('be.visible');
         // Wait for the list table to load
         // Click the first germplasm list item in the table
-        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@class,'leaf')][1]`).should('exist').click();
+        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@data-test,'listRow')][1]`).should('exist').click();
         getIframeBody().xpath(`//div[@id='listTreeModal']//button[text()='Select']`).should('be.visible').click();
     }
 

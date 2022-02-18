@@ -11,7 +11,7 @@ const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
 const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(addEntryDetailsContext);
 
 And('I open an existing list', () => {
-    searchPage.openGermplasmList();
+    searchPage.selectListFilteredByLockedStatus();
 });
 When('I navigate to add entry details screen', () => {
     germplasmListPage.openAddEntryDetailsModal();
