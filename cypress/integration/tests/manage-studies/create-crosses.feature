@@ -13,6 +13,7 @@ Background:
     And Design generation is successful
     Then I should be directed back to the study
 
+@ignore
 @TestCaseKey=IBP-T522
 @smoke-test
 Scenario: Check if user can create crosses with unknown male parents using 'Use automatic name generation' option
@@ -23,7 +24,7 @@ Scenario: Check if user can create crosses with unknown male parents using 'Use 
    And I save the cross list
    Then a message saying that list data is saved successfully should display
 
-    
+@ignore
 @TestCaseKey=IBP-T521
 @smoke-test
 Scenario: Check if user can create polycrosses using 'Specify name format' option
