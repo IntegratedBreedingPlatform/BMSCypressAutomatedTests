@@ -89,7 +89,7 @@ export default class CreateStudyPage {
         getIframeBody().xpath(`//div[@id='listTreeModal']//label[text()='Browse For Lists']`).should('be.visible');
         // Wait for the list table to load
         // Click the first germplasm list item in the table
-        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@class,'leaf')][1]`).should('exist').click();
+        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@data-test,'listRow')][1]`).should('exist').click();
         getIframeBody().xpath(`//div[@id='listTreeModal']//button[text()='Select']`).should('be.visible').click();
     }
 
@@ -122,7 +122,7 @@ export default class CreateStudyPage {
     }
 
     manageSettingsModal(headerName: string, variableName: string) {
-        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 15000 }).should('be.visible');
+        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 120000 }).should('be.visible');
         // Trigger variable search dropdown
         getIframeBody().xpath(`//body/div[3]/div/div/div[7]/div/div/div/div/div/div[2]/div[1]/div/a`).should('be.visible').click();
         // Search variable name
@@ -167,28 +167,36 @@ export default class CreateStudyPage {
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
+        this.goToObservations();
         this.addObservations(observationName);
     }
 
-    addObservations(observationName: string) {
+    goToObservations() {
         getMainIframeDocumentWaitLoad();
+
+        cy.intercept('POST', `**/observationUnits/table?*`).as('loadObservations');
         this.clickTab('Observations');
-        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+    }
+
+    addObservations(observationName: string) {
+        cy.wait('@loadObservations').then((interception) => {
+            getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        }
+
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        this.manageSettingsModal('Add Traits', 'Aflatox_M_ppb');
+        this.manageSettingsModal('Add Traits', observationName);
 
         cy.wait('@addTraits').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
             getIframeBody().xpath(`//th[text()='${observationName}']`).should('be.visible');
-            this.setVariableValues();
+            this.setVariableValues(observationName);
         });
-
     }
 
-    setVariableValues() {
+    setVariableValues(observationName: string) {
         getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
         getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
-        getIframeBody().find('[title="Aflatox_M_ppb"]').should('be.visible').click();
+        getIframeBody().find(`[title='${observationName}']`).should('be.visible').click();
         getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
         getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
         getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');

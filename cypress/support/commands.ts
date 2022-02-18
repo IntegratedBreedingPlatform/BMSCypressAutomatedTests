@@ -25,6 +25,9 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
+import 'cy-verify-downloads';
+
+require('cy-verify-downloads').addCustomCommand();
 
 Cypress.Commands.add('login', () => {
   cy.visit('ibpworkbench/controller/auth/login');

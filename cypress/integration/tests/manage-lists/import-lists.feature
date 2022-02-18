@@ -19,7 +19,7 @@ Feature: Import Lists
     And I click Confirm on Save Germplasm List screen
     Then the created list is available and filtered
 
-  @smoke-test
+  @ignore
   Scenario: Check if user can download import lists template
     When I select Import germplasm list from Actions
     And I click the link to dowload the import list template
