@@ -45,4 +45,8 @@ And('I add {} trait to the study', (traitName) => {
     createStudyPage.addTrait(traitName);
 })
 
+Then('I should be directed back to the study', () => {
+    createStudyPage.waitForStudyToLoad();
+});
+
 
