@@ -36,7 +36,8 @@ And('I add {} trait to the study', (traitName) => {
 })
 
 And('I add {} trait to the study with observations', (traitName) => {
-    createStudyPage.addTraitWithObservations(traitName);
+    createStudyPage.addTrait(traitName);
+    manageObservationsPage.addTraitObservations(traitName);
 })
 
 Then('I should be directed back to the study', () => {

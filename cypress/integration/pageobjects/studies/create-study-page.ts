@@ -159,11 +159,6 @@ export default class CreateStudyPage {
         this.manageSettingsModal('Add Traits', variable);
     }
 
-    addTraitWithObservations(variable: string) {
-        this.addTrait(variable)
-        this.addTraitObservations(variable);
-    }
-
     saveNewStudyWithRCBDDesign(studyName: string, studyDesc: string, studyType: string, objective: string) {
         // Step 1 - create new study with basic details
         this.saveStudyWithBasicDetails(studyName, studyDesc, studyType, objective);
@@ -176,25 +171,6 @@ export default class CreateStudyPage {
         this.checkGenerateDesignSuccess();
         // Step 4 - wait for study to reload
         this.waitForStudyToLoad();
-    }
-
-
-    addTraitObservations(observationName: string) {
-        cy.wait('@addTraits').then((interception) => {
-            expect(interception.response.statusCode).to.equal(200);
-            this.setVariableValues(observationName);
-        });
-    }
-
-    setVariableValues(observationName: string) {
-        getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
-        getIframeBody().find(`[title='${observationName}']`).should('be.visible').click();
-        getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
-        getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
-        getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
-        getIframeBody().find('[data-test="applyBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('button[ng-bind="confirmButtonLabel"]').should('be.visible').click();
     }
 
 }

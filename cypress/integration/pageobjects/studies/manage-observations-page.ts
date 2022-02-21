@@ -84,4 +84,23 @@ export default class ManageObservationsPage {
         return `//table/tbody/tr[${row}]/td[contains(@class,'${className}')]`;
     }
 
+    addTraitObservations(observationName: string) {
+        cy.wait('@addTraits').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            this.setVariableValues(observationName);
+        });
+    }
+
+    setVariableValues(observationName: string) {
+        getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
+        getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
+        getIframeBody().find(`[title='${observationName}']`).should('be.visible').click();
+        getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
+        getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
+        // Only works for numeric trait
+        getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
+        getIframeBody().find('[data-test="applyBatchActionButton"]').should('be.visible').click();
+        getIframeBody().find('button[ng-bind="confirmButtonLabel"]').should('be.visible').click();
+    }
+
 }
