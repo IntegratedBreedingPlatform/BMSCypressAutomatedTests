@@ -8,7 +8,7 @@ Feature: Generate Plot Visualization
 Background: 
     Given I am on the Manage Studies page of specified program
     And I opened a study with RCBD design
-    And I add GCol_E_1to9 trait to the study with observations
+    And I add EPo_Cmp_ratio trait to the study with observations
     And I add ASI_Cmp_day trait to the study with observations
 
 
@@ -18,7 +18,7 @@ Scenario: Check if user can generate plot visualization - auto
     When I navigate to plot visualization screen
     And I select Scatterplot as plot type
     And I select Auto as regression method
-    And I select variable GCol_E_1to9 on X and ASI_Cmp_day on Y
+    And I select variable EPo_Cmp_ratio on X and ASI_Cmp_day on Y
     And I generate plot visualization
     Then a plot visualization graph should display
     
