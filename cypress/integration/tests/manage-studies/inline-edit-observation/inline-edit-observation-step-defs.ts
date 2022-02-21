@@ -7,7 +7,7 @@ When('I inline edit a value of {} for the {} trait {} with id {}', (value, dataT
     manageObservationsPage.performInlineEdit(traitName, dataType, traitId, value, 1);
 })
 
-When('When I inline edit an observation for trait {} with id {} using an out-of-bound value {}', (traitName, traitId, value) => {
+When('I inline edit an observation for trait {} with id {} using an out-of-bound value {}', (traitName, traitId, value) => {
     manageObservationsPage.performInlineEdit(traitName, 'categorical', traitId, value, 2);
 })
 
