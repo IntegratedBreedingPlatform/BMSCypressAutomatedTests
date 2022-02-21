@@ -27,6 +27,7 @@ export default class GermplasmListImportPage {
                             lastModified: new Date().getTime()
                         });
                     });
+                    cy.wait(50);
             });
         });
     }
