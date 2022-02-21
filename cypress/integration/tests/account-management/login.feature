@@ -26,6 +26,13 @@ Feature: Login
         And I click login
         Then The Dashboard page should display
 
+@TestCaseKey=IBP-T78
+@smoke-test
+    Scenario: Check if user can sign out in BMS
+        Given I am already logged in to BMS
+        When I sign out
+		Then I should be redirected to the login page
+
 @TestCaseKey=IBP-T3154
 @sanity-test  
 @clean-install
@@ -34,10 +41,5 @@ Feature: Login
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version
 
-@TestCaseKey=IBP-T78
-@smoke-test
-    Scenario: Check if user can sign out in BMS
-        Given I am already logged in to BMS
-        When I sign out
-		Then I should be redirected to the login page
+
         
