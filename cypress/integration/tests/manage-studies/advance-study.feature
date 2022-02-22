@@ -7,7 +7,7 @@ Feature: Advance Study
 
 Background: 
     Given I am on the Manage Studies page of specified program
-    And I created a new study in RCBD design with traits
+    And I opened a study with RCBD design
 
 @ignore
 @TestCaseKey=IBP-T607  
