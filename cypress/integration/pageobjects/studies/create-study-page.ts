@@ -128,7 +128,7 @@ export default class CreateStudyPage {
         // Search variable name
         getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
         // Select the first result
-        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').click();
+        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').first().click();
         // Add the item from result
         getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
         // Close the modal
@@ -145,61 +145,41 @@ export default class CreateStudyPage {
     }
 
     verifyColumnsInObservationTable(columnNames: string[] = []) {
-        this.clickTab('Observations');
+        this.clickTab(observationsTab);
         for (let columnName of columnNames) {
             getIframeBody().xpath(`//th[text()='${columnName}']`).should('be.visible');
         }
     }
 
-    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string, observationName: string) {
+
+    addTrait(variable: string) {
+        this.clickStudyAction(observationsTab);
+        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
+        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
+        this.manageSettingsModal('Add Traits', variable);
+    }
+
+    saveNewStudyWithRCBDDesign(studyName: string, studyDesc: string, studyType: string, objective: string) {
+        // Step 1 - create new study with basic details
         this.saveStudyWithBasicDetails(studyName, studyDesc, studyType, objective);
-        this.addStudySettings();
+        // Step 2 - select germplasm list
         this.addGermplasms();
+        // Step 3 - generate RCBD design
         this.goToExperimentalDesign(false);
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
-        this.goToObservations();
-        this.addObservations(observationName);
+        // Step 4 - wait for study to reload
+        this.waitForStudyToLoad();
     }
 
-    goToObservations() {
-        getMainIframeDocumentWaitLoad();
-
-        cy.intercept('POST', `**/observationUnits/table?*`).as('loadObservations');
-        this.clickTab('Observations');
-    }
-
-    addObservations(observationName: string) {
-        cy.wait('@loadObservations').then((interception) => {
-            getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
-        }
-
-        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        this.manageSettingsModal('Add Traits', observationName);
-
-        cy.wait('@addTraits').then((interception) => {
-            expect(interception.response.statusCode).to.equal(200);
-            getIframeBody().xpath(`//th[text()='${observationName}']`).should('be.visible');
-            this.setVariableValues(observationName);
-        });
-    }
-
-    setVariableValues(observationName: string) {
-        getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
-        getIframeBody().find(`[title='${observationName}']`).should('be.visible').click();
-        getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
-        getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
-        getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
-        getIframeBody().find('[data-test="applyBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('button[ng-bind="confirmButtonLabel"]').should('be.visible').click();
-    }
 }
 
 const generateDesignLabel = 'Generate Design';
 
 const experimentalDesignLabel = 'Experimental Design';
+
+const observationsTab = 'Observations';
 
 const getMainIframeDocumentWaitLoad = () => {
     return cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(cy.wrap);

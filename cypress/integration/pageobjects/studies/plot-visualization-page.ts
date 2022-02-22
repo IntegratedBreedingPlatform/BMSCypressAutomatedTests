@@ -16,11 +16,11 @@ export default class PlotVisualizationPage {
         getIframeBody().find('[data-test="auto_option"]').should('exist').click();
     }
 
-    selectXYVariable () {
+    selectXYVariable (x:string, y:string) {
         getIframeBody().find('[data-test="xVariableSelect"]').should('exist').click();
-        getIframeBody().find('[data-test="Aflatox_M_ppb_option"]').should('exist').click();
+        getIframeBody().find(`[data-test='${x}_option']`).should('exist').click();
         getIframeBody().find('[data-test="yVariableSelect"]').should('exist').click();
-        getIframeBody().find('[data-test="ASI_Cmp_day_option"]').should('exist').click();
+        getIframeBody().find(`[data-test='${y}_option']`).should('exist').click();
     }
 
     generatePlotVisualization () {

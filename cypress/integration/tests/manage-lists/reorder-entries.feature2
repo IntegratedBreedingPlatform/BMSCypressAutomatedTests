@@ -10,6 +10,7 @@ Background:
     Given I import a new list
     And I open the imported list
 
+@ignore
 @TestCaseKey=IBP-T3381
 @smoke-test
 Scenario: Check if user can reorder entries by specific position of the entry number
@@ -19,6 +20,7 @@ Scenario: Check if user can reorder entries by specific position of the entry nu
     Then a success message about reordering of entries should display
     And the selected germplasm should be on the specified position
 
+@ignore
 @TestCaseKey=IBP-T3248
 Scenario: Check if user can reorder one entry at the beginning of the list
     When I select a germplasm entry
@@ -34,6 +36,7 @@ Scenario: Check if user can reorder one entry at the end of the list
     Then a success message about reordering of entries should display
     And the selected germplasm should be at the end of the list
 
+@ignore
 @TestCaseKey=IBP-T3248
 Scenario: Check if user can reorder multiple entries by specific position of the entry number
     When I select multiple germplasm entries
