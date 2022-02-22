@@ -9,8 +9,6 @@ Feature: Login
 @TestCaseKey=IBP-T3153
 @sanity-test
 @smoke-test
-@clean-install
-@update-install
     Scenario: Launch BMS      
         Given I navigate to the BMS login page
         Then The BMS login page should display
@@ -18,8 +16,6 @@ Feature: Login
 @TestCaseKey=IBP-T3155
 @sanity-test
 @smoke-test
-@clean-install  
-@update-install
     Scenario: Login as an admin
         Given I navigate to the BMS login page
         When I enter valid user credentials
@@ -34,9 +30,7 @@ Feature: Login
 		Then I should be redirected to the login page
 
 @TestCaseKey=IBP-T3154
-@sanity-test  
-@clean-install
-@update-install   
+@sanity-test
     Scenario: Check BMS version on login page
         Given I navigate to the BMS login page
         Then The BMS login should have the correct version

@@ -7,8 +7,6 @@ Feature: Release Notes
 
 @TestCaseKey=IBP-T3185
 @sanity-test
-@clean-install
-@update-install
     Scenario: Check display of release notes
     # Pre-condition
     # The BMS has been upgraded
@@ -20,8 +18,6 @@ Feature: Release Notes
 
 @TestCaseKey=IBP-T3185
 @sanity-test
-@clean-install
-@update-install
     Scenario: Check if release notes displays when unchecked Don't show again
         Given I am already logged in to BMS
         And I am presented with the release notes pop-up
@@ -32,8 +28,6 @@ Feature: Release Notes
 
 @TestCaseKey=IBP-T3185
 @sanity-test
-@clean-install
-@update-install
     Scenario: Check if release notes no longer shows when checked Don't show again
         Given I am already logged in to BMS
         And I am presented with the release notes pop-up
