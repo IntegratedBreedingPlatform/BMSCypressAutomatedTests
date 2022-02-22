@@ -7,8 +7,6 @@ Feature: Germplasm Details
 
 @TestCaseKey=IBP-T3178
 @sanity-test
-@clean-install
-@update-install
     Scenario: Check pedigree tree
         Given I am on the Germplasm Manager page
         When I click on the GID of a germplasm
@@ -17,8 +15,6 @@ Feature: Germplasm Details
 
 @TestCaseKey=IBP-T3180
 @sanity-test
-@clean-install
-@update-install
     Scenario: Check pedigree graph
         Given I am on the Germplasm Manager page
         When I click on the GID of a germplasm

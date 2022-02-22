@@ -7,12 +7,9 @@ Feature: Create Crosses
 
 Background: 
     Given I am on the Manage Studies page of specified program
-    When I created a new study with basic details
-    And I browsed germplasm list 
-    And I generated experimental design using Randomized Complete Block design
-    And Design generation is successful
-    Then I should be directed back to the study
+    And I opened a study with RCBD design
 
+@ignore
 @TestCaseKey=IBP-T522
 @smoke-test
 Scenario: Check if user can create crosses with unknown male parents using 'Use automatic name generation' option
@@ -23,7 +20,7 @@ Scenario: Check if user can create crosses with unknown male parents using 'Use 
    And I save the cross list
    Then a message saying that list data is saved successfully should display
 
-    
+@ignore
 @TestCaseKey=IBP-T521
 @smoke-test
 Scenario: Check if user can create polycrosses using 'Specify name format' option
