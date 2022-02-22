@@ -10,7 +10,8 @@ const manageObservationsPage = new ManageObservationsPage();
 
 And('I opened a study with RCBD design', () => {
     // Reuse created RCBD study within session
-    if (Cypress.env('rcbdStudy')) {
+    if (localStorage.getItem('rcbdStudy') != null) {
+        Cypress.env('rcbdStudy', localStorage.getItem('rcbdStudy'));
         manageStudiesPage.browseExistingStudies();
         manageStudiesPage.selectExistingStudy(Cypress.env('rcbdStudy'));
         createStudyPage.waitForStudyToLoad();
@@ -19,6 +20,7 @@ And('I opened a study with RCBD design', () => {
     } else {
         cy.wrap('Study-' + Math.random().toString(20).replace(/[^a-z]+/g, '')).as('rcbdStudy').then((rcbdStudy) => {
             Cypress.env('rcbdStudy', rcbdStudy);
+            localStorage.setItem('rcbdStudy', Cypress.env('rcbdStudy'));
             manageStudiesPage.startNewStudy();
             createStudyPage.saveNewStudyWithRCBDDesign(rcbdStudy,
                 'Study with Randomized Complete Block Design',
