@@ -19,10 +19,10 @@ export default class GermplasmListsBetaPage {
         });
     }
 
-    verifyImportTemplateDownload() {
+    verifyImportTemplateDownload(fileName:string) {
         const downloadsFolder = Cypress.config("downloadsFolder");
         // TODO clear downloads https://github.com/cypress-io/cypress/issues/14886
-        cy.readFile(path.join(downloadsFolder, "GermplasmListImportTemplate.xls")).should("exist");
+        cy.readFile(path.join(downloadsFolder, fileName)).should("exist");
     }
 
     verifyImportCancelled() {

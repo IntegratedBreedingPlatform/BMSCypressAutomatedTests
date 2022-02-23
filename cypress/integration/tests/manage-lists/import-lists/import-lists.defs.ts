@@ -62,7 +62,7 @@ And('I click the link to dowload the import list template', () => {
     importModal.openImportListClickTemplate();
 });
 Then('An import list template should be downloaded', () => {
-    searchPage.verifyImportTemplateDownload();
+    searchPage.verifyImportTemplateDownload(ImportFileNames.GERMPLASM_IMPORT_TEMPLATE);
 });
 
 // Cancel import
