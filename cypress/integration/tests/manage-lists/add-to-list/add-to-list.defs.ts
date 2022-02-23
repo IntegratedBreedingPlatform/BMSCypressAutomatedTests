@@ -26,6 +26,7 @@ Given('I open an existing list', () => {
     searchPage.selectListFilteredByNumberOfEntries();
 });
 
+
 Given('I lock the imported list', () => {
     searchPage.selectListFilteredByListName(listName);
     germplasmListPage.lockList();

@@ -41,10 +41,33 @@ export default class GermplasmListsBetaPage {
         });
     }
 
+    filterListByLockedStatus(status:Boolean){
+            //Filter lists with unlocked status
+            getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("locked");
+            getIframeBody().find('[data-test="addFilterButton"]').click();           
+            getIframeBody().find('button.btn-info[title="Locked :: All"]').should('be.visible').click();
+
+            if(status){
+                getIframeBody().xpath('//input[@id="radio-true"]').should('exist').click();
+            }else{
+                getIframeBody().xpath('//input[@id="radio-false"]').should('exist').click();
+            }
+            getIframeBody().xpath('//button[@class="btn btn-primary btn-sm"]').should('exist').click();
+    }
+
+    selectListFilteredByLockedStatus(){
+        this.resetAllFilters();
+        this.filterListByLockedStatus(false);
+        this.selectFirstList();
+    }
+
     selectListFilteredByNumberOfEntries() {
         this.resetAllFilters();
+
+        this.filterListByLockedStatus(false);
         getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
         getIframeBody().find('[data-test="addFilterButton"]').click();
+
         getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
         getIframeBody().xpath('//input[@id="from"]').should('exist').type("20");
 

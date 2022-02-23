@@ -17,10 +17,13 @@ export default class GermplasmListPage {
     }
 
     checkEntryDetailWasAdded() {
-        getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
-                .should('exist')
-                .contains(<string>this.addEntryDetailsContext.variableName);
+        cy.wait('@loadList',{ timeout: 60000}).then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().then(($iframe) => {
+                cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
+                    .should('exist')
+                    .contains(<string>this.addEntryDetailsContext.variableName);
+            });
         });
     }
 
