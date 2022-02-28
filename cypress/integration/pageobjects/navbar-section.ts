@@ -20,7 +20,6 @@ export default class NavbarSection {
     }
 
     openUserProfilePopup() {
-        closeReleaseNotePopupIfShown();
         cy.get('[data-test="userProfileMenu"]', {timeout: 5000}).should('exist').click();
         cy.get('[data-test="openUserProfileButton"]').should('exist').click();
     }
