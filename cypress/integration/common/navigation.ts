@@ -41,12 +41,6 @@ And('I navigate to Site Admin page',()=>{
 });
 
 // ==================================
-// ANDS
-And('I am already logged in to BMS', () => {
-    loginPage.performLogin();
-});
-
-// ==================================
 // WHENS
 When('I navigate to {} in the sidebar', (sidebarLink) => {
     sidebarSection.navigateTo(sidebarLink);
