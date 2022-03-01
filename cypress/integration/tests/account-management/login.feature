@@ -25,7 +25,7 @@ Feature: Login
 @TestCaseKey=IBP-T78
 @smoke-test
     Scenario: Check if user can sign out in BMS
-        Given I am already logged in to BMS
+        Given I login to BMS
         When I sign out
 		Then I should be redirected to the login page
 
