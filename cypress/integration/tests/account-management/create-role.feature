@@ -2,7 +2,7 @@
 @account-management
 Feature: Create Role
 Background: 
-    Given I am already logged in to BMS
+    Given I login to BMS
     And I navigate to Site Admin page
 @TestCaseKey=IBP-T76
 @smoke-test

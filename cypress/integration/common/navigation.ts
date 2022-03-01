@@ -14,6 +14,9 @@ const navBar = new NavbarSection()
 Given('I am already logged in to BMS', () => {
     loginPage.useToken();
 });
+Given('I login to BMS', () => {
+    loginPage.performLogin();
+});
 
 Given('I am on the {} page', (page) => {
     loginPage.performLogin();
