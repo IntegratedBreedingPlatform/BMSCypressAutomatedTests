@@ -30,7 +30,8 @@ Background:
         |Low Density|
         |High Density|
         |Manage Ontologies|
-        |Manage Metadata|
+        |Manage Crop Settings|
+        |BrAPI sync (beta)|
         |Manage Program Settings|
 
 @TestCaseKey=IBP-T3176
