@@ -24,6 +24,10 @@ And('I enter a program name',()=>{
     addProgramPage.enterProgramName(programName);
 })
 
+And('I enter a program start date',()=>{
+    addProgramPage.enterProgramStartDate("2022-03-07");
+})
+
 And('I save program details',()=>{
     addProgramPage.clickSaveProgram();
 })

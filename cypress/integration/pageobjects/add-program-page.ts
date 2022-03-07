@@ -1,38 +1,35 @@
 export default class AddProgramPage{
 
     openCropNameOptions(){
-        return getMainIframeDocumentWaitToLoad().find('.v-filterselect-button').should('exist')
-            .click();
+        cy.get('#updatePersonalHeader').should('exist');
+        cy.get('[data-test="cropDropdown"]').should('exist')
+                .click();
     }
 
-    selectCropName(cropName:string){
-        return getMainIframeDocument().find('.gwt-MenuItem > span').contains(cropName).should('exist')
-            .click();
+    selectCropName(cropName:string){;
+        // Select the first result
+        cy.xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li`).should('be.visible').first().click();
     }
 
     enterProgramName(programName:string){
-        return getMainIframeDocument().find('#vaadin_projectname_txt')
+        cy.get('[data-test="programNameTextbox"]')
             .type(programName).type('{enter}');
     }
 
+    enterProgramStartDate(programStartDate:string){
+        cy.get('[data-test="startDateTextbox"]')
+            .type(programStartDate).type('{enter}');
+    }
+
     clickSaveProgram(){
-        cy.intercept('POST', `ibpworkbench/workbenchtools/UIDL?*`).as('saveProgram');
-        getMainIframeDocument().find('#saveProjectButton').should('exist').click();
+        cy.intercept('POST', `**/programs*`).as('saveProgram');
+        cy.get('[data-test="saveProgramButton"]').should('exist').click();
     }
 
     checkSaveProgramSuccess() {
         cy.wait('@saveProgram').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
-            getMainIframeDocument().find('.v-Notification').should('exist');
-            getMainIframeDocument().find('.v-Notification-error').should('not.exist');
+            cy.get('ngb-alert > span').contains('The program was created successfully');
         })
     }
 }
-const getMainIframeDocumentWaitToLoad = () => {
-    return cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(cy.wrap);
-}
-
-const getMainIframeDocument = () => {
-    return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
-}
-
