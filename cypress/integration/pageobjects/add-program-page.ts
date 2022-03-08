@@ -6,7 +6,7 @@ export default class AddProgramPage{
                 .click();
     }
 
-    selectCropName(cropName:string){;
+    selectCropName(cropName:string){
         // Select the first result
         cy.xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li`).should('be.visible').first().click();
     }
