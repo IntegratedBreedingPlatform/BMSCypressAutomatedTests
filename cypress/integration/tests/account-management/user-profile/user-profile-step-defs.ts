@@ -1,11 +1,13 @@
 import { After, And, Before, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import UserProfilePage from '../../../pageobjects/account-management/user-profile-page';
 import NavbarSection from '../../../pageobjects/navbar-section';
+import { closeReleaseNotePopupIfShown } from '../../../../support/commands';
 
 const navBar = new NavbarSection();
 const userProfilePage = new UserProfilePage();
 
 Given('I navigate to update user profile screen',()=>{
+    closeReleaseNotePopupIfShown();
     navBar.openUserProfilePopup();
 })
 
