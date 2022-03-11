@@ -14,6 +14,9 @@ const navBar = new NavbarSection()
 Given('I am already logged in to BMS', () => {
     loginPage.useToken();
 });
+Given('I login to BMS', () => {
+    loginPage.performLogin();
+});
 
 Given('I am on the {} page', (page) => {
     loginPage.performLogin();
@@ -38,12 +41,6 @@ Given('I am already in my program', () => {
 
 And('I navigate to Site Admin page',()=>{
     navBar.clickSiteAdmin();
-});
-
-// ==================================
-// ANDS
-And('I am already logged in to BMS', () => {
-    loginPage.performLogin();
 });
 
 // ==================================

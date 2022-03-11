@@ -50,6 +50,7 @@ export default class DashboardPage{
 
     verifyPageLoaded() {
         // Verify Crop dropdown, Program dropdown and Launch buttons
+        closeReleaseNotePopupIfShown();
         this.getProgramsIframeBody().find('#cropDropdown select').should('exist')
         this.getProgramsIframeBody().find('#programDropdown select').should('exist')
         this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist')
