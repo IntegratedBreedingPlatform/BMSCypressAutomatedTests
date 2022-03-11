@@ -37,9 +37,15 @@ export default class GermplasmListImportPage {
         });
     }
 
-    skipMultimatch() {
+    skipMultiMatch() {
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[id="skipMultiMatchesCheckbox"]').check();
+            cy.wrap($iframe).xpath('//*[@id="skipMultiMatchesCheckbox"]').should('be.visible').check();
+        });
+    }
+
+    skipWithoutMatch() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).xpath('//*[@id="skipDataWithoutMatchesCheckbox"]').should('be.visible').check();
         });
     }
     clickImportSubmit() {
