@@ -12,10 +12,7 @@ Feature: Add Program
     Scenario: Add a new program      
         Given I am already logged in to BMS
         When I navigate to Add Program page
-        And I select a crop name
-        And I enter a program name
-        And I enter a program start date
-        And I save program details
+        And I add a new program for the first time
         Then A success message should display
 
 @TestCaseKey=IBP-T3156    
