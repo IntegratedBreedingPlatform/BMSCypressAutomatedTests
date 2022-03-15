@@ -21,17 +21,13 @@ And('I select a crop name',()=>{
     addProgramPage.selectCropName(cropName);
 })
  
-And('I add a new program for the first time',()=>{
-    addProgramPage.openCropNameOptions();
-    addProgramPage.selectCropName(cropName);
-    addProgramPage.enterProgramName(Cypress.env('existingProgramName'));
-    const datePipe = new DatePipe('en-US');
-    addProgramPage.enterProgramStartDate(datePipe.transform(Date.now(), 'YYYY-MM-dd'));
-    addProgramPage.clickSaveProgram();
-})
+And('I enter {} program name',(name)=>{
 
-And('I enter a program name',()=>{
-    addProgramPage.enterProgramName(programName);
+    if(name == "default"){
+        addProgramPage.enterProgramName(Cypress.env('existingProgramName'));
+    }else{
+        addProgramPage.enterProgramName(programName);
+    }
 })
 
 And('I enter a program start date',()=>{
