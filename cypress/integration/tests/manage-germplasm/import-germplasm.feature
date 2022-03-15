@@ -8,7 +8,7 @@ Feature: Import Germplasm
 @TestCaseKey=IBP-T3177    
 @sanity-test
 @clean-install
-    Scenario: Import new germplasm records
+    Scenario: Import new germplasm records on clean db
         Given I am on the Germplasm Manager page
         When I select Import germplasm from Actions
         And I select a file to upload
