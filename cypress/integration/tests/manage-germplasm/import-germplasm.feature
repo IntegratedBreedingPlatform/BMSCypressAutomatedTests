@@ -7,13 +7,24 @@ Feature: Import Germplasm
 
 @TestCaseKey=IBP-T3177    
 @sanity-test
+@clean-install
+    Scenario: Import new germplasm records
+        Given I am on the Germplasm Manager page
+        When I select Import germplasm from Actions
+        And I select a file to upload
+        And I click Next on Import Germplasm screen
+        And I click Next on Create Inventory screen
+        And I click Save on Review Germplasm screen
+        Then saving of germplasm succeeds
+@TestCaseKey=IBP-T3177    
 @smoke-test
     Scenario: Import new germplasm records
         Given I am on the Germplasm Manager page
         When I select Import germplasm from Actions
         And I select a file to upload
-        #Note: The assumption here is that the file to upload already has breeding methods, location and inventory details
         And I click Next on Import Germplasm screen
         And I click Next on Create Inventory screen
         And I click Save on Review Germplasm screen
         Then saving of germplasm succeeds
+#Note: The scenarios above are duplicated to be able to include import germplasm
+# when running TAGS=(@smoke-test) and not @ignore and not @clean-install
