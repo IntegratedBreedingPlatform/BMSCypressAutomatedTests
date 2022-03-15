@@ -19,14 +19,14 @@ export default class DashboardPage{
         closeReleaseNotePopupIfShown();
         this.selectCrop();
         if (openSpecifiedProgram){
-            this.searchAndSelectProgram(Cypress.env('existingProgramName'));
+            this.searchAndSelectProgram(this.programName);
         }
         this.clickLaunchProgram();
     }
 
-    searchAndSelectProgram(programName:string){
+    searchAndSelectProgram(programName: string){
         getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).xpath('//*[@id="programDropdown"]/span/span[1]/span').should('exist').click();
+            cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').should('exist').click();
             cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('Cypress.io{enter}');     
         });
 
@@ -51,7 +51,7 @@ export default class DashboardPage{
 
     }
     clickLaunchProgram(){
-       this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist').click();
+       this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist').click();
 
     }
 
