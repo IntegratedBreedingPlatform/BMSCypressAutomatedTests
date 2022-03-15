@@ -9,7 +9,6 @@ Feature: Add Program
 @TestCaseKey=IBP-T3156    
 @smoke-test
 @sanity-test
-@clean-install
     Scenario: Add a new program      
         Given I am already logged in to BMS
         When I navigate to Add Program page
