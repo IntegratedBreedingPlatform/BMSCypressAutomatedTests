@@ -8,7 +8,6 @@ Feature: Import Germplasm
 @TestCaseKey=IBP-T3177    
 @sanity-test
 @smoke-test
-@clean-install
     Scenario: Import new germplasm records
         Given I am on the Germplasm Manager page
         When I select Import germplasm from Actions
