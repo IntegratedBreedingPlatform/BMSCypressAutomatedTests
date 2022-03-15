@@ -9,7 +9,7 @@ Feature: Add Program
 @TestCaseKey=IBP-T3156    
 @sanity-test
 @clean-install
-    Scenario: Add a new program      
+    Scenario: Add a default program      
         Given I am already logged in to BMS
         When I navigate to Add Program page
         And I select a crop name
