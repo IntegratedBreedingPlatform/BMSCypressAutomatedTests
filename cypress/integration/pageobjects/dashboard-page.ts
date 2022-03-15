@@ -1,5 +1,5 @@
 
-import { closeReleaseNotePopupIfShown } from '../../support/commands';
+import { closeReleaseNotePopupIfShown, getIframeBody } from '../../support/commands';
 import LoginPage from './account-management/login-page';
 export default class DashboardPage{
 
@@ -19,11 +19,18 @@ export default class DashboardPage{
         closeReleaseNotePopupIfShown();
         this.selectCrop();
         if (openSpecifiedProgram){
-            this.selectProgram();
+            this.searchAndSelectProgram(Cypress.env('existingProgramName'));
         }
         this.clickLaunchProgram();
     }
 
+    searchAndSelectProgram(programName:string){
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).xpath('//*[@id="programDropdown"]/span/span[1]/span').should('exist').click();
+            cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('Cypress.io{enter}');     
+        });
+
+    }
     selectProgram(){
         this.getProgramsIframeBody().find('#programDropdown .select2-selection__rendered').should('be.visible').invoke('text').then((text) => {
             // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
