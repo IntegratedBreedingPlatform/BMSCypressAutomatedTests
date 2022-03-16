@@ -7,16 +7,18 @@ Feature: Germplasm Details
 
 @TestCaseKey=IBP-T3178
 @sanity-test
-    Scenario: Check pedigree tree
-        Given I am on the Germplasm Manager page
+    Scenario: Check pedigree 
+        Given germplasm records already exists
+        And I am on the Germplasm Manager page
         When I click on the GID of a germplasm
         And I navigate to the Pedigree tab of germplasm details
         Then I should be able to see the pedigree tree
 
 @TestCaseKey=IBP-T3180
 @sanity-test
-    Scenario: Check pedigree graph
-        Given I am on the Germplasm Manager page
+    Scenario: Check pedigree 
+        Given germplasm records already exists
+        And I am on the Germplasm Manager page
         When I click on the GID of a germplasm
         And I navigate to the Pedigree tab of germplasm details
         And I click View Pedigree Graph button
