@@ -9,7 +9,7 @@ Feature: Import Germplasm
 @sanity-test
 @focus @clean-install
     Scenario: Import initial germplasm records
-        Given I am on the Germplasm Manager page of specified program
+        Given I am on the Manage Germplasm  page of specified program
         When I select Import germplasm from Actions
         And I select a file to upload
         And I click Next on Import Germplasm screen
@@ -19,7 +19,7 @@ Feature: Import Germplasm
 @TestCaseKey=IBP-T3177    
 @smoke-test
     Scenario: Import new germplasm records
-        Given I am on the Germplasm Manager page of specified program
+        Given I am on the Manage Germplasm page of specified program
         When I select Import germplasm from Actions
         And I select a file to upload
         And I click Next on Import Germplasm screen
