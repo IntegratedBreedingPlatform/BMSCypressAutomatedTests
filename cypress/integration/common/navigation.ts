@@ -59,6 +59,7 @@ Then('The {} page should display', (page) => {
     } else if (page === 'Dashboard') {
         loginPage.checkURLandToken()
         loginPage.checkIfCookieExist('BMS_TOK')
+        dashboardPage.searchAndSelectProgram(Cypress.env("existingProgramName"))
         dashboardPage.verifyPageLoaded();
 
     } else if (page === 'Add Program') {
