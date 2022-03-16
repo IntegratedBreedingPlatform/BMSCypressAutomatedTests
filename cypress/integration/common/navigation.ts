@@ -20,7 +20,7 @@ Given('I login to BMS', () => {
 
 Given('I am on the {} page', (page) => {
     loginPage.performLogin();
-    dashboardPage.launchProgram(true);
+    dashboardPage.launchProgram();
     let tool = SidebarTool.getFromToolName(page);
     sidebarSection.navigate(tool);
 });
