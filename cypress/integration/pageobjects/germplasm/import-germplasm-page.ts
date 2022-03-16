@@ -68,6 +68,15 @@ export default class ImportGermplasmPage{
             getIframeBody().find('[data-test="cancelSaveList"]').click();
         }
     }
+
+    clickSaveList(listName: string) {
+        getIframeBody().then(($iframe) => {
+            // Select "Program list" node
+            cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
+            cy.wrap($iframe).find('[data-test="name"]').type(listName);
+            cy.wrap($iframe).find('[data-test="saveList"]').click();
+        });
+    }
 }
 const getMainIframeDocument = () => {
     return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
