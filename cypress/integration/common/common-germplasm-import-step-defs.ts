@@ -31,7 +31,7 @@ When('germplasm records already exists', () => {
         importGermplasmPage.goToInventoryScreen();
         importGermplasmPage.goToReviewScreen();
         importGermplasmPage.saveImport();
-        importListPage.clickSaveList(listName);
+        importGermplasmPage.clickSaveList(listName);
         Cypress.env('germplasmList', listName);
     }
 });
