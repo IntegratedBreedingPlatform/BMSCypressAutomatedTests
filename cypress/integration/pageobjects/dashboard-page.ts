@@ -27,7 +27,7 @@ export default class DashboardPage{
     searchAndSelectProgram(programName: string){
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').should('exist').click();
-            cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('Cypress.io{enter}');     
+            cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('{enter}');     
         });
 
     }
