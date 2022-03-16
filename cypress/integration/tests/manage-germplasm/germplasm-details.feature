@@ -9,7 +9,7 @@ Feature: Germplasm Details
 @sanity-test
     Scenario: Check pedigree 
         Given germplasm records already exists
-        And I am on the Germplasm Manager page
+        And I am on the Germplasm Manager page of specified program
         When I click on the GID of a germplasm
         And I navigate to the Pedigree tab of germplasm details
         Then I should be able to see the pedigree tree
@@ -18,7 +18,7 @@ Feature: Germplasm Details
 @sanity-test
     Scenario: Check pedigree 
         Given germplasm records already exists
-        And I am on the Germplasm Manager page
+        And I am on the Germplasm Manager page of specified program
         When I click on the GID of a germplasm
         And I navigate to the Pedigree tab of germplasm details
         And I click View Pedigree Graph button
