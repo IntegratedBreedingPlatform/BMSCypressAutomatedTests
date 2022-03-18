@@ -19,7 +19,7 @@ export default class DashboardPage{
         closeReleaseNotePopupIfShown();
         this.selectCrop();
         if (openSpecifiedProgram){
-            this.searchAndSelectProgram(this.programName);
+            this.selectProgram();
         }
         this.clickLaunchProgram();
     }
@@ -41,10 +41,10 @@ export default class DashboardPage{
             // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
             // workaround: only perform selection when selected text is not yet the specified programName
             if (text != this.programName) {
-                this.getProgramsIframeBody().find('#programDropdown').should('exist').click();
+                this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist').click();
                 this.getProgramsIframeBody().find('input[role="searchbox"]').should('be.visible')
-                    .type(this.programName);
-                this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
+                    .type(this.programName).type('{enter}');
+               // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
             }
         });
     }
