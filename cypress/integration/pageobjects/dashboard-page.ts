@@ -44,8 +44,8 @@ export default class DashboardPage{
                 if (text != this.programName) {
                     cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').should('exist').click();
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible')
-                        .type(this.programName).type('{enter}');
-                   // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
+                        .type(this.programName);
+                    cy.wrap($iframe).find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
                 }
             });
         });
