@@ -37,15 +37,17 @@ export default class DashboardPage{
 
     }
     selectProgram(){
-        this.getProgramsIframeBody().find('#programDropdown .select2-selection__rendered').should('be.visible').invoke('text').then((text) => {
-            // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
-            // workaround: only perform selection when selected text is not yet the specified programName
-            if (text != this.programName) {
-                this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist').click();
-                this.getProgramsIframeBody().find('input[role="searchbox"]').should('be.visible')
-                    .type(this.programName).type('{enter}');
-               // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
-            }
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('be.visible').invoke('text').then((text) => {
+                // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
+                // workaround: only perform selection when selected text is not yet the specified programName
+                if (text != this.programName) {
+                    cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').should('exist').click();
+                    cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible')
+                        .type(this.programName).type('{enter}');
+                   // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
+                }
+            });
         });
     }
 
