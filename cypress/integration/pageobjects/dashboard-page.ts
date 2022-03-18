@@ -26,10 +26,9 @@ export default class DashboardPage{
 
     searchAndSelectProgram(programName: string){
         getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').click();
             cy.wrap($iframe).xpath('//*[@data-test="dashboardProgramDropdown"]/select/option').should('be.visible').invoke('text').then((text) =>{
-                cy.log(text);
                 if(text!=programName){
-                    cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').click();
                     cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('{enter}');     
 
                 }
