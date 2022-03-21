@@ -44,7 +44,7 @@ export default class DashboardPage{
                 if (text != this.programName) {
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName);
-                    cy.wrap($iframe).find('span.select2-results li.select2-results__option').contains(this.programName).should('exist').click().then(()=>{
+                    cy.wrap($iframe).find('span.select2-results li.select2-results__option').contains(this.programName).should('exist').first().click().then(()=>{
                         cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
                     });
                                     }
