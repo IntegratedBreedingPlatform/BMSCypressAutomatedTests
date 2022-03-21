@@ -42,11 +42,13 @@ export default class DashboardPage{
                 // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
                 // workaround: only perform selection when selected text is not yet the specified programName
                 if (text != this.programName) {
-                    cy.wrap($iframe).find('#programDropdown').click()
-                    //.should('exist').select(this.programName, { force : true })
-                    //.should('have.value', this.programName);
+                    cy.wrap($iframe).find('#programDropdown').should('exist').click()
+                   // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
+
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName);
-                    cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').contains(this.programName);
+                    cy.wait(5000);
+                    cy.wrap($iframe).find('span.select2-results').contains('ul', this.programName).should('be.visible').first().click();
+                    //cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
                 }
             });
         });
