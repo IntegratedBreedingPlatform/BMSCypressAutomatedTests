@@ -41,6 +41,7 @@ export default class DashboardPage{
             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('exist').invoke('text').then((text) => {
                 // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
                 // workaround: only perform selection when selected text is not yet the specified programName
+                cy.log(text)
                 if (text != this.programName) {
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName);
