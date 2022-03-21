@@ -43,6 +43,7 @@ export default class DashboardPage{
                 // workaround: only perform selection when selected text is not yet the specified programName
                 cy.log(text)
                 if (text != this.programName) {
+                    cy.log("not equal")
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName);
                     cy.wrap($iframe).find('span.select2-results li.select2-results__option').contains(this.programName).should('exist').first().click().then(()=>{
