@@ -43,11 +43,9 @@ export default class DashboardPage{
                 // workaround: only perform selection when selected text is not yet the specified programName
                 if (text != this.programName) {
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
-                   // this.getProgramsIframeBody().find('span.select2-results').contains('ul', this.programName).should('be.visible').click();
-
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName);
-                    cy.wrap($iframe).xpath('//body/span/span/span[2]/ul').contains('li', this.programName).should('be.visible').click();
-                    //cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
+                    //cy.wrap($iframe).xpath('//body/span/span/span[2]/ul').contains('li', this.programName).should('be.visible').click();
+                    cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
                 }
             });
         });
