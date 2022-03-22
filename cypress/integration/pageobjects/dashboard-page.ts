@@ -24,18 +24,6 @@ export default class DashboardPage{
         this.clickLaunchProgram();
     }
 
-    searchAndSelectProgram(programName: string){
-        getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').click();
-            cy.wrap($iframe).xpath('//*[@data-test="dashboardProgramDropdown"]/select/option').should('be.visible').invoke('text').then((text) =>{
-                if(text!=programName){
-                    cy.wrap($iframe).xpath('//body/span/span/span[1]/input').should('be.visible').type(programName).type('{enter}');     
-
-                }
-            });
-     });
-
-    }
     selectProgram(){
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('exist').then(() => {
@@ -43,9 +31,8 @@ export default class DashboardPage{
                 // workaround: only perform selection when selected text is not yet the specified programName
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
                     cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName+'{enter}').then(()=>{
-                      //  cy.wrap($iframe).find('span.select2-results li.select2-results__option').should('exist').first().click().then(()=>{
                             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
-                      //  });
+
                     });
                    
             });
