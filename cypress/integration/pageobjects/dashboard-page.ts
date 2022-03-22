@@ -42,10 +42,10 @@ export default class DashboardPage{
                 // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
                 // workaround: only perform selection when selected text is not yet the specified programName
                     cy.wrap($iframe).find('#programDropdown').should('exist').click()
-                    cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName).then(()=>{
-                        cy.wrap($iframe).find('span.select2-results li.select2-results__option').should('exist').first().click().then(()=>{
+                    cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName+'{enter}').then(()=>{
+                      //  cy.wrap($iframe).find('span.select2-results li.select2-results__option').should('exist').first().click().then(()=>{
                             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
-                        });
+                      //  });
                     });
                    
             });
