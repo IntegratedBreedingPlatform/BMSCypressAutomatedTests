@@ -49,6 +49,7 @@ export default class LoginPage{
     }
 
     checkIfCookieExist(cookieName:string){
+        cy.wait(3000)
         cy.getCookie(cookieName)
         .should('exist')
         .then((cookie)=>{
