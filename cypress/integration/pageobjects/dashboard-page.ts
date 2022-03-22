@@ -74,8 +74,6 @@ export default class DashboardPage{
         if(this.login.getToken('bms.xAuthToken')==null){
             this.login.performLogin();    
             this.launchProgram(true);    
-        }else{
-          return;
         }
     }
 }
