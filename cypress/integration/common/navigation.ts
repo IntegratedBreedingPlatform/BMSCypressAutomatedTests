@@ -62,7 +62,13 @@ Then('The {} page should display', (page) => {
         dashboardPage.selectProgram();
         dashboardPage.verifyPageLoaded();
 
-    } else if (page === 'Add Program') {
+    } else if (page === "default dashboard"){
+        loginPage.checkURLandToken()
+        loginPage.checkIfCookieExist('BMS_TOK')
+        dashboardPage.selectProgram();
+        dashboardPage.verifyDefaultDashboardPage();
+
+    }else if (page === 'Add Program') {
 
     } else if (page === 'Site Admin') {
 

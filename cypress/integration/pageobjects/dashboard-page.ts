@@ -53,15 +53,22 @@ export default class DashboardPage{
     verifyPageLoaded() {
         // Verify Crop dropdown, Program dropdown and Launch buttons
         closeReleaseNotePopupIfShown();
-        this.getProgramsIframeBody().find('#cropDropdown select').should('exist')
-        this.getProgramsIframeBody().find('#programDropdown select').should('exist')
-        this.getProgramsIframeBody().find('jhi-program > section > div:nth-child(1) > div.col-sm-4 > form > div:nth-child(2) > div.col-sm-auto > button').should('exist')
+        this.getProgramsIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
+        this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
+        this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist')
         this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(1) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Studies')});
         this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
+    verifyDefaultDashboardPage(){
+        closeReleaseNotePopupIfShown();
+        this.getProgramsIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
+        this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
+        this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist')
+
+    }
     loginAndLaunchProgram(){
 
         if(this.login.getToken('bms.xAuthToken')==null){
