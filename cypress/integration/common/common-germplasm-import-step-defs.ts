@@ -27,7 +27,7 @@ When('germplasm records already exists', () => {
         let tool = SidebarTool.getFromLinkName("Manage Germplasm");
         sidebarSection.navigate(tool);
         manageGermplasmPage.openImportGermplasmModal();
-        importGermplasmPage.uploadFile('GermplasmImport.xls');
+        importGermplasmPage.uploadFile('GermplasmImport_CleanInstall.xls');
         importGermplasmPage.goToInventoryScreen();
         importGermplasmPage.goToReviewScreen();
         importGermplasmPage.saveImport();
