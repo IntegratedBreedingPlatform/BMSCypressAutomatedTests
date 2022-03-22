@@ -25,6 +25,7 @@ export default class DashboardPage{
     }
 
     selectProgram(){
+        closeReleaseNotePopupIfShown();
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('exist').then(() => {
                 // select2 doesn't trigger change when programName is already selected so it always selects the first option for some reason
