@@ -52,7 +52,6 @@ export default class DashboardPage{
 
     verifyPageLoaded() {
         // Verify Crop dropdown, Program dropdown and Launch buttons
-        closeReleaseNotePopupIfShown();
         this.getProgramsIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
         this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
         this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist')
