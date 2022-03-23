@@ -3,6 +3,7 @@ import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 import NavbarSection from '../pageobjects/navbar-section';
+import { closeReleaseNotePopupIfShown, getIframeBody } from '../../support/commands';
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
@@ -20,6 +21,7 @@ Given('I login to BMS', () => {
 
 Given('I am on the {} page', (page) => {
     loginPage.performLogin();
+    closeReleaseNotePopupIfShown();
     dashboardPage.launchProgram();
     let tool = SidebarTool.getFromToolName(page);
     sidebarSection.navigate(tool);
