@@ -61,6 +61,7 @@ Then('The {} page should display', (page) => {
     } else if (page === 'Dashboard') {
         loginPage.checkURLandToken()
         loginPage.checkIfCookieExist('BMS_TOK')
+        closeReleaseNotePopupIfShown()
         dashboardPage.selectProgram();
         dashboardPage.verifyPageLoaded();
 
