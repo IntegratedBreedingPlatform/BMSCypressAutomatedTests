@@ -56,12 +56,13 @@ When('I navigate to {} in the sidebar', (sidebarLink) => {
 // THENS
 Then('The {} page should display', (page) => {
     if (page === 'BMS login') {
+        closeReleaseNotePopupIfShown();
         loginPage.verifyPageLoaded();
 
     } else if (page === 'Dashboard') {
         loginPage.checkURLandToken()
         loginPage.checkIfCookieExist('BMS_TOK')
-        closeReleaseNotePopupIfShown()
+        closeReleaseNotePopupIfShown();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         dashboardPage.selectProgram();
         dashboardPage.verifyPageLoaded();
 
