@@ -52,26 +52,33 @@ export default class GermplasmListsBetaPage {
             }else{
                 getIframeBody().xpath('//input[@id="radio-false"]').should('exist').click();
             }
+
+            cy.intercept('POST', `**/germplasm-lists/search?*`).as('filterListByLocked');
             getIframeBody().xpath('//button[@class="btn btn-primary btn-sm"]').should('exist').click();
     }
 
     selectListFilteredByLockedStatus(){
         this.resetAllFilters();
         this.filterListByLockedStatus(false);
-        this.selectFirstList();
+        cy.wait('@filterListByLocked',{timeout:30000}).then((interception) => {
+            this.selectFirstList();
+        });
     }
 
     selectListFilteredByNumberOfEntries() {
         this.resetAllFilters();
 
         this.filterListByLockedStatus(false);
-        getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
-        getIframeBody().find('[data-test="addFilterButton"]').click();
+        cy.wait('@filterListByLocked',{timeout:30000}).then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
+            getIframeBody().find('[data-test="addFilterButton"]').click();
 
-        getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
-        getIframeBody().xpath('//input[@id="from"]').should('exist').type("20");
+            getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
+            getIframeBody().xpath('//input[@id="from"]').should('exist').type("20");
 
-        this.filterAndSelectFirstResult();
+            this.filterAndSelectFirstResult();
+        });
     }
 
     selectListFilteredByListName(listName:string) {
@@ -101,6 +108,7 @@ export default class GermplasmListsBetaPage {
         getIframeBody().find('button.btn-primary').contains("Apply").click({force:true});
         cy.wait('@filterList').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
+            cy.wait(1000);
             this.selectFirstList();
         });
     }
