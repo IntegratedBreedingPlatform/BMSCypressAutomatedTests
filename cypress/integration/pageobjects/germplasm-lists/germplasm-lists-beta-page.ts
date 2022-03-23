@@ -108,7 +108,7 @@ export default class GermplasmListsBetaPage {
         getIframeBody().find('button.btn-primary').contains("Apply").click({force:true});
         cy.wait('@filterList').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
-            cy.wait(1000);
+            cy.wait(100);
             this.selectFirstList();
         });
     }
