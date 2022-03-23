@@ -71,7 +71,8 @@ export default class DashboardPage{
     loginAndLaunchProgram(){
 
         if(this.login.getToken('bms.xAuthToken')==null){
-            this.login.performLogin();    
+            this.login.performLogin();
+            closeReleaseNotePopupIfShown();    
             this.launchProgram(true);    
         }
     }
