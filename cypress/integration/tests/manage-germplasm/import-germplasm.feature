@@ -7,7 +7,7 @@ Feature: Import Germplasm
 
 @TestCaseKey=IBP-T3177    
 @sanity-test
-@focus @clean-install
+@clean-install
     Scenario: Import initial germplasm records
         Given I am on the Manage Germplasm page of specified program
         When I select Import germplasm from Actions

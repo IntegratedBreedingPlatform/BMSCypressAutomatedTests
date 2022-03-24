@@ -7,17 +7,15 @@ import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 import { randomString } from '../../support/commands';
 
-const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const sidebarSection = new SidebarSection()
 
 const manageGermplasmPage = new ManageGermplasmPage()
 const importGermplasmPage = new ImportGermplasmPage()
-const importListPage = new GermplasmListImportPage()
 var listName: string;
 listName = 'list name ' + randomString();
 When('germplasm records already exists', () => {
-    // Reuse created RCBD study within session
+    // Reuse imported list within session
        if (Cypress.env('germplasmList')) {
         return;
     // Otherwise, import germplasm
