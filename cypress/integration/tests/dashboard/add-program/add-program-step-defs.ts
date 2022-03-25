@@ -20,9 +20,14 @@ And('I select a crop name',()=>{
     addProgramPage.openCropNameOptions();
     addProgramPage.selectCropName(cropName);
 })
+ 
+And('I enter {} program name',(name)=>{
 
-And('I enter a program name',()=>{
-    addProgramPage.enterProgramName(programName);
+    if(name == "default"){
+        addProgramPage.enterProgramName(Cypress.env('existingProgramName'));
+    }else{
+        addProgramPage.enterProgramName(programName);
+    }
 })
 
 And('I enter a program start date',()=>{

@@ -15,8 +15,14 @@ Feature: Login
 
 @TestCaseKey=IBP-T3155
 @sanity-test
-@smoke-test
     Scenario: Login as an admin
+        Given I navigate to the BMS login page
+        When I enter valid user credentials
+        And I click login
+        Then The default dashboard page should display
+
+@smoke-test
+    Scenario: Login to BMS
         Given I navigate to the BMS login page
         When I enter valid user credentials
         And I click login
