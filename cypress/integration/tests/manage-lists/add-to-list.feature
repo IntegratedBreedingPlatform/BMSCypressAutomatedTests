@@ -37,7 +37,7 @@ Scenario: Add the same entry to another list
     When I select the same entry that exists in the list
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully
-@ignore
+
 @TestCaseKey=IBP-T3371
 Scenario: Add entries to another list that is locked
     Given I lock the imported list
