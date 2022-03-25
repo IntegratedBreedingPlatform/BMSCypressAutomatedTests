@@ -1,8 +1,6 @@
 import { When, And, Then } from 'cypress-cucumber-preprocessor/steps';
 import ManageGermplasmPage from '../pageobjects/germplasm/manage-germplasm-page'
 import ImportGermplasmPage from '../pageobjects/germplasm/import-germplasm-page'
-import GermplasmListImportPage from '../pageobjects/germplasm-lists/germplasm-list-import-page'
-import LoginPage from '../pageobjects/account-management/login-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 import { randomString } from '../../support/commands';
