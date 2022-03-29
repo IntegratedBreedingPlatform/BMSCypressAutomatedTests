@@ -6,11 +6,10 @@ In order to change the order of entries in a germplasm list
 As a user
 I should be able to reorder entries of a list
 
-Background: 
-    Given I import a new list
-    And I open the imported list
+Background:
+    Given I am on the Germplasm Lists page of specified program
+    And I open an existing list
 
-@ignore
 @TestCaseKey=IBP-T3381
 @smoke-test
 Scenario: Check if user can reorder entries by specific position of the entry number
