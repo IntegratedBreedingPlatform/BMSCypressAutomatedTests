@@ -114,7 +114,9 @@ export default class GermplasmListsBetaPage {
     }
 
     selectFirstList() {
-        getIframeBody().find('[data-test="germplasmListSearchTable"] > tbody > tr:first-of-type > td:first-of-type > a')
+
+        getIframeBody().then(($iframe) =>{
+            cy.wrap($iframe).find('[data-test="germplasmListSearchTable"] > tbody > tr:first-of-type > td:first-of-type > a')
             .should('exist')
             .click()
             .then(($a) => {
@@ -124,5 +126,7 @@ export default class GermplasmListsBetaPage {
                     .should('exist')
                     .contains(listName);
             });
+        });
+
     }
 }
