@@ -36,6 +36,21 @@ export default class ManageGermplasmPage{
         getIframeBody().find('[data-test="modalConfirmButton"]').should('exist').click();
     }
 
+    clickAddToExistingListAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.add-to-list"]').click();
+    }
+
+    clickCreateNewListAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.create-list"]').click();
+    }
+
+    verifyAddToEntriesListModalIsDisplayed() {
+        getIframeBody().find('jhi-germplasm-list-add').should('be.visible');
+        
+    }
+
     verifySuccessUngroupAction() {
         cy.wait('@ungroup').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
@@ -53,5 +68,38 @@ export default class ManageGermplasmPage{
         getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
     }
 
+    selectRandomGermplasm() {
+        // select 3 random germplasm in the first page
+        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+    }
+
+    filterByGid(gid: string) {
+        getIframeBody().xpath('//button[contains(@title,"GID ::")]').click();
+        getIframeBody().find('input[data-test="columnFilterListInput"]').should('exist').type(gid);
+        getIframeBody().find('button[data-test="columnFilterListApplyButton"]').contains("Apply").click();
+    }
+
+    filterByListName(listName: string) {
+        getIframeBody().find('#dropdownFilters').select('Germplasm List');
+        getIframeBody().find('[data-test="addFilterButton"]').click();
+        
+        getIframeBody().xpath('//button[contains(@title,"Germplasm List ::")]').click();
+
+        // Browse for list modal popup
+        getIframeBody().find('[data-test="treeTableModalBody"]').should('be.visible');
+        getIframeBody().xpath(`//td//span[text()="${listName}"]`).click();
+        getIframeBody().find('button[data-test="treeTableOkButton"]').click();
+    }
+
+    clickSaveList(listName: string) {
+        getIframeBody().then(($iframe) => {
+            // Select "Program list" node
+            cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
+            cy.wrap($iframe).find('[data-test="name"]').type(listName);
+            cy.wrap($iframe).find('[data-test="saveList"]').click();
+        });
+    }
 
 }

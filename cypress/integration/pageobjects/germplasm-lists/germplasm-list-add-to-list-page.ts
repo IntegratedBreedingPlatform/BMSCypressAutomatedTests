@@ -12,11 +12,15 @@ export default class GermplasmListAddToListPage {
             .click();
     }
 
-    clickAddToListConfirm() {
+    clickAddToListConfirm(addToListApiURL: string) {
         getIframeBody().then(($iframe) => {
-            cy.intercept('POST', `**/entries/import?*`).as('addToList');
+            cy.intercept('POST', addToListApiURL).as('addToList');
             cy.wrap($iframe).find('[data-test="modalConfirmButton"]').should('exist').click();
         });
+    }
+
+    clickAddToListCancel() {
+        getIframeBody().find('[data-test="modalCancelButton"]').should('exist').click();
     }
 
     verifySuccessAddToList () {
@@ -31,6 +35,10 @@ export default class GermplasmListAddToListPage {
             expect(interception.response.statusCode).to.equal(400);
             getIframeBody().find('ngb-alert > span').contains('List is locked');
         })
+    }
+
+    verifyGermplasmAddToListModalBodyIsVisible() {
+        getIframeBody().find('[data-test="addToListModalBody"]').should('be.visible');
     }
 }
 
