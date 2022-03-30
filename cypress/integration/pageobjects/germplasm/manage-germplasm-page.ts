@@ -53,5 +53,21 @@ export default class ManageGermplasmPage{
         getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
     }
 
+    openCreateNewListModal(){
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.create-list"]').click().then(() => {
+            getIframeBody().find('.modal-dialog').should('exist');
+            getIframeBody().find('[jhitranslate="germplasm-list-creation.header"] > span').contains('Save list');
+        });
+    }
+    
+    openCreateNewListModal(){
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.create-list"]').click().then(() => {
+            getIframeBody().find('.modal-dialog').should('exist');
+            getIframeBody().find('[jhitranslate="germplasm-list-creation.header"] > span').contains('Save list');
+        });
+    }
+
 
 }
