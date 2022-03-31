@@ -3,9 +3,19 @@ import { randomString } from "../../../../../cypress/support/commands";
 import { loginAndNavigateToPage } from "../../../../../cypress/integration/common/navigation";
 import GermplasmListAddToListPage from "../../../pageobjects/germplasm-lists/germplasm-list-add-to-list-page";
 import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page';
+import GermplasmListsBetaPage from "../../../pageobjects/germplasm-lists/germplasm-lists-beta-page";
+import GermplasmListPage from "../../../pageobjects/germplasm-lists/germplasm-lists-page";
+import AddEntryDetailsContext from "../../manage-lists/add-entry-details/add-entry-details.context";
+import GermplasmListDeleteListPage from "../../../pageobjects/germplasm-lists/germplasm-list-delete-list-page";
+import SidebarSection from "../../../pageobjects/sidebar-section";
 
 const manageGermplasmPage = new ManageGermplasmPage();
 const germplasmListAddToListPage = new GermplasmListAddToListPage();
+const germplasmListsBetaPage = new GermplasmListsBetaPage();
+const addEntryDetailsContext = new AddEntryDetailsContext();
+const germplasmListPage = new GermplasmListPage(addEntryDetailsContext);
+const germplasmListDeleteListPage = new GermplasmListDeleteListPage();
+const sidebarSection = new SidebarSection();
 
 const existingListName = 'TestListName' + randomString();
 let existingListId: any;
@@ -20,6 +30,15 @@ before(() => {
     manageGermplasmPage.clickSaveList(existingListName).then((listId) => {
         existingListId = listId;
     });
+});
+
+after(() => {
+    // Delete the created germplasm list after all scenarios are executed.
+    sidebarSection.navigateTo('Germplasm Lists');
+    germplasmListsBetaPage.selectListFilteredByListName(existingListName);
+    germplasmListPage.deleteList();
+    germplasmListDeleteListPage.clickDeleteListConfirm();
+    
 });
 
 When('I filter some germplasm entries by GID', () => {
@@ -73,12 +92,15 @@ When('I select germplasm entries from different pages', () => {
 And('I add select germplasm entries to an existing locked crop list', () => {
     manageGermplasmPage.clickAddToExistingListAction();
     manageGermplasmPage.verifyAddToEntriesListModalIsDisplayed();
-    manageGermplasmPage.markListAsLocked(existingListId);
+    // Programatically lock the list
+    manageGermplasmPage.toggleListStatus(existingListId);
     germplasmListAddToListPage.selectExistingList(existingListName);
 });
 
 Then('an error message saying that list is locked should display', () => {
     manageGermplasmPage.verifyAlertMessage('List is locked');
+    // Programatically unlock the list
+    manageGermplasmPage.toggleListStatus(existingListId);
 });
 
 

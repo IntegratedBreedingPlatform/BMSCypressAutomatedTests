@@ -131,7 +131,7 @@ export default class ManageGermplasmPage{
         });
     }
 
-    markListAsLocked(listId: any) {
+    toggleListStatus(listId: any) {
         getProgramByName(Cypress.env('existingProgramName')).then((program: any) => {
             cy.request({
                 method: 'POST',
