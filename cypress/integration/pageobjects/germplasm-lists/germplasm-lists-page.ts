@@ -55,7 +55,7 @@ export default class GermplasmListPage {
             cy.wrap($iframe).find('[data-test="germplasmListTable"] > tbody > tr:first-of-type > td:last-child > jhi-list-data-row')
                 .should('exist')
                 .then(($row) => {
-                    cy.wrap($row).find('div.editable').contains(this.entryDetailValue.toString());
+                    cy.wrap($row).find('div.editable', { timeout: 120000}).contains(this.entryDetailValue.toString());
                 });
         });
     }
