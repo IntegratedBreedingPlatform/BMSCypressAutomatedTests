@@ -73,3 +73,7 @@ Then('a message saying that there is an existing item with the same name display
 When('I lock the imported list', () => {
     germplasmListPage.lockList();
 });
+
+And('I clone the list', () => {
+    germplasmListPage.cloneList();
+});
