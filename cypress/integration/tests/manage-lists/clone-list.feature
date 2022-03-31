@@ -8,11 +8,9 @@ I should be able to clone germplasm list
 
 Background: 
     Given I import a new list
-    And I open the imported list
     And I add entry details variable to the list
     And I add value to the entry detail
 
-@ignore
 @TestCaseKey=IBP-T3406
 @smoke-test
 Scenario: Check if user can clone a list using a new list name
@@ -23,7 +21,6 @@ Scenario: Check if user can clone a list using a new list name
     And the entry detail variables are available in the list
     And the entry detail values are available in the list
 
-@ignore
 @TestCaseKey=IBP-T3493
 Scenario: Check if user can clone the list using an existing list
     When I clone the list
