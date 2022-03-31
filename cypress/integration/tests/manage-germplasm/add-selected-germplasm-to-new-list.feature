@@ -6,7 +6,7 @@ Feature: Add Selected Germplasm to New List
     I should be able to add selected germplasm to a new list
 Background: 
         Given I am on the Germplasm Manager page
-@ignore
+
 @TestCaseKey=IBP-T1638
 @smoke-test
     Scenario: Add selected germplasm entries to a new list
@@ -14,6 +14,7 @@ Background:
         And I add selected germplasm entries to a new list
         And I save the new list
         Then a message saying germplasm list successfully saved should display
+        And I am on the Germplasm Lists page of specified program
         And the new list should include the selected germplasm list
 
 @ignore
