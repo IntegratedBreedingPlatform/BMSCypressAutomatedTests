@@ -14,7 +14,7 @@ const searchPage = new GermplasmListsBetaPage();
 const importModal = new GermplasmListImportPage();
 const germplasmListCloneListPage = new GermplasmListCloneListPage();
 let listName;
-const clonedListName = 'list name ' + randomString();
+let clonedListName:string;
 
 And('I import a new list', () => {
     listName = 'list name ' + randomString();
@@ -40,6 +40,7 @@ When('I clone the list', () => {
 });
 
 And('I save the list with a new name', () => {
+    clonedListName = 'list name ' + randomString();
     importModal.clickSaveList(clonedListName);
 });
 
@@ -67,4 +68,8 @@ And('I save the list with an existing name', () => {
 
 Then('a message saying that there is an existing item with the same name displays', () => {
     germplasmListCloneListPage.verifyDuplicateNameErrorMessage();
+});
+
+When('I lock the imported list', () => {
+    germplasmListPage.lockList();
 });
