@@ -61,6 +61,13 @@ Then('I should see the list tree', () => {
     germplasmListAddToListPage.verifyGermplasmAddToListModalBodyIsVisible();
 });
 
+When('I select germplasm entries from different pages', () => {
+    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.goToPage(2);
+    manageGermplasmPage.selectAllCurrentPage();
+    
+});
+
 
 
 

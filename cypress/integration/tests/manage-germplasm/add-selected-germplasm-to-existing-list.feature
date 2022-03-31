@@ -53,11 +53,10 @@ Background:
 #         And I confirm to add selected germplasm to the list
 #         Then an error message saying that list is locked should display
 
-# @ignore
-# @TestCaseKey=IBP-T1721
-#     Scenario: Add selected entries from different pages to an existing list
-#         When I select germplasm entries from different pages
-#         And I add select germplasm entries to an existing list
-#         And I confirm to add selected germplasm to the list
-#         Then a message saying germplasm entries added to list successfully should display
+@TestCaseKey=IBP-T1721
+    Scenario: Add selected entries from different pages to an existing list
+        When I select germplasm entries from different pages
+        And I add select germplasm entries to an existing list
+        And I confirm to add selected germplasm to the list
+        Then a message saying germplasm entries added to list successfully should display
          

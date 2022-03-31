@@ -1,6 +1,11 @@
 import { getIframeBody } from '../../../support/commands';
 
 export default class ManageGermplasmPage{
+
+    goToPage(page: number) {
+        getIframeBody().xpath(`//div[@data-test='germplasmSearchResultsTablePagination']//li/a[text()=' ${page} ']`).click();
+    }
+
     openGermplasm(){
         cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
             cy.wrap($iframeBody).find('table > tbody > tr:nth-child(1) > td:nth-child(2) > a').should('exist').click().then(($a) => {
@@ -65,14 +70,18 @@ export default class ManageGermplasmPage{
     }
 
     selectAllCurrentPage() {
-        getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
+        this.waitForGermplasmSearchResultsToLoad().then(() => {
+            getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
+        });
     }
 
     selectRandomGermplasm() {
-        // select 3 random germplasm in the first page
-        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
-        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
-        getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+        this.waitForGermplasmSearchResultsToLoad().then(() => {
+            // select 3 random germplasm in the first page
+            getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+            getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+            getIframeBody().xpath(`(//table[@data-test="germplasmSearchResultsTable"]//tbody//input)[${Math.floor(Math.random() * 9) + 1}]`).check();
+        });
     }
 
     filterByGid(gid: string) {
@@ -99,6 +108,15 @@ export default class ManageGermplasmPage{
             cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
             cy.wrap($iframe).find('[data-test="name"]').type(listName);
             cy.wrap($iframe).find('[data-test="saveList"]').click();
+        });
+    }
+
+    waitForGermplasmSearchResultsToLoad() {
+        return new Cypress.Promise((resolve, reject) => {
+            cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('germplasmSearch');
+            cy.wait('@germplasmSearch', { timeout: 15000 }).then(() => {
+                resolve();
+            });
         });
     }
 
