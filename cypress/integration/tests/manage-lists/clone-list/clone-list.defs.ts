@@ -13,10 +13,11 @@ const germplasmListAddEntryDetailsPage = new GermplasmListAddEntryDetailsPage(ad
 const searchPage = new GermplasmListsBetaPage();
 const importModal = new GermplasmListImportPage();
 const germplasmListCloneListPage = new GermplasmListCloneListPage();
-const listName = 'list name ' + randomString();
+let listName;
 const clonedListName = 'list name ' + randomString();
 
 And('I import a new list', () => {
+    listName = 'list name ' + randomString();
     searchPage.openImportGermplasmListModal();
     importModal.importNewList(listName);
     searchPage.selectListFilteredByListName(listName);
