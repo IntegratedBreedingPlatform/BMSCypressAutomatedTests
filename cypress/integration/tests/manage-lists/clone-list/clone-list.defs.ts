@@ -16,7 +16,7 @@ const germplasmListCloneListPage = new GermplasmListCloneListPage();
 const listName = 'list name ' + randomString();
 const clonedListName = 'list name ' + randomString();
 
-Given('I import a new list', () => {
+And('I import a new list', () => {
     searchPage.openImportGermplasmListModal();
     importModal.importNewList(listName);
     searchPage.selectListFilteredByListName(listName);

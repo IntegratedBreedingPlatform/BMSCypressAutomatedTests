@@ -6,8 +6,9 @@ In order create another list with the same entries and details
 As a user
 I should be able to clone germplasm list
 
-Background: 
-    Given I import a new list
+Background:
+    Given I am on the Germplasm Lists page of specified program 
+    And I import a new list
     And I add entry details variable to the list
     And I add value to the entry detail
 
