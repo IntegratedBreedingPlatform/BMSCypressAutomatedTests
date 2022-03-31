@@ -1,4 +1,4 @@
-import { And, Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
+import { And, When, Then } from 'cypress-cucumber-preprocessor/steps';
 import { randomString } from '../../../../support/commands';
 import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germplasm-lists-beta-page';
 import GermplasmListImportPage from '../../../pageobjects/germplasm-lists/germplasm-list-import-page';
