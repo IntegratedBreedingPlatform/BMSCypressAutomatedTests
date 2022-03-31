@@ -2,7 +2,7 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListAddToListPage {
     selectExistingList(listName: string) {
-        getIframeBody().find('[data-test="addToListTable"]').should('be.visible');
+        getIframeBody().find('[data-test="addToListTable"]').should('exist');
         getIframeBody().find('[data-test="addToListTable"] > div > div > table > tbody > tr > td:nth-child(1)')
             .contains(listName)
             .should('exist')
@@ -38,7 +38,7 @@ export default class GermplasmListAddToListPage {
     }
 
     verifyGermplasmAddToListModalBodyIsVisible() {
-        getIframeBody().find('[data-test="addToListModalBody"]').should('be.visible');
+        getIframeBody().find('[data-test="addToListModalBody"]').should('exist');
     }
 }
 

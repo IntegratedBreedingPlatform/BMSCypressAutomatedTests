@@ -1,4 +1,4 @@
-import { getIframeBody } from '../../../support/commands';
+import { getAccessToken, getIframeBody, getProgramByName } from '../../../support/commands';
 
 export default class ManageGermplasmPage{
 
@@ -52,7 +52,7 @@ export default class ManageGermplasmPage{
     }
 
     verifyAddToEntriesListModalIsDisplayed() {
-        getIframeBody().find('jhi-germplasm-list-add').should('be.visible');
+        getIframeBody().find('jhi-germplasm-list-add').scrollIntoView().should('be.visible');
         
     }
 
@@ -67,6 +67,10 @@ export default class ManageGermplasmPage{
             });
               
         });
+    }
+
+    verifyAlertMessage(message: string) {
+        getIframeBody().find('ngb-alert > span').contains(message);
     }
 
     selectAllCurrentPage() {
@@ -103,11 +107,18 @@ export default class ManageGermplasmPage{
     }
 
     clickSaveList(listName: string) {
-        getIframeBody().then(($iframe) => {
-            // Select "Program list" node
-            cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
-            cy.wrap($iframe).find('[data-test="name"]').type(listName);
-            cy.wrap($iframe).find('[data-test="saveList"]').click();
+        return new Cypress.Promise((resolve, reject) => {
+            getIframeBody().then(($iframe) => {
+                cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/germplasm-lists?programUUID=*`).as('saveList');
+                // Select "Program list" node
+                cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
+                cy.wrap($iframe).find('[data-test="name"]').type(listName);
+                cy.wrap($iframe).find('[data-test="saveList"]').click();
+                cy.wait('@saveList').then(({response}) => {
+                    expect(response?.statusCode).to.be.oneOf([200, 201]);
+                    resolve(response?.body.listId);
+                });
+            });
         });
     }
 
@@ -120,4 +131,17 @@ export default class ManageGermplasmPage{
         });
     }
 
+    markListAsLocked(listId: any) {
+        getProgramByName(Cypress.env('existingProgramName')).then((program: any) => {
+            cy.request({
+                method: 'POST',
+                url: `bmsapi/crops/${Cypress.env('cropName')}/germplasm-lists/${listId}/toggle-status?programUUID=${program.programDbId}`,
+                headers: {
+                  'X-Auth-Token': getAccessToken()
+                }
+              });
+        });
+    }
+
 }
+

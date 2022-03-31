@@ -8,6 +8,7 @@ const manageGermplasmPage = new ManageGermplasmPage();
 const germplasmListAddToListPage = new GermplasmListAddToListPage();
 
 const existingListName = 'TestListName' + randomString();
+let existingListId: any;
 
 
 before(() => {
@@ -16,7 +17,9 @@ before(() => {
     // Create new germplasm list first
     manageGermplasmPage.selectAllCurrentPage();
     manageGermplasmPage.clickCreateNewListAction();
-    manageGermplasmPage.clickSaveList(existingListName);
+    manageGermplasmPage.clickSaveList(existingListName).then((listId) => {
+        existingListId = listId;
+    });
 });
 
 When('I filter some germplasm entries by GID', () => {
@@ -42,7 +45,7 @@ And('I select all germplasm entries on the current page', () => {
 And('I add select germplasm entries to an existing list', () => {
     manageGermplasmPage.clickAddToExistingListAction();
     manageGermplasmPage.verifyAddToEntriesListModalIsDisplayed();
-    germplasmListAddToListPage.selectExistingList('LIST1');
+    germplasmListAddToListPage.selectExistingList(existingListName);
 });
 
 And('I confirm to add selected germplasm to the list', () => {
@@ -65,7 +68,17 @@ When('I select germplasm entries from different pages', () => {
     manageGermplasmPage.selectAllCurrentPage();
     manageGermplasmPage.goToPage(2);
     manageGermplasmPage.selectAllCurrentPage();
-    
+});
+
+And('I add select germplasm entries to an existing locked crop list', () => {
+    manageGermplasmPage.clickAddToExistingListAction();
+    manageGermplasmPage.verifyAddToEntriesListModalIsDisplayed();
+    manageGermplasmPage.markListAsLocked(existingListId);
+    germplasmListAddToListPage.selectExistingList(existingListName);
+});
+
+Then('an error message saying that list is locked should display', () => {
+    manageGermplasmPage.verifyAlertMessage('List is locked');
 });
 
 
