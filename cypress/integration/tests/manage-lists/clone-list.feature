@@ -28,6 +28,7 @@ Scenario: Check if user can clone the list using an existing list
     And I save the list with an existing name
     Then a message saying that there is an existing item with the same name displays
 
+@ignore
 @TestCaseKey=IBP-T3492
 Scenario: Check if user can clone a locked list
     When I lock the imported list
