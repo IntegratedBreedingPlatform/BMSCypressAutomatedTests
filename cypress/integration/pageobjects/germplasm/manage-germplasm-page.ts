@@ -89,21 +89,25 @@ export default class ManageGermplasmPage{
     }
 
     filterByGid(gid: string) {
-        getIframeBody().xpath('//button[contains(@title,"GID ::")]').click();
-        getIframeBody().find('input[data-test="columnFilterListInput"]').should('exist').type(gid);
-        getIframeBody().find('button[data-test="columnFilterListApplyButton"]').contains("Apply").click();
+        this.waitForGermplasmSearchResultsToLoad().then(() => {
+            getIframeBody().find('button[title^="GID ::"]').click();
+            getIframeBody().find('input[data-test="columnFilterListInput"]').should('exist').type(gid);
+            getIframeBody().find('button[data-test="columnFilterListApplyButton"]').contains("Apply").click();
+        });
     }
 
     filterByListName(listName: string) {
-        getIframeBody().find('#dropdownFilters').select('Germplasm List');
-        getIframeBody().find('[data-test="addFilterButton"]').click();
-        
-        getIframeBody().xpath('//button[contains(@title,"Germplasm List ::")]').click();
-
-        // Browse for list modal popup
-        getIframeBody().find('[data-test="treeTableModalBody"]').should('be.visible');
-        getIframeBody().xpath(`//td//span[text()="${listName}"]`).click();
-        getIframeBody().find('button[data-test="treeTableOkButton"]').click();
+        this.waitForGermplasmSearchResultsToLoad().then(() => {
+            getIframeBody().find('#dropdownFilters').select('Germplasm List');
+            getIframeBody().find('[data-test="addFilterButton"]').click();
+            
+            getIframeBody().find('button[title^="Germplasm List ::"]').click();
+    
+            // Browse for list modal popup
+            getIframeBody().find('[data-test="treeTableModalBody"]').should('be.visible');
+            getIframeBody().xpath(`//td//span[text()="${listName}"]`).click();
+            getIframeBody().find('button[data-test="treeTableOkButton"]').click();
+        });
     }
 
     clickSaveList(listName: string) {
