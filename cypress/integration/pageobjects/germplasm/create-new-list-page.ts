@@ -11,4 +11,8 @@ export default class CreateNewListPage{
             getIframeBody().find('ngb-alert > span').contains('Germplasm list saved successfully!');
         })
     }
+
+    clickCancelSaveList () {
+        getIframeBody().find('[data-test="cancelSaveList"]').click();
+    }
 }
