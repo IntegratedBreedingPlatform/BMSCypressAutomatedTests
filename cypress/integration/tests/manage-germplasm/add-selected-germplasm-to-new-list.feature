@@ -25,12 +25,12 @@ Background:
         Then the list saving screen should close
 
 @TestCaseKey=IBP-T1498
-@ignore
     Scenario: Add selected entries to a new list in Crop List folder
         When I select some germplasm entries
-        And I add selected germplasm entries to an new list
+        And I add selected germplasm entries to a new list
         And I save the new list in Crop Lists folder
         Then a message saying germplasm list successfully saved should display
+        And I am on the Germplasm Lists page of specified program
         And the status of the saved crop list should be locked
 
 @TestCaseKey=IBP-T1498

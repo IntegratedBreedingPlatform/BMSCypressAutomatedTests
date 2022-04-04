@@ -53,8 +53,9 @@ And('I cancel saving the the list', () => {
     createNewListPage.clickCancelSaveList();
 });
 
-And('And I save the new list in Crop Lists folder', () => {
-
+And('I save the new list in Crop Lists folder', () => {
+    createNewListPage.interceptSaveRequest();
+    manageGermplasmPage.clickSaveList(newList, true);
 });
 
 Then('a message saying germplasm list successfully saved should display', () => {
@@ -75,8 +76,11 @@ Then('the list saving screen should close', () => {
 
 And('the status of the saved crop list should be locked', () => {
     searchPage.filterAndVerifyResult(newList, 'not.exist');
-    // Check if locked
+    searchPage.filterListByLockedStatus(true);
     searchPage.selectFirstList();
+
+    //unlock list and delete
+    germplasmListPage.toggleLockList(false);
     germplasmListPage.deleteList();
     germplasmListDeleteListPage.clickDeleteListConfirm();
 });

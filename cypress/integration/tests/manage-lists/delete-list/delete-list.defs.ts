@@ -51,7 +51,7 @@ And('the list is not deleted', () => {
 });
 
 When('I lock the list', () => {
-    germplasmListPage.lockList();
+    germplasmListPage.toggleLockList();
 });
 
 Then('the Delete list is not available', () => {

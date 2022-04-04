@@ -106,12 +106,15 @@ export default class ManageGermplasmPage{
         getIframeBody().find('button[data-test="treeTableOkButton"]').click();
     }
 
-    clickSaveList(listName: string) {
+    clickSaveList(listName: string, saveToCropFolder = false) {
         return new Cypress.Promise((resolve, reject) => {
             getIframeBody().then(($iframe) => {
                 cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/germplasm-lists?programUUID=*`).as('saveList');
-                // Select "Program list" node
-                cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
+
+                var folderToSave = 'p-tree > div > ul > p-treenode:nth-child('
+                    + (saveToCropFolder ? '1' : '2')
+                    + ') > li.ui-treenode > div';
+                cy.wrap($iframe).find(folderToSave).should('exist').click();
                 cy.wrap($iframe).find('[data-test="name"]').type(listName);
                 cy.wrap($iframe).find('[data-test="saveList"]').click();
                 cy.wait('@saveList').then(({response}) => {
