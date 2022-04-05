@@ -63,7 +63,7 @@ Then('a message saying germplasm list successfully saved should display', () => 
 });
 
 And('the new list should have been created with selected entries', () => {
-    searchPage.filterAndVerifyResult(newList, 'not.exist');
+    searchPage.filterAndVerifyResult(newList, true);
     searchPage.filterListByNumberOfEntries("1");
     searchPage.filterAndSelectFirstResult();
 
@@ -76,7 +76,7 @@ Then('the list saving screen should close', () => {
 });
 
 And('the status of the saved crop list should be locked', () => {
-    searchPage.filterAndVerifyResult(newList, 'not.exist');
+    searchPage.filterAndVerifyResult(newList, true);
     searchPage.filterListByLockedStatus(true);
     searchPage.filterListByNumberOfEntries("1");
     searchPage.filterAndSelectFirstResult();

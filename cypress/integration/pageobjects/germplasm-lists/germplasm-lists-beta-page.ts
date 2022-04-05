@@ -96,14 +96,14 @@ export default class GermplasmListsBetaPage {
         getIframeBody().xpath('//input[@placeholder="Search Text"]').should('be.visible').type(listName);
     }
 
-    filterAndVerifyResult(listName:string, condition:string) {
+    filterAndVerifyResult(listName:string, listShouldExist: boolean) {
         this.filterByListName(listName);
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
         getIframeBody().find('button.btn-primary').contains("Apply").click();
         cy.wait('@loadLists').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
-                .should(condition);
+                .should(listShouldExist ? "not.exist" : "exist");
         });
     }
 
