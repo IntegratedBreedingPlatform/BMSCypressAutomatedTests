@@ -62,10 +62,11 @@ Then('a message saying germplasm list successfully saved should display', () => 
     createNewListPage.verifySuccessAddToList();
 });
 
-And('the new list should include the selected germplasm list', () => {
+And('the new list should have been created with selected entries', () => {
     searchPage.filterAndVerifyResult(newList, 'not.exist');
-    cy.wait(100);
-    searchPage.selectFirstList();
+    searchPage.filterListByNumberOfEntries("1");
+    searchPage.filterAndSelectFirstResult();
+
     germplasmListPage.deleteList();
     germplasmListDeleteListPage.clickDeleteListConfirm();
 });
@@ -77,7 +78,8 @@ Then('the list saving screen should close', () => {
 And('the status of the saved crop list should be locked', () => {
     searchPage.filterAndVerifyResult(newList, 'not.exist');
     searchPage.filterListByLockedStatus(true);
-    searchPage.selectFirstList();
+    searchPage.filterListByNumberOfEntries("1");
+    searchPage.filterAndSelectFirstResult();
 
     //unlock list and delete
     germplasmListPage.toggleLockList(false);

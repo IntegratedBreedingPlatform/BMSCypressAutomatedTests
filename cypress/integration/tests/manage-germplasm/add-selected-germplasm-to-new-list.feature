@@ -15,7 +15,7 @@ Background:
         And I save the new list
         Then a message saying germplasm list successfully saved should display
         And I am on the Germplasm Lists page of specified program
-        And the new list should include the selected germplasm list
+        And the new list should have been created with selected entries
 
 @TestCaseKey=IBP-T1498
     Scenario: Cancel adding selected germplasm entries to a new list
@@ -40,7 +40,7 @@ Background:
         And I save the new list
         Then a message saying germplasm list successfully saved should display
         And I am on the Germplasm Lists page of specified program
-        And the new list should include the selected germplasm list
+        And the new list should have been created with selected entries
 
 @TestCaseKey=IBP-T1498
     Scenario: Filter entries and add all to a new list
@@ -50,7 +50,7 @@ Background:
         And I save the new list
         Then a message saying germplasm list successfully saved should display
         And I am on the Germplasm Lists page of specified program
-        And the new list should include the selected germplasm list
+        And the new list should have been created with selected entries
 
 @TestCaseKey=IBP-T1498
     Scenario: Add all entries on the current page to a new list
@@ -59,4 +59,4 @@ Background:
         And I save the new list
         Then a message saying germplasm list successfully saved should display
         And I am on the Germplasm Lists page of specified program
-        And the new list should include the selected germplasm list
+        And the new list should have been created with selected entries
