@@ -41,7 +41,7 @@ Cypress.Commands.add('login', () => {
   cy.wait('@doLogin');
 })
 
-function getAccessToken() {
+export function getAccessToken() {
   const token = localStorage.getItem('bms.xAuthToken');
   return JSON.parse(token).token;
 }
@@ -50,11 +50,25 @@ export function randomString(length = 11) {
     return Math.random().toString(36).substr(2, length);
 }
 
-Cypress.Commands.add('getProgram', () => {
+export function getProgramByName(programName: string) {
+    return new Cypress.Promise((resolve, reject) => {
+        cy.request({
+            method: 'GET',
+            url: `/bmsapi/${Cypress.env('cropName')}/brapi/v1/programs?programName=${programName}` ,
+            headers: {
+              'X-Auth-Token': getAccessToken()
+            }
+          }).its('body').then((body) => {
+            resolve(body.result.data[0]);
+          });
+    });
+}
+
+Cypress.Commands.add('getPrograms', () => {
 
   cy.request({
     method: 'GET',
-    url: `/bmsapi/${Cypress.env('cropName')}/brapi/v1/programs`,
+    url: `/bmsapi/${Cypress.env('cropName')}/brapi/v1/programs` ,
     headers: {
       'X-Auth-Token': getAccessToken()
     }
