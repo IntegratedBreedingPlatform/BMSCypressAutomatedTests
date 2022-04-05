@@ -74,9 +74,7 @@ export default class ManageGermplasmPage{
     }
 
     selectAllCurrentPage() {
-        this.waitForGermplasmSearchResultsToLoad().then(() => {
-            getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
-        });
+        getIframeBody().find('[data-test="checkSelectCurrentPage"]').click();
     }
 
     selectRandomGermplasm() {

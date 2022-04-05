@@ -15,7 +15,9 @@ before(() => {
     // Before all the scenarios are executed, login first and navigate to Germplasm Manager
     loginAndNavigateToPage('Germplasm Manager');
     // Create new germplasm list first
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
     manageGermplasmPage.clickCreateNewListAction();
     manageGermplasmPage.clickSaveList(existingListName).then((listId) => {
         existingListId = listId;
@@ -35,11 +37,15 @@ When('I select some germplasm entries', () => {
 });
 
 When('I select all germplasm entries on the current page', () => {
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
 });
 
 And('I select all germplasm entries on the current page', () => {
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
 });
 
 And('I add select germplasm entries to an existing list', () => {
@@ -65,9 +71,13 @@ Then('I should see the list tree', () => {
 });
 
 When('I select germplasm entries from different pages', () => {
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
     manageGermplasmPage.goToPage(2);
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
 });
 
 And('I add select germplasm entries to an existing locked crop list', () => {
