@@ -1,6 +1,5 @@
 import { And, Then, When } from "cypress-cucumber-preprocessor/steps";
 import { randomString } from "../../../../../cypress/support/commands";
-import GermplasmListAddToListPage from "../../../pageobjects/germplasm-lists/germplasm-list-add-to-list-page";
 import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page';
 import CreateNewListPage from '../../../pageobjects/germplasm/create-new-list-page';
 import GermplasmListsBetaPage from '../../../pageobjects/germplasm-lists/germplasm-lists-beta-page';
@@ -9,7 +8,6 @@ import GermplasmListDeleteListPage from '../../../pageobjects/germplasm-lists/ge
 import AddEntryDetailsContext from '../../manage-lists/add-entry-details/add-entry-details.context';
 
 const manageGermplasmPage = new ManageGermplasmPage();
-const germplasmListAddToListPage = new GermplasmListAddToListPage();
 const createNewListPage = new CreateNewListPage();
 const searchPage = new GermplasmListsBetaPage();
 
