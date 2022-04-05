@@ -20,7 +20,11 @@ Given('I login to BMS', () => {
 });
 
 Given('I am on the {} page', (page) => {
-    loginAndNavigateToPage(page);
+    loginPage.performLogin();
+    closeReleaseNotePopupIfShown();
+    dashboardPage.launchProgram();
+    let tool = SidebarTool.getFromToolName(page);
+    sidebarSection.navigate(tool);
 });
 
 Given('I am on the {} page of specified program', (page) => {
@@ -76,14 +80,6 @@ Then('The {} page should display', (page) => {
         // TODO add page-specific checking of elements
     }
 });
-
-export function loginAndNavigateToPage(page: string) {
-    loginPage.performLogin();
-    closeReleaseNotePopupIfShown();
-    dashboardPage.launchProgram();
-    let tool = SidebarTool.getFromToolName(page);
-    sidebarSection.navigate(tool);
-}
 
 
 

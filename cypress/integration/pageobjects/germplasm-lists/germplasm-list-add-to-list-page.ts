@@ -2,7 +2,7 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class GermplasmListAddToListPage {
     selectExistingList(listName: string) {
-        getIframeBody().find('[data-test="addToListTable"]').should('exist');
+        getIframeBody().find('[data-test="addToListTable"]').should('be.visible');
         getIframeBody().find('[data-test="addToListTable"] > div > div > table > tbody > tr > td:nth-child(1)')
             .contains(listName)
             .should('exist')
@@ -12,15 +12,11 @@ export default class GermplasmListAddToListPage {
             .click();
     }
 
-    clickAddToListConfirm(addToListApiURL: string) {
+    clickAddToListConfirm() {
         getIframeBody().then(($iframe) => {
-            cy.intercept('POST', addToListApiURL).as('addToList');
+            cy.intercept('POST', `**/entries/import?*`).as('addToList');
             cy.wrap($iframe).find('[data-test="modalConfirmButton"]').should('exist').click();
         });
-    }
-
-    clickAddToListCancel() {
-        getIframeBody().find('[data-test="modalCancelButton"]').should('exist').click();
     }
 
     verifySuccessAddToList () {
@@ -35,10 +31,6 @@ export default class GermplasmListAddToListPage {
             expect(interception.response.statusCode).to.equal(400);
             getIframeBody().find('ngb-alert > span').contains('List is locked');
         })
-    }
-
-    verifyGermplasmAddToListModalBodyIsVisible() {
-        getIframeBody().find('[data-test="addToListModalBody"]').should('exist');
     }
 }
 
