@@ -6,7 +6,7 @@ Feature: View and Filter Lots Records
 
 Background:
   Given germplasm list with lot records already exists
-  # TODO: Create common step def for importing germplasm list with lot records and save name as env variable
+  # TODO: Create common step def for importing germplasm list with lot records and save list name and GID as env variables
   # in common-germplasm-import-step-defs
   And I am on the Manage Inventory page of specified program
 
