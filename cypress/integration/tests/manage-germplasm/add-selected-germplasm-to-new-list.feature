@@ -18,7 +18,7 @@ Background:
         And the new list should include the selected germplasm list
 
 @TestCaseKey=IBP-T1498
-    Scenario: Cancel adding selected germplasm entries to an new list
+    Scenario: Cancel adding selected germplasm entries to a new list
         When I select some germplasm entries
         And I add selected germplasm entries to a new list
         And I cancel saving the the list
