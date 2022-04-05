@@ -138,6 +138,10 @@ export default class GermplasmListPage {
         });
     }
 
+    cloneList() {
+        this.openGermplasmListAction("cloneListButton");
+    }
+
     /*
         Returns a radom value in range from 1 to 10
      */
