@@ -65,17 +65,21 @@ export default class GermplasmListsBetaPage {
         });
     }
 
+    filterListByNumberOfEntries(numberOfEntries:string) {
+        getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
+        getIframeBody().find('[data-test="addFilterButton"]').click();
+
+        getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
+        getIframeBody().xpath('//input[@id="from"]').should('exist').type(numberOfEntries);
+    }
+
     selectListFilteredByNumberOfEntries() {
         this.resetAllFilters();
 
         this.filterListByLockedStatus(false);
         cy.wait('@filterListByLocked',{timeout:30000}).then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
-            getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("numberOfEntriesRange");
-            getIframeBody().find('[data-test="addFilterButton"]').click();
-
-            getIframeBody().find('button.btn-info[title="Number Of Entries Range :: All"]').should('be.visible').click();
-            getIframeBody().xpath('//input[@id="from"]').should('exist').type("20");
+            this.filterListByNumberOfEntries("20");
 
             this.filterAndSelectFirstResult();
         });
@@ -92,14 +96,14 @@ export default class GermplasmListsBetaPage {
         getIframeBody().xpath('//input[@placeholder="Search Text"]').should('be.visible').type(listName);
     }
 
-    filterAndVerifyResult(listName:string, condition:string) {
+    filterAndVerifyResult(listName:string, listShouldExist: boolean) {
         this.filterByListName(listName);
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
         getIframeBody().find('button.btn-primary').contains("Apply").click();
         cy.wait('@loadLists').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
-                .should(condition);
+                .should(listShouldExist ? "not.exist" : "exist");
         });
     }
 

@@ -123,10 +123,12 @@ export default class GermplasmListPage {
         });
     }
 
-    lockList() {
+    toggleLockList(checkLocked=true) {
         getIframeBody().find('[data-test="lockListButton"]').click();
-        getIframeBody().find('[data-test="lockListIcon"]')
-            .should('have.class', 'fa-lock');
+        if (checkLocked) {
+            getIframeBody().find('[data-test="lockListIcon"]')
+                .should('have.class', 'fa-lock');
+        }
     }
 
     openEditListMetadata() {
