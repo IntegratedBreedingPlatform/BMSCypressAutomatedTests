@@ -22,13 +22,18 @@ When('I select some germplasm entries', () => {
 });
 
 When('I select germplasm entries from different pages', () => {
-    manageGermplasmPage.selectAllCurrentPage();
-    manageGermplasmPage.goToPage(2);
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+        manageGermplasmPage.goToPage(2);
+        manageGermplasmPage.selectAllCurrentPage();
+    });
+   
 });
 
 When('I select all germplasm entries on the current page', () => {
-    manageGermplasmPage.selectAllCurrentPage();
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
 });
 
 When('I filter some germplasm entries by GID', () => {
