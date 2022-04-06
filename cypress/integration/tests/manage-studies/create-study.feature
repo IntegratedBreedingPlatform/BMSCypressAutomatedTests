@@ -21,7 +21,8 @@ Scenario: Check creation of trial using randomized complete block design with tr
 @sanity-test
 @clean-install 
 Scenario: Check BV Design License is not included
-    Given I am on the Manage Studies page of specified program
+    Given germplasm records already exists
+    And I am on the Manage Studies page of specified program
     And I created a new study with basic details
     And I browsed germplasm list
     When I try to generate experimental design using Randomized Complete Block design
