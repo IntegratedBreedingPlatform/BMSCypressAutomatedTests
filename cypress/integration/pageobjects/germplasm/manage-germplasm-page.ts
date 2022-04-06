@@ -127,9 +127,13 @@ export default class ManageGermplasmPage{
         });
     }
 
+    interceptGermplasmResultsLoad() {
+        cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('germplasmSearch');
+    }
+
     waitForGermplasmSearchResultsToLoad() {
         return new Cypress.Promise((resolve, reject) => {
-            cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('germplasmSearch');
+            this.interceptGermplasmResultsLoad();
             cy.wait('@germplasmSearch', { timeout: 15000 }).then(() => {
                 resolve();
             });

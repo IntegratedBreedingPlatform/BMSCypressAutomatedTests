@@ -24,8 +24,9 @@ When('I select some germplasm entries', () => {
 When('I select germplasm entries from different pages', () => {
     manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
         manageGermplasmPage.selectAllCurrentPage();
+        manageGermplasmPage.interceptGermplasmResultsLoad();
         manageGermplasmPage.goToPage(2);
-        manageGermplasmPage.selectAllCurrentPage();
+        manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => { manageGermplasmPage.selectAllCurrentPage();});
     });
    
 });
@@ -37,10 +38,7 @@ When('I select all germplasm entries on the current page', () => {
 });
 
 When('I filter some germplasm entries by GID', () => {
-    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
-        cy.wait(100);
-        manageGermplasmPage.filterByGid('1');
-    });
+    manageGermplasmPage.filterByGid('1');
 });
 
 And('I add selected germplasm entries to a new list', () => {
