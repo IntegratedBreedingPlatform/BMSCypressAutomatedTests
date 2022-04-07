@@ -1,15 +1,30 @@
 import { getIframeBody } from '../../../support/commands';
 
 export default class CreateLotsPage{
-    interceptSaveRequest() {
-        cy.intercept('POST', '**/lots/generation?*').as('createLots');
+    interceptSaveRequestFromManageGermplasm() {
+        cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/lots/generation?*`).as('createLots');
     }
 
-    verifySuccessfulCreation () {
+    interceptSaveRequestFromManageInventory() {
+        cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/lots?programUUID=*`).as('createLots');
+    }
+
+    verifySuccessfulCreationFromManageGermplasm () {
         cy.wait('@createLots').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
             getIframeBody().find('ngb-alert > span').contains(' lots were created successfully');
         })
+    }
+
+    verifySuccessfulCreationFromManageInventory () {
+        cy.wait('@createLots').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().find('ngb-alert > span').contains('The new lot has been created successfully.');
+        })
+    }
+
+    specifyGID(gid: string) {
+        getIframeBody().find('#gid').type(gid);
     }
 
     specifyLotDetails(stockId: string, units: string, notes:string){

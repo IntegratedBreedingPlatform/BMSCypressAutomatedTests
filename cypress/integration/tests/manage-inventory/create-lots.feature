@@ -6,9 +6,6 @@ Feature: Create Inventory Lots
 
 Background:
   Given germplasm records already exists
-  # NOTE: There is already a common step def that exists for the step above
-  # but need to add code to store GID of the imported germplasm as an env variable
-  # to use in specifying GID on create lots form
   And I am on the Manage Inventory page of specified program
 
 @TestCaseKey=IBP-T495
@@ -18,8 +15,5 @@ Scenario: Create new lot with initial deposit amount
   And I specified valid values for lot details
   And I enable initial deposit
   And I specify valid deposit details
-  # Note: Avoid hard coding the values in the page object functions,
-  # instead pass them as argument from the step def
   And I save the new lot
   Then I should be able to see that the new lot has been created successfully
-  # Assert response code of POST lots api call to be 200 and the success message that will display after saving lots
