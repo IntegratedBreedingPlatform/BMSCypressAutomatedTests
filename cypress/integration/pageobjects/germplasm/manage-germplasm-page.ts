@@ -51,6 +51,11 @@ export default class ManageGermplasmPage{
         getIframeBody().find('[jhitranslate="search-germplasm.actions.create-list"]').click();
     }
 
+    clickCreateInventoryLotsAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.create-inventory-lots"]').click();
+    }
+
     verifyAddToEntriesListModalIsDisplayed() {
         getIframeBody().find('jhi-germplasm-list-add').scrollIntoView().should('be.visible');
         
