@@ -1,21 +1,21 @@
 import { And, Then, When } from "cypress-cucumber-preprocessor/steps";
 import { randomString } from "../../../../../cypress/support/commands";
-import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page';
+import ManageInventoryPage from '../../../pageobjects/inventory/manage-inventory-page';
 import CreateLotsPage from '../../../pageobjects/inventory/create-lots-page';
 
-const manageGermplasmPage = new ManageGermplasmPage();
+const manageInventoryPage = new ManageInventoryPage();
 const createLotsPage = new CreateLotsPage();
 
 
-When('I select some germplasm entries', () => {
-    manageGermplasmPage.selectRandomGermplasm();
-});
-
-And('I navigate to create lot screen', () => {
-    manageGermplasmPage.clickCreateInventoryLotsAction();
+When('I navigate to create lots screen', () => {
+    manageInventoryPage.waitForSearchResultsToLoad().then(() => {
+        manageInventoryPage.clickCreateInventoryLotsAction();
+    });
+   
 });
 
 And('I specified valid values for lot details', () => {
+    createLotsPage.specifyGID(Cypress.env('importedGid'));
     createLotsPage.specifyLotDetails("STK", "SEED_AMOUNT_g", "Sample Lot Notes " + randomString());
 });
 
@@ -32,10 +32,10 @@ And('I confirm transactions on saving', () => {
 });
 
 And('I save the new lot', () => {
-    createLotsPage.interceptSaveRequestFromManageGermplasm();
+    createLotsPage.interceptSaveRequestFromManageInventory();
     createLotsPage.clickSaveButton();
 });
 
 Then('I should be able to see that the new lot has been created successfully', () => {
-    createLotsPage.verifySuccessfulCreationFromManageGermplasm();
+    createLotsPage.verifySuccessfulCreationFromManageInventory();
 });
