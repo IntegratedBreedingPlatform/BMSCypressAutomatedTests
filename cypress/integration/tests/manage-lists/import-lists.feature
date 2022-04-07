@@ -19,13 +19,11 @@ Feature: Import Lists
     And I click Confirm on Save Germplasm List screen
     Then the created list is available and filtered
 
-  @ignore
   Scenario: Check if user can download import lists template
     When I navigate to import list screen
     And I click the link to dowload the import list template
     Then An import list template should be downloaded
 
-  @smoke-test
   Scenario: Check if user cancels import lists
     Given I reload the Germplasm Lists page
     When I navigate to import list screen
@@ -59,7 +57,7 @@ Feature: Import Lists
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
 
 # Add before-hook: @import-germplasm.feature
-@focus 
+ 
   Scenario: Check if user can review list and skip multiple matches
     Given I reload the Germplasm Lists page
     And I navigate to import list screen 
@@ -76,7 +74,7 @@ Feature: Import Lists
 # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file
 # Add assertion to check that the entries with multiple matches are not included in the saved list
 
-  @ignore
+
   Scenario: Check if user can review list and skip without matches
     Given I imported a valid file with entries without matches
     # Note: File has non-existing entries included
@@ -87,7 +85,7 @@ Feature: Import Lists
     # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file
     # Add assertion to check that the entries without matches are not included in the saved list
 
-  @ignore
+ 
   Scenario: Check if user can review list and omit selected entries
     Given I imported a valid file with missing matches
     # Note: File has non-existing entries included
@@ -100,8 +98,6 @@ Feature: Import Lists
     # Add assertion to check that the omitted entries are not in the saved list
 
   @TestCaseKey=IBP-T3214
-  @smoke-test
-  @ignore
   Scenario: Check if user can review list and manually match selected entries
     Given I imported a valid file with multiple matches
     # Note: File has entries with multiple existing entries included. Add values to check GUID, GID, DESIGNATION search prioritization
@@ -114,7 +110,7 @@ Feature: Import Lists
     # And check if the system assigned correct ENTRY_NOs based on the ordering of entries in the file.
     # Add assertion to check that the matched entries are included in the saved list
 
-  @ignore
+ 
   Scenario: Check if user can review list and proceed with missing matches entries
     Given I imported a valid file with missing matches
     # Note: File has non-existing entries included
