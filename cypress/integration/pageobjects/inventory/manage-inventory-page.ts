@@ -7,6 +7,11 @@ export default class ManageInventoryPage{
         getIframeBody().find('[data-test="createInventoryLotsButton"]').click();
     }
 
+    clickImportInventoryLotsAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="importInventoryLotsButton"]').click();
+    }
+
     interceptLotsSearchResultsLoad() {
         cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/lots/search?programUUID=*`).as('lotsSearch');
     }
