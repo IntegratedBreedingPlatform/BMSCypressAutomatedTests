@@ -5,11 +5,13 @@ Feature: Add Selected Germplasm to Existing List
     As a user I should be able to add selected germplasm to existing list
 
 Background: 
-        Given I reload the Germplasm Manager page
+        Given I am on the Manage Germplasm page of specified program
+        And I create a new list
 
 @TestCaseKey=IBP-T2178
 @smoke-test
-    Scenario: Add selected germplasm entries to an existing list 
+    Scenario: Add selected germplasm entries to an existing list
+        Given I reload the Germplasm Manager page
         When I select some germplasm entries
         And I add select germplasm entries to an existing list
         And I confirm to add selected germplasm to the list

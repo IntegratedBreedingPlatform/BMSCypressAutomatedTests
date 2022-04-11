@@ -10,18 +10,17 @@ const germplasmListAddToListPage = new GermplasmListAddToListPage();
 const existingListName = 'TestListName' + randomString();
 let existingListId: any;
 
-
-before(() => {
-    // Before all the scenarios are executed, login first and navigate to Germplasm Manager
-    loginAndNavigateToPage('Germplasm Manager');
-    // Create new germplasm list first
-    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
-        manageGermplasmPage.selectAllCurrentPage();
-    });
-    manageGermplasmPage.clickCreateNewListAction();
-    manageGermplasmPage.clickSaveList(existingListName).then((listId) => {
-        existingListId = listId;
-    });
+And('I create a new list', () => {
+    // Create a new list only once before executing all test scenarios.
+    if (!existingListId) {
+        manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+            manageGermplasmPage.selectAllCurrentPage();
+        });
+        manageGermplasmPage.clickCreateNewListAction();
+        manageGermplasmPage.clickSaveList(existingListName).then((listId) => {
+            existingListId = listId;
+        });
+    }
 });
 
 When('I filter some germplasm entries by GID', () => {
