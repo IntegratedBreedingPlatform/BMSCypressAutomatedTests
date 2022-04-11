@@ -31,7 +31,7 @@ export default class DashboardPage{
                 cy.log(text)
                 if (text != this.programName) {
                     cy.wrap($iframe).find('[data-test="dashboardProgramDropdown"]').should('exist').click().then(()=>{
-                        cy.wrap($iframe).find('input[role="searchbox"]').should('be.visible').type(this.programName+'{enter}').then(()=>{
+                        cy.wrap($iframe).find('input[role="searchbox"]').should('be.exist').type(this.programName+'{enter}').then(()=>{
                             cy.wrap($iframe).find('#programDropdown .select2-selection__rendered').should('have.text',this.programName);
 
                        });
