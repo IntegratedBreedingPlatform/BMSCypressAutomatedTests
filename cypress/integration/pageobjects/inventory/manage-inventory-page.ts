@@ -3,7 +3,7 @@ import { getIframeBody } from '../../../support/commands';
 export default class ManageInventoryPage{
 
     viewTransactionsTab(){
-        getIframeBody().xpath('//a[text()="View Transactions"]').click();
+        getIframeBody().find('[data-test="viewTransactionsLink"]').click();
     }
 
     clickCreateInventoryLotsAction() {

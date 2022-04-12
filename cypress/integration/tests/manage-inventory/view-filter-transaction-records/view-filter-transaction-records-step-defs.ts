@@ -5,13 +5,14 @@ const manageInventoryPage = new ManageInventoryPage();
 
 
 When('I navigate to transaction records page', () => {
+    manageInventoryPage.waitForLotsSearchResultsToLoad().then(() => {
+        manageInventoryPage.viewTransactionsTab();
+    });
     manageInventoryPage.viewTransactionsTab();
 });
 
 And('I filter transaction records by GID', () => {
-    manageInventoryPage.waitForTransactionsSearchResultsToLoad().then(() => {
-        manageInventoryPage.filterByGID(Cypress.env('importedGidWithInventory'));
-    });
+    manageInventoryPage.filterByGID(Cypress.env('importedGidWithInventory'));
 });
 
 And('I filter transaction records by type', () => {
