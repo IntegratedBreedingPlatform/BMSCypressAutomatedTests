@@ -8,7 +8,7 @@ const importLotsPage = new ImportLotsPage();
 const templateFileName = `basic_template_import_lots_${Cypress.env('cropName')}.xls`;
 
 When('I navigate to import lots screen', () => {
-    manageInventoryPage.waitForSearchResultsToLoad().then(() => {
+    manageInventoryPage.waitForLotsSearchResultsToLoad().then(() => {
         manageInventoryPage.clickImportInventoryLotsAction();
     });
 });
