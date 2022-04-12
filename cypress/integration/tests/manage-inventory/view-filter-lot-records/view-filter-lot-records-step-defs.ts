@@ -3,10 +3,9 @@ import ManageInventoryPage from '../../../pageobjects/inventory/manage-inventory
 
 const manageInventoryPage = new ManageInventoryPage();
 
-When('I filter lot records by GID and location', () => {
+When('I filter lot records by a germplasm list', () => {
     manageInventoryPage.waitForLotsSearchResultsToLoad().then(() => {
-        manageInventoryPage.filterByGID(Cypress.env('importedGidWithInventory'));
-        manageInventoryPage.filterLotsByLocation("Default Seed Store")
+        manageInventoryPage.filterByGermplasmList(Cypress.env('germplasmListWithInventory'));
     });
 });
 
