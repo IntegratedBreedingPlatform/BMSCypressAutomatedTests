@@ -2,6 +2,17 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class ImportGermplasmPage{
 
+    importFile(fileName:string, listName:string, importInventory:boolean){
+        this.uploadFile(fileName);
+        this.goToInventoryScreen();
+        if (importInventory) {
+            this.saveInventory();
+        }
+        this.goToReviewScreen();
+        this.saveImport();
+        this.clickSaveList(listName);
+    }
+
     uploadFile(fileName: string) {
         cy.fixture(fileName, 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
@@ -30,7 +41,21 @@ export default class ImportGermplasmPage{
             getMainIframeDocument().find('jhi-germplasm-import-inventory').should('exist');
         });
     }
-
+    
+    saveInventory() {
+        const location = 'Default Seed Store - (DSS)';
+        getIframeBody().find('#createInventoryLots').click();
+        getIframeBody().find('#stockIdPrefixInput').type("STK");
+        getIframeBody().find('#useFavoriteSeeStorageLocations').click();
+        getIframeBody().find('#seedStorageLocation').should('exist').click()
+        getIframeBody().find('input[role="searchbox"]').should('be.visible').type(location+'{enter}').then(()=>{
+            getIframeBody().find('#seedStorageLocation .select2-selection__rendered').should('have.text',location);
+        });
+        getIframeBody().find('#dropdownUnits').should('exist').select("SEED_AMOUNT_g", { force : true });    
+        getIframeBody().find('#depositAmount').type("100");
+        getIframeBody().find('#confirmDeposit').click();
+    }
+    
     goToReviewScreen() {
         // Click next button to go to import review modal
        getMainIframeDocument().find('jhi-germplasm-import-inventory > .modal-footer > .btn-primary').click().then(() => {
