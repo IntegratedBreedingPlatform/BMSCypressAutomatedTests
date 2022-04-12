@@ -10,6 +10,9 @@ export default class ImportGermplasmPage{
         }
         this.goToReviewScreen();
         this.saveImport();
+        if (importInventory) {
+            this.verifyLotsSaved();
+        }
         this.clickSaveList(listName);
     }
 
@@ -101,6 +104,10 @@ export default class ImportGermplasmPage{
             cy.wrap($iframe).find('[data-test="name"]').type(listName);
             cy.wrap($iframe).find('[data-test="saveList"]').click();
         });
+    }
+
+    verifyLotsSaved(){
+        getIframeBody().find('ngb-alert > span').contains(' lots were created successfully');
     }
 }
 const getMainIframeDocument = () => {
