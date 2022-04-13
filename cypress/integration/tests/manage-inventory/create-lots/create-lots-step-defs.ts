@@ -8,7 +8,7 @@ const createLotsPage = new CreateLotsPage();
 
 
 When('I navigate to create lots screen', () => {
-    manageInventoryPage.waitForSearchResultsToLoad().then(() => {
+    manageInventoryPage.waitForLotsSearchResultsToLoad().then(() => {
         manageInventoryPage.clickCreateInventoryLotsAction();
     });
    

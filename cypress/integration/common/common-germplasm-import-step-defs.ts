@@ -23,15 +23,31 @@ When('germplasm records already exists', () => {
         let tool = SidebarTool.getFromLinkName("Manage Germplasm");
         sidebarSection.navigate(tool);
         manageGermplasmPage.openImportGermplasmModal();
-        importGermplasmPage.uploadFile('GermplasmImport_CleanInstall.xls');
-        importGermplasmPage.goToInventoryScreen();
-        importGermplasmPage.goToReviewScreen();
-        importGermplasmPage.saveImport();
-        importGermplasmPage.clickSaveList(listName);
+        importGermplasmPage.importFile('GermplasmImport_CleanInstall.xls', listName, false);
         Cypress.env('germplasmList', listName);
         // Save to Cypress environment the first GID from import
         getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
             Cypress.env('importedGid', $a.text());
+        })
+    }
+});
+
+When('germplasm with lot records already exists', () => {
+    // Reuse imported list within session
+       if (Cypress.env('germplasmListWithInventory')) {
+        return;
+    // Otherwise, import germplasm
+    } else {
+        //Login
+        dashboardPage.loginAndLaunchProgram();
+        let tool = SidebarTool.getFromLinkName("Manage Germplasm");
+        sidebarSection.navigate(tool);
+        manageGermplasmPage.openImportGermplasmModal();
+        importGermplasmPage.importFile('GermplasmImport_CleanInstall.xls', listName, true);
+        Cypress.env('germplasmListWithInventory', listName);
+        // Save to Cypress environment the first GID from import
+        getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
+            Cypress.env('importedGidWithInventory', $a.text());
         })
     }
 });
