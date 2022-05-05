@@ -41,7 +41,7 @@ export default class GermplasmListPage {
                 .should('exist')
                 .click()
                 .then(($row) => {
-                    cy.wrap($row).find('jhi-inline-editor > form > div > input')
+                    cy.wrap($row).find('[name="editorInput"]')
                         .should('exist')
                         .clear()
                         .type(this.entryDetailValue.toString())
