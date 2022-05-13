@@ -46,7 +46,7 @@ export default class ManageInventoryPage{
         getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("germplasmListIds");
         getIframeBody().find('[data-test="addFilterButton"]').click();
         getIframeBody().find('button.btn-info[title="Germplasm List :: All"]').should('be.visible').click();
-        cy.wait(20000);
+        cy.wait(2000);
         getIframeBody().xpath(`//span[@data-test="listName" and text()='${listName}']`, { timeout: 15000 }).click();
         this.interceptLotsSearchResultsLoad();
         getIframeBody().find('[data-test="selectListButton"]').click();
