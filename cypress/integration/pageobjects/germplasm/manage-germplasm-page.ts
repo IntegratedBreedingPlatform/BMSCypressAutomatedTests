@@ -51,6 +51,11 @@ export default class ManageGermplasmPage{
         getIframeBody().find('[jhitranslate="search-germplasm.actions.create-list"]').click();
     }
 
+    clickCreateInventoryLotsAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[jhitranslate="search-germplasm.actions.create-inventory-lots"]').click();
+    }
+
     verifyAddToEntriesListModalIsDisplayed() {
         getIframeBody().find('jhi-germplasm-list-add').scrollIntoView().should('be.visible');
         
@@ -108,12 +113,15 @@ export default class ManageGermplasmPage{
         });
     }
 
-    clickSaveList(listName: string) {
+    clickSaveList(listName: string, saveToCropFolder = false) {
         return new Cypress.Promise((resolve, reject) => {
             getIframeBody().then(($iframe) => {
                 cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/germplasm-lists?programUUID=*`).as('saveList');
-                // Select "Program list" node
-                cy.wrap($iframe).find('p-tree > div > ul > p-treenode:nth-child(2) > li.ui-treenode > div').should('exist').click();
+
+                var folderToSave = 'p-tree > div > ul > p-treenode:nth-child('
+                    + (saveToCropFolder ? '1' : '2')
+                    + ') > li.ui-treenode > div';
+                cy.wrap($iframe).find(folderToSave).should('exist').click();
                 cy.wrap($iframe).find('[data-test="name"]').type(listName);
                 cy.wrap($iframe).find('[data-test="saveList"]').click();
                 cy.wait('@saveList').then(({response}) => {
@@ -124,9 +132,13 @@ export default class ManageGermplasmPage{
         });
     }
 
+    interceptGermplasmResultsLoad() {
+        cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('germplasmSearch');
+    }
+
     waitForGermplasmSearchResultsToLoad() {
         return new Cypress.Promise((resolve, reject) => {
-            cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/germplasm/search?programUUID=*`).as('germplasmSearch');
+            this.interceptGermplasmResultsLoad();
             cy.wait('@germplasmSearch', { timeout: 15000 }).then(() => {
                 resolve();
             });

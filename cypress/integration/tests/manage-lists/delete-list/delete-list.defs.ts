@@ -36,7 +36,7 @@ Then('I should see a message that the list is deleted successfully', () => {
 });
 
 And('the list is no longer available', () => {
-    searchPage.filterAndVerifyResult(listName, 'exist');
+    searchPage.filterAndVerifyResult(listName, false);
 });
 
 And('I click Cancel in the delete germplasm list screen', () => {
@@ -48,11 +48,11 @@ Then('the delete germplasm list screen closes', () => {
 });
 
 And('the list is not deleted', () => {
-    searchPage.filterAndVerifyResult(listName, 'not.exist');
+    searchPage.filterAndVerifyResult(listName, true);
 });
 
 When('I lock the list', () => {
-    germplasmListPage.lockList();
+    germplasmListPage.toggleLockList();
 });
 
 Then('the Delete list is not available', () => {

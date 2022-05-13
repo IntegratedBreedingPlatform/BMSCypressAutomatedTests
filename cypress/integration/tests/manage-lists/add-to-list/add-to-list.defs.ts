@@ -29,7 +29,7 @@ Given('I open an existing list', () => {
 
 Given('I lock the imported list', () => {
     searchPage.selectListFilteredByListName(listName);
-    germplasmListPage.lockList();
+    germplasmListPage.toggleLockList();
 });
 
 When('I select some entries in the current page', () => {

@@ -41,7 +41,7 @@ export default class GermplasmListPage {
                 .should('exist')
                 .click()
                 .then(($row) => {
-                    cy.wrap($row).find('jhi-inline-editor > form > div > input')
+                    cy.wrap($row).find('[name="editorInput"]')
                         .should('exist')
                         .clear()
                         .type(this.entryDetailValue.toString())
@@ -123,10 +123,12 @@ export default class GermplasmListPage {
         });
     }
 
-    lockList() {
+    toggleLockList(checkLocked=true) {
         getIframeBody().find('[data-test="lockListButton"]').click();
-        getIframeBody().find('[data-test="lockListIcon"]')
-            .should('have.class', 'fa-lock');
+        if (checkLocked) {
+            getIframeBody().find('[data-test="lockListIcon"]')
+                .should('have.class', 'fa-lock');
+        }
     }
 
     openEditListMetadata() {

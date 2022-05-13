@@ -5,16 +5,13 @@ Feature: Create Inventory Lots in Manage Germplasm
   I want to create inventory lots so I can match them into existing germplasm in the system
 
 Background:
-  Given germplasm records already exists
-  # NOTE: There is already a common step def that exists for the step above
-  And I am on the Manage Germplasm page of specified program
+  Given I am on the Manage Germplasm page of specified program
 
 @TestCaseKey=IBP-T3005
 @smoke-test
 Scenario: Create new lot with initial deposit amount
-  Given I filter for a germplasm record
-  And I select the germplasm record
-  When I navigate to create lot screen
+  When I select some germplasm entries
+  And I navigate to create lot screen
   And I specified valid values for lot details
   And I enable initial deposit
   And I specify valid deposit details
