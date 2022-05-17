@@ -14,13 +14,9 @@ And('I download an import germplasm updates template', () => {
     importGermplasmUpdatesPage.downloadImportFile();
     cy.verifyDownload(templateFileName);
 });
-And('I import the germplasm update template file with update on methods and progenitors', () => {
+And('I import the germplasm update template file with complete details', () => {
     importGermplasmUpdatesPage.interceptSaveRequest();
-    importGermplasmUpdatesPage.uploadGermplasmUpdateFile(templateFileName,false);
-});
-And('I import the germplasm update template file with basic details', () => {
-    importGermplasmUpdatesPage.interceptSaveRequest();
-    importGermplasmUpdatesPage.uploadGermplasmUpdateFile(templateFileName,true);
+    importGermplasmUpdatesPage.uploadGermplasmUpdateFile(templateFileName);
 });
 
 Then('saving of germplasm updates succeeds',()=>{

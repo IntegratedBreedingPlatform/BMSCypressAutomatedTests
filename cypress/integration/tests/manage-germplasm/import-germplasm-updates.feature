@@ -8,20 +8,12 @@ Feature: Import Germplasm Updates
 Background: 
         Given germplasm records already exists
 
-@TestCaseKey=IBP-T2177
-@smoke-test
-    Scenario: Import germplasm updates with basic details
-        And I am on the Manage Germplasm page of specified program
-        When I select Import germplasm updates from Actions
-        And I download an import germplasm updates template
-        And I import the germplasm update template file with basic details
-        Then saving of germplasm updates succeeds
 
 @TestCaseKey=IBP-T3053    
 @smoke-test
-    Scenario: Import germplasm updates - update methods and progenitors
+    Scenario: Import germplasm updates with complete details
         And I am on the Manage Germplasm page of specified program
         When I select Import germplasm updates from Actions
         And I download an import germplasm updates template
-        And I import the germplasm update template file with update on methods and progenitors
+        And I import the germplasm update template file with complete details
         Then saving of germplasm updates succeeds

@@ -16,18 +16,14 @@ export default class ImportGermplasmUpdatesPage{
         getIframeBody().find('[data-test="downloadTemplateLink"]').click(); 
     }
  
-    async uploadGermplasmUpdateFile(fileName: string, basicDetailsOnly: boolean) {
+    async uploadGermplasmUpdateFile(fileName: string) {
         const downloadsFolder = Cypress.config('downloadsFolder');
         const downloadedFilename = `${downloadsFolder}/${fileName}`;
         const gid = Cypress.env('importedGid');
-        let taskName = "generateImportGermplasmUpdatesComplete";
 
-        if (basicDetailsOnly){
-            taskName = "generateImportGermplasmUpdatesDataBasicDetails";
-        }
-        cy.task(taskName, downloadedFilename + '#' + gid).then(() => {
+        cy.task('generateImportGermplasmUpdates', downloadedFilename + '#' + gid).then(() => {
             // Wait for the modified file to be written
-            cy.wait(10000);
+            cy.wait(5000);
 
             // Upload the modified downloaded file 
             cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).then(Cypress.Blob.binaryStringToBlob)
