@@ -23,7 +23,7 @@ export default class ImportGermplasmUpdatesPage{
 
         cy.task('generateImportGermplasmUpdates', downloadedFilename + '#' + gid).then(() => {
             // Wait for the modified file to be written
-            cy.wait(5000);
+            cy.wait(20000);
 
             // Upload the modified downloaded file 
             cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).then(Cypress.Blob.binaryStringToBlob)
