@@ -23,7 +23,7 @@ export function generateImportCrossesTestData (fileName: string) {
 
   // This will append lot information for Import Lots template.
 
-  export function generateImportGermplasmUpdatesData (param: string) {
+  export function generateImportGermplasmUpdatesDataBasicDetails (param: string) {
     // HACK: The parameters contain two sections: fileName and gid, separated by "#" delimiter
     let index = param.indexOf('#');
     let fileName = param.substring(0, index);
@@ -35,27 +35,46 @@ export function generateImportCrossesTestData (fileName: string) {
     //add PUI column and value
     XLSX.utils.sheet_add_aoa(workSheet, [['PUI']], {origin: 'L1'});
     XLSX.utils.sheet_add_aoa(workSheet, [['PUINewGermplasm1']], {origin: 'L2'});
-
     //add new attribute
     XLSX.utils.sheet_add_aoa(workSheet, [['ANCEST_AP_text']], {origin: 'M1'});
     XLSX.utils.sheet_add_aoa(workSheet, [['NewAttribute1']], {origin: 'M2'});
-
     //add new name
     XLSX.utils.sheet_add_aoa(workSheet, [['VABBR']], {origin: 'N1'});
     XLSX.utils.sheet_add_aoa(workSheet, [['NewName1']], {origin: 'N2'});
-
-    //update progenitor
-    XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'D2'});
-    XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'E2'});
-
-    //update method
-    XLSX.utils.sheet_add_aoa(workSheet, [['UBM']], {origin: 'C2'});
-
     //update existing name
     XLSX.utils.sheet_add_aoa(workSheet, [['LNAME']], {origin: 'O1'});
     XLSX.utils.sheet_add_aoa(workSheet, [['NewGermplasm1Edited']], {origin: 'O2'});
     XLSX.writeFile(workbook, fileName); // write the same file with new values
-  
+    // explicitly return null to signal that the given event has been handled.
+    return null;
+  }
+  export function generateImportGermplasmUpdatesComplete (param: string) {
+    // HACK: The parameters contain two sections: fileName and gid, separated by "#" delimiter
+    let index = param.indexOf('#');
+    let fileName = param.substring(0, index);
+    let gid = param.substring(index+1, param.length);
+    let workbook = XLSX.readFile(fileName); // reads original file
+    let sheetName = workbook.SheetNames[0]; //get 'Lots' sheet
+    let workSheet = workbook.Sheets[sheetName];
+    XLSX.utils.sheet_add_aoa(workSheet, [[gid]], {origin: 'A2'});
+    //add PUI column and value
+    XLSX.utils.sheet_add_aoa(workSheet, [['PUI']], {origin: 'L1'});
+    XLSX.utils.sheet_add_aoa(workSheet, [['PUINewGermplasm1']], {origin: 'L2'});
+    //add new attribute
+    XLSX.utils.sheet_add_aoa(workSheet, [['ANCEST_AP_text']], {origin: 'M1'});
+    XLSX.utils.sheet_add_aoa(workSheet, [['NewAttribute1']], {origin: 'M2'});
+    //add new name
+    XLSX.utils.sheet_add_aoa(workSheet, [['VABBR']], {origin: 'N1'});
+    XLSX.utils.sheet_add_aoa(workSheet, [['NewName1']], {origin: 'N2'});
+    //update existing name
+    XLSX.utils.sheet_add_aoa(workSheet, [['LNAME']], {origin: 'O1'});
+    XLSX.utils.sheet_add_aoa(workSheet, [['NewGermplasm1Edited']], {origin: 'O2'});
+    XLSX.writeFile(workbook, fileName); // write the same file with new values
+    //update progenitor
+    XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'D2'});
+    XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'E2'});
+    //update method
+      XLSX.utils.sheet_add_aoa(workSheet, [['UBM']], {origin: 'C2'});    
     // explicitly return null to signal that the given event has been handled.
     return null;
   }
