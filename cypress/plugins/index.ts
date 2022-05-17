@@ -1,7 +1,7 @@
 // Plugins enable you to tap into, modify, or extend the internal behavior of Cypress
 // For more info, visit https://on.cypress.io/plugins-api
 
-import { generateImportCrossesTestData, generateImportLotsData} from "./tasks/excel-data-generator";
+import { generateImportCrossesTestData, generateImportLotsData,generateImportGermplasmUpdatesData} from "./tasks/excel-data-generator";
 
 const browserify = require('@cypress/browserify-preprocessor');
 const cucumber = require('cypress-cucumber-preprocessor').default;
@@ -18,7 +18,8 @@ module.exports = (on, config) => {
   on('file:preprocessor', cucumber(options));
   on('task', {isFileExist, generateImportCrossesTestData});
   on('task', {isFileExist, generateImportLotsData});
-  
+  on('task', {isFileExist, generateImportGermplasmUpdatesData});
+
 
   // If there is no baseUrl set as config we set the one that is defined as env variable (check cypress.env.json)
   if (!config.baseUrl) {

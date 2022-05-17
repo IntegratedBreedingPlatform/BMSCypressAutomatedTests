@@ -26,6 +26,16 @@ export default class ManageGermplasmPage{
         });
     }
 
+    openImportGermplasmUpdatesModal(){
+        cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
+            cy.wrap($iframeBody).find('#actionMenu').click();
+            cy.wrap($iframeBody).find('[jhitranslate="germplasm-import-updates.title"]').click().then(() => {
+                cy.wrap($iframeBody).find('.modal-dialog').should('exist');
+                cy.wrap($iframeBody).find('[jhitranslate="germplasm-import-updates.title"] > span').contains('Import germplasm');
+            });
+        });
+    }
+    
     openGroupGermplasmModal(){
         getIframeBody().find('#actionMenu').click();
         getIframeBody().find('[jhitranslate="search-germplasm.actions.group"]').click().then(() => {
