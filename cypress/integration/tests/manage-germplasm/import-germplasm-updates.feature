@@ -8,7 +8,7 @@ Feature: Import Germplasm Updates
 Background: 
         Given germplasm records already exists
 
-@TestCaseKey=IBP-T2177    
+@TestCaseKey=IBP-T3053    
 @smoke-test
     Scenario: Import germplasm updates using basic template
         And I am on the Manage Germplasm page of specified program
