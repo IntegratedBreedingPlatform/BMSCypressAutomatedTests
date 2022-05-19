@@ -1,5 +1,8 @@
 const XLSX = require("xlsx");
+import { randomString } from '../../support/commands';
 
+
+var germplasmName = 'germplasm' + randomString();
 // This will append observation plots for Import Crosses template.
 export function generateImportCrossesTestData (fileName: string) {
     let workbook = XLSX.readFile(fileName); // reads original file
@@ -20,16 +23,26 @@ export function generateImportCrossesTestData (fileName: string) {
     // explicitly return null to signal that the given event has been handled.
     return null;
   }
+  export function generateImportGermplasmData (fileName: string) {
+    let workbook = XLSX.readFile(fileName); 
+    let sheetName = workbook.SheetNames[0]; 
+    let workSheet = workbook.Sheets[sheetName];
+    XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'A2'});
+    XLSX.utils.sheet_add_aoa(workSheet, [[germplasmName]], {origin: 'B2'});  
+    XLSX.utils.sheet_add_aoa(workSheet, [["UDM"]], {origin: 'I2'});        
+    XLSX.writeFile(workbook, fileName);
+    return null;
+  }
 
-  // This will append lot information for Import Lots template.
 
+  // This will dynamic germplasm name for Import Germplasm template
   export function generateImportGermplasmUpdates (param: string) {
     // HACK: The parameters contain two sections: fileName and gid, separated by "#" delimiter
     let index = param.indexOf('#');
     let fileName = param.substring(0, index);
     let gid = param.substring(index+1, param.length);
     let workbook = XLSX.readFile(fileName); // reads original file
-    let sheetName = workbook.SheetNames[0]; //get 'Lots' sheet
+    let sheetName = workbook.SheetNames[0]; 
     let workSheet = workbook.Sheets[sheetName];
     XLSX.utils.sheet_add_aoa(workSheet, [[gid]], {origin: 'A2'});
     //update method
@@ -67,6 +80,7 @@ export function generateImportCrossesTestData (fileName: string) {
     return null;
   }
 
+  // This will append lot information for Import Lots template.
 export function generateImportLotsData (param: string) {
   // HACK: The parameters contain two sections: fileName and gid, separated by "#" delimiter
   let index = param.indexOf('#');

@@ -7,7 +7,7 @@ const manageGermplasmPage = new ManageGermplasmPage();
 const groupGermplasmPage = new GroupGermplasmPage();
 const importGermplasmPage = new ImportGermplasmPage();
 
-And('I imported a germplasm list with derivative germplasm entries',()=>{
+And('I select grouped germplasm entries from the list',()=>{
     manageGermplasmPage.openImportGermplasmModal();
     importGermplasmPage.uploadFile('GermplasmImportDerivative.xls');
     importGermplasmPage.goToInventoryScreen();
@@ -15,18 +15,3 @@ And('I imported a germplasm list with derivative germplasm entries',()=>{
     importGermplasmPage.saveImport();
     importGermplasmPage.skipSavingList();
 })
-
-And('I select all germplasm entries from the list',()=>{
-    groupGermplasmPage.selectAllImportedEntries();
-})
-
-When('I mark the germplasm entries as fixed to assign them in a group',()=>{
-    manageGermplasmPage.openGroupGermplasmModal();
-    groupGermplasmPage.confirmGermplasmGrouping();
-})
-
-Then('I should see that the selected entries have assigned group id',()=>{
-    groupGermplasmPage.verifySuccessMessage();
-    groupGermplasmPage.verifyGroupIdExists();
-})
-

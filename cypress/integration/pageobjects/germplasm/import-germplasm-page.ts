@@ -2,6 +2,10 @@ import { getIframeBody } from '../../../support/commands';
 
 export default class ImportGermplasmPage{
 
+    downloadImportGermplasmTemplateFile() {
+        getIframeBody().find('[data-test="downloadTemplateLink"]').click(); 
+    }
+
     importFile(fileName:string, listName:string, importInventory:boolean){
         this.uploadFile(fileName);
         this.goToInventoryScreen();
@@ -16,6 +20,46 @@ export default class ImportGermplasmPage{
         this.clickSaveList(listName);
     }
 
+    importGermplasmTemplateWithData(fileName:string, listName:string, importInventory:boolean){
+        this.uploadGermplasmTemplateWithData(fileName);
+        this.goToInventoryScreen();
+        if (importInventory) {
+            this.saveInventory();
+        }
+        this.goToReviewScreen();
+        this.saveImport();
+        if (importInventory) {
+            this.verifyLotsSaved();
+        }
+        this.clickSaveList(listName);
+    }
+
+    async uploadGermplasmTemplateWithData(fileName: string) {
+        const downloadsFolder = Cypress.config('downloadsFolder');
+        const downloadedFilename = `${downloadsFolder}/${fileName}`;
+        const gid = Cypress.env('importedGIDForGrouping');
+
+        cy.task('generateImportGermplasmData', downloadedFilename).then(() => {
+            // Wait for the modified file to be written
+            cy.wait(5000);
+
+            // Upload the modified downloaded file 
+            cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).then(Cypress.Blob.binaryStringToBlob)
+            .then((fileContent) => {
+                getIframeBody().find('#importFile').attachFile({
+                    fileContent,
+                    fileName,
+                    mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    encoding:'utf8',
+                    lastModified: new Date().getTime()
+                });
+            });
+
+            // Wait for file to be uploaded
+            cy.wait(100);
+
+        });
+    }
     uploadFile(fileName: string) {
         cy.fixture(fileName, 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
