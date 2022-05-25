@@ -1,5 +1,6 @@
+import { random } from 'cypress/types/lodash';
 import { getIframeBody } from '../../../support/commands';
-
+import { randomString } from '../../../support/commands';
 export default class ImportGermplasmPage{
 
     downloadImportGermplasmTemplateFile() {
@@ -37,11 +38,10 @@ export default class ImportGermplasmPage{
     async uploadGermplasmTemplateWithData(fileName: string) {
         const downloadsFolder = Cypress.config('downloadsFolder');
         const downloadedFilename = `${downloadsFolder}/${fileName}`;
-        const gid = Cypress.env('importedGIDForGrouping');
-
-        cy.task('generateImportGermplasmData', downloadedFilename).then(() => {
+        let germplasmName = 'germplasm' + randomString();
+        cy.task('generateImportGermplasmData', downloadedFilename +'#' + germplasmName).then(() => {
             // Wait for the modified file to be written
-            cy.wait(5000);
+            cy.wait(2000);
 
             // Upload the modified downloaded file 
             cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).then(Cypress.Blob.binaryStringToBlob)
