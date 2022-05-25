@@ -28,7 +28,7 @@ When('grouped germplasm records already exists', () => {
         manageGermplasmPage.openImportGermplasmModal();
         importGermplasmPage.downloadImportGermplasmTemplateFile();
         cy.verifyDownload(templateFileName);
-        importGermplasmPage.importFile('templateFileName', listName, false);
+        importGermplasmPage.importGermplasmTemplateWithData(templateFileName, listName, false);
         Cypress.env('groupedGermplasmList', listName);
         // Save to Cypress environment the first GID from import
         getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
