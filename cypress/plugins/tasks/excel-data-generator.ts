@@ -30,7 +30,12 @@ export function generateImportCrossesTestData (fileName: string) {
     let workSheet = workbook.Sheets[sheetName];
     XLSX.utils.sheet_add_aoa(workSheet, [['1']], {origin: 'A2'});
     XLSX.utils.sheet_add_aoa(workSheet, [[germplasmName]], {origin: 'B2'});  
-    XLSX.utils.sheet_add_aoa(workSheet, [["UDM"]], {origin: 'I2'});        
+    XLSX.utils.sheet_add_aoa(workSheet, [["AFG"]], {origin: 'F2'}); 
+    XLSX.utils.sheet_add_aoa(workSheet, [["UDM"]], {origin: 'I2'});      
+    XLSX.utils.sheet_add_aoa(workSheet, [["DSS"]], {origin: 'M2'});    
+    XLSX.utils.sheet_add_aoa(workSheet, [["SEED_AMOUNT_g"]], {origin: 'N2'});      
+    XLSX.utils.sheet_add_aoa(workSheet, [["500"]], {origin: 'O2'});   
+    XLSX.utils.sheet_add_aoa(workSheet, [[germplasmName+"STK1"]], {origin: 'P2'});   
     XLSX.writeFile(workbook, fileName);
     return null;
   }
