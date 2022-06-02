@@ -74,12 +74,6 @@ export default class ImportGermplasmPage{
             })
 
         cy.wait(50);
-
-        // Click next button to go to basic details modal
-        getMainIframeDocument().find('jhi-germplasm-import > .modal-footer > .btn-primary').click().then(() => {
-            getMainIframeDocument().find('jhi-germplasm-import-basic-details').should('exist');
-        });
-
     }
 
     goToInventoryScreen() {
