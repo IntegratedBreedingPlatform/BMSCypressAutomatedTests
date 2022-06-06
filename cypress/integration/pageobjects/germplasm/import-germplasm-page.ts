@@ -32,7 +32,7 @@ export default class ImportGermplasmPage{
         if (importInventory) {
             this.verifyLotsSaved();
         }
-        this.clickSaveList(listName);
+        this.skipSavingList();
     }
 
     async uploadGermplasmTemplateWithData(fileName: string) {
