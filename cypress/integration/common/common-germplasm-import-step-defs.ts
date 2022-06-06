@@ -4,12 +4,14 @@ import ImportGermplasmPage from '../pageobjects/germplasm/import-germplasm-page'
 import DashboardPage from '../pageobjects/dashboard-page'
 import SidebarSection, { SidebarTool } from '../pageobjects/sidebar-section'
 import { randomString, getIframeBody } from '../../support/commands';
+import GroupGermplasmPage from '../pageobjects/germplasm/group-germplasm-page';
 
 const dashboardPage = new DashboardPage()
 const sidebarSection = new SidebarSection()
 
 const manageGermplasmPage = new ManageGermplasmPage()
 const importGermplasmPage = new ImportGermplasmPage()
+const groupGermplasmPage = new GroupGermplasmPage();
 var listName: string;
 listName = 'list name ' + randomString();
 const templateFileName = `GermplasmImportTemplate_${Cypress.env('cropName')}.xls`;
@@ -28,12 +30,16 @@ When('grouped germplasm records already exists', () => {
         manageGermplasmPage.openImportGermplasmModal();
         importGermplasmPage.downloadImportGermplasmTemplateFile();
         cy.verifyDownload(templateFileName);
+        //Import new germplasm records
         importGermplasmPage.importGermplasmTemplateWithData(templateFileName, listName, false);
-        Cypress.env('groupedGermplasmList', listName);
         // Save to Cypress environment the first GID from import
         getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
             Cypress.env('importedGIDForGrouping', $a.text());
         })
+        //Mark germplasm records as fixed
+        groupGermplasmPage.selectAllImportedEntries();
+        manageGermplasmPage.openGroupGermplasmModal();
+        groupGermplasmPage.confirmGermplasmGrouping();
     }
 });
 
