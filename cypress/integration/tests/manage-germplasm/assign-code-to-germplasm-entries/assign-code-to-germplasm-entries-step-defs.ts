@@ -7,6 +7,14 @@ const manageGermplasmPage = new ManageGermplasmPage();
 const assignCodePage = new AssignCodePage();
 const importGermplasmPage = new ImportGermplasmPage();
 
+And('I filtered germplasm entries by the GID of the existing grouped germplasm',()=>{
+    manageGermplasmPage.filterByGid(Cypress.env('importedGIDForGrouping'));
+    manageGermplasmPage.waitForGermplasmSearchResultsToLoad().then(() => {
+        manageGermplasmPage.selectAllCurrentPage();
+    });
+})
+
+
 When('I assign CODE 1 to a germplasm using automatic naming generation',()=>{
     assignCodePage.openAssignCodeModal();
     assignCodePage.selectCodeLevel("CODE1");
