@@ -18,8 +18,8 @@ const templateFileName = `GermplasmImportTemplate_${Cypress.env('cropName')}.xls
 
 
 When('grouped germplasm records already exists', () => {
-    // Reuse imported list within session
-       if (Cypress.env('groupedGermplasmList')) {
+    // Reuse imported germplasm within session
+       if (Cypress.env('importedGIDForGrouping')) {
         return;
     // Otherwise, import germplasm
     } else {
