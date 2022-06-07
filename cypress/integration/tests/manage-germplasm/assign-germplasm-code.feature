@@ -1,4 +1,4 @@
-@assign-code-germplasm
+@assign-germplasm-code
 @manage-germplasm
 Feature: Assign Code to Germplasm Entries
     In order to assign code 1 to germplasm entries
