@@ -31,7 +31,7 @@ When('grouped germplasm records already exists', () => {
         importGermplasmPage.downloadImportGermplasmTemplateFile();
         cy.verifyDownload(templateFileName);
         //Import new germplasm records
-        importGermplasmPage.importGermplasmTemplateWithData(templateFileName, listName, false);
+        importGermplasmPage.importGermplasmTemplateWithData(templateFileName, false);
         //Mark germplasm records as fixed
         groupGermplasmPage.selectAllImportedEntries();
         manageGermplasmPage.openGroupGermplasmModal();
