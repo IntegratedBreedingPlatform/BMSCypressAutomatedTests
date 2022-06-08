@@ -9,6 +9,7 @@ export default class ImportGermplasmPage{
 
     importFile(fileName:string, listName:string, importInventory:boolean){
         this.uploadFile(fileName);
+        this.goToImportBasicDetailsScreen();
         this.goToInventoryScreen();
         if (importInventory) {
             this.saveInventory();
@@ -21,8 +22,9 @@ export default class ImportGermplasmPage{
         this.clickSaveList(listName);
     }
 
-    importGermplasmTemplateWithData(fileName:string, listName:string, importInventory:boolean){
+    importGermplasmTemplateWithData(fileName:string, importInventory:boolean){
         this.uploadGermplasmTemplateWithData(fileName);
+        this.goToImportBasicDetailsScreen();
         this.goToInventoryScreen();
         if (importInventory) {
             this.saveInventory();
@@ -76,10 +78,17 @@ export default class ImportGermplasmPage{
         cy.wait(50);
     }
 
+    goToImportBasicDetailsScreen() {
+        // Click next button to go inventory modal
+        getMainIframeDocument().find('jhi-germplasm-import').should('exist').click().then(() => {
+            getMainIframeDocument().find('[data-test="importGermplasmNextButton"]').should('exist').click();
+        });
+    }
+
     goToInventoryScreen() {
         // Click next button to go inventory modal
-        getMainIframeDocument().find('[data-test="importGermplasmNextButton"]').click().then(() => {
-            getMainIframeDocument().find('jhi-germplasm-import-basic-details').should('exist');
+        getMainIframeDocument().find('jhi-germplasm-import-basic-details').should('exist').click().then(() => {
+            getMainIframeDocument().find('[data-test="importGermplasmDetailsNextButton"]').should('exist').click();
         });
     }
     
@@ -99,24 +108,23 @@ export default class ImportGermplasmPage{
     
     goToReviewScreen() {
         // Click next button to go to import review modal
-       getMainIframeDocument().find('[data-test="importGermplasmDetailsNextButton"]').click().then(() => {
-           getMainIframeDocument().find('jhi-germplasm-import-inventory').should('exist');
+       getMainIframeDocument().find('jhi-germplasm-import-inventory').click().then(() => {
+           getMainIframeDocument().find('[data-test="importGermplasmInventoryButton"]').should('exist').click();
        });
     }
 
     saveImport() {
         // Click save button
-        getMainIframeDocument().find('[data-test="importGermplasmInventoryButton"]').click().then(() => {
-            getMainIframeDocument().find('jhi-germplasm-import-review').should('exist');
+        getMainIframeDocument().find('jhi-germplasm-import-review').should('exist').then(() => {
+            getMainIframeDocument().find('[data-test="importGermplasmSaveButton"]').should('exist').click();
         });
         cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/germplasm?programUUID=*`).as('importGermplasm');
         // Click confirm button of confirmation modal
-        getMainIframeDocument().find('[data-test="importGermplasmSaveButton"]').click().then(() => {
-            getMainIframeDocument().find('jhi-modal-confirm').should('exist');
+        getMainIframeDocument().find('jhi-modal-confirm').should('exist').then(() => {
+            getMainIframeDocument().find('[data-test="modalConfirmButton"]').click();
         })
-        getMainIframeDocument().find('[data-test="modalConfirmButton"]').click().then(() => {
-            getMainIframeDocument().find('jhi-germplasm-list-creation').should('exist');
-        })
+        getMainIframeDocument().find('jhi-germplasm-list-creation').should('exist');
+
     }
 
     verifyImportSaved() {
