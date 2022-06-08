@@ -10,6 +10,7 @@ const importGermplasmPage = new ImportGermplasmPage();
 And('I imported a germplasm list with derivative germplasm entries',()=>{
     manageGermplasmPage.openImportGermplasmModal();
     importGermplasmPage.uploadFile('GermplasmImportDerivative.xls');
+    importGermplasmPage.goToImportBasicDetailsScreen();
     importGermplasmPage.goToInventoryScreen();
     importGermplasmPage.goToReviewScreen();
     importGermplasmPage.saveImport();
