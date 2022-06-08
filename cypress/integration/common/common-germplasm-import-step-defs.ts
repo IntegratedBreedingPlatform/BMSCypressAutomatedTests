@@ -32,14 +32,13 @@ When('grouped germplasm records already exists', () => {
         cy.verifyDownload(templateFileName);
         //Import new germplasm records
         importGermplasmPage.importGermplasmTemplateWithData(templateFileName, listName, false);
-        // Save to Cypress environment the first GID from import
-        getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
-            Cypress.env('importedGIDForGrouping', $a.text());
-        })
         //Mark germplasm records as fixed
         groupGermplasmPage.selectAllImportedEntries();
         manageGermplasmPage.openGroupGermplasmModal();
         groupGermplasmPage.confirmGermplasmGrouping();
+        getIframeBody().find('#cdk-drop-list-1 > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)').then(($a) => {
+            Cypress.env('importedGIDForGrouping', $a.text());
+        })
     }
 });
 
