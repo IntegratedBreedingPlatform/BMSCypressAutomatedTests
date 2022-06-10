@@ -8,6 +8,7 @@ export default class SaveListTreeModalPage {
     }
 
     setListName(listName: string) {
+        cy.wait(5000);
         getIframeBody().find('#saveListTreeModal').should('exist').then(() => {
             getIframeBody().find('[data-test="listNameTextBox"]').should('be.visible').type(listName);
         });
