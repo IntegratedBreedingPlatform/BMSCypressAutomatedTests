@@ -80,14 +80,14 @@ export default class ImportGermplasmPage{
 
     goToImportBasicDetailsScreen() {
         // Click next button to go inventory modal
-        getMainIframeDocument().find('jhi-germplasm-import').should('exist').click().then(() => {
+        getMainIframeDocument().find('jhi-germplasm-import').should('exist').then(() => {
             getMainIframeDocument().find('[data-test="importGermplasmNextButton"]').should('exist').click();
         });
     }
 
     goToInventoryScreen() {
         // Click next button to go inventory modal
-        getMainIframeDocument().find('jhi-germplasm-import-basic-details').should('exist').click().then(() => {
+        getMainIframeDocument().find('jhi-germplasm-import-basic-details').should('exist').then(() => {
             getMainIframeDocument().find('[data-test="importGermplasmDetailsNextButton"]').should('exist').click();
         });
     }
