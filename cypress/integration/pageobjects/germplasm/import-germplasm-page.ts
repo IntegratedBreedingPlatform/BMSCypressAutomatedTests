@@ -96,10 +96,10 @@ export default class ImportGermplasmPage{
         const location = 'Default Seed Store - (DSS)';
         getIframeBody().find('#createInventoryLots').click();
         getIframeBody().find('#stockIdPrefixInput').type("STK");
-        getIframeBody().find('#useFavoriteBreedingLocations\ \+\ true').click();
-        getIframeBody().find('#seedStorageLocation').should('exist').click()
+        getIframeBody().find('[id="useFavoriteBreedingLocations\ \+\ true"]').click();
+        getIframeBody().find('[data-test="locationDropdown"]').should('exist').click()
         getIframeBody().find('input[role="searchbox"]').should('be.visible').type(location+'{enter}').then(()=>{
-            getIframeBody().find('#seedStorageLocation .select2-selection__rendered').should('have.text',location);
+            getIframeBody().xpath('//*[@class="select2-selection__rendered"]').should('have.text',location);
         });
         getIframeBody().find('#dropdownUnits').should('exist').select("SEED_AMOUNT_g", { force : true });    
         getIframeBody().find('#depositAmount').type("100");
