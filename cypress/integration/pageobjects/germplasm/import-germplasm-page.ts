@@ -96,7 +96,7 @@ export default class ImportGermplasmPage{
         const location = 'Default Seed Store - (DSS)';
         getIframeBody().find('#createInventoryLots').click();
         getIframeBody().find('#stockIdPrefixInput').type("STK");
-        getIframeBody().find('#useFavoriteBreedingLocations + true').click();
+        getIframeBody().find('#useFavoriteBreedingLocations\ \+\ true').click();
         getIframeBody().find('#seedStorageLocation').should('exist').click()
         getIframeBody().find('input[role="searchbox"]').should('be.visible').type(location+'{enter}').then(()=>{
             getIframeBody().find('#seedStorageLocation .select2-selection__rendered').should('have.text',location);
