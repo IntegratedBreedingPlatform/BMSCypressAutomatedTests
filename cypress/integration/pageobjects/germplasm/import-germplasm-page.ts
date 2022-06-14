@@ -96,7 +96,7 @@ export default class ImportGermplasmPage{
         const location = 'Default Seed Store - (DSS)';
         getIframeBody().find('#createInventoryLots').click();
         getIframeBody().find('#stockIdPrefixInput').type("STK");
-        getIframeBody().find('#useFavoriteSeeStorageLocations').click();
+        getIframeBody().find('#useFavoriteBreedingLocations').click();
         getIframeBody().find('#seedStorageLocation').should('exist').click()
         getIframeBody().find('input[role="searchbox"]').should('be.visible').type(location+'{enter}').then(()=>{
             getIframeBody().find('#seedStorageLocation .select2-selection__rendered').should('have.text',location);
@@ -108,7 +108,7 @@ export default class ImportGermplasmPage{
     
     goToReviewScreen() {
         // Click next button to go to import review modal
-       getMainIframeDocument().find('jhi-germplasm-import-inventory').click().then(() => {
+       getMainIframeDocument().find('jhi-germplasm-import-inventory').should('exist').then(() => {
            getMainIframeDocument().find('[data-test="importGermplasmInventoryButton"]').should('exist').click();
        });
     }
