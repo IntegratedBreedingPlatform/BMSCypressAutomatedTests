@@ -13,6 +13,7 @@ var listName: string;
 And('I imported a germplasm list with derivative germplasm entries',()=>{
     manageGermplasmPage.openImportGermplasmModal();
     importGermplasmPage.uploadFile('GermplasmImportDerivative2.xls');
+    importGermplasmPage.goToImportBasicDetailsScreen();
     importGermplasmPage.goToInventoryScreen();
     importGermplasmPage.goToReviewScreen();
     importGermplasmPage.saveImport();

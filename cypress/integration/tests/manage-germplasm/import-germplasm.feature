@@ -13,6 +13,7 @@ Feature: Import Germplasm
         When I select Import germplasm from Actions
         And I select a file to upload
         And I click Next on Import Germplasm screen
+        And I click Next on Import Germplasm Basic details screen
         And I click Next on Create Inventory screen
         And I click Save on Review Germplasm screen
         Then saving of germplasm succeeds
@@ -23,6 +24,7 @@ Feature: Import Germplasm
         When I select Import germplasm from Actions
         And I select a file to upload
         And I click Next on Import Germplasm screen
+        And I click Next on Import Germplasm Basic details screen
         And I click Next on Create Inventory screen
         And I click Save on Review Germplasm screen
         Then saving of germplasm succeeds

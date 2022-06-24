@@ -1,18 +1,16 @@
 import { When,And,Then } from "cypress-cucumber-preprocessor/steps";
 import ManageGermplasmPage from '../../../pageobjects/germplasm/manage-germplasm-page'
 import GroupGermplasmPage from '../../../pageobjects/germplasm/group-germplasm-page';
-import { randomString } from '../../../../support/commands';
 import ImportGermplasmPage from '../../../pageobjects/germplasm/import-germplasm-page';
 
 const manageGermplasmPage = new ManageGermplasmPage();
 const groupGermplasmPage = new GroupGermplasmPage();
 const importGermplasmPage = new ImportGermplasmPage();
 
-var listName: string;
-
 And('I imported a germplasm list with derivative germplasm entries',()=>{
     manageGermplasmPage.openImportGermplasmModal();
     importGermplasmPage.uploadFile('GermplasmImportDerivative.xls');
+    importGermplasmPage.goToImportBasicDetailsScreen();
     importGermplasmPage.goToInventoryScreen();
     importGermplasmPage.goToReviewScreen();
     importGermplasmPage.saveImport();
