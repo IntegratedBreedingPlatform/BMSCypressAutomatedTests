@@ -18,10 +18,7 @@ export default class AssignCodePage{
                 getIframeBody().find('#code2').click();
                 break;
            case 'CODE3' :
-                getIframeBody().find('#code3').click();
-                break;    
-           default:
-                break;           
+                getIframeBody().find('#code3').click();          
        }           
     }
     selectManualNaming(){
