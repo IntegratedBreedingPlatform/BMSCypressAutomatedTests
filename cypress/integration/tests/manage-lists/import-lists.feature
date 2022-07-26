@@ -13,6 +13,7 @@ Feature: Import Lists
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click Next on Import Germplasm list screen
+    And I click Next on Entry Details screen
     And I click Next on Review Import List screen
     And I select the first match on Select Match screen
     And I click Confirm on Import List Summary screen
