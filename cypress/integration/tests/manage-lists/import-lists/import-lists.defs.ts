@@ -17,6 +17,9 @@ And('I select a file to upload', () => {
 And('I click Next on Import Germplasm list screen', () => {
     importModal.clickImportNext();
 });
+And('I click Next on Entry Details screen', () => {
+    importModal.clickNextEntryDetails();
+});
 And('I click Next on Review Import List screen', () => {
     importModal.clickImportSubmit();
 });
