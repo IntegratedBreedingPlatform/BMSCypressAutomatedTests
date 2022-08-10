@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../support/commands';
+
 export default class AddProgramPage{
 
     openCropNameOptions(){
@@ -10,6 +12,15 @@ export default class AddProgramPage{
         // Select the first result
         cy.xpath('//body/span/span/span[1]/input').should('be.visible').type(cropName);
         cy.xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li`).should('be.visible').first().click();
+    }
+
+    selectDefaultLocation(locationDropdownIndex: number, locationName: string){
+        cy.get('[data-test="locationDropdown"]').eq(locationDropdownIndex).should('exist').click();
+        // Select the first result
+        cy.xpath('//body/span/span/span[1]/input').should('be.visible').type(locationName).then(()=>{
+            cy.wait(1000);
+            cy.xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li`).should('be.visible').first().click();
+        });
     }
 
     enterProgramName(programName:string){
