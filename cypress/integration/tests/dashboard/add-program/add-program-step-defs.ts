@@ -20,7 +20,17 @@ And('I select a crop name',()=>{
     addProgramPage.openCropNameOptions();
     addProgramPage.selectCropName(cropName);
 })
- 
+
+And('I select default breeding location',()=>{
+    const location = 'Default Breeding Location';
+    addProgramPage.selectDefaultLocation(0, location);
+})
+
+And('I select default storage location',()=>{
+    const location = 'Default Seed Store';
+    addProgramPage.selectDefaultLocation(1, location);
+})
+
 And('I enter {} program name',(name)=>{
 
     if(name == "default"){

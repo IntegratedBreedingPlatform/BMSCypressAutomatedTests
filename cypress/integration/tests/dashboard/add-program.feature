@@ -15,8 +15,8 @@ Feature: Add Program
         And I select a crop name
         And I enter default program name
         And I enter a program start date
-        #And I select default breeding location
-        #And I select default storage location
+        And I select default breeding location
+        And I select default storage location
         And I save program details
         Then A success message should display
 
@@ -28,8 +28,8 @@ Feature: Add Program
         And I select a crop name
         And I enter new program name
         And I enter a program start date
-        #And I select default breeding location
-        #And I select default storage location
+        And I select default breeding location
+        And I select default storage location
         And I save program details
         Then A success message should display
 #Note: The scenarios above are duplicated to be able to include add program
