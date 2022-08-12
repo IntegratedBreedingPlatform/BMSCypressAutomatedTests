@@ -1,9 +1,9 @@
-import { And, Then } from "cypress-cucumber-preprocessor/steps";
+import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import CreateNameTypePage from '../../../pageobjects/crop-management/create-name-type-page';
 
 const createNameTypePage = new CreateNameTypePage();
 
-And('I navigate  Germplasm Name Types tab', () => {
+When('I navigate  Germplasm Name Types tab', () => {
     createNameTypePage.clickNameTypeTab();
 });
 
