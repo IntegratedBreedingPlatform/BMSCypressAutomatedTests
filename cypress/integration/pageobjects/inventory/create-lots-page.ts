@@ -19,6 +19,7 @@ export default class CreateLotsPage{
     verifySuccessfulCreationFromManageInventory () {
         cy.wait('@createLots').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
+            cy.wrap(interception.response?.body+'').as('newLotUID');
             getIframeBody().find('ngb-alert > span').contains('The new lot has been created successfully.');
         })
     }

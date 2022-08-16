@@ -16,6 +16,16 @@ export default class ManageInventoryPage{
         getIframeBody().find('[data-test="importInventoryLotsButton"]').click();
     }
 
+    clickDepositInventoryAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="depositInventoryLotsButton"]').click();
+    }
+
+    clickWithdrawInventoryAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="withdrawInventoryLotsButton"]').click();
+    }
+
     interceptLotsSearchResultsLoad() {
         cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/lots/search?programUUID=*`).as('lotsSearch');
     }
@@ -61,6 +71,20 @@ export default class ManageInventoryPage{
         getIframeBody().find('button.btn-primary').contains("Apply").click();
     }
 
+    filterByLotUID(lotUID:string) {
+        cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/lots/search?programUUID=*`).as('filterByLotUID');
+        return new Cypress.Promise((resolve, reject) => {
+            getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("lotUUIDs");
+            getIframeBody().find('[data-test="addFilterButton"]').click();
+            getIframeBody().find('button.btn-info[title="Lot UID :: All"]').should('be.visible').click();
+            getIframeBody().xpath('//input[@placeholder="Match Text"]').should('be.visible').type(lotUID);
+            getIframeBody().find('button.btn-primary').contains("Apply").click();
+            cy.wait('@filterByLotUID', { timeout: 15000 }).then(() => {
+                resolve();
+            });
+        });
+    }
+
     filterLotsByLocation(location:string){
         getIframeBody().xpath('//select[@id="dropdownFilters"]').should('exist').select("locationNameContainsString");
         getIframeBody().find('[data-test="addFilterButton"]').click();
@@ -102,5 +126,9 @@ export default class ManageInventoryPage{
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
                 .should(recordsShouldExist ? "not.exist" : "exist");
         });
+    }
+
+    selectCurrentPageForLotsTable() {
+        getIframeBody().find('input[title="select current page"]').should('be.visible').check();
     }
 }
