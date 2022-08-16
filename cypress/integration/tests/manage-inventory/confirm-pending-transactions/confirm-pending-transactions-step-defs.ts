@@ -27,7 +27,7 @@ Given('I have created a new lot', () => {
 And('I filter by Lot UID', () => {
     cy.get('@newLotUID').then((newLotUID:any) => {
         manageInventoryPage.filterByLotUID(newLotUID).then(() => {
-            manageInventoryPage.selectCurrentPageForLotsTable();
+            manageInventoryPage.toggleCheckboxesForCurrentPage(true);
         });
     });
 });
@@ -42,7 +42,7 @@ And('I create Deposit Inventory', () => {
 });
 
 And('I create Withdrawal Inventory', () => {
-    manageInventoryPage.selectCurrentPageForLotsTable();
+    manageInventoryPage.toggleCheckboxesForCurrentPage(true);
     manageInventoryPage.clickWithdrawInventoryAction();
     withdrawInventoryPage.setAmountForUnit('50', 'SEED_AMOUNT_g');
     withdrawInventoryPage.setNotes('Test Withdraw Transaction');
@@ -52,17 +52,25 @@ And('I create Withdrawal Inventory', () => {
 });
 
 When('I navigate to View Transactions tab', () => {
+    manageInventoryPage.interceptTransactionsSearchResultsLoad();
     manageInventoryPage.viewTransactionsTab();
 });
 
 And('I filtered transactions by the germplasm list with existing pending transactions', () => {
-    
+    manageInventoryPage.waitForTransactionsSearchResultsToLoad().then(() => {
+        manageInventoryPage.filterTransactionsByStatus('Pending');
+    }); 
 });
 
 And('I confirmed all filtered transactions', () => {
-    
+    manageInventoryPage.waitForTransactionsSearchResultsToLoad().then(() => {
+        manageInventoryPage.toggleCheckboxesForCurrentPage(true);
+        manageInventoryPage.clickConfirmTransactionsAction();
+        manageInventoryPage.interceptTransactionConfirmation();
+        manageInventoryPage.clickModalConfirmButton();
+    });
 });
 
 Then('I should see a success message that transactions were successfully confirmed', () => {
-    
+    manageInventoryPage.verifyTransactionsConfirmation();
 });

@@ -26,6 +26,19 @@ export default class ManageInventoryPage{
         getIframeBody().find('[data-test="withdrawInventoryLotsButton"]').click();
     }
 
+    clickConfirmTransactionsAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="confirmTransactionsButton"]').click();
+    }
+
+    clickModalConfirmButton() {
+        getIframeBody().find('[data-test="modalConfirmButton"]').click();
+    }
+
+    interceptTransactionConfirmation() {
+        cy.intercept('POST', `bmsapi/crops/${Cypress.env('cropName')}/transactions/confirmation`).as('transactionsConfirmation');
+    }
+
     interceptLotsSearchResultsLoad() {
         cy.intercept('GET', `bmsapi/crops/${Cypress.env('cropName')}/lots/search?programUUID=*`).as('lotsSearch');
     }
@@ -114,7 +127,7 @@ export default class ManageInventoryPage{
 
     verifySuccessfulLotsFilter(recordsShouldExist: boolean){
         cy.wait('@lotsSearch').then((interception) => {
-            expect(interception.response.statusCode).to.be.equal(200);
+            expect(interception.response?.statusCode).to.be.equal(200);
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
                 .should(recordsShouldExist ? "not.exist" : "exist");
         });
@@ -122,13 +135,25 @@ export default class ManageInventoryPage{
 
     verifySuccessfulTransactionsFilter(recordsShouldExist: boolean){
         cy.wait('@transactionsSearch').then((interception) => {
-            expect(interception.response.statusCode).to.be.equal(200);
+            expect(interception.response?.statusCode).to.be.equal(200);
             getIframeBody().find('table > tbody > tr:first-of-type > td[jhitranslate="no.data"]')
                 .should(recordsShouldExist ? "not.exist" : "exist");
         });
     }
 
-    selectCurrentPageForLotsTable() {
-        getIframeBody().find('input[title="select current page"]').should('be.visible').check();
+    verifyTransactionsConfirmation() {
+        cy.wait('@transactionsConfirmation').then((interception) => {
+            expect(interception.response?.statusCode).to.be.equal(200);
+            getIframeBody().find('ngb-alert > span').contains('The transactions were confirmed successfully.');
+        });
+    }
+
+    toggleCheckboxesForCurrentPage(check: boolean) {
+        let selectAllCurrentPage = getIframeBody().find('input[title="select current page"]').should('be.visible');
+        if (check) {
+            selectAllCurrentPage.check();
+        } else {
+            selectAllCurrentPage.uncheck();
+        }
     }
 }

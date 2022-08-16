@@ -8,7 +8,7 @@ export default class ImportLotsPage{
 
     verifySuccessfulImport() {
         cy.wait('@importLots').then((interception) => {
-            expect(interception.response.statusCode).to.equal(200);
+            expect(interception.response?.statusCode).to.equal(200);
             getIframeBody().find('ngb-alert > span').contains('The lots has been imported successfully');
         })
     }
