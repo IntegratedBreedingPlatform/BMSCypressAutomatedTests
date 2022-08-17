@@ -6,7 +6,10 @@ Feature: Browse Sample List
   I should be able to browse sample list
 
 Background:
-  Given sample lists already exists
+  Given I am on the Manage Studies page of specified program
+  And I opened a study with RCBD design
+  And I add nEarsSel selection to the study with observations
+  And I create a genotyping sample list for the study
   And I am on the Sample Lists page of specified program
 
 @TestCaseKey=IBP-T109

@@ -152,11 +152,11 @@ export default class CreateStudyPage {
     }
 
 
-    addTrait(variable: string) {
+    addTrait(variable: string, variableType='Traits') {
         this.clickStudyAction(observationsTab);
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
-        this.manageSettingsModal('Add Traits', variable);
+        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='${variableType.toUpperCase()}']//span[text()='Add']`).should('be.visible').click();
+        this.manageSettingsModal('Add ' + variableType, variable);
     }
 
     saveNewStudyWithRCBDDesign(studyName: string, studyDesc: string, studyType: string, objective: string) {
