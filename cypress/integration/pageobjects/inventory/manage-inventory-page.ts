@@ -58,7 +58,6 @@ export default class ManageInventoryPage{
 
     waitForTransactionsSearchResultsToLoad() {
         return new Cypress.Promise((resolve, reject) => {
-            this.interceptTransactionsSearchResultsLoad();
             cy.wait('@transactionsSearch', { timeout: 15000 }).then(() => {
                 resolve();
             });
