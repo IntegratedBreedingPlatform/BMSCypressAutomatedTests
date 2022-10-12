@@ -3,7 +3,6 @@ import { getIframeBody } from '../../support/commands';
 export default class AddProgramPage{
 
     openCropNameOptions(){
-        cy.get('#updatePersonalHeader').should('exist');
         cy.get('[data-test="cropDropdown"]').should('exist')
                 .click();
     }
