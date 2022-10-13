@@ -3,7 +3,7 @@ import { getIframeBody, randomString } from '../../../support/commands';
 export default class SampleListPage {
     clickSaveList(listName: string) {
         getIframeBody().find('[data-test="createSampleModal"]').should('exist');
-        getIframeBody().find('#sampleListName').should('exist').type(listName).then(() => {
+        getIframeBody().find('input#sampleListName').should('exist').click().type(listName).then(() => {
             getIframeBody().find('#sampleFolderTree > ul.fbtree-container > li.dynatree-lastsib > span > a.dynatree-title').should('exist')
                 .click({force:true});
             getIframeBody().find('#submitSampleList').click();
