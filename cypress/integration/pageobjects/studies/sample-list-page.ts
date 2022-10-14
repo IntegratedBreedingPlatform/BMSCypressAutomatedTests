@@ -29,6 +29,7 @@ export default class SampleListPage {
 
         cy.wait('@loadSampleLists').then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
+            getIframeBody().find('div#listTreeContext').should('be.visible');
             getIframeBody().find('[data-test="sampleListName"]').contains(listName).should('exist').click();
             getIframeBody().find('[data-test="openSampleListOkButton"]').should('exist').click();
         });
