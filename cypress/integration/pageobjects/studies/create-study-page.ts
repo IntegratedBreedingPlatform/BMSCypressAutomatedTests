@@ -126,13 +126,21 @@ export default class CreateStudyPage {
         // Trigger variable search dropdown
         getIframeBody().xpath(`//body/div[3]/div/div/div[7]/div/div/div/div/div/div[2]/div[1]/div/a`).should('be.visible').click();
         // Search variable name
-        getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
-        // Select the first result
-        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').first().click();
-        // Add the item from result
-        getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
-        // Close the modal
-        getIframeBody().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
+        getIframeBody().xpath("count(//div[@class='select2-search']//input)")
+            .then(count => {
+                if (count) {
+                    getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
+                    // Select the first result
+                    getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').first().click();
+                } else {
+                    getIframeBody().xpath(`//span[@class='ps-item-attr' and contains(text(),'${variableName}')]`).click();
+                }
+
+                // Add the item from result
+                getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
+                // Close the modal
+                getIframeBody().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
+            });
     }
 
     waitForStudyToLoad() {
@@ -152,11 +160,11 @@ export default class CreateStudyPage {
     }
 
 
-    addTrait(variable: string) {
+    addTrait(variable: string, variableType='Traits') {
         this.clickStudyAction(observationsTab);
         cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
-        this.manageSettingsModal('Add Traits', variable);
+        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='${variableType.toUpperCase()}']//span[text()='Add']`).should('be.visible').click();
+        this.manageSettingsModal('Add ' + variableType, variable);
     }
 
     saveNewStudyWithRCBDDesign(studyName: string, studyDesc: string, studyType: string, objective: string) {
