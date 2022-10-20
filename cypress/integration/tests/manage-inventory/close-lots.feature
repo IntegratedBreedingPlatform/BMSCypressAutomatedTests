@@ -11,7 +11,7 @@ Background:
 @TestCaseKey=IBP-T647
 @smoke-test
 Scenario: Verify that user can close lots
-  When I navigate to View Lots tab
-  And I select an active lot
+  Given I have created a new lot
+  When I select the created lot
   And I close the lot
   Then I should see that the lot is closed successfully

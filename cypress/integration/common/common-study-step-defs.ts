@@ -31,6 +31,10 @@ When('I click {} action from {}', (actionName, actionOptionsName) => {
     createStudyPage.clickStudyAction(actionName, actionOptionsName);
 });
 
+When('I click {} action', (actionName) => {
+    createStudyPage.clickStudyAction(actionName);
+});
+
 And('I add {} trait to the study', (traitName) => {
     createStudyPage.addTrait(traitName);
 })
@@ -38,6 +42,11 @@ And('I add {} trait to the study', (traitName) => {
 And('I add {} trait to the study with observations', (traitName) => {
     createStudyPage.addTrait(traitName);
     manageObservationsPage.addTraitObservations(traitName);
+})
+
+And('I add {} selection to the study with observations', (selectionName) => {
+    createStudyPage.addTrait(selectionName, 'Selections');
+    manageObservationsPage.addTraitObservations(selectionName);
 })
 
 Then('I should be directed back to the study', () => {
