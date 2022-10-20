@@ -12,6 +12,7 @@ When('I navigate to transaction records page', () => {
 });
 
 And('I filter transaction records by GID', () => {
+    manageInventoryPage.interceptTransactionsSearchResultsLoad();
     manageInventoryPage.filterByGID(Cypress.env('importedGidWithInventory'));
 });
 
