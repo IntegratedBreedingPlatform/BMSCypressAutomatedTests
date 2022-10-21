@@ -89,7 +89,7 @@ export default class CreateStudyPage {
         getIframeBody().xpath(`//div[@id='listTreeModal']//label[text()='Browse For Lists']`).should('be.visible');
         // Wait for the list table to load
         // Click the first germplasm list item in the table
-        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@class,'leaf')][1]`).should('exist').click();
+        getIframeBody().xpath(`//div[@id='listTreeModal']//table[@id='treeTable']//tr[contains(@data-test,'listRow')][1]`).should('exist').click();
         getIframeBody().xpath(`//div[@id='listTreeModal']//button[text()='Select']`).should('be.visible').click();
     }
 
@@ -122,17 +122,25 @@ export default class CreateStudyPage {
     }
 
     manageSettingsModal(headerName: string, variableName: string) {
-        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 15000 }).should('be.visible');
+        getIframeBody().xpath(`//h4[contains(text(), '${headerName}')]`, { timeout: 120000 }).should('be.visible');
         // Trigger variable search dropdown
         getIframeBody().xpath(`//body/div[3]/div/div/div[7]/div/div/div/div/div/div[2]/div[1]/div/a`).should('be.visible').click();
         // Search variable name
-        getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
-        // Select the first result
-        getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').click();
-        // Add the item from result
-        getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
-        // Close the modal
-        getIframeBody().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
+        getIframeBody().xpath("count(//div[@class='select2-search']//input)")
+            .then(count => {
+                if (count) {
+                    getIframeBody().xpath(`//div[@class='select2-search']//input`).should('be.visible').type(variableName, { force: true, delay: 0 });
+                    // Select the first result
+                    getIframeBody().xpath(`//div[contains(@class,'select2-with-searchbox')]//ul[@class='select2-results']/li`).should('be.visible').first().click();
+                } else {
+                    getIframeBody().xpath(`//span[@class='ps-item-attr' and contains(text(),'${variableName}')]`).click();
+                }
+
+                // Add the item from result
+                getIframeBody().xpath(`//span[text()='${variableName}']/parent::span/parent::span//span[contains(text(), 'Add')]`).click();
+                // Close the modal
+                getIframeBody().xpath(`//button[contains(text(), 'Close')]`).should('be.visible').click();
+            });
     }
 
     waitForStudyToLoad() {
@@ -145,53 +153,41 @@ export default class CreateStudyPage {
     }
 
     verifyColumnsInObservationTable(columnNames: string[] = []) {
-        this.clickTab('Observations');
+        this.clickTab(observationsTab);
         for (let columnName of columnNames) {
             getIframeBody().xpath(`//th[text()='${columnName}']`).should('be.visible');
         }
     }
 
-    startNewStudyWithObservations (studyName: string, studyDesc: string, studyType: string, objective: string, observationName: string) {
+
+    addTrait(variable: string, variableType='Traits') {
+        this.clickStudyAction(observationsTab);
+        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
+        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='${variableType.toUpperCase()}']//span[text()='Add']`).should('be.visible').click();
+        this.manageSettingsModal('Add ' + variableType, variable);
+    }
+
+    saveNewStudyWithRCBDDesign(studyName: string, studyDesc: string, studyType: string, objective: string) {
+        // Step 1 - create new study with basic details
         this.saveStudyWithBasicDetails(studyName, studyDesc, studyType, objective);
-        this.addStudySettings();
+        // Step 2 - select germplasm list
         this.addGermplasms();
+        // Step 3 - generate RCBD design
         this.goToExperimentalDesign(false);
         this.generateRCBDesign();
         this.confirmGenerateModal();
         this.checkGenerateDesignSuccess();
-        this.addObservations(observationName);
+        // Step 4 - wait for study to reload
+        this.waitForStudyToLoad();
     }
 
-    addObservations(observationName: string) {
-        getMainIframeDocumentWaitLoad();
-        this.clickTab('Observations');
-        getIframeBody().xpath(`//div[@id='manage-study-tabs']//section-container[@heading='TRAITS']//span[text()='Add']`).should('be.visible').click();
-        cy.intercept('POST', `**/observationUnits/table?*`).as('addTraits');
-        this.manageSettingsModal('Add Traits', 'Aflatox_M_ppb');
-
-        cy.wait('@addTraits').then((interception) => {
-            expect(interception.response.statusCode).to.equal(200);
-            getIframeBody().xpath(`//th[text()='${observationName}']`).should('be.visible');
-            this.setVariableValues();
-        });
-
-    }
-
-    setVariableValues() {
-        getIframeBody().find('[data-test="toggleBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('[data-test="selectVariable"]').should('be.visible').click();
-        getIframeBody().find('[title="Aflatox_M_ppb"]').should('be.visible').click();
-        getIframeBody().find('[data-test="selectAction"]').should('be.visible').click();
-        getIframeBody().find('[title="Apply new value to observations"]').should('be.visible').click();
-        getIframeBody().find('input[data-test="newValueInput"]').should('be.visible').type('3');
-        getIframeBody().find('[data-test="applyBatchActionButton"]').should('be.visible').click();
-        getIframeBody().find('button[ng-bind="confirmButtonLabel"]').should('be.visible').click();
-    }
 }
 
 const generateDesignLabel = 'Generate Design';
 
 const experimentalDesignLabel = 'Experimental Design';
+
+const observationsTab = 'Observations';
 
 const getMainIframeDocumentWaitLoad = () => {
     return cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(cy.wrap);

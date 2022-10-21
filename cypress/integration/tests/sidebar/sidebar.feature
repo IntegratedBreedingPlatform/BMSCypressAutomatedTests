@@ -8,8 +8,6 @@ Background:
     Given I am already in my program
 @TestCaseKey=IBP-T3157
 @sanity-test
-@clean-install
-@update-install
     Scenario Outline: Check BMS sidebar links
         When I navigate to <sidebarlink> in the sidebar
         Then The <sidebarlink> page should display
@@ -32,7 +30,8 @@ Background:
         |Low Density|
         |High Density|
         |Manage Ontologies|
-        |Manage Metadata|
+        |Manage Crop Settings|
+        |BrAPI sync (beta)|
         |Manage Program Settings|
 
 @TestCaseKey=IBP-T3176

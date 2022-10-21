@@ -6,9 +6,9 @@ In order create another list with the same entries and details
 As a user
 I should be able to clone germplasm list
 
-Background: 
-    Given I import a new list
-    And I open the imported list
+Background:
+    Given I am on the Germplasm Lists page of specified program 
+    And I import a new list
     And I add entry details variable to the list
     And I add value to the entry detail
 
@@ -27,6 +27,8 @@ Scenario: Check if user can clone the list using an existing list
     When I clone the list
     And I save the list with an existing name
     Then a message saying that there is an existing item with the same name displays
+
+@ignore
 @TestCaseKey=IBP-T3492
 Scenario: Check if user can clone a locked list
     When I lock the imported list

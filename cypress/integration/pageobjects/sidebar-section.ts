@@ -57,6 +57,7 @@ export default class SidebarSection {
         let bmsVersion = Cypress.env('bmsVersion');
         cy.xpath(`//mat-sidenav/div[contains(text(), 'BMS ${bmsVersion}')]`).should('exist');
     }
+
 }
 
 
@@ -77,13 +78,16 @@ export class SidebarTool {
     public static readonly GDMS = new SidebarTool('Low Density', 'Genotyping', 'GDMS', true);
     public static readonly HIGH_DENSITY = new SidebarTool('High Density', 'Genotyping', 'Module is not defined yet', true);
     public static readonly MANAGE_ONTOLOGIES = new SidebarTool('Manage Ontologies', 'Crop Administration', 'Ontology Browser');
-    public static readonly MANAGE_METADATA = new SidebarTool('Manage Metadata', 'Crop Administration', 'Manage Metadata');
+    public static readonly MANAGE_CROP_SETTINGS = new SidebarTool('Manage Crop Settings', 'Crop Administration',
+        'Manage Crop settings');
+    public static readonly BRAPI_SYNC_BETA = new SidebarTool('BrAPI sync (beta)', 'Crop Administration',
+        'BrAPI Synchronization Tool');    
     public static readonly MANAGE_PROGRAM_SETTINGS = new SidebarTool('Manage Program Settings', 'Program Administration',
-        'Manage Program Settings', true);
+        'Manage Program Settings';
 
     private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS, SidebarTool.MANAGE_STUDIES,
         SidebarTool.BROWSE_STUDIES, SidebarTool.DATASET_IMPORT, SidebarTool.SINGLE_SITE_ANALYSIS, SidebarTool.MULTI_SITE_ANALYSIS, SidebarTool.MANAGE_INVENTORY, SidebarTool.GRAPHICAL_QUERIES,
-        SidebarTool.HEAD_TO_HEAD_QUERY, SidebarTool.MULTI_TRAIT_QUERY, SidebarTool.GDMS, SidebarTool.HIGH_DENSITY, SidebarTool.MANAGE_ONTOLOGIES, SidebarTool.MANAGE_METADATA,
+        SidebarTool.HEAD_TO_HEAD_QUERY, SidebarTool.MULTI_TRAIT_QUERY, SidebarTool.GDMS, SidebarTool.HIGH_DENSITY, SidebarTool.MANAGE_ONTOLOGIES, SidebarTool.MANAGE_CROP_SETTINGS, SidebarTool.BRAPI_SYNC_BETA,
         SidebarTool.MANAGE_PROGRAM_SETTINGS]
     constructor(
         public linkName?: string,

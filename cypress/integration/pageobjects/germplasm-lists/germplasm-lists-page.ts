@@ -17,10 +17,13 @@ export default class GermplasmListPage {
     }
 
     checkEntryDetailWasAdded() {
-        getIframeBody().then(($iframe) => {
-            cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
-                .should('exist')
-                .contains(<string>this.addEntryDetailsContext.variableName);
+        cy.wait('@loadList',{ timeout: 60000}).then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(200);
+            getIframeBody().then(($iframe) => {
+                cy.wrap($iframe).find('[data-test="entryDetailsTable"] > tbody > tr > td:nth-child(2) > a')
+                    .should('exist')
+                    .contains(<string>this.addEntryDetailsContext.variableName);
+            });
         });
     }
 
@@ -38,7 +41,7 @@ export default class GermplasmListPage {
                 .should('exist')
                 .click()
                 .then(($row) => {
-                    cy.wrap($row).find('jhi-inline-editor > form > div > input')
+                    cy.wrap($row).find('[name="editorInput"]')
                         .should('exist')
                         .clear()
                         .type(this.entryDetailValue.toString())
@@ -120,10 +123,12 @@ export default class GermplasmListPage {
         });
     }
 
-    lockList() {
+    toggleLockList(checkLocked=true) {
         getIframeBody().find('[data-test="lockListButton"]').click();
-        getIframeBody().find('[data-test="lockListIcon"]')
-            .should('have.class', 'fa-lock');
+        if (checkLocked) {
+            getIframeBody().find('[data-test="lockListIcon"]')
+                .should('have.class', 'fa-lock');
+        }
     }
 
     openEditListMetadata() {
@@ -131,6 +136,10 @@ export default class GermplasmListPage {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('.modal').should('exist');
         });
+    }
+
+    cloneList() {
+        this.openGermplasmListAction("cloneListButton");
     }
 
     /*

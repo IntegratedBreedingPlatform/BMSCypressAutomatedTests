@@ -13,13 +13,14 @@ Feature: Import Lists
     When I select Import germplasm list from Actions
     And I select a file to upload
     And I click Next on Import Germplasm list screen
+    And I click Next on Entry Details screen
     And I click Next on Review Import List screen
     And I select the first match on Select Match screen
     And I click Confirm on Import List Summary screen
     And I click Confirm on Save Germplasm List screen
     Then the created list is available and filtered
 
-  @smoke-test
+  @ignore
   Scenario: Check if user can download import lists template
     When I select Import germplasm list from Actions
     And I click the link to dowload the import list template

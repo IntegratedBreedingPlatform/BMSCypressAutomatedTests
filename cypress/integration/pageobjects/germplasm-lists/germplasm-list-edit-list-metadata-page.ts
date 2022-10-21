@@ -13,13 +13,17 @@ export default class GermplasmListEditListMetadataPage {
     }
 
     enterInvalidName() {
-        getIframeBody().find('[data-test="name"]').type('{end}- update to invalid name that exceeds 50 characters');
+        getIframeBody().find('[data-test="name"]').type('{end}- update to invalid name that exceeds 50 characters '+
+            'and must return an error...........................................');
+        cy.wait(5000);
     }
 
     enterInvalidDescription() {
         getIframeBody().find('#description').type('{end}- this is an updated description that exceeds 255 characters ' +
             'and must return an error that says "description must not exceed 255 characters"...........................................' +
+            '........................................................................'+
             '........................................................................');
+        cy.wait(5000);
     }
 
     clickModalSave() {

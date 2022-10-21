@@ -25,9 +25,10 @@ Given('I open an existing list', () => {
     searchPage.selectListFilteredByNumberOfEntries();
 });
 
+
 Given('I lock the imported list', () => {
     searchPage.selectListFilteredByListName(listName);
-    germplasmListPage.lockList();
+    germplasmListPage.toggleLockList();
 });
 
 When('I select some entries in the current page', () => {
@@ -48,14 +49,14 @@ When('I select the same entry that exists in the list', () => {
     germplasmListPage.selectAllEntriesCurrentPage();
     germplasmListPage.openAddToList();
     germplasmListAddToListPage.selectExistingList(listName);
-    germplasmListAddToListPage.clickAddToListConfirm();
+    germplasmListAddToListPage.clickAddToListConfirm(`**/entries/import?*`);
     germplasmListAddToListPage.verifySuccessAddToList();
 });
 
 And('I select germplasm list in the add entries to list screen', () => {
     germplasmListPage.openAddToList();
     germplasmListAddToListPage.selectExistingList(listName);
-    germplasmListAddToListPage.clickAddToListConfirm();
+    germplasmListAddToListPage.clickAddToListConfirm(`**/entries/import?*`);
 });
 
 Then('I should see a message that entries are added successfully', () => {

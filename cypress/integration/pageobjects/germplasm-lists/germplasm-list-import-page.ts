@@ -5,6 +5,7 @@ export default class GermplasmListImportPage {
     importNewList(listName: string) {
         this.selectFile(listName);
         this.clickImportNext();
+        this.clickNextEntryDetails();
         this.clickImportSubmit();
         this.selectFirstMatch();
         this.clickImportConfirm();
@@ -26,6 +27,7 @@ export default class GermplasmListImportPage {
                             lastModified: new Date().getTime()
                         });
                     });
+                    cy.wait(50);
             });
         });
     }
@@ -39,6 +41,12 @@ export default class GermplasmListImportPage {
     clickImportSubmit() {
         getIframeBody().then(($iframe) => {
             cy.wrap($iframe).find('[data-test="importSubmit"]').should('exist').click();
+        });
+    }
+
+    clickNextEntryDetails() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('jhi-germplasm-list-variable-matches > div.modal-footer > button.btn.btn-primary').should('exist').click();
         });
     }
 

@@ -7,8 +7,6 @@ Feature: BMSAPI
 @TestCaseKey=IBP-T3184
 @sanity-test
 @smoke-test
-@clean-install
-@update-install
     Scenario: Launch BMSAPI page
         Given I am already logged in to BMS
         When I navigate to the BMSAPI page
