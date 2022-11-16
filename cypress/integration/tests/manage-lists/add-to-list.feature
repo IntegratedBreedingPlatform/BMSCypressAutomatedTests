@@ -23,7 +23,7 @@ Scenario: Add random entries to another list
     When I select all entries from the current page
     And I select germplasm list in the add entries to list screen
     Then I should see a message that entries are added successfully
-
+@smoke-test  
 @TestCaseKey=IBP-T3371
 Scenario: Filter entries and add to another list
   Given I open an existing list
