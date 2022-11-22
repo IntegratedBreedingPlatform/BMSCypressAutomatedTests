@@ -173,10 +173,10 @@ export default class ManageOntologiesPage {
                 .should('exist')
                 .should('have.length', 1)
                 .then(($tr) => {
-                    cy.wrap($tr).find('td:nth-child(1) > span').should('exist').should('contain', <string>this.variableName);
-                    cy.wrap($tr).find('td:nth-child(2) > span').should('exist').should('contain', <string>this.propertyName);
-                    cy.wrap($tr).find('td:nth-child(3) > span').should('exist').should('contain', <string>this.methodName);
-                    cy.wrap($tr).find('td:nth-child(4) > span').should('exist').should('contain', <string>this.scaleName);
+                    cy.wrap($tr).find('td > span').should('exist').should('contain', <string>this.variableName);
+                    cy.wrap($tr).find('td > span').should('exist').should('contain', <string>this.propertyName);
+                    cy.wrap($tr).find('td > span').should('exist').should('contain', <string>this.methodName);
+                    cy.wrap($tr).find('td > span').should('exist').should('contain', <string>this.scaleName);
                 });
         });
     }
