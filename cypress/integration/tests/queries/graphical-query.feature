@@ -3,7 +3,7 @@
 Feature: Graphical Query
     In order to perform breeding activities
     As a user
-    I should be able to perform geographical queries on BMS
+    I should be able to perform graphical queries on BMS
 
 Background:
     Given I am on the Manage Studies page of specified program
