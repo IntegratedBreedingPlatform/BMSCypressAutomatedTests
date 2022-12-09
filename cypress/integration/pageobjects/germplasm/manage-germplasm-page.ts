@@ -78,7 +78,7 @@ export default class ManageGermplasmPage{
 
             // Verify the groupId column is empty (-)
             getIframeBody().find(`tbody[id="cdk-drop-list-1"] > tr`).each(($el) => {
-                cy.wrap($el).xpath('td[position()=3]/span[text()="-"]').should('exist');
+                cy.wrap($el).xpath('td[position()=4]/span[text()="-"]').should('exist');
             });
               
         });

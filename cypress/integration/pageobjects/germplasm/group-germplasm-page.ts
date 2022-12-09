@@ -19,6 +19,6 @@ export default class GroupGermplasmPage{
 
     verifyGroupIdExists() {
         getIframeBody().find('[data-test="groupIdHeader"]').should('exist');
-        getIframeBody().find('table > tbody > tr.selected > td:nth-child(3) > a').should('have.attr', 'data-test', 'germplasmGroupIdLink');
+        getIframeBody().find('table > tbody > tr.selected > td:nth-child(4) > a').should('have.attr', 'data-test', 'germplasmGroupIdLink');
     }
 }
