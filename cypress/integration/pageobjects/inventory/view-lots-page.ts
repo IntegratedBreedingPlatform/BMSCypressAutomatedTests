@@ -6,6 +6,6 @@ export default class ViewLotsPage{
     }
 
     clickLotStockId() {
-        getIframeBody().find('[data-test="lotStockId"]').should('exist').first().click();
+        getIframeBody().find('[data-test="lotStockId"]').should('be.visible').first().click({force:true});
     }
 }
