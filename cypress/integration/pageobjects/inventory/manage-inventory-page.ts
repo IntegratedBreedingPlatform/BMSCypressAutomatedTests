@@ -16,6 +16,11 @@ export default class ManageInventoryPage{
         getIframeBody().find('[data-test="importInventoryLotsButton"]').click();
     }
 
+    clickImportLotUpdateAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="importLotUpdateButton"]').click();
+    }
+
     clickDepositInventoryAction() {
         getIframeBody().find('#actionMenu').click();
         getIframeBody().find('[data-test="depositInventoryLotsButton"]').click();
