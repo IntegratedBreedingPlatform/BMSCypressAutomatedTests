@@ -113,11 +113,15 @@ Cypress.Commands.add("restoreLocalStorage", () => {
 
 /**
  * Usage:
+ * <pre>
  *      getIframeBody().then(($iframe) => {
  *        cy.wrap($iframe)
  *      })
+ * </pre>
  * or
+ * <pre>
  *      getIframeBody().find()
+ * </pre>
  */
 export function getIframeBody() {
     // get the main iframe
