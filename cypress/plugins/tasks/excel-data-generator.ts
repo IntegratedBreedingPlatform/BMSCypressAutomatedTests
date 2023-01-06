@@ -123,3 +123,23 @@ export function generateImportLotUpdateData (param: string) {
   // explicitly return null to signal that the given event has been handled.
   return null;
 }
+
+// This will append lot attributes for Import Lot Update template.
+export function generateImportLotAttributesData (param: string) {
+  // HACK: The parameters contain two sections: fileName and lotuid, separated by "#" delimiter
+  let index = param.indexOf('#');
+  let fileName = param.substring(0, index);
+  let lotUid = param.substring(index+1, param.length);
+  let workbook = XLSX.readFile(fileName); // reads original file
+  let sheetName = workbook.SheetNames[0]; //get 'Lots' sheet
+  let workSheet = workbook.Sheets[sheetName];
+  XLSX.utils.sheet_add_aoa(workSheet, [[lotUid]], {origin: 'A2'});
+  XLSX.utils.sheet_add_aoa(workSheet, [['L_ProdNotes']], {origin: 'E1'});
+  XLSX.utils.sheet_add_aoa(workSheet, [['L_ProdYear']], {origin: 'F1'});
+  XLSX.utils.sheet_add_aoa(workSheet, [['sample lot prod notes']], {origin: 'E2'});
+  XLSX.utils.sheet_add_aoa(workSheet, [['2022']], {origin: 'F2'});
+  XLSX.writeFile(workbook, fileName); // write the same file with new values
+
+  // explicitly return null to signal that the given event has been handled.
+  return null;
+}

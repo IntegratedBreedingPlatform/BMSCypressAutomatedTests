@@ -19,7 +19,7 @@ export default class ImportLotUpdatePage{
         getIframeBody().find('[data-test="downloadTemplateLink"]').click(); 
     }
 
-    async uploadFile(fileName: string, newLotUID: string) {
+    async uploadFile(fileName: string, newLotUID: string, taskName: string) {
         const downloadsFolder = Cypress.config('downloadsFolder');
         const downloadedFilename = `${downloadsFolder}/${fileName}`;
         const gid = Cypress.env('importedGid');
