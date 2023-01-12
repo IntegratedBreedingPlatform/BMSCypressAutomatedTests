@@ -68,4 +68,12 @@ export default class ImportCrossesPage {
         getIframeBody().find('[data-test="crossesPreviewNextButton"]').should('be.visible').click();
     }
 
+    processAutomaticNamingCrossesImport() {
+        this.specifyBreedingMethod();
+        this.goToNamingAndHarvestDetails();
+        this.specifyAutomaticNaming();
+        this.specifyHarvestDetails();
+        this.goToPreviewCrosses();
+        this.goToSaveList();
+    }
 }

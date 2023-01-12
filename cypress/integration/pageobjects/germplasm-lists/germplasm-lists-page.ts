@@ -142,6 +142,35 @@ export default class GermplasmListPage {
         this.openGermplasmListAction("cloneListButton");
     }
 
+    addDisplayedColumn(columnName: string) {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('#columnMenu').should('exist').click();
+            cy.wrap($iframe).find('label.form-check-label').contains(columnName).click();
+            cy.intercept('GET', `**/search?*`).as('filterList');
+            cy.wrap($iframe).find('[data-test="displayColumnApplyButton"]').click();
+
+            cy.wait('@filterList').then((interception) => {
+                expect(interception.response.statusCode).to.be.equal(200);
+            });
+            this.addEntryDetailsContext.variableName = columnName;
+        });
+    }
+
+    selectExpansionLevel() {
+        getIframeBody().then(($iframe) => {
+            cy.wrap($iframe).find('[data-test="specifyExpansionLevelButton"]').should('exist').click();
+            cy.wrap($iframe).find('#generationLevel').should('exist').select("2");
+            cy.intercept('PUT', `**/pedigree-generation-level?*`).as('pedigreeGenerationLevelUpdate');
+            cy.wrap($iframe).find('[data-test="crossExpansionApplyButton"]').click();
+        });
+    }
+
+    checkCrossExpansionUpdate() {
+        cy.wait('@pedigreeGenerationLevelUpdate').then((interception) => {
+            expect(interception.response.statusCode).to.equal(200);
+        })
+    }
+
     /*
         Returns a radom value in range from 1 to 10
      */
