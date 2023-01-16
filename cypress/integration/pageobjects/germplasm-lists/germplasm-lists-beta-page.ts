@@ -1,15 +1,19 @@
-import { getIframeBody } from '../../../support/commands';
+import {closeGermplasmListFeedbackPopupIfShown, getIframeBody} from '../../../support/commands';
 import * as path from 'path';
 
 export default class GermplasmListsBetaPage {
 
     openImportGermplasmListModal() {
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
+        cy.intercept('GET', `**/feedback/GERMPLASM_LIST/should-show*`).as('shouldShowFeedback');
         cy.wait('@loadLists',{timeout:30000}).then((interception) => {
-            getIframeBody().find('[data-test="actionMenu"]', { timeout: Cypress.config('pageLoadTimeout') })
-                .should('exist')
-                .click();
-            getIframeBody().find('[data-test="importListButton"]').should('exist').click();
+            cy.wait('@shouldShowFeedback',{timeout:30000}).then((interception) => {
+                closeGermplasmListFeedbackPopupIfShown(interception.response?.body);
+                getIframeBody().find('[data-test="actionMenu"]', {timeout: Cypress.config('pageLoadTimeout')})
+                    .should('exist')
+                    .click();
+                getIframeBody().find('[data-test="importListButton"]').should('exist').click();
+            });
         });
     }
 
@@ -33,11 +37,15 @@ export default class GermplasmListsBetaPage {
 
     resetAllFilters() {
         cy.intercept('POST', `**/germplasm-lists/search?*`).as('loadLists');
-        cy.wait('@loadLists',{timeout:30000}).then((interception) => {
-            expect(interception.response.statusCode).to.be.equal(200);
-            getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
-                .should("exist")
-                .click({force:true});
+        cy.intercept('GET', `**/feedback/GERMPLASM_LIST/should-show*`).as('shouldShowFeedback');
+        cy.wait('@loadLists',{timeout:30000}).then((loadListsIntercept) => {
+            cy.wait('@shouldShowFeedback',{timeout:30000}).then((feedbackIntercept) => {
+                closeGermplasmListFeedbackPopupIfShown(feedbackIntercept.response?.body);
+                expect(loadListsIntercept.response.statusCode).to.be.equal(200);
+                getIframeBody().find('[data-test="resetAllFilters"]').contains("reset all filters")
+                    .should("exist")
+                    .click({force: true});
+            });
         });
     }
 

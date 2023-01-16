@@ -140,3 +140,13 @@ export function closeReleaseNotePopupIfShown() {
         }
     });
 }
+
+export function closeGermplasmListFeedbackPopupIfShown(shown: boolean) {
+    if (shown) {
+        getIframeBody().find('#dontShowAgain').should('exist').check();
+        getIframeBody().find('jhi-feedback-dialog-component > div.modal-footer > button.btn-primary', {
+            timeout: Cypress.config('pageLoadTimeout')
+        }).click();
+
+    };
+}
