@@ -7,7 +7,6 @@ export default class GermplasmListImportPage {
         this.clickImportNext();
         this.clickNextEntryDetails();
         this.clickImportSubmit();
-        this.selectFirstMatch();
         this.clickImportConfirm();
         this.clickSaveList(listName);
         this.verifyListCreated(listName);
