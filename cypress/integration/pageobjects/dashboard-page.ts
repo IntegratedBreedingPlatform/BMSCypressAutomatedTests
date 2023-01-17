@@ -7,14 +7,6 @@ export default class DashboardPage{
     protected programName = Cypress.env('existingProgramName');
     login:LoginPage = new LoginPage()
 
-    getProgramsIframeDocument = () => {
-        return cy.get('mat-sidenav-content > iframe').its('0.contentDocument').should('exist');
-    }
-
-    getProgramsIframeBody = () => {
-		return this.getProgramsIframeDocument().its('body').should('not.be.undefined').then(cy.wrap);
-	}
-
     launchProgram(openSpecifiedProgram?:boolean) {
         this.selectCrop();
         if (openSpecifiedProgram){
@@ -40,32 +32,32 @@ export default class DashboardPage{
     }
 
     selectCrop(){
-		return this.getProgramsIframeBody().find('#cropDropdown select')
+		return getIframeBody().find('#cropDropdown select')
         .should('exist').select(this.cropName, { force : true })
         .should('have.value', this.cropName);
 
     }
     clickLaunchProgram(){
-       this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist').click();
+       getIframeBody().find('[data-test="launchProgramButton"]').should('exist').click();
 
     }
 
     verifyPageLoaded() {
         // Verify Crop dropdown, Program dropdown and Launch buttons
-        this.getProgramsIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
-        this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
-        this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist')
-        this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(1) > a > span`)
+        getIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
+        getIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
+        getIframeBody().find('[data-test="launchProgramButton"]').should('exist')
+        getIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(1) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Studies')});
-        this.getProgramsIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
+        getIframeBody().find(`jhi-program > section > div:nth-child(2) > div > nav > ul > li:nth-child(2) > a > span`)
             .should('exist').should(($sp) => {expect($sp).to.have.text('My Lists')});
     }
 
     verifyDefaultDashboardPage(){
         closeReleaseNotePopupIfShown();
-        this.getProgramsIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
-        this.getProgramsIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
-        this.getProgramsIframeBody().find('[data-test="launchProgramButton"]').should('exist')
+        getIframeBody().find('[data-test="dashboardCropDropdown"]').should('exist')
+        getIframeBody().find('[data-test="dashboardProgramDropdown"]').should('exist')
+        getIframeBody().find('[data-test="launchProgramButton"]').should('exist')
 
     }
     loginAndLaunchProgram(){
