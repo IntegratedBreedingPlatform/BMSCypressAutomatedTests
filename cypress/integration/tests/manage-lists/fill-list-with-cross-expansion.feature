@@ -7,7 +7,9 @@ As a user
 I should be able to add cross column to a germplasm list and fill with cross expansion 
 
 Background:
-    Given a cross list already exists
+    Given I am on the Manage Studies page of specified program
+    And I opened a study with RCBD design
+    And I imported a cross and created a cross list
     And I am on the Germplasm Lists page of specified program 
 
 @TestCaseKey=IBP-T4154
