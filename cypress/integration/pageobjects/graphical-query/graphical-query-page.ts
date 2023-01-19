@@ -7,8 +7,29 @@ export default class GraphicalQueryPage {
         getIframeBody().xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li[text()='${studyName}']`).should('be.visible').click();
     }
 
+    addStudyName (studyName: string) {
+        getIframeBody().xpath(`//div[@id='trials']//input`).should('be.visible').type(studyName, { force: true, delay: 0 });
+        getIframeBody().xpath(`//span[contains(@class,'select2-results')]//ul[@class='select2-results__options']/li[text()='${studyName}']`).should('be.visible').click();
+    }
+
     selectObservationLevel () {
         getIframeBody().find('[data-test="observationLevelSelect"]').should('exist').select('PLOT');
+    }
+
+    selectStudyComparisonQueryType () {
+        getIframeBody().find('[data-test="queryTypeSelect"]').should('exist').select('Study Comparison');
+    }
+
+    selectVariableToCompare(variableName: string) {
+        getIframeBody().find('#scomp-select-var').should('exist').select(variableName);
+    }
+
+    clickCompareVariable() {
+        getIframeBody().find('#scomp-compare').click();
+    }
+
+    verifyDisplayedGraph() {
+        getIframeBody().find('#graph_div').children().should('have.length', 1);
     }
 
     clickLoadQuery () {

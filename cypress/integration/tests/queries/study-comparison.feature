@@ -6,7 +6,11 @@ Feature: Study Comparison
     I should be able to perform study comparison in BMS
 
 Background:
-    Given there are multiple studies that have observations for the same traits
+    Given I am on the Manage Studies page of specified program
+    And I opened a study with RCBD design
+    And I add Aflatox_M_ppb trait to the study with observations
+    And  I am on the Manage Studies page of specified program
+    And added another study that have observations for the same traits
     And I am on the Graphical Queries page of specified program
 
 @TestCaseKey=IBP-T1647
