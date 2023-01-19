@@ -4,8 +4,9 @@ Feature: Import Inventory Lot Updates
   As a user with Manage inventory permission
   I want to import inventory lots updates
 Background:
-  Given germplasm with lot records already exists
+  Given germplasm records already exists
   And I am on the Manage Inventory page of specified program
+  And I have created a new lot
 
 @TestCaseKey=IBP-T1479
 @smoke-test

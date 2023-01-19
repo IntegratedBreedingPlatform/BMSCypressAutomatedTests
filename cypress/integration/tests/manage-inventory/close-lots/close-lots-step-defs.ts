@@ -8,18 +8,6 @@ const manageInventoryPage = new ManageInventoryPage();
 const createLotsPage = new CreateLotsPage();
 const closeLotsPage = new CloseLotsPage();
 
-Given('I have created a new lot', () => {
-    manageInventoryPage.waitForLotsSearchResultsToLoad().then(() => {
-        manageInventoryPage.clickCreateInventoryLotsAction();
-    });
-
-    createLotsPage.specifyGID(Cypress.env('importedGid'));
-    createLotsPage.specifyLotDetails("STK", "SEED_AMOUNT_g", "Sample Lot Notes " + randomString());
-    createLotsPage.interceptSaveRequestFromManageInventory();
-    createLotsPage.clickSaveButton();
-    createLotsPage.verifySuccessfulCreationFromManageInventory();
-});
-
 When('I select the created lot', () => {
     closeLotsPage.selectNewLot();
 });

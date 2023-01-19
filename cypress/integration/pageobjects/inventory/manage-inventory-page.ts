@@ -16,6 +16,25 @@ export default class ManageInventoryPage{
         getIframeBody().find('[data-test="importInventoryLotsButton"]').click();
     }
 
+    clickImportLotUpdateAction() {
+        getIframeBody().find('#actionMenu').click();
+        getIframeBody().find('[data-test="importLotUpdateButton"]').click();
+    }
+
+    selectColumnsToDisplay() {
+        getIframeBody().find('#columnMenu').click();
+        getIframeBody().find('#check-static-lotId').check();
+        getIframeBody().find('label.form-check-label').contains('L_ProdNotes').click();
+        getIframeBody().find('label.form-check-label').contains('L_ProdYear').click();
+        getIframeBody().find('[data-test="columnsApplyButton"]').click();
+    }
+
+    verifyDisplayedColumns() {
+        getIframeBody().find('[data-test="lotIdColHeader"]').should('be.visible');
+        getIframeBody().find('[data-test="lotListHeaderRow"]').contains('L_ProdNotes');
+        getIframeBody().find('[data-test="lotListHeaderRow"]').contains('L_ProdYear');
+    }
+
     clickDepositInventoryAction() {
         getIframeBody().find('#actionMenu').click();
         getIframeBody().find('[data-test="depositInventoryLotsButton"]').click();
