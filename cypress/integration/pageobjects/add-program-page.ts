@@ -1,9 +1,9 @@
 import { getIframeBody } from '../../support/commands';
 
-export default class AddProgramPage{
+export default class AddProgramPage {
 
     openCropNameOptions(){
-        cy.get('[data-test="cropDropdown"]').should('exist')
+        getIframeBody().get('[data-test="cropDropdown"]').should('exist')
                 .click();
     }
 
