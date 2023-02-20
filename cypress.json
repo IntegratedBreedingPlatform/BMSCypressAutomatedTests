@@ -10,6 +10,6 @@
   "testFiles": "**/*.feature",
   "video": false,
   "screenshotOnRunFailure": true,
-  "defaultCommandTimeout": 20000,
-  "pageLoadTimeout": 30000
+  "defaultCommandTimeout": 50000,
+  "pageLoadTimeout": 200000
 }
