@@ -1,19 +1,18 @@
-import { getIframeBody } from '../../../support/commands';
 export default class ManageStudiesPage {
 
     browseExistingStudies() {
-        getIframeBody().find('.control-label > a').contains('Browse').click();
+        getMainIframeDocumentWaitToLoad().find('.control-label > a').contains('Browse').click();
     }
 
     selectExistingStudy(studyName: string) {
-        getIframeBody().xpath('//div[@id=\'studyTreeModal\']//label[text()=\'Browse Studies\']').should('be.visible');
-        getIframeBody().xpath(`//a[@class='dynatree-title' and text()='${studyName}']`).scrollIntoView().should('be.visible').click().then(() => {
-            getIframeBody().xpath(`//div[@id='studyTreeModal']//button[text()='Open']`).click();
+        getMainIframeDocument().xpath('//div[@id=\'studyTreeModal\']//label[text()=\'Browse Studies\']').should('be.visible');
+        getMainIframeDocument().xpath(`//a[@class='dynatree-title' and text()='${studyName}']`).scrollIntoView().should('be.visible').click().then(() => {
+            getMainIframeDocument().xpath(`//div[@id='studyTreeModal']//button[text()='Open']`).click();
         });
     }
 
     startNewStudy() {
-        getIframeBody().find('button[jhitranslate="study.manager.actions.new-study"]').should('exist').click();
+        getMainIframeDocumentWaitToLoad().xpath(`//a[contains(text(),'Start a New Study')]`).click();
     }
 }
 
