@@ -1,3 +1,4 @@
+import { getIframeBody } from '../../../support/commands';
 export default class ManageStudiesPage {
 
     browseExistingStudies() {
@@ -12,7 +13,7 @@ export default class ManageStudiesPage {
     }
 
     startNewStudy() {
-        getMainIframeDocumentWaitToLoad().xpath(`//a[contains(text(),'Start a New Study')]`).click();
+        getMainIframeDocumentWaitToLoad().xpath(`//button[@jhitranslate="study.manager.actions.new-study"]`).should('exist').click();
     }
 }
 
