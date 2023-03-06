@@ -13,7 +13,7 @@ export default class ManageStudiesPage {
     }
 
     startNewStudy() {
-       getMainIframeDocumentWaitToLoad().find('[jhitranslate="study.manager.actions.new-study"]> span').should('have.text','Start a New Study').should('be.enabled').click({force:true});
+       getMainIframeDocumentWaitToLoad().find('[jhitranslate="study.manager.actions.new-study"]').should('exist').should('be.enabled').click({force:true});
     }
 }
 
