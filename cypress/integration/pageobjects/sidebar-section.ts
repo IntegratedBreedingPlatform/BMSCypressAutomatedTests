@@ -22,33 +22,28 @@ export default class SidebarSection {
      * Assumes sidebar section is already expanded
      */
     reload(sidebarTool:SidebarTool){
-        getIframeBody().then(($iframe) => {
-            cy.xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
-        });
+        getIframeBody().xpath(`//mat-tree-node[contains(@class, 'leaf') and contains(text(), ' ${sidebarTool.linkName} ')]`).should('exist').first().click();
     }
 
     verifyPageIsShown(page:string) {
         let sidebarTool = SidebarTool.getFromLinkName(page);
 
         if(sidebarTool.isVaadin) {
-            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
                 if (sidebarTool.toolName === 'GDMS') {
-                    cy.wrap($iframeBody).xpath(`//img[@src="/GDMS/VAADIN/themes/gdmstheme/images/GDMS.gif"]`).should('exist')
+                    getIframeBody().xpath(`//img[@src="/GDMS/VAADIN/themes/gdmstheme/images/GDMS.gif"]`).should('exist')
 
                 } else if (sidebarTool.linkName == 'High Density') {
-                    cy.wrap($iframeBody).xpath(`//p[contains(text(),'${sidebarTool.toolName}')]`).should('exist')
+                    getIframeBody().xpath(`//p[contains(text(),'${sidebarTool.toolName}')]`).should('exist')
 
                 } else {
-                    cy.wrap($iframeBody).xpath(`//div[@id="toolTitle"]`).should('exist').should('have.text', sidebarTool.toolName);
+                    getIframeBody().xpath(`//div[@id="toolTitle"]`).should('exist').should('have.text', sidebarTool.toolName);
                 }
-            });
+         
         } else {
-            cy.get('mat-sidenav-content > iframe').waitIframeToLoad().then(($iframeBody) => {
-                cy.wrap($iframeBody).xpath(`//h1[contains(text(),'${sidebarTool.toolName}')]| 
+            getIframeBody().xpath(`//h1[contains(text(),'${sidebarTool.toolName}')]| 
                     //h2[contains(text(),'${sidebarTool.toolName}')] | 
                     //h1/span[contains(text(),'${sidebarTool.toolName}')]| 
                     //h1/span/span[contains(text(),'${sidebarTool.toolName}')]`).should('exist');
-            });
         }
 
     }
