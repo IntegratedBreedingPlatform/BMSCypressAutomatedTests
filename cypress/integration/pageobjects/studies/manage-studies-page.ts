@@ -13,7 +13,7 @@ export default class ManageStudiesPage {
     }
 
     startNewStudy() {
-       getMainIframeDocumentWaitToLoad().find('[data-test="startNewStudyButton"]').should('exist').should('be.enabled').click({force:true});
+        getIframeBody().find('[data-test="startNewStudyButton"]').should('exist').should('be.enabled').click({force:true});
     }
 }
 
