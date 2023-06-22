@@ -1,3 +1,5 @@
+import { getIframeBody } from '../../../support/commands';
+
 export default class ManageStudiesPage {
 
     browseExistingStudies() {
@@ -12,7 +14,13 @@ export default class ManageStudiesPage {
     }
 
     startNewStudy() {
-        getMainIframeDocumentWaitToLoad().xpath(`//a[contains(text(),'Start a New Study')]`).click();
+        cy.window().then((win) => {
+            win.top.addEventListener("message", (e) => {
+                win.postMessage({...e.data}, '*');
+            })
+        });
+
+        getIframeBody().find('[data-test="startNewStudyButton"]').should('exist').click();
     }
 }
 
