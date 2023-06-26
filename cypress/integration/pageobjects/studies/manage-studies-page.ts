@@ -8,8 +8,8 @@ export default class ManageStudiesPage {
 
     selectExistingStudy(studyName: string) {
         getMainIframeDocument().xpath(`//h4[contains(text(),'Browse for studies')]`).should('be.visible');
-        getMainIframeDocument().find(`.ui-treenode-label > span > span`).contains("Studies").should('be.visible').click().then(()=>{
-            getMainIframeDocument().find(`.ui-treenode-label > span > span`).contains(studyName).scrollIntoView().should('be.visible').click().then(() => {
+        getMainIframeDocument().find('.ui-treenode-label > span > span').contains("Studies").should('be.visible').click().then(()=>{
+            getMainIframeDocument().find('ui-treenode-label > span > span').contains(studyName).scrollIntoView().should('be.visible').click().then(() => {
             getMainIframeDocument().xpath(`//button[contains(text(),'Open')]`).click();
         });
         }));
