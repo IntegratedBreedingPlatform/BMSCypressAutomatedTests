@@ -3,7 +3,7 @@ import { getIframeBody } from '../../../support/commands';
 export default class ManageStudiesPage {
 
     browseExistingStudies() {
-        getMainIframeDocumentWaitToLoad().find('.control-label > a').contains('Browse').click();
+        getMainIframeDocumentWaitToLoad().find('[jhitranslate="study.manager.browse-link"]').contains('Browse').click();
     }
 
     selectExistingStudy(studyName: string) {
