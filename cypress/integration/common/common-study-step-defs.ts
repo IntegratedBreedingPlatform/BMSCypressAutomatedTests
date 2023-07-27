@@ -49,6 +49,10 @@ And('I add {} selection to the study with observations', (selectionName) => {
     manageObservationsPage.addTraitObservations(selectionName);
 })
 
+And('I select {} tab of the study', (tabName) => {
+    createStudyPage.clickTab(tabName);
+})
+
 Then('I should be directed back to the study', () => {
     createStudyPage.waitForStudyToLoad();
 });

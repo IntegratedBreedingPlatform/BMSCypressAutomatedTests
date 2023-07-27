@@ -9,6 +9,7 @@ Background:
     Given I am on the Manage Studies page of specified program
     And I opened a study with RCBD design
     And I add EPo_Cmp_ratio trait to the study with observations
+    And I select Experimental Design tab of the study
     And I add ASI_Cmp_day trait to the study with observations
 
 @TestCaseKey=IBP-T147
