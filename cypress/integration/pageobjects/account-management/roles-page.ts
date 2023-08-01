@@ -20,13 +20,13 @@ export default class RolesPage{
     }
 
     selectAllPermissions() {
-        getIframeBody().find('ul.ul-tree-level-zero input[type="checkbox"]').check().should('be.checked');
+        getIframeBody().find('ul.ul-tree-level-zero input[type="checkbox"]').check({force:true}).should('be.checked');
         this.saveNewRole();
     }
 
     saveNewRole() {
         cy.intercept('POST', `/bmsapi/roles*`).as('addRole');
-        getIframeBody().find('[jhitranslate="site-admin.role.modal.create.role"]').contains('Add Role').scrollIntoView().should('be.visible').click();
+        getIframeBody().find('[jhitranslate="site-admin.role.modal.create.role"]').contains('Add role').should('be.visible').click();
     }
 
     checkAddRoleSuccess() {
