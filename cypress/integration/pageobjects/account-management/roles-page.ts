@@ -2,11 +2,11 @@ import { randomString, getIframeBody } from '../../../support/commands';
 
 export default class RolesPage{
     selectRolesTab() {
-        getMainIframeDocumentWaitToLoad().find('ol.nav-tabs  > li > a', {timeout: 50000}).contains('Roles').should('exist').click();
+        getMainIframeDocumentWaitToLoad().find('jhi-site-admin > section > nav > ul > li:nth-child(2) > a', {timeout: 50000}).contains('Roles').should('exist').click();
     }
 
     openCreateRoleModal() {
-        getIframeBody().find('div.om-panel-content > a').contains('Create role').should('exist').click();
+        getIframeBody().find('[jhitranslate="site-admin.role.add"]').contains('Create role').should('exist').click();
     }
 
     createRole(roleType: string) {
@@ -26,7 +26,7 @@ export default class RolesPage{
 
     saveNewRole() {
         cy.intercept('POST', `/bmsapi/roles*`).as('addRole');
-        getIframeBody().find('div.modal-footer > button').contains('Add Role').should('be.visible').click();
+        getIframeBody().find('[jhitranslate="site-admin.role.modal.create.role"]').contains('Add Role').scrollIntoView().should('be.visible').click();
     }
 
     checkAddRoleSuccess() {
