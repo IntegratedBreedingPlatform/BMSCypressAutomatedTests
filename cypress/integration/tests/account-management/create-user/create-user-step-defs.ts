@@ -19,8 +19,9 @@ And('I add the new user',()=>{
 });
 
 Then('I should see that the created user in the list',()=>{
-    usersPage.checkAddUserSuccess();
     usersPage.checkNewUserExists();
+    usersPage.checkAddUserSuccess();
+    
 });
 
 
