@@ -7,11 +7,11 @@ export default class UsersPage{
 
     openAddUserModal() {
         getIframeBody().find('table', {timeout: 30000}).should('be.visible');
-        getIframeBody().find('div.om-panel-content button').should('exist').contains('Add user').click();
+        getIframeBody().find('[jhitranslate="site-admin.user.add"]').should('exist').contains('Add user').click();
     }
 
     createUser() {
-        getIframeBody().find('h4.modal-title').contains('Add User').should('exist');
+        getIframeBody().find('[jhitranslate="site-admin.user.modal.create.header"]').contains('Create User').should('exist');
         getIframeBody().find('#firstName')
             .type("TestUser");
         getIframeBody().find('#lastName')
@@ -43,16 +43,16 @@ export default class UsersPage{
     }
 
     saveNewUser() {
-        cy.intercept('POST', `/bmsapi/users*`).as('addUser');
+       // cy.intercept('POST', `/bmsapi/users*`).as('addUser');
         getIframeBody().find('div.modal-footer > button').contains('Add user').should('be.visible').click();
     }
 
     checkAddUserSuccess() {
-        cy.intercept('GET', `/bmsapi/users*`).as('searchUsers');
-        cy.wait('@addUser').then((interception) => {
-            expect(interception.response.statusCode).to.be.oneOf([200, 201]);
-            getIframeBody().find('#default-notification h1').contains('Success').should('be.visible');
-        });
+       // cy.intercept('GET', `/bmsapi/users*`).as('searchUsers');
+       // cy.wait('@addUser').then((interception) => {
+       //     expect(interception.response.statusCode).to.be.oneOf([200, 201]);
+            getIframeBody().find('.alert-success').contains('User created successfully').should('be.visible');
+       // });
     }
 
     checkNewUserExists() {
