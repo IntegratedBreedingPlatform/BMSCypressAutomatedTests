@@ -43,19 +43,20 @@ export default class UsersPage{
     }
 
     saveNewUser() {
-       // cy.intercept('POST', `/bmsapi/users*`).as('addUser');
+        cy.intercept('POST', `/bmsapi/users*`).as('addUser');
         getIframeBody().find('div.modal-footer > button').contains('Add user').should('be.visible').click();
     }
 
     checkAddUserSuccess() {
-       // cy.intercept('GET', `/bmsapi/users*`).as('searchUsers');
-       // cy.wait('@addUser').then((interception) => {
-       //     expect(interception.response.statusCode).to.be.oneOf([200, 201]);
+        cy.intercept('GET', `/bmsapi/users*`).as('searchUsers');
+         cy.wait('@addUser').then((interception) => {
+           expect(interception.response.statusCode).to.be.oneOf([200, 201]);
             getIframeBody().find('.alert-success').contains('User created successfully').should('be.visible');
-       // });
+        });
     }
 
     checkNewUserExists() {
+        cy.intercept('POST', `/bmsapi/users/search*`).as('searchUsers');
         cy.wait('@searchUsers').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             const respBody = interception.response.body;
