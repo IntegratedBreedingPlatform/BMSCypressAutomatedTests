@@ -2,11 +2,11 @@ import { randomString, getIframeBody } from '../../../support/commands';
 
 export default class RolesPage{
     selectRolesTab() {
-        getMainIframeDocumentWaitToLoad().find('ol.nav-tabs  > li > a', {timeout: 50000}).contains('Roles').should('exist').click();
+        getMainIframeDocumentWaitToLoad().find('jhi-site-admin > section > nav > ul > li:nth-child(2) > a', {timeout: 50000}).contains('Roles').should('exist').click();
     }
 
     openCreateRoleModal() {
-        getIframeBody().find('div.om-panel-content > a').contains('Create role').should('exist').click();
+        getIframeBody().find('[jhitranslate="site-admin.role.add"]').contains('Create role').should('exist').click();
     }
 
     createRole(roleType: string) {
@@ -20,24 +20,21 @@ export default class RolesPage{
     }
 
     selectAllPermissions() {
-        getIframeBody().find('ul.ul-tree-level-zero input[type="checkbox"]').check().should('be.checked');
+        getIframeBody().find('ul.ul-tree-level-zero input[type="checkbox"]').check({force:true}).should('be.checked');
         this.saveNewRole();
     }
 
     saveNewRole() {
-        cy.intercept('POST', `/bmsapi/roles*`).as('addRole');
-        getIframeBody().find('div.modal-footer > button').contains('Add Role').should('be.visible').click();
+        getIframeBody().find('[jhitranslate="site-admin.role.modal.create.role"]').scrollIntoView().contains('Add role').should('be.visible').click();
     }
 
     checkAddRoleSuccess() {
-        cy.intercept('POST', `/bmsapi/roles/search*`).as('searchRoles');
-        cy.wait('@addRole').then((interception) => {
-            expect(interception.response.statusCode).to.be.oneOf([200, 201]);
-            getIframeBody().find('#default-notification h1').contains('Success').should('be.visible');
-        });
+            getIframeBody().find('.alert-success').should('exist').should('be.visible');
+            getIframeBody().find('.alert-danger').should('not.exist');
     }
 
     checkNewRoleExists(roleType: string) {
+        cy.intercept('POST', `/bmsapi/roles/search*`).as('searchRoles');
         cy.wait('@searchRoles').then((interception) => {
             expect(interception.response.statusCode).to.be.equal(200);
             const respBody = interception.response.body;

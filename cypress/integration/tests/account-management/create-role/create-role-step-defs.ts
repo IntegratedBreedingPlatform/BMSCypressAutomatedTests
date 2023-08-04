@@ -17,8 +17,8 @@ And('I select all available permissions',()=>{
 });
 
 Then('A message should display that the {} role is successfully saved',(roleType)=>{
-    rolesPage.checkAddRoleSuccess();
     rolesPage.checkNewRoleExists(roleType);
+    rolesPage.checkAddRoleSuccess();
 });
 
 
