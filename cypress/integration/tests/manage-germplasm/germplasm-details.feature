@@ -8,7 +8,6 @@ Feature: Germplasm Details
 @TestCaseKey=IBP-T3178
 @sanity-test
 @clean-install
-@ignore
     Scenario: Check pedigree 
         Given germplasm records already exists
         And I am on the Manage Germplasm page of specified program
@@ -18,7 +17,6 @@ Feature: Germplasm Details
 @TestCaseKey=IBP-T3178
 @sanity-test
 @update-install
-@ignore
     Scenario: Check pedigree 
         Given I am on the Manage Germplasm page of specified program
         When I click on the GID of a germplasm
@@ -28,7 +26,6 @@ Feature: Germplasm Details
 @TestCaseKey=IBP-T3180
 @sanity-test
 @clean-install
-@ignore
     Scenario: Check pedigree graph
         Given germplasm records already exists
         And I am on the Manage Germplasm page of specified program
@@ -40,7 +37,6 @@ Feature: Germplasm Details
 @TestCaseKey=IBP-T3180
 @sanity-test
 @update-install
-@ignore
     Scenario: Check pedigree graph
         Given I am on the Manage Germplasm page of specified program
         When I click on the GID of a germplasm
