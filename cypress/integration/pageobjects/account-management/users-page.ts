@@ -4,6 +4,7 @@ export default class UsersPage{
 
     protected cropName = Cypress.env('cropName');
     protected programName = Cypress.env('existingProgramName');
+    roleName = "Breeder";
 
     openAddUserModal() {
         getIframeBody().find('table', {timeout: 30000}).should('be.visible');
@@ -31,15 +32,14 @@ export default class UsersPage{
 
     assignRoleToUser() {
         getIframeBody().find('div.form-group a').contains('+ Assign role').should('exist').click();
-        getIframeBody().find('#roleTypeCombo')
-            .select("Program");
-        getIframeBody().find('#roleNameCombo')
-            .select("Breeder");
-        getIframeBody().find('#cropCombo')
-            .select(this.cropName);
-        getIframeBody().find('#programCombo')
-            .select(this.programName);
-        getIframeBody().find('div.modal-footer > button').contains('Assign role').should('be.visible').click();
+        getIframeBody().find('#roleTypeCombo').select("Program");
+        getIframeBody().find('#roleNameCombo').should('exist').click()
+        getIframeBody().find('#roleNameCombo > select').should('exist').select('Breeder',{force:true})
+        getIframeBody().find('#cropCombo').should('exist').click()
+        getIframeBody().find('input[class="select2-search__field"]').should('be.visible').type(Cypress.env('cropName')+'{enter}')
+        getIframeBody().find('#programCombo').should('exist').click()
+        getIframeBody().find('input[class="select2-search__field"]').should('be.visible').type(Cypress.env('existingProgramName')+'{enter}')
+        getIframeBody().find('[jhitranslate="site-admin.user.modal.role.assign"]').contains('Assign role').should('be.visible').click();
     }
 
     saveNewUser() {
