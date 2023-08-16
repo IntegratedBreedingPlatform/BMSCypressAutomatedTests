@@ -37,12 +37,16 @@ export default class UsersPage{
         
         getIframeBody().find('#roleNameCombo').should('exist').click()
         getIframeBody().find('input[class="select2-search__field"]').should('be.visible').type(this.roleName+'{enter}')
+        cy.wait(100)
 
         getIframeBody().find('#cropCombo').should('exist').click()
         getIframeBody().find('input[class="select2-search__field"]').should('be.visible').type(Cypress.env('cropName')+'{enter}')
-        
+        cy.wait(100)
+
         getIframeBody().find('#programCombo').should('exist').click()
         getIframeBody().find('input[class="select2-search__field"]').should('be.visible').type(Cypress.env('existingProgramName')+'{enter}')
+        cy.wait(100)
+        
         getIframeBody().find('[jhitranslate="site-admin.user.modal.role.assign"]').contains('Assign role').should('be.visible').click();
     }
 
