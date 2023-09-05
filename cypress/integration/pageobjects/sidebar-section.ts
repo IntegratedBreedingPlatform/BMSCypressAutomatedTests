@@ -67,7 +67,6 @@ export class SidebarTool {
     public static readonly SAMPLE_LISTS = new SidebarTool('Samples Lists', 'Lists', 'Manage Samples');
     public static readonly GERMPLASM_LISTS = new SidebarTool('Germplasm Lists', 'Lists', 'Germplasm Lists');
     public static readonly MANAGE_STUDIES = new SidebarTool('Manage Studies', 'Studies', 'Manage Studies');
-    public static readonly BROWSE_STUDIES = new SidebarTool('Browse Studies', 'Studies', 'Browse Studies', true);
     public static readonly DATASET_IMPORT = new SidebarTool('Import Datasets', 'Studies', 'Dataset Importer');
     public static readonly SINGLE_SITE_ANALYSIS = new SidebarTool('Single-Site Analysis', 'Studies', 'Single-Site Analysis', true);
     public static readonly MULTI_SITE_ANALYSIS = new SidebarTool('Multi-Site Analysis', 'Studies', 'Multi-Site Analysis', true);
@@ -86,7 +85,7 @@ export class SidebarTool {
         'Manage Program Settings';
 
     private static TOOLS : SidebarTool[] = [SidebarTool.MANAGE_GERMPLASM, SidebarTool.SAMPLE_LISTS, SidebarTool.GERMPLASM_LISTS, SidebarTool.MANAGE_STUDIES,
-        SidebarTool.BROWSE_STUDIES, SidebarTool.DATASET_IMPORT, SidebarTool.SINGLE_SITE_ANALYSIS, SidebarTool.MULTI_SITE_ANALYSIS, SidebarTool.MANAGE_INVENTORY, SidebarTool.GRAPHICAL_QUERIES,
+        SidebarTool.DATASET_IMPORT, SidebarTool.SINGLE_SITE_ANALYSIS, SidebarTool.MULTI_SITE_ANALYSIS, SidebarTool.MANAGE_INVENTORY, SidebarTool.GRAPHICAL_QUERIES,
         SidebarTool.HEAD_TO_HEAD_QUERY, SidebarTool.MULTI_TRAIT_QUERY, SidebarTool.GDMS, SidebarTool.HIGH_DENSITY, SidebarTool.MANAGE_ONTOLOGIES, SidebarTool.MANAGE_CROP_SETTINGS, SidebarTool.BRAPI_SYNC_BETA,
         SidebarTool.MANAGE_PROGRAM_SETTINGS]
     constructor(

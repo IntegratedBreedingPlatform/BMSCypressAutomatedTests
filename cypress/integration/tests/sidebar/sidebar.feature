@@ -19,7 +19,6 @@ Background:
         |Samples Lists|
         |Germplasm Lists|
         |Manage Studies|
-        |Browse Studies|
         |Import Datasets|
         |Single-Site Analysis|
         |Multi-Site Analysis|
